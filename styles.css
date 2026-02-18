@@ -191,6 +191,38 @@ p {
   margin-bottom: 1.1rem;
 }
 
+.section-controls {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 1rem;
+}
+
+.section-controls input,
+.section-controls select {
+  background: rgba(12, 24, 36, 0.88);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 0.65rem;
+  padding: 0.55rem 0.7rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  min-height: 2.35rem;
+}
+
+.section-controls input {
+  min-width: 16rem;
+  flex: 1 1 16rem;
+}
+
+.section-controls select {
+  min-width: 11rem;
+}
+
+.section-controls input::placeholder {
+  color: #8aa8c4;
+}
+
 .grid {
   display: grid;
   gap: 0.9rem;
@@ -209,6 +241,12 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.result-count {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #99bdd8;
+}
+
 .card {
   border: 1px solid var(--line);
   background: var(--card);
@@ -221,6 +259,40 @@ p {
 .card li {
   color: var(--ink-dim);
   font-size: 0.95rem;
+}
+
+.tip-category {
+  display: inline-flex;
+  margin-bottom: 0.45rem;
+  font-size: 0.75rem;
+  color: #89d7ff;
+  border: 1px solid #2f5f87;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+
+.char-card,
+.build-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.char-head,
+.build-head {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.char-avatar,
+.build-avatar {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid #335b7e;
+  background: #0b1b2a;
 }
 
 .meta-tier {
@@ -259,13 +331,14 @@ p {
 .tier-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 650px;
+  min-width: 760px;
 }
 
 .tier-table th,
 .tier-table td {
   padding: 0.75rem 0.8rem;
   text-align: left;
+  vertical-align: top;
   border-bottom: 1px solid rgba(38, 66, 94, 0.65);
 }
 
@@ -275,6 +348,36 @@ p {
   letter-spacing: 0.04em;
 }
 
+.tier-char-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tier-chip {
+  display: inline-flex;
+  gap: 0.33rem;
+  align-items: center;
+  background: rgba(22, 44, 63, 0.72);
+  border: 1px solid #2e5577;
+  border-radius: 999px;
+  padding: 0.15rem 0.48rem 0.15rem 0.2rem;
+  font-size: 0.8rem;
+  color: #cae6ff;
+}
+
+.tier-chip img {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid #406d92;
+}
+
+.tier-empty {
+  color: #7b9ab5;
+}
+
 .build-list {
   margin: 0;
   padding-left: 1.05rem;
@@ -282,6 +385,10 @@ p {
 
 .build-list li {
   margin: 0.18rem 0;
+}
+
+.empty-state p {
+  margin: 0;
 }
 
 .gallery-section {
@@ -342,6 +449,12 @@ a {
 
   .gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-controls input,
+  .section-controls select {
+    width: 100%;
+    min-width: 0;
   }
 }
 

@@ -1,0 +1,290 @@
+﻿{
+  "meta": {
+    "updatedAt": "2026-02-18",
+    "patchNote": "Launch window + early global patches"
+  },
+  "tips": [
+    {
+      "id": "tips-core-team",
+      "title": "Fokus ke 1 tim inti",
+      "category": "Early Game",
+      "description": "Prioritaskan 4 operator utama (DPS, sub-DPS, support, sustain) sampai progression stabil.",
+      "tags": ["resource", "leveling", "team"]
+    },
+    {
+      "id": "tips-weapon-level",
+      "title": "Naikkan level senjata lebih dulu",
+      "category": "Early Game",
+      "description": "Dampak upgrade weapon biasanya terasa lebih cepat dibanding menaikkan banyak karakter sekaligus.",
+      "tags": ["weapon", "damage", "upgrade"]
+    },
+    {
+      "id": "tips-skill-priority",
+      "title": "Ikuti skill priority",
+      "category": "Combat",
+      "description": "Jangan rata semua skill. Ikuti prioritas tiap karakter agar material tidak boros.",
+      "tags": ["skill", "combat", "materials"]
+    },
+    {
+      "id": "tips-element-cover",
+      "title": "Siapkan coverage elemen",
+      "category": "Combat",
+      "description": "Minimal punya 2 elemen damage aktif agar lebih fleksibel lawan musuh di stage berbeda.",
+      "tags": ["element", "stage", "team"]
+    },
+    {
+      "id": "tips-aic-logistic",
+      "title": "Jangan abaikan AIC dan logistik",
+      "category": "Economy",
+      "description": "Sistem industri dan energi memengaruhi farming jangka panjang. Stabilkan produksi dari awal.",
+      "tags": ["aic", "logistic", "economy"]
+    },
+    {
+      "id": "tips-daily-routine",
+      "title": "Rutinkan login + event harian",
+      "category": "Economy",
+      "description": "Resource event launch biasanya paling efisien untuk account baru, terutama upgrade material.",
+      "tags": ["event", "daily", "resource"]
+    },
+    {
+      "id": "tips-boss-practice",
+      "title": "Latihan rotasi di boss fight",
+      "category": "Combat",
+      "description": "Timing combo, skill cancel, dan burst window jauh lebih penting di konten boss ketimbang auto-spam.",
+      "tags": ["boss", "rotation", "damage"]
+    },
+    {
+      "id": "tips-save-currency",
+      "title": "Simpan currency untuk banner target",
+      "category": "Gacha",
+      "description": "Hindari impuls pull. Simpan resource untuk unit yang benar-benar menguatkan core team kamu.",
+      "tags": ["gacha", "currency", "planning"]
+    }
+  ],
+  "characters": [
+    {
+      "id": "laevatain",
+      "name": "Laevatain",
+      "tier": "S",
+      "role": "Main DPS",
+      "isMeta": true,
+      "image": "assets/icons/laevatain.webp",
+      "summary": "Burst damage tinggi dan konsisten untuk jadi carry utama tim.",
+      "tags": ["dps", "burst", "core"],
+      "build": {
+        "weapon": "Dawn's Last Glimmer / Daybreak Caller / Straight Away",
+        "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
+        "team": "Yvonne + Laevatain + Gilberta + Ardelia",
+        "notes": "Fokuskan uptime buff sebelum buka burst window."
+      }
+    },
+    {
+      "id": "gilberta",
+      "name": "Gilberta",
+      "tier": "S",
+      "role": "Sub DPS / Buffer",
+      "isMeta": true,
+      "image": "assets/icons/gilberta.webp",
+      "summary": "Buffer kuat dengan kontribusi damage tinggi di komposisi burst.",
+      "tags": ["sub-dps", "buffer", "burst"],
+      "build": {
+        "weapon": "Return to Arcadia / Daybreak Caller / Rocket Belt",
+        "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
+        "team": "Yvonne + Laevatain + Gilberta + Ardelia",
+        "notes": "Sinkronkan skill dengan main DPS agar buff tidak terbuang."
+      }
+    },
+    {
+      "id": "yvonne",
+      "name": "Yvonne",
+      "tier": "S",
+      "role": "Main DPS",
+      "isMeta": true,
+      "image": "assets/icons/yvonne.webp",
+      "summary": "DPS fleksibel dengan scaling kuat dari early ke endgame.",
+      "tags": ["dps", "flex", "carry"],
+      "build": {
+        "weapon": "Daybreak Caller / Old Times in Londinium / Matcha",
+        "skills": "Talent > Basic Attack > Active Skill > Combo Skill > Ultimate",
+        "team": "Yvonne + Gilberta + Perlica + Ardelia",
+        "notes": "Utamakan rotasi basic + skill untuk damage stabil."
+      }
+    },
+    {
+      "id": "ardelia",
+      "name": "Ardelia",
+      "tier": "S",
+      "role": "Support",
+      "isMeta": true,
+      "image": "assets/icons/ardelia.webp",
+      "summary": "Support premium untuk menjaga tempo tim dan memaksimalkan output.",
+      "tags": ["support", "utility", "meta"],
+      "build": {
+        "weapon": "Return to Arcadia / Old Times in Londinium / Seashell",
+        "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
+        "team": "Yvonne + Gilberta + Perlica + Ardelia",
+        "notes": "Jaga posisi dan timing utility agar tim tetap aman saat burst."
+      }
+    },
+    {
+      "id": "last-rite",
+      "name": "Last Rite",
+      "tier": "S",
+      "role": "Main DPS",
+      "isMeta": false,
+      "image": "assets/icons/last-rite.webp",
+      "summary": "DPS agresif dengan potensi clear cepat untuk konten padat musuh.",
+      "tags": ["dps", "aggressive", "s-tier"],
+      "build": {
+        "weapon": "High ATK Great Weapon / Return to Arcadia",
+        "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
+        "team": "Last Rite + Perlica + Gilberta + Ardelia",
+        "notes": "Buka skill saat musuh terkumpul untuk value maksimum."
+      }
+    },
+    {
+      "id": "perlica",
+      "name": "Perlica",
+      "tier": "A",
+      "role": "Support",
+      "isMeta": false,
+      "image": "assets/icons/perlica.webp",
+      "summary": "Support solid yang memperkuat stabilitas tim jangka panjang.",
+      "tags": ["support", "a-tier", "utility"],
+      "build": {
+        "weapon": "Energy-focused Arts Unit / Utility Weapon",
+        "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
+        "team": "Yvonne + Perlica + Gilberta + Ardelia",
+        "notes": "Cocok untuk tim sustain dan boss fight panjang."
+      }
+    },
+    {
+      "id": "pogranichnik",
+      "name": "Pogranichnik",
+      "tier": "A",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "assets/icons/pogranichnik.webp",
+      "summary": "Sub DPS kuat dengan pressure tinggi saat rotasi tim rapi.",
+      "tags": ["sub-dps", "a-tier", "physical"],
+      "build": {
+        "weapon": "Physical Sword Core / Burst Weapon",
+        "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
+        "team": "Pogranichnik + Yvonne + Perlica + Ardelia",
+        "notes": "Maksimalkan combo chaining untuk efisiensi damage."
+      }
+    },
+    {
+      "id": "ember",
+      "name": "Ember",
+      "tier": "A",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "assets/icons/ember.webp",
+      "summary": "Sub DPS elemen yang efektif untuk membantu break tempo musuh.",
+      "tags": ["sub-dps", "a-tier", "elemental"],
+      "build": {
+        "weapon": "Heat-tuned Weapon / Utility Sidearm",
+        "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
+        "team": "Ember + Laevatain + Perlica + Ardelia",
+        "notes": "Pakai saat perlu transisi damage antarelemen."
+      }
+    },
+    {
+      "id": "avywenna",
+      "name": "Avywenna",
+      "tier": "A",
+      "role": "Support",
+      "isMeta": false,
+      "image": "assets/icons/avywenna.webp",
+      "summary": "Support fleksibel untuk memperpanjang uptime tim di stage sulit.",
+      "tags": ["support", "a-tier", "flex"],
+      "build": {
+        "weapon": "Support Utility Weapon",
+        "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
+        "team": "Avywenna + Yvonne + Gilberta + Ardelia",
+        "notes": "Bagus sebagai slot adaptif saat komposisi masih berkembang."
+      }
+    },
+    {
+      "id": "da-pan",
+      "name": "Da Pan",
+      "tier": "A",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "assets/icons/da-pan.webp",
+      "summary": "Sub DPS yang kuat saat dipasangkan dengan tim burst.",
+      "tags": ["sub-dps", "a-tier", "burst"],
+      "build": {
+        "weapon": "Balanced Damage Weapon",
+        "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
+        "team": "Da Pan + Laevatain + Perlica + Ardelia",
+        "notes": "Prioritaskan timing combo agar tidak overlap cooldown tim."
+      }
+    },
+    {
+      "id": "catcher",
+      "name": "Catcher",
+      "tier": "B",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "assets/icons/catcher.webp",
+      "summary": "Bisa dipakai untuk transisi awal sebelum tim S/A tier lengkap.",
+      "tags": ["b-tier", "starter", "sub-dps"],
+      "build": {
+        "weapon": "Starter-friendly Weapon",
+        "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
+        "team": "Catcher + Perlica + Ardelia + fleksibel DPS",
+        "notes": "Gunakan sebagai unit jembatan sambil kumpulkan resource."
+      }
+    },
+    {
+      "id": "arclight",
+      "name": "Arclight",
+      "tier": "B",
+      "role": "Support",
+      "isMeta": false,
+      "image": "assets/icons/arclight.webp",
+      "summary": "Support yang masih layak dipakai untuk account awal.",
+      "tags": ["b-tier", "support", "early"],
+      "build": {
+        "weapon": "Utility Weapon",
+        "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
+        "team": "Arclight + Yvonne + Perlica + unit sustain",
+        "notes": "Fokus fungsi utilitas ketimbang raw damage."
+      }
+    },
+    {
+      "id": "lifeng",
+      "name": "Lifeng",
+      "tier": "B",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "assets/icons/lifeng.webp",
+      "summary": "Punya nilai saat tim butuh slot damage tambahan murah resource.",
+      "tags": ["b-tier", "sub-dps", "resource-light"],
+      "build": {
+        "weapon": "Consistent DPS Weapon",
+        "skills": "Talent > Active Skill > Combo Skill > Basic Attack > Ultimate",
+        "team": "Lifeng + Perlica + Ardelia + main DPS",
+        "notes": "Naikkan secukupnya, jangan over-invest saat resource minim."
+      }
+    },
+    {
+      "id": "snowshine",
+      "name": "Snowshine",
+      "tier": "B",
+      "role": "Sustain",
+      "isMeta": false,
+      "image": "assets/icons/snowshine.webp",
+      "summary": "Pilihan sustain sementara sebelum dapat opsi lebih kuat.",
+      "tags": ["b-tier", "sustain", "early"],
+      "build": {
+        "weapon": "Durability-focused Weapon",
+        "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
+        "team": "Snowshine + Perlica + sub DPS + main DPS",
+        "notes": "Dipakai saat stage butuh survivability tambahan."
+      }
+    }
+  ]
+}

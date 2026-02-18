@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -44,7 +44,7 @@
             <a class="btn primary" href="#about">Mulai Baca</a>
             <a class="btn ghost" href="#sources">Lihat Sumber</a>
           </div>
-          <p class="stamp">Data disusun: 18 Februari 2026</p>
+          <p class="stamp" id="data-stamp">Data disusun: memuat data...</p>
         </div>
         <figure class="hero-art">
           <img
@@ -72,36 +72,11 @@
 
       <section class="section container" id="tips">
         <h2>Tips & Trik Pemula</h2>
-        <div class="grid tips-grid">
-          <article class="card">
-            <h3>Fokus 1 tim inti dulu</h3>
-            <p>
-              Prioritaskan 4 karakter utama (DPS, sub-DPS, support, sustain)
-              sebelum menyebar resource ke banyak unit.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Upgrade senjata berdampak besar</h3>
-            <p>
-              Di early game, peningkatan weapon dan level skill penting banget
-              untuk lonjakan damage ketimbang menaikkan banyak karakter sekaligus.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Jangan skip logistik & energi</h3>
-            <p>
-              Sistem otomasi di Endfield memengaruhi progress farming. Stabilkan
-              produksi material biar leveling tim lebih lancar.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Ambil event launch rutin</h3>
-            <p>
-              Event awal biasanya kasih resource terbaik untuk account baru.
-              Klaim login reward dan misi event setiap hari.
-            </p>
-          </article>
+        <div class="section-controls">
+          <input id="tips-search" type="search" placeholder="Cari tips..." />
+          <select id="tips-category"></select>
         </div>
+        <div class="grid tips-grid" id="tips-grid"></div>
       </section>
 
       <section class="section container" id="tier">
@@ -112,6 +87,17 @@
             update, banner baru, dan komposisi tim baru.
           </p>
         </div>
+        <div class="section-controls">
+          <input id="char-search" type="search" placeholder="Cari karakter / role..." />
+          <select id="tier-filter">
+            <option value="ALL">Semua Tier</option>
+            <option value="S">Tier S</option>
+            <option value="A">Tier A</option>
+            <option value="B">Tier B</option>
+          </select>
+          <select id="role-filter"></select>
+        </div>
+        <p class="result-count" id="char-count"></p>
         <div class="grid meta-grid" id="meta-grid"></div>
         <div class="tier-table-wrap">
           <table class="tier-table">
@@ -132,6 +118,15 @@
         <p class="section-sub">
           Diambil dari build guide komunitas yang sering dipakai pemain saat ini.
         </p>
+        <div class="section-controls">
+          <input id="build-search" type="search" placeholder="Cari build karakter..." />
+          <select id="build-tier-filter">
+            <option value="ALL">Semua Tier</option>
+            <option value="S">Tier S</option>
+            <option value="A">Tier A</option>
+            <option value="B">Tier B</option>
+          </select>
+        </div>
         <div class="grid build-grid" id="build-grid"></div>
       </section>
 
@@ -189,6 +184,14 @@
               >Endfield.gg</a
             >
           </li>
+          <li>
+            Icon karakter:
+            <a href="https://aendfield.com/" target="_blank" rel="noreferrer noopener">aendfield.com</a>
+            dan
+            <a href="https://arknightsendfield.gg/" target="_blank" rel="noreferrer noopener"
+              >arknightsendfield.gg</a
+            >
+          </li>
         </ul>
         <p class="disclaimer">
           Website ini fanmade dan tidak berafiliasi dengan Hypergryph/GRYPHLINE.
@@ -199,7 +202,7 @@
 
     <footer class="footer">
       <div class="container">
-        <p>Made by FahriAdison • Endfield Web (fan project)</p>
+        <p>Made by FahriAdison - Endfield Web (fan project)</p>
       </div>
     </footer>
 

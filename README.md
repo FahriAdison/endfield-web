@@ -6,6 +6,8 @@ Website sederhana untuk konten **Arknights: Endfield**:
 - Meta character
 - Tier list
 - Build rekomendasi awal
+- Search + filter (Tips, Tier List, Build)
+- Data-driven dari JSON (mudah update patch)
 
 ## Nama Repo yang Direkomendasikan
 
@@ -28,6 +30,8 @@ Kalau targetmu sekarang cuma website Endfield, nama `endfield-web` itu sudah bag
 |- index.html
 |- styles.css
 |- script.js
+|- data/
+|  |- content.json
 |- assets/
 |  |- images/
 |     |- hero-share.jpg
@@ -36,7 +40,29 @@ Kalau targetmu sekarang cuma website Endfield, nama `endfield-web` itu sudah bag
 |     |- gallery-fanart.png
 |     |- trailer-cg.jpg
 |     |- talos-awakening.jpg
+|  |- icons/
+|     |- laevatain.webp
+|     |- gilberta.webp
+|     |- yvonne.webp
+|     |- ardelia.webp
+|     |- ...
 ```
+
+## Cara Update Data Patch
+
+Semua data utama ada di file:
+- `data/content.json`
+
+Yang biasa kamu update:
+1. `meta.updatedAt` -> tanggal update data.
+2. `tips` -> tambah/edit tips.
+3. `characters` -> update tier, role, summary, build, dan `image`.
+
+Contoh edit cepat:
+- Ubah tier karakter: cari objek karakter lalu edit `"tier": "A"` jadi `"tier": "S"`.
+- Ganti build: edit field `build.weapon`, `build.skills`, `build.team`, `build.notes`.
+
+Tidak perlu edit `index.html` atau `script.js` kalau cuma update data patch.
 
 ## Cara Deploy ke GitHub Pages
 
