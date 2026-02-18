@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endfield Web | Guide Indonesia</title>
+    <meta
+      name="description"
+      content="Website sederhana Arknights: Endfield berisi intro, tips & trik, meta character, tier list, dan build rekomendasi."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="hero" id="top">
+      <nav class="nav container">
+        <a class="brand" href="#top">Endfield Web</a>
+        <div class="nav-links">
+          <a href="#about">Tentang</a>
+          <a href="#tips">Tips</a>
+          <a href="#tier">Tier List</a>
+          <a href="#builds">Build</a>
+          <a href="#gallery">Galeri</a>
+        </div>
+      </nav>
+
+      <div class="hero-content container">
+        <div class="hero-copy">
+          <p class="kicker">FANMADE GUIDE INDONESIA</p>
+          <h1>Arknights: Endfield Starter Hub</h1>
+          <p>
+            Ringkasan cepat tentang apa itu Endfield, tips awal, karakter meta,
+            tier list, dan build yang bisa kamu pakai sebagai fondasi.
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#about">Mulai Baca</a>
+            <a class="btn ghost" href="#sources">Lihat Sumber</a>
+          </div>
+          <p class="stamp">Data disusun: 18 Februari 2026</p>
+        </div>
+        <figure class="hero-art">
+          <img
+            src="assets/images/hero-share.jpg"
+            alt="Arknights Endfield key art"
+            loading="eager"
+          />
+        </figure>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container" id="about">
+        <h2>Apa itu Arknights: Endfield?</h2>
+        <p>
+          Arknights: Endfield adalah action RPG 3D real-time dengan elemen
+          strategi. Kamu mengendalikan tim Operator di planet Talos-II,
+          eksplorasi area, bertarung, dan mengelola sistem industri/otomasi.
+        </p>
+        <p>
+          Untuk region global, game ini sudah rilis pada 22 Januari 2026 (UTC+8).
+          Meta masih bergerak cepat karena game baru launch.
+        </p>
+      </section>
+
+      <section class="section container" id="tips">
+        <h2>Tips & Trik Pemula</h2>
+        <div class="grid tips-grid">
+          <article class="card">
+            <h3>Fokus 1 tim inti dulu</h3>
+            <p>
+              Prioritaskan 4 karakter utama (DPS, sub-DPS, support, sustain)
+              sebelum menyebar resource ke banyak unit.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Upgrade senjata berdampak besar</h3>
+            <p>
+              Di early game, peningkatan weapon dan level skill penting banget
+              untuk lonjakan damage ketimbang menaikkan banyak karakter sekaligus.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Jangan skip logistik & energi</h3>
+            <p>
+              Sistem otomasi di Endfield memengaruhi progress farming. Stabilkan
+              produksi material biar leveling tim lebih lancar.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Ambil event launch rutin</h3>
+            <p>
+              Event awal biasanya kasih resource terbaik untuk account baru.
+              Klaim login reward dan misi event setiap hari.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container" id="tier">
+        <div class="section-head">
+          <h2>Meta Character & Tier List (Komunitas)</h2>
+          <p>
+            Snapshot awal patch launch. Nilai tier bisa berubah saat ada balance
+            update, banner baru, dan komposisi tim baru.
+          </p>
+        </div>
+        <div class="grid meta-grid" id="meta-grid"></div>
+        <div class="tier-table-wrap">
+          <table class="tier-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Karakter</th>
+                <th>Catatan Singkat</th>
+              </tr>
+            </thead>
+            <tbody id="tier-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section container" id="builds">
+        <h2>Build Rekomendasi Awal</h2>
+        <p class="section-sub">
+          Diambil dari build guide komunitas yang sering dipakai pemain saat ini.
+        </p>
+        <div class="grid build-grid" id="build-grid"></div>
+      </section>
+
+      <section class="section container gallery-section" id="gallery">
+        <h2>Galeri Endfield</h2>
+        <div class="gallery">
+          <img src="assets/images/banner-gilberta.jpg" alt="Banner Gilberta" loading="lazy" />
+          <img src="assets/images/event-spring.jpg" alt="Event spring Endfield" loading="lazy" />
+          <img src="assets/images/trailer-cg.jpg" alt="CG trailer Endfield" loading="lazy" />
+          <img src="assets/images/talos-awakening.jpg" alt="Talos II awakening" loading="lazy" />
+          <img src="assets/images/gallery-fanart.png" alt="Themed gallery Endfield" loading="lazy" />
+        </div>
+      </section>
+
+      <section class="section container" id="sources">
+        <h2>Sumber</h2>
+        <ul class="source-list">
+          <li>
+            Situs resmi Endfield:
+            <a href="https://endfield.gryphline.com/en-us" target="_blank" rel="noreferrer noopener"
+              >endfield.gryphline.com</a
+            >
+          </li>
+          <li>
+            Info rilis global:
+            <a
+              href="https://www.gematsu.com/2025/12/arknights-endfield-launches-january-22-2026"
+              target="_blank"
+              rel="noreferrer noopener"
+              >Gematsu (11 Des 2025)</a
+            >
+          </li>
+          <li>
+            Tier list:
+            <a
+              href="https://www.pcgamer.com/games/rpg/arknights-endfield-tier-list/"
+              target="_blank"
+              rel="noreferrer noopener"
+              >PC Gamer</a
+            >
+            dan
+            <a
+              href="https://mobalytics.gg/blog/arknights-endfield/tier-list/"
+              target="_blank"
+              rel="noreferrer noopener"
+              >Mobalytics</a
+            >
+          </li>
+          <li>
+            Build guide karakter:
+            <a
+              href="https://endfield.gg/character-builds/"
+              target="_blank"
+              rel="noreferrer noopener"
+              >Endfield.gg</a
+            >
+          </li>
+        </ul>
+        <p class="disclaimer">
+          Website ini fanmade dan tidak berafiliasi dengan Hypergryph/GRYPHLINE.
+          Semua nama karakter dan artwork tetap milik pemegang hak cipta masing-masing.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Made by FahriAdison • Endfield Web (fan project)</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
