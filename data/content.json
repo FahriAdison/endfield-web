@@ -121,12 +121,12 @@
         "element": "Heat",
         "weapon": "Sword",
         "intro": [
-          "Laevatain is a Striker in Arknights Endfields. Laevatain is a Heat character which equips with Sword.",
-          "Laevatain is a Rhodes Island Operator assigned to Endfield Industries where she serves as a specialist operator following the framework agreement between the two companies. With Warfarin's authorization, Laevatain once spent years in the north to carry out a solo field mission, thanks to her strong skills in independent operations."
+          "Laevatain adalah Striker di Arknights: Endfield. Laevatain merupakan karakter Heat yang dilengkapi dengan Sword.",
+          "Laevatain adalah Operator Rhodes Island yang ditugaskan di Endfield Industries di mana dia menjabat sebagai operator spesialis mengikuti perjanjian kerangka kerja antara kedua perusahaan. Dengan izin Warfarin, Laevatain pernah menghabiskan waktu bertahun-tahun di utara untuk menjalankan misi lapangan tunggal, berkat keahliannya yang kuat dalam operasi independen."
         ],
         "storyHighlights": [
-          "Laevatain is a Striker in Arknights Endfields. Laevatain is a Heat character which equips with Sword.",
-          "Laevatain is a Rhodes Island Operator assigned to Endfield Industries where she serves as a specialist operator following the framework agreement between the two companies. With Warfarin's authorization, Laevatain once spent years in the north to carry out a solo field mission, thanks to her strong skills in independent operations."
+          "Laevatain adalah Striker di Arknights: Endfield. Laevatain merupakan karakter Heat yang dilengkapi dengan Sword.",
+          "Laevatain adalah Operator Rhodes Island yang ditugaskan di Endfield Industries di mana dia menjabat sebagai operator spesialis mengikuti perjanjian kerangka kerja antara kedua perusahaan. Dengan izin Warfarin, Laevatain pernah menghabiskan waktu bertahun-tahun di utara untuk menjalankan misi lapangan tunggal, berkat keahliannya yang kuat dalam operasi independen."
         ],
         "playstyle": "Mainkan Laevatain sebagai striker heat. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -134,22 +134,156 @@
             "type": "Basic Attack",
             "name": "Flaming Cinders",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 5 sequences that deals Heat DMG. As the controlled operator, Final Strike also deals 18 Stagger.",
+            "description": "Serangan hingga 5 rangkaian yang mengakibatkan Heat DMG. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 18 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Seethe",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When an enemy suffers Combustion or Corrosion.Fire erupts beneath the feet of any enemy with Combustion or Corrosion, dealing Heat DMG to them.If the skill hits the enemy, Laevatain gains 1 stack of Melting Flame and further gains Ultimate Energy per enemy hit.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Saat musuh mengalami Pembakaran atau Korosi. Api akan meledak di bawah kaki musuh mana pun yang memiliki Pembakaran atau Korosi, mengakibatkan Heat DMG kepada musuh. Jika skill mengenai musuh, Laevatain memperoleh 1 tumpukan Melting Flame dan selanjutnya memperoleh Energi Ultimate per musuh yang terkena.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Scorching Heart",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "After the controlled operator's Final Strike or Finisher hits the enemy, Laevatain absorbs Heat Infliction from nearby enemies.Every stack of Heat Infliction absorbed gives Laevatain 1 stack of Melting Flame (max stacks: 4).After reaching 4 stacks, DMG dealt by Laevatain ignores {100*ignore_fire_resist:0} Heat Resistance of the enemy for 20s.Laevatain also absorbs Heat Infliction from enemies defeated nearby.",
+            "description": "Setelah Serangan Terakhir atau Penyelesai dari operator yang dikontrol mengenai musuh, Laevatain menyerap Heat Infliction dari musuh di dekatnya. Setiap tumpukan Heat Infliction yang diserap memberi Laevatain 1 tumpukan Melting Flame (stack maksimal: 4). Setelah mencapai 4 tumpukan, DMG yang ditangani oleh Laevatain mengabaikan {100*ignore_fire_resist:0} Ketahanan Panas musuh selama 20 detik.Laevatain juga menyerap Heat Infliction dari musuh yang dikalahkan di dekatnya.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Tide Fall Light Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Intellect",
+                "value": "+87"
+              },
+              {
+                "name": "Strength",
+                "value": "+58"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+12.3%"
+              }
+            ],
+            "effectName": "Tide Surge",
+            "effectDescription": "Efek set 3 bagian: DMG Skill pengguna +20%. Setelah pemakainya menerapkan 2 atau lebih tumpukan Arts Infliction pada musuh, pemakainya memperoleh Arts DMG +35% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Tide Fall Light Armor cocok untuk build armor dan sinergi set Tide Surge."
+          },
+          {
+            "name": "Hot Work Gauntlets",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Gauntlets.png",
+            "source": "https://arknightsendfield.gg/gloves/hot-work-gauntlets/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Intellect",
+                "value": "+65"
+              },
+              {
+                "name": "Strength",
+                "value": "+43"
+              },
+              {
+                "name": "Bonus DMG Heat/Nature",
+                "value": "+19.2%"
+              }
+            ],
+            "effectName": "Hot Work",
+            "effectDescription": "Efek set 3 bagian: Intensitas Arts Pemakainya +30. Setelah pemakainya menerapkan Pembakaran, pemakainya memperoleh Heat DMG +50% selama 10 detik. Setelah pemakai menerapkan Korosi, pemakai memperoleh Nature DMG +50% selama 10 detik. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear Hot Work Gauntlets cocok untuk build gloves dan sinergi set Hot Work."
+          },
+          {
+            "name": "Hot Work Pyrometer",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Pyrometer.png",
+            "source": "https://arknightsendfield.gg/kit/hot-work-pyrometer/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Intellect",
+                "value": "+41"
+              },
+              {
+                "name": "Bonus DMG Battle Skill",
+                "value": "+41.4%"
+              }
+            ],
+            "effectName": "Hot Work",
+            "effectDescription": "Efek set 3 bagian: Intensitas Arts Pemakainya +30. Setelah pemakainya menerapkan Pembakaran, pemakainya memperoleh Heat DMG +50% selama 10 detik. Setelah pemakai menerapkan Korosi, pemakai memperoleh Nature DMG +50% selama 10 detik. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear Hot Work Pyrometer cocok untuk build kit dan sinergi set Hot Work."
+          },
+          {
+            "name": "Eternal Xiranite Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Intellect",
+                "value": "+65"
+              },
+              {
+                "name": "Strength",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Gloves cocok untuk build gloves dan sinergi set Eternal Xiranite."
+          },
+          {
+            "name": "Redeemer Seal",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Redeemer-Seal.png",
+            "source": "https://arknightsendfield.gg/kit/redeemer-seal/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Intellect",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+25.7%"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "-",
+            "description": "Gear Redeemer Seal direkomendasikan untuk komposisi karakter ini."
           }
         ]
       }
@@ -181,35 +315,121 @@
         "element": "Nature",
         "weapon": "Arts Unit",
         "intro": [
-          "Gilberta is a Support in Arknights Endfields. Gilberta is a Nature character which equips with Arts Unit.",
-          "Gilberta, serves as a Rhodes Island liaison based at Endfield Industries. Fans of the earlier Arknights game may recognize her. Proficient in the uncommon gravity facet of Originium Arts, she has played a pivotal role in supporting numerous crucial projects across different divisions."
+          "Gilberta adalah Pendukung di Arknights: Endfield. Gilberta merupakan karakter Alam yang dilengkapi dengan Unit Seni.",
+          "Gilberta, bertindak sebagai penghubung Rhodes Island yang berbasis di Endfield Industries. Penggemar game Arknights sebelumnya mungkin mengenalinya. Mahir dalam aspek gravitasi yang tidak biasa di Originium Arts, dia telah memainkan peran penting dalam mendukung banyak proyek penting di berbagai divisi."
         ],
         "storyHighlights": [
-          "Gilberta is a Support in Arknights Endfields. Gilberta is a Nature character which equips with Arts Unit.",
-          "Gilberta, serves as a Rhodes Island liaison based at Endfield Industries. Fans of the earlier Arknights game may recognize her. Proficient in the uncommon gravity facet of Originium Arts, she has played a pivotal role in supporting numerous crucial projects across different divisions."
+          "Gilberta adalah Pendukung di Arknights: Endfield. Gilberta merupakan karakter Alam yang dilengkapi dengan Unit Seni.",
+          "Gilberta, bertindak sebagai penghubung Rhodes Island yang berbasis di Endfield Industries. Penggemar game Arknights sebelumnya mungkin mengenalinya. Mahir dalam aspek gravitasi yang tidak biasa di Originium Arts, dia telah memainkan peran penting dalam mendukung banyak proyek penting di berbagai divisi."
         ],
-        "playstyle": "Mainkan Gilberta sebagai support nature. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "playstyle": "Mainkan Gilberta sebagai pendukung alam. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
           {
             "type": "Basic Attack",
             "name": "Arcane Staff: Beam Cohesion Arts",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Nature DMG. As the controlled operator, Final Strike also deals 16 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan Nature DMG. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 16 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Arcane Staff: Matrix Displacement",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When an Arts Reaction is applied to an enemy.A quick casting of the Arts that generates a gravity pull, which then deals Nature DMG and forcibly Lifts the target and nearby enemies.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika Reaksi Seni diterapkan pada musuh. Pengeluaran Seni dengan cepat yang menghasilkan tarikan gravitasi, yang kemudian mengakibatkan DMG Alam dan secara paksa Mengangkat target dan musuh di sekitar.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Messenger's Song",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "When fighting in the battlefield, all allied guards, casters, and supporters gain Ultimate Gain Efficiency +4%.",
+            "description": "Saat bertarung di medan perang, semua penjaga, kastor, dan pendukung sekutu memperoleh Efisiensi Peningkatan Tertinggi +4%.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Eternal Xiranite Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/eternal-xiranite-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Will",
+                "value": "+87"
+              },
+              {
+                "name": "Intellect",
+                "value": "+58"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+20"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Armor cocok untuk build armor dan sinergi set Eternal Xiranite."
+          },
+          {
+            "name": "Eternal Xiranite Gloves T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves-t1/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Intellect",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Gloves T1 cocok untuk build gloves dan sinergi set Eternal Xiranite."
+          },
+          {
+            "name": "Eternal Xiranite Auxiliary Arm",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Will",
+                "value": "+32"
+              },
+              {
+                "name": "Intellect",
+                "value": "+21"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+24.6%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Auxiliary Arm cocok untuk build kit dan sinergi set Eternal Xiranite."
           }
         ]
       }
@@ -241,10 +461,10 @@
         "element": "Cryo",
         "weapon": "Handcannon",
         "intro": [
-          "Yvonne is a Caster in Arknights Endfields. Yvonne is a Cryo character which equips with Handcannon."
+          "Yvonne adalah seorang Kastor di Arknights: Endfield. Yvonne merupakan karakter Cryo yang dilengkapi dengan Handcannon."
         ],
         "storyHighlights": [
-          "Yvonne is a Caster in Arknights Endfields. Yvonne is a Cryo character which equips with Handcannon.",
+          "Yvonne adalah seorang Kastor di Arknights: Endfield. Yvonne merupakan karakter Cryo yang dilengkapi dengan Handcannon.",
           "Yvonne punya kontribusi penting dalam operasi Endfield berdasarkan sumber komunitas."
         ],
         "playstyle": "Mainkan Yvonne sebagai caster cryo. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
@@ -253,22 +473,108 @@
             "type": "Basic Attack",
             "name": "Exuberant Trigger",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 5 sequences that deals Cryo DMG. As the controlled operator, Final Strike also deals 17 Stagger.",
+            "description": "Serangan hingga 5 rangkaian yang mengakibatkan Cryo DMG. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 17 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Flashfreezer u37",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When the controlled operator performs a Final Strike on an enemy with Solidification.Immediately deploys Frost-e-Bytee next to the enemy. While active, Frost-e-Bytee constantly releases energy to attack nearby enemies, deals Cryo DMG to them, and pulls them towards itself. After Frost-e-Bytee expires, it explodes to forcibly apply Solidification and deal Cryo DMG to nearby enemies.After the combo skill successfully hits the enemy, Yvonne gains additional Ultimate Energy. This Ultimate Energy Gain effect can only trigger 1 time, even if the skill hits multiple enemies.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika operator yang dikendalikan melakukan Serangan Terakhir pada musuh dengan Solidifikasi. Segera menyebarkan Frost-e-Bytee di sebelah musuh. Saat aktif, Frost-e-Bytee terus-menerus melepaskan energi untuk menyerang musuh di sekitar, mengakibatkan Cryo DMG kepada mereka, dan menarik mereka ke arah dirinya. Setelah Frost-e-Bytee habis masa berlakunya, ia meledak untuk menerapkan Solidifikasi secara paksa dan mengakibatkan Cryo DMG ke musuh di sekitar. Setelah kombo skill berhasil mengenai musuh, Yvonne memperoleh Energi Ultimate tambahan. Efek Ultimate Energy Gain ini hanya dapat terpicu 1 kali, meskipun skill mengenai banyak musuh.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Barrage of Technology",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "Battle skill Brr-Brr-Bomb β improved: After applying Solidification, the next basic attack performed becomes a Final Strike.",
+            "description": "Keterampilan bertarung Brr-Brr-Bomb β ditingkatkan: Setelah menerapkan Solidifikasi, serangan dasar berikutnya yang dilakukan menjadi Serangan Terakhir.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "MI Security Overalls",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/MI-Security-Overalls.png",
+            "source": "https://arknightsendfield.gg/armor/mi-security-overalls/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Intellect",
+                "value": "+87"
+              },
+              {
+                "name": "Agility",
+                "value": "+58"
+              },
+              {
+                "name": "Bonus DMG Serangan Dasar",
+                "value": "+13.8%"
+              }
+            ],
+            "effectName": "MI Security",
+            "effectDescription": "Efek set 3 bagian: Critical Rate Pemakainya +5%. Setelah pemakainya mencetak serangan kritis, pemakainya memperoleh ATK +5% selama 5 detik. Efek ini bisa mencapai 5 stack. Pada stack maksimal, berikan Critical Rate tambahan +5%. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear MI Security Overalls cocok untuk build armor dan sinergi set MI Security."
+          },
+          {
+            "name": "MI Security Hands PPE",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/MI-Security-Hands-PPE.png",
+            "source": "https://arknightsendfield.gg/gloves/mi-security-hands-ppe/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Intellect",
+                "value": "+65"
+              },
+              {
+                "name": "Agility",
+                "value": "+43"
+              },
+              {
+                "name": "Bonus DMG Serangan Dasar",
+                "value": "+23%"
+              }
+            ],
+            "effectName": "MI Security",
+            "effectDescription": "Efek set 3 bagian: Critical Rate Pemakainya +5%. Setelah pemakainya mencetak serangan kritis, pemakainya memperoleh ATK +5% selama 5 detik. Efek ini bisa mencapai 5 stack. Pada stack maksimal, berikan Critical Rate tambahan +5%. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear MI Security Hands PPE cocok untuk build gloves dan sinergi set MI Security."
+          },
+          {
+            "name": "MI Security Toolkit",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/MI-Security-Toolkit.png",
+            "source": "https://arknightsendfield.gg/kit/mi-security-toolkit/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Intellect",
+                "value": "+32"
+              },
+              {
+                "name": "Agility",
+                "value": "+21"
+              },
+              {
+                "name": "Critical Rate",
+                "value": "+10.4%"
+              }
+            ],
+            "effectName": "MI Security",
+            "effectDescription": "Efek set 3 bagian: Critical Rate Pemakainya +5%. Setelah pemakainya mencetak serangan kritis, pemakainya memperoleh ATK +5% selama 5 detik. Efek ini bisa mencapai 5 stack. Pada stack maksimal, berikan Critical Rate tambahan +5%. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear MI Security Toolkit cocok untuk build kit dan sinergi set MI Security."
           }
         ]
       }
@@ -300,35 +606,121 @@
         "element": "Nature",
         "weapon": "Arts Unit",
         "intro": [
-          "Ardelia is a Support in Arknights Endfields. Ardelia is a Nature character which equips with Arts Unit.",
-          "Ardelia, serves as a Rhodes Island operator assigned to Endfield Industries where she serves as an expert geologist under the framework agreement between the two companies."
+          "Ardelia adalah seorang Support di Arknights: Endfield. Ardelia merupakan karakter Alam yang dilengkapi dengan Unit Seni.",
+          "Ardelia, menjabat sebagai operator Rhodes Island yang ditugaskan di Endfield Industries di mana dia menjabat sebagai ahli geologi berdasarkan perjanjian kerangka kerja antara kedua perusahaan."
         ],
         "storyHighlights": [
-          "Ardelia is a Support in Arknights Endfields. Ardelia is a Nature character which equips with Arts Unit.",
-          "Ardelia, serves as a Rhodes Island operator assigned to Endfield Industries where she serves as an expert geologist under the framework agreement between the two companies."
+          "Ardelia adalah seorang Support di Arknights: Endfield. Ardelia merupakan karakter Alam yang dilengkapi dengan Unit Seni.",
+          "Ardelia, menjabat sebagai operator Rhodes Island yang ditugaskan di Endfield Industries di mana dia menjabat sebagai ahli geologi berdasarkan perjanjian kerangka kerja antara kedua perusahaan."
         ],
-        "playstyle": "Mainkan Ardelia sebagai support nature. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "playstyle": "Mainkan Ardelia sebagai pendukung alam. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
           {
             "type": "Basic Attack",
             "name": "Rocky Whispers",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Nature DMG. As the controlled operator, Final Strike also deals 18 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan Nature DMG. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 18 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Eruption Column",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When the controlled operator performs a Final Strike on an enemy with no stacks of Vulnerability or Arts Infliction.Launches a homing Volcanic Cloud at a target enemy that deals Nature DMG when close enough to the target. The Volcanic Cloud explodes after a short delay, dealing half of the Nature DMG and forcibly applying temporary Corrosion to nearby enemies",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika operator yang dikendalikan melakukan Serangan Terakhir pada musuh yang tidak memiliki tumpukan Kerentanan atau Serangan Seni. Meluncurkan Awan Vulkanik yang bergerak ke arah musuh yang dituju dan menimbulkan DMG Alam ketika cukup dekat dengan target. Awan Vulkanik meledak setelah beberapa saat, menimbulkan setengah dari DMG Alam dan secara paksa menerapkan Korosi sementara ke musuh di sekitar",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Friendly Presence",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "The battle skill Dolly Rush creates 3 Shadows of Mr. Dolly after hitting the enemy. The copies of Mr. Dolly scattered by the ultimate Wooly Party also have a 10% chance to create Shadows of Mr. Dolly when they fall to the ground. When the controlled operator touches a Shadow of Mr. Dolly, Ardelia restores the said operator's HP by [45 + Will×0.38].If the controlled operator is already at max HP, then restore the HP of the teammate with lowest percentage HP.Shadows of Mr. Dolly last for 10s and up to 10 can exist in the battlefield.",
+            "description": "Skill pertarungan Dolly Rush menciptakan 3 Bayangan Mr. Dolly setelah mengenai musuh. Salinan Tuan Dolly yang disebarkan oleh Kelompok Wooly terhebat juga memiliki peluang 10% untuk menciptakan Bayangan Tuan Dolly ketika jatuh ke tanah. Ketika operator yang dikendalikan menyentuh Bayangan Tuan Dolly, Ardelia memulihkan HP operator tersebut sebesar [45 + Will×0,38]. Jika operator yang dikendalikan sudah berada pada HP maksimal, maka pulihkan HP rekan setimnya dengan persentase HP terendah. Bayangan Tuan Dolly bertahan selama 10 detik dan hingga 10 dapat bertahan di medan perang.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Tide Fall Light Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Intellect",
+                "value": "+87"
+              },
+              {
+                "name": "Strength",
+                "value": "+58"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+12.3%"
+              }
+            ],
+            "effectName": "Tide Surge",
+            "effectDescription": "Efek set 3 bagian: DMG Skill pengguna +20%. Setelah pemakainya menerapkan 2 atau lebih tumpukan Arts Infliction pada musuh, pemakainya memperoleh Arts DMG +35% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Tide Fall Light Armor cocok untuk build armor dan sinergi set Tide Surge."
+          },
+          {
+            "name": "Eternal Xiranite Gloves T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves-t1/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Intellect",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Gloves T1 cocok untuk build gloves dan sinergi set Eternal Xiranite."
+          },
+          {
+            "name": "Eternal Xiranite Auxiliary Arm",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Will",
+                "value": "+32"
+              },
+              {
+                "name": "Intellect",
+                "value": "+21"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+24.6%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Auxiliary Arm cocok untuk build kit dan sinergi set Eternal Xiranite."
           }
         ]
       }
@@ -360,12 +752,12 @@
         "element": "Cryo",
         "weapon": "Great Sword",
         "intro": [
-          "Last Rite is a Striker in Arknights Endfields. Last Rite is a Cryo character which equips with Great Sword.",
-          "Last Rite, Before the Sarkaz of the floating city found her, Last Rite was a kind-hearted girl adopted by a Caprinae gravekeeper couple. Shaped by their teachings, the young Nachzehrer refused to disturb the dead, resisting her instinct to feed. But that restraint left her reeling with hunger, and her insecurity made her shrink away from others."
+          "Ritus Terakhir adalah Striker di Arknights: Endfield. Last Rite adalah karakter Cryo yang dilengkapi dengan Great Sword.",
+          "Ritus Terakhir, Sebelum Sarkaz dari kota terapung menemukannya, Ritus Terakhir adalah seorang gadis baik hati yang diadopsi oleh pasangan penjaga makam Caprinae. Dibentuk oleh ajaran mereka, Nachzehrer muda menolak mengganggu orang mati, menolak nalurinya untuk memberi makan. Namun pengekangan itu membuatnya terguncang oleh rasa lapar, dan rasa tidak aman membuatnya menjauh dari orang lain."
         ],
         "storyHighlights": [
-          "Last Rite is a Striker in Arknights Endfields. Last Rite is a Cryo character which equips with Great Sword.",
-          "Last Rite, Before the Sarkaz of the floating city found her, Last Rite was a kind-hearted girl adopted by a Caprinae gravekeeper couple. Shaped by their teachings, the young Nachzehrer refused to disturb the dead, resisting her instinct to feed. But that restraint left her reeling with hunger, and her insecurity made her shrink away from others."
+          "Ritus Terakhir adalah Striker di Arknights: Endfield. Last Rite adalah karakter Cryo yang dilengkapi dengan Great Sword.",
+          "Ritus Terakhir, Sebelum Sarkaz dari kota terapung menemukannya, Ritus Terakhir adalah seorang gadis baik hati yang diadopsi oleh pasangan penjaga makam Caprinae. Dibentuk oleh ajaran mereka, Nachzehrer muda menolak mengganggu orang mati, menolak nalurinya untuk memberi makan. Namun pengekangan itu membuatnya terguncang oleh rasa lapar, dan rasa tidak aman membuatnya menjauh dari orang lain."
         ],
         "playstyle": "Mainkan Last Rite sebagai striker cryo. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -373,22 +765,108 @@
             "type": "Basic Attack",
             "name": "Dance of Rime",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Cryo DMG. As the controlled operator, Final Strike also deals 25 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan Cryo DMG. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 25 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Winter's Devourer",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When an enemy has 3 or more Cryo Infliction stacks.Encases the target enemy in icicles and shatters them to consume all Cryo Infliction stacks of the said enemy. The number of Cryo Infliction stacks consumed determines the amount of Cryo DMG dealt to the said enemy and Ultimate Energy gained by Last Rite.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika musuh memiliki 3 tumpukan Cryo Infliction atau lebih. Membungkus musuh target dalam es dan menghancurkannya untuk menghabiskan semua tumpukan Cryo Infliction musuh tersebut. Jumlah tumpukan Cryo Infliction yang dikonsumsi menentukan jumlah Cryo DMG yang diberikan kepada musuh dan Energi Ultimate yang diperoleh dari Last Rite.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Hypothermia",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "After Last Rite consumes any Arts Infliction, she applies Cryo Susceptibility to the target with the effect of [Number of Arts Infliction stacks consumed × 2%] for 15s. This effect cannot stack.",
+            "description": "Setelah Last Rite menghabiskan Art Infliction apa pun, dia menerapkan Cryo Susceptibility ke target dengan efek [Jumlah tumpukan Arts Infliction yang dikonsumsi × 2%] selama 15 detik. Efek ini tidak dapat ditumpuk.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Tide Fall Light Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Intellect",
+                "value": "+87"
+              },
+              {
+                "name": "Strength",
+                "value": "+58"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+12.3%"
+              }
+            ],
+            "effectName": "Tide Surge",
+            "effectDescription": "Efek set 3 bagian: DMG Skill pengguna +20%. Setelah pemakainya menerapkan 2 atau lebih tumpukan Arts Infliction pada musuh, pemakainya memperoleh Arts DMG +35% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Tide Fall Light Armor cocok untuk build armor dan sinergi set Tide Surge."
+          },
+          {
+            "name": "Tide Surge Gauntlets",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Surge-Gauntlets.png",
+            "source": "https://arknightsendfield.gg/gloves/tide-surge-gauntlets/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Strength",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Bonus DMG Cryo/Electric",
+                "value": "+19.2%"
+              }
+            ],
+            "effectName": "Tide Surge",
+            "effectDescription": "Efek set 3 bagian: DMG Skill pengguna +20%. Setelah pemakainya menerapkan 2 atau lebih tumpukan Arts Infliction pada musuh, pemakainya memperoleh Arts DMG +35% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Tide Surge Gauntlets cocok untuk build gloves dan sinergi set Tide Surge."
+          },
+          {
+            "name": "Hanging River O2 Tube",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Hanging-River-02-Tube.png",
+            "source": "https://arknightsendfield.gg/kit/hanging-river-o2-tube/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Strength",
+                "value": "+32"
+              },
+              {
+                "name": "Will",
+                "value": "+21"
+              },
+              {
+                "name": "Bonus DMG Cryo/Electric",
+                "value": "+23%"
+              }
+            ],
+            "effectName": "Tide Surge",
+            "effectDescription": "Efek set 3 bagian: DMG Skill pengguna +20%. Setelah pemakainya menerapkan 2 atau lebih tumpukan Arts Infliction pada musuh, pemakainya memperoleh Arts DMG +35% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Hanging River O2 Tube cocok untuk build kit dan sinergi set Tide Surge."
           }
         ]
       }
@@ -420,12 +898,12 @@
         "element": "Electric",
         "weapon": "Arts Unit",
         "intro": [
-          "Perlica is a Caster in Arknights Endfields. Perlica is a Electric character which equips with Arts Unit.",
-          "As the Supervisor at Endfield Industries, she adeptly navigates company resources. A disciplined and approachable leader, she engenders anticipation among operators to join her team, known for its attractive incentives such as bonuses, ample leave days, and continuous learning opportunities during assignments."
+          "Perlica adalah seorang Caster di Arknights: Endfield. Perlica merupakan karakter Electric yang dilengkapi dengan Arts Unit.",
+          "Sebagai Supervisor di Endfield Industries, dia dengan mahir menavigasi sumber daya perusahaan. Sebagai pemimpin yang disiplin dan mudah didekati, beliau membangkitkan antisipasi di antara operator untuk bergabung dengan timnya, yang dikenal dengan insentif menarik seperti bonus, hari cuti yang cukup, dan kesempatan belajar terus menerus selama penugasan."
         ],
         "storyHighlights": [
-          "Perlica is a Caster in Arknights Endfields. Perlica is a Electric character which equips with Arts Unit.",
-          "As the Supervisor at Endfield Industries, she adeptly navigates company resources. A disciplined and approachable leader, she engenders anticipation among operators to join her team, known for its attractive incentives such as bonuses, ample leave days, and continuous learning opportunities during assignments."
+          "Perlica adalah seorang Caster di Arknights: Endfield. Perlica merupakan karakter Electric yang dilengkapi dengan Arts Unit.",
+          "Sebagai Supervisor di Endfield Industries, dia dengan mahir menavigasi sumber daya perusahaan. Sebagai pemimpin yang disiplin dan mudah didekati, beliau membangkitkan antisipasi di antara operator untuk bergabung dengan timnya, yang dikenal dengan insentif menarik seperti bonus, hari cuti yang cukup, dan kesempatan belajar terus menerus selama penugasan."
         ],
         "playstyle": "Mainkan Perlica sebagai caster electric. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -433,22 +911,104 @@
             "type": "Basic Attack",
             "name": "Protocol a: Breach",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Electric DMG. As the controlled operator, Final Strike also deals 15 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan DMG Listrik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 15 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Instant Protocol: Chain",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When controlled operator performs a Final Strike on any enemy.Unleashes stored electro-magnetic energy to bombard the target, dealing Electric DMG and forcibly inflicting temporary Electrification.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika operator yang dikendalikan melakukan Serangan Terakhir pada musuh mana pun. Melepaskan energi elektromagnetik yang tersimpan untuk membombardir target, menyebabkan DMG Listrik dan secara paksa menimbulkan Elektrifikasi sementara.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Obliteration Protocol",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "DMG Dealt +20% to Staggered enemies.",
+            "description": "DMG Menimbulkan +20% kepada musuh yang terkena Stagger.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Pulser Labs Disruptor Suit",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Pulser-Labs-Disruptor-Suit.png",
+            "source": "https://arknightsendfield.gg/armor/pulser-labs-disruptor-suit/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Intellect",
+                "value": "+87"
+              },
+              {
+                "name": "Will",
+                "value": "+58"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+20"
+              }
+            ],
+            "effectName": "Pulser Labs",
+            "effectDescription": "Efek set 3 bagian: Intensitas Arts Pemakainya +30. Setelah pemakainya menerapkan Elektrifikasi, pemakainya memperoleh DMG Listrik +50% selama 10 detik. Setelah pemakai menerapkan Solidifikasi, pemakai memperoleh Cryo DMG +50% selama 10 detik. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear Pulser Labs Disruptor Suit cocok untuk build armor dan sinergi set Pulser Labs."
+          },
+          {
+            "name": "Æthertech Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/AEthertech-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/aethertech-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Agility",
+                "value": "+65"
+              },
+              {
+                "name": "Strength",
+                "value": "+43"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+34"
+              }
+            ],
+            "effectName": "Æthertech",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +8%. Setelah pemakainya menerapkan Kerentanan, pemakainya memperoleh DMG Fisik +8% selama 15 detik. Efek ini bisa mencapai 4 stack. Jika target sudah mempunyai 4 tumpukan Kerentanan, pemakainya memperoleh tambahan DMG Fisik +16% selama 10 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Æthertech Gloves cocok untuk build gloves dan sinergi set Æthertech."
+          },
+          {
+            "name": "Pulser Labs Calibrator",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Pulser-Labs-Calibrator.png",
+            "source": "https://arknightsendfield.gg/kit/pulser-labs-calibrator/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Intellect",
+                "value": "+41"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+41"
+              }
+            ],
+            "effectName": "Pulser Labs",
+            "effectDescription": "Efek set 3 bagian: Intensitas Arts Pemakainya +30. Setelah pemakainya menerapkan Elektrifikasi, pemakainya memperoleh DMG Listrik +50% selama 10 detik. Setelah pemakai menerapkan Solidifikasi, pemakai memperoleh Cryo DMG +50% selama 10 detik. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear Pulser Labs Calibrator cocok untuk build kit dan sinergi set Pulser Labs."
           }
         ]
       }
@@ -480,12 +1040,12 @@
         "element": "Physical",
         "weapon": "Sword",
         "intro": [
-          "Pogranichnik is a Vanguard in Arknights Endfields. Pogranichnik is a Physical character which equips with Sword.",
-          "Pogranichnik, is a Rhodes Island operator assigned to Endfield Industries where he serves as a military consultant under the framework agreement between the two companies."
+          "Pogranichnik adalah pelopor di Arknights: Endfield. Pogranichnik adalah karakter Fisik yang dilengkapi dengan Pedang.",
+          "Pogranichnik, adalah operator Rhodes Island yang ditugaskan di Endfield Industries di mana ia menjabat sebagai konsultan militer berdasarkan perjanjian kerangka kerja antara kedua perusahaan."
         ],
         "storyHighlights": [
-          "Pogranichnik is a Vanguard in Arknights Endfields. Pogranichnik is a Physical character which equips with Sword.",
-          "Pogranichnik, is a Rhodes Island operator assigned to Endfield Industries where he serves as a military consultant under the framework agreement between the two companies."
+          "Pogranichnik adalah pelopor di Arknights: Endfield. Pogranichnik adalah karakter Fisik yang dilengkapi dengan Pedang.",
+          "Pogranichnik, adalah operator Rhodes Island yang ditugaskan di Endfield Industries di mana ia menjabat sebagai konsultan militer berdasarkan perjanjian kerangka kerja antara kedua perusahaan."
         ],
         "playstyle": "Mainkan Pogranichnik sebagai vanguard physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -493,22 +1053,136 @@
             "type": "Basic Attack",
             "name": "All-Out Offensive",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 5 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 18 Stagger.",
+            "description": "Serangan hingga 5 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 18 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Full Moon Slash",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When Crush or Breach consumes the enemy's Vulnerability stack(s).Performs a number of slash sequences (up to 3) based on the max number of Vulnerability stacks consumed, dealing Physical DMG and recovering some SP. Each slash deals more DMG and gives better SP recovery.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Saat Penghancuran atau Pelanggaran menghabiskan tumpukan Vulnerabilitas musuh. Melakukan serangkaian tebasan (hingga 3) berdasarkan jumlah maksimum tumpukan Vulnerabilitas yang dikonsumsi, menyebabkan DMG Fisik dan memulihkan sejumlah SP. Setiap tebasan menghasilkan lebih banyak DMG dan memberikan pemulihan SP yang lebih baik.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "The Living Banner",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "During battle, recovering 80 SP with his own skills grants Fervent Morale for 20s. Fervent Morale effects: ATK +4% and Arts Intensity +4.",
+            "description": "Selama pertarungan, memulihkan 80 SP dengan keahliannya sendiri akan memberikan Semangat Semangat selama 20 detik. Efek Semangat yang Kuat: ATK +4% dan Intensitas Arts +4.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Eternal Xiranite Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/eternal-xiranite-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Will",
+                "value": "+87"
+              },
+              {
+                "name": "Intellect",
+                "value": "+58"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+20"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Armor cocok untuk build armor dan sinergi set Eternal Xiranite."
+          },
+          {
+            "name": "Æthertech Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/AEthertech-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/aethertech-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Agility",
+                "value": "+65"
+              },
+              {
+                "name": "Strength",
+                "value": "+43"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+34"
+              }
+            ],
+            "effectName": "Æthertech",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +8%. Setelah pemakainya menerapkan Kerentanan, pemakainya memperoleh DMG Fisik +8% selama 15 detik. Efek ini bisa mencapai 4 stack. Jika target sudah mempunyai 4 tumpukan Kerentanan, pemakainya memperoleh tambahan DMG Fisik +16% selama 10 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Æthertech Gloves cocok untuk build gloves dan sinergi set Æthertech."
+          },
+          {
+            "name": "Æthertech Stabilizer",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/AEthertech-Stabilizer.png",
+            "source": "https://arknightsendfield.gg/kit/aethertech-stabilizer/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Agility",
+                "value": "+32"
+              },
+              {
+                "name": "Strength",
+                "value": "+21"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+41"
+              }
+            ],
+            "effectName": "Æthertech",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +8%. Setelah pemakainya menerapkan Kerentanan, pemakainya memperoleh DMG Fisik +8% selama 15 detik. Efek ini bisa mencapai 4 stack. Jika target sudah mempunyai 4 tumpukan Kerentanan, pemakainya memperoleh tambahan DMG Fisik +16% selama 10 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Æthertech Stabilizer cocok untuk build kit dan sinergi set Æthertech."
+          },
+          {
+            "name": "Eternal Xiranite Auxiliary Arm",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Will",
+                "value": "+32"
+              },
+              {
+                "name": "Intellect",
+                "value": "+21"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+24.6%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Auxiliary Arm cocok untuk build kit dan sinergi set Eternal Xiranite."
           }
         ]
       }
@@ -540,12 +1214,12 @@
         "element": "Heat",
         "weapon": "Great Sword",
         "intro": [
-          "Ember is a Defender in Arknights Endfields. Ember is a Heat character which equips with Great Sword.",
-          "Ember, a Tank character in the current game lineup, stands out as a remarkable warrior with extensive combat expertise and a knack for military strategies. While she excels in battle, Ember struggles with everyday communication, prompting caution among fellow Endfield members to communicate with her sensitively to prevent any misunderstandings."
+          "Ember adalah Pembela di Arknights: Endfield. Ember merupakan karakter Heat yang dilengkapi dengan Great Sword.",
+          "Ember, karakter Tank dalam jajaran game saat ini, menonjol sebagai pejuang luar biasa dengan keahlian tempur yang luas dan kemampuan strategi militer. Meskipun dia unggul dalam pertempuran, Ember kesulitan dengan komunikasi sehari-hari, sehingga mendorong kehati-hatian di antara sesama anggota Endfield untuk berkomunikasi dengannya secara sensitif untuk mencegah kesalahpahaman."
         ],
         "storyHighlights": [
-          "Ember is a Defender in Arknights Endfields. Ember is a Heat character which equips with Great Sword.",
-          "Ember, a Tank character in the current game lineup, stands out as a remarkable warrior with extensive combat expertise and a knack for military strategies. While she excels in battle, Ember struggles with everyday communication, prompting caution among fellow Endfield members to communicate with her sensitively to prevent any misunderstandings."
+          "Ember adalah Pembela di Arknights: Endfield. Ember merupakan karakter Heat yang dilengkapi dengan Great Sword.",
+          "Ember, karakter Tank dalam jajaran game saat ini, menonjol sebagai pejuang luar biasa dengan keahlian tempur yang luas dan kemampuan strategi militer. Meskipun dia unggul dalam pertempuran, Ember kesulitan dengan komunikasi sehari-hari, sehingga mendorong kehati-hatian di antara sesama anggota Endfield untuk berkomunikasi dengannya secara sensitif untuk mencegah kesalahpahaman."
         ],
         "playstyle": "Mainkan Ember sebagai defender heat. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -553,22 +1227,108 @@
             "type": "Basic Attack",
             "name": "Sword Art of Assault",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 25 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 25 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Frontline Support",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When the controlled operator is attacked.Leaps at the target enemy and unleashes a heavy slam that deals Physical DMG and Knock Down while giving HP treatment to the controlled operator. The attribute of Will increases the amount of HP treatment.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika operator yang dikendalikan diserang. Melompat ke arah musuh sasaran dan melancarkan bantingan keras yang mengakibatkan DMG Fisik dan Knock Down sambil memberikan perawatan HP kepada operator yang dikendalikan. Atribut Will meningkatkan jumlah pengobatan HP.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Inflamed for the Assault",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "When casting the battle skill Forward March and the combo skill Frontline Support, Ember gains 30% Protection and is less likely to be interrupted.",
+            "description": "Saat menggunakan skill tempur Forward March dan kombo skill Frontline Support, Ember memperoleh 30% Perlindungan dan kecil kemungkinannya untuk diganggu.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "LYNX Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/lynx-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Strength",
+                "value": "+87"
+              },
+              {
+                "name": "Will",
+                "value": "+58"
+              },
+              {
+                "name": "Bonus Healing",
+                "value": "+10.4%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Heavy Armor cocok untuk build armor dan sinergi set LYNX."
+          },
+          {
+            "name": "LYNX Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Gloves-1.png",
+            "source": "https://arknightsendfield.gg/gloves/lynx-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Strength",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Gloves cocok untuk build gloves dan sinergi set LYNX."
+          },
+          {
+            "name": "LYNX Connector",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Connector.png",
+            "source": "https://arknightsendfield.gg/kit/lynx-connector/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Strength",
+                "value": "+32"
+              },
+              {
+                "name": "Will",
+                "value": "+21"
+              },
+              {
+                "name": "Pengurangan DMG Final",
+                "value": "+82.9%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Connector cocok untuk build kit dan sinergi set LYNX."
           }
         ]
       }
@@ -600,12 +1360,12 @@
         "element": "Electric",
         "weapon": "Polearm",
         "intro": [
-          "Avywenna is a Striker in Arknights Endfields. Avywenna is a Electric character which equips with Polearm.",
-          "Avywenna is widely recognized as an Armed Messenger on the frontier. With extensive experience traversing the rugged terrain, she navigates the wildlands adeptly, shuttling between the frontier and the Civilization Band. A seasoned warrior, Avywenna joined Endfield on the endorsement of the company's longstanding recruitment associate."
+          "Avywenna adalah Striker di Arknights: Endfield. Avywenna merupakan karakter Electric yang dilengkapi dengan Polearm.",
+          "Avywenna dikenal luas sebagai Utusan Bersenjata di perbatasan. Dengan pengalaman luas melintasi medan terjal, dia menavigasi alam liar dengan mahir, bolak-balik antara perbatasan dan Civilization Band. Seorang pejuang berpengalaman, Avywenna bergabung dengan Endfield atas dukungan dari rekanan perekrutan lama perusahaan."
         ],
         "storyHighlights": [
-          "Avywenna is a Striker in Arknights Endfields. Avywenna is a Electric character which equips with Polearm.",
-          "Avywenna is widely recognized as an Armed Messenger on the frontier. With extensive experience traversing the rugged terrain, she navigates the wildlands adeptly, shuttling between the frontier and the Civilization Band. A seasoned warrior, Avywenna joined Endfield on the endorsement of the company's longstanding recruitment associate."
+          "Avywenna adalah Striker di Arknights: Endfield. Avywenna merupakan karakter Electric yang dilengkapi dengan Polearm.",
+          "Avywenna dikenal luas sebagai Utusan Bersenjata di perbatasan. Dengan pengalaman luas melintasi medan terjal, dia menavigasi alam liar dengan mahir, bolak-balik antara perbatasan dan Civilization Band. Seorang pejuang berpengalaman, Avywenna bergabung dengan Endfield atas dukungan dari rekanan perekrutan lama perusahaan."
         ],
         "playstyle": "Mainkan Avywenna sebagai striker electric. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -613,22 +1373,108 @@
             "type": "Basic Attack",
             "name": "Thunderlance: Blitz",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 5 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 17 Stagger.",
+            "description": "Serangan hingga 5 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 17 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Thunderlance: Strike",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When controlled operator performs a Final Strike on a target with active Electric Infliction or Electrification.Leaps into mid-air and throws 3 Thunderlances at the target, then deals 1 hit of Electric DMG to enemies in the area of effect.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Ketika operator yang dikendalikan melakukan Serangan Terakhir pada target dengan Electric Infliction atau Electrification aktif. Melompat ke udara dan melemparkan 3 Thunderlance ke target, lalu mengakibatkan 1 serangan Electric DMG ke musuh di area efek.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Expedited Delivery",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "After a thrown or returning Thunderlance or Thunderlance EX hits the enemy, Avywenna gains 3 Ultimate Energy.",
+            "description": "Setelah Thunderlance atau Thunderlance EX yang dilempar atau dikembalikan mengenai musuh, Avywenna memperoleh 3 Energi Ultimate.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Bonekrusha Poncho T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Bonekrusha-Poncho-1.png",
+            "source": "https://arknightsendfield.gg/armor/bonekrusha-poncho-mod/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Will",
+                "value": "+87"
+              },
+              {
+                "name": "Agility",
+                "value": "+58"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+12.3%"
+              }
+            ],
+            "effectName": "Bonekrusha",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +15%. Saat pemakainya menggunakan kombo keterampilan, pemakainya memperoleh 1 tumpukan Bonekrushing Smash yang memberikan DMG keterampilan pertempuran berikutnya kepada pemakainya +30%. Bonekrushing Smash dapat ditumpuk sebanyak 2 kali.",
+            "description": "Gear Bonekrusha Poncho T1 cocok untuk build armor dan sinergi set Bonekrusha."
+          },
+          {
+            "name": "Type 50 Yinglung Gloves T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Type-50-Yinglung-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/type-50-yinglung-gloves-t1/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Will",
+                "value": "+65"
+              },
+              {
+                "name": "Agility",
+                "value": "+43"
+              },
+              {
+                "name": "Combo Skill DMG Bonus",
+                "value": "+34.5%"
+              }
+            ],
+            "effectName": "Type 50 Yinglung",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +15%. Saat operator mana pun dalam tim menggunakan keterampilan bertarung, pemakainya memperoleh 1 tumpukan Yinglung's Edge yang memberikan DMG +20% pada kombo keterampilan berikutnya kepada pemakainya. Tepian Yinglung dapat ditumpuk sebanyak 3 kali.",
+            "description": "Gear Type 50 Yinglung Gloves T1 cocok untuk build gloves dan sinergi set Type 50 Yinglung."
+          },
+          {
+            "name": "Bonekrusha Figurine",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Bonekrusha-Figurine-1.png",
+            "source": "https://arknightsendfield.gg/kit/bonekrusha-figurine/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Will",
+                "value": "+32"
+              },
+              {
+                "name": "Agility",
+                "value": "+21"
+              },
+              {
+                "name": "Bonus DMG Battle Skill",
+                "value": "+41.4%"
+              }
+            ],
+            "effectName": "Bonekrusha",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +15%. Saat pemakainya menggunakan kombo keterampilan, pemakainya memperoleh 1 tumpukan Bonekrushing Smash yang memberikan DMG keterampilan pertempuran berikutnya kepada pemakainya +30%. Bonekrushing Smash dapat ditumpuk sebanyak 2 kali.",
+            "description": "Gear Bonekrusha Figurine cocok untuk build kit dan sinergi set Bonekrusha."
           }
         ]
       }
@@ -660,12 +1506,12 @@
         "element": "Physical",
         "weapon": "Great Sword",
         "intro": [
-          "Da Pan is a Striker in Arknights Endfields. Da Pan is a Physical character which equips with Great Sword.",
-          "Da Pan carries a special bottle with him wherever he goes. It doesn't look like anything special to most people, but anyone familiar with the writing of Yan would wonder about its origins. However, if that person happens to be from Hongshan, they would immediately recognize its origins and significance, because they know very well that the bottle is an item of honor only awarded to \"major contributors to science\"."
+          "Da Pan adalah Striker di Arknights: Endfield. Da Pan adalah karakter Fisik yang dilengkapi dengan Great Sword.",
+          "Da Pan membawa botol khusus kemanapun dia pergi. Tampaknya ini bukan sesuatu yang istimewa bagi kebanyakan orang, tetapi siapa pun yang akrab dengan tulisan Yan pasti bertanya-tanya tentang asal usulnya. Namun, jika orang tersebut kebetulan berasal dari Hongshan, mereka akan segera mengenali asal usul dan maknanya, karena mereka tahu betul bahwa botol tersebut merupakan barang kehormatan yang hanya diberikan kepada \"kontributor utama ilmu pengetahuan\"."
         ],
         "storyHighlights": [
-          "Da Pan is a Striker in Arknights Endfields. Da Pan is a Physical character which equips with Great Sword.",
-          "Da Pan carries a special bottle with him wherever he goes. It doesn't look like anything special to most people, but anyone familiar with the writing of Yan would wonder about its origins. However, if that person happens to be from Hongshan, they would immediately recognize its origins and significance, because they know very well that the bottle is an item of honor only awarded to \"major contributors to science\"."
+          "Da Pan adalah Striker di Arknights: Endfield. Da Pan adalah karakter Fisik yang dilengkapi dengan Great Sword.",
+          "Da Pan membawa botol khusus kemanapun dia pergi. Tampaknya ini bukan sesuatu yang istimewa bagi kebanyakan orang, tetapi siapa pun yang akrab dengan tulisan Yan pasti bertanya-tanya tentang asal usulnya. Namun, jika orang tersebut kebetulan berasal dari Hongshan, mereka akan segera mengenali asal usul dan maknanya, karena mereka tahu betul bahwa botol tersebut merupakan barang kehormatan yang hanya diberikan kepada \"kontributor utama ilmu pengetahuan\"."
         ],
         "playstyle": "Mainkan Da Pan sebagai striker physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -673,22 +1519,108 @@
             "type": "Basic Attack",
             "name": "ROLLING CUT!",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 20 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 20 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "MORE SPICE!",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When an enemy reaches 4 stacks of Vulnerability.Swings the wok at the enemy to deal massive Physical DMG and Crush. This Crush also deals more DMG.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Saat musuh mencapai 4 tumpukan Kerentanan. Mengayunkan wajan ke arah musuh untuk menimbulkan DMG Fisik dan Penghancuran besar-besaran. Penghancuran ini juga mengakibatkan lebih banyak DMG.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Reduce and Thicken",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "After consuming 1 Vulnerability stack, Da Pan gains Physical DMG Dealt +4% for 10s. This effect can reach 4 stacks.",
+            "description": "Setelah mengonsumsi 1 tumpukan Vulnerability, Da Pan memperoleh DMG Fisik yang Ditangani +4% selama 10 detik. Efek ini bisa mencapai 4 stack.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Type 50 Yinglung Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Type-50-Yinglung-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/type-50-yinglung-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Strength",
+                "value": "+87"
+              },
+              {
+                "name": "Will",
+                "value": "+58"
+              },
+              {
+                "name": "Bonus DMG Fisik",
+                "value": "+11.5%"
+              }
+            ],
+            "effectName": "Type 50 Yinglung",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +15%. Saat operator mana pun dalam tim menggunakan keterampilan bertarung, pemakainya memperoleh 1 tumpukan Yinglung's Edge yang memberikan DMG +20% pada kombo keterampilan berikutnya kepada pemakainya. Tepian Yinglung dapat ditumpuk sebanyak 3 kali.",
+            "description": "Gear Type 50 Yinglung Heavy Armor cocok untuk build armor dan sinergi set Type 50 Yinglung."
+          },
+          {
+            "name": "LYNX Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Gloves-1.png",
+            "source": "https://arknightsendfield.gg/gloves/lynx-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Strength",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Gloves cocok untuk build gloves dan sinergi set LYNX."
+          },
+          {
+            "name": "Type 50 Yinglung Radar",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Type-50-Yinglung-Radar.png",
+            "source": "https://arknightsendfield.gg/kit/type-50-yinglung-radar/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Strength",
+                "value": "+32"
+              },
+              {
+                "name": "Will",
+                "value": "+21"
+              },
+              {
+                "name": "Bonus DMG Fisik",
+                "value": "+23%"
+              }
+            ],
+            "effectName": "Type 50 Yinglung",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +15%. Saat operator mana pun dalam tim menggunakan keterampilan bertarung, pemakainya memperoleh 1 tumpukan Yinglung's Edge yang memberikan DMG +20% pada kombo keterampilan berikutnya kepada pemakainya. Tepian Yinglung dapat ditumpuk sebanyak 3 kali.",
+            "description": "Gear Type 50 Yinglung Radar cocok untuk build kit dan sinergi set Type 50 Yinglung."
           }
         ]
       }
@@ -720,12 +1652,12 @@
         "element": "Physical",
         "weapon": "Great Sword",
         "intro": [
-          "Catcher is a Defender in Arknights Endfields. Catcher is a Physical character which equips with Great Sword.",
-          "Catcher, serves on Operations Team Z7 in Endfield, responsible for cover and logistical support. Backed by full military training, he draws on his extensive knowledge to guide his teammates through critical moments."
+          "Catcher adalah Pembela di Arknights: Endfield. Catcher adalah karakter Fisik yang dilengkapi dengan Great Sword.",
+          "Catcher, bertugas di Tim Operasi Z7 di Endfield, bertanggung jawab atas perlindungan dan dukungan logistik. Didukung oleh pelatihan militer penuh, dia memanfaatkan pengetahuannya yang luas untuk membimbing rekan satu timnya melewati saat-saat kritis."
         ],
         "storyHighlights": [
-          "Catcher is a Defender in Arknights Endfields. Catcher is a Physical character which equips with Great Sword.",
-          "Catcher, serves on Operations Team Z7 in Endfield, responsible for cover and logistical support. Backed by full military training, he draws on his extensive knowledge to guide his teammates through critical moments."
+          "Catcher adalah Pembela di Arknights: Endfield. Catcher adalah karakter Fisik yang dilengkapi dengan Great Sword.",
+          "Catcher, bertugas di Tim Operasi Z7 di Endfield, bertanggung jawab atas perlindungan dan dukungan logistik. Didukung oleh pelatihan militer penuh, dia memanfaatkan pengetahuannya yang luas untuk membimbing rekan satu timnya melewati saat-saat kritis."
         ],
         "playstyle": "Mainkan Catcher sebagai defender physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -733,22 +1665,108 @@
             "type": "Basic Attack",
             "name": "Basic Tactics",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 22 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 22 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Timely Suppression",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When an enemy starts charging up a skill, or when the controlled operator is attacked and falls below 40% HP.A powerful downward punch that deals Physical DMG to the enemy, while granting shields to self and another teammate (controlled operator prioritized).DEF can further increase Shield points.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Saat musuh mulai mengisi skill, atau saat operator yang dikendalikan diserang dan HPnya turun di bawah 40%. Pukulan ke bawah yang kuat yang mengakibatkan DMG Fisik kepada musuh, sekaligus memberikan perisai kepada diri sendiri dan rekan satu tim lainnya (operator yang dikontrol diprioritaskan).DEF dapat meningkatkan poin Perisai lebih lanjut.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Resilient Defense",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "For every 10 Will, DEF +1.0.",
+            "description": "Untuk setiap 10 Will, DEF +1.0.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "LYNX Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/lynx-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Strength",
+                "value": "+87"
+              },
+              {
+                "name": "Will",
+                "value": "+58"
+              },
+              {
+                "name": "Bonus Healing",
+                "value": "+10.4%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Heavy Armor cocok untuk build armor dan sinergi set LYNX."
+          },
+          {
+            "name": "LYNX Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Gloves-1.png",
+            "source": "https://arknightsendfield.gg/gloves/lynx-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Strength",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Gloves cocok untuk build gloves dan sinergi set LYNX."
+          },
+          {
+            "name": "LYNX Connector",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Connector.png",
+            "source": "https://arknightsendfield.gg/kit/lynx-connector/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Strength",
+                "value": "+32"
+              },
+              {
+                "name": "Will",
+                "value": "+21"
+              },
+              {
+                "name": "Pengurangan DMG Final",
+                "value": "+82.9%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Connector cocok untuk build kit dan sinergi set LYNX."
           }
         ]
       }
@@ -780,12 +1798,12 @@
         "element": "Electric",
         "weapon": "Sword",
         "intro": [
-          "Arclight is a Vanguard in Arknights Endfields. Arclight is a Electric character which equips with Sword.",
-          "Arclight is a scabhta of the Fiannæ Circuit. She is currently partnering with Endfield Industries as a technical consultant. No one roaming the wildlands could escape the grip of starvation and disasters, no matter how clever or capable they may think themselves to be. Misfortune struck Arclight hard. The wildlands consumed her entire family, leaving her the only survivor."
+          "Arclight adalah pelopor di Arknights: Endfield. Arclight merupakan karakter Electric yang dilengkapi dengan Sword.",
+          "Arclight adalah scabhta dari Sirkuit Fiannæ. Dia saat ini bermitra dengan Endfield Industries sebagai konsultan teknis. Tak seorang pun yang berkeliaran di alam liar dapat lepas dari cengkeraman kelaparan dan bencana, tidak peduli seberapa pintar atau cakapnya mereka. Nasib buruk menimpa Arclight dengan keras. Alam liar memakan seluruh keluarganya, meninggalkan dia satu-satunya yang selamat."
         ],
         "storyHighlights": [
-          "Arclight is a Vanguard in Arknights Endfields. Arclight is a Electric character which equips with Sword.",
-          "Arclight is a scabhta of the Fiannæ Circuit. She is currently partnering with Endfield Industries as a technical consultant. No one roaming the wildlands could escape the grip of starvation and disasters, no matter how clever or capable they may think themselves to be. Misfortune struck Arclight hard. The wildlands consumed her entire family, leaving her the only survivor."
+          "Arclight adalah pelopor di Arknights: Endfield. Arclight merupakan karakter Electric yang dilengkapi dengan Sword.",
+          "Arclight adalah scabhta dari Sirkuit Fiannæ. Dia saat ini bermitra dengan Endfield Industries sebagai konsultan teknis. Tak seorang pun yang berkeliaran di alam liar dapat lepas dari cengkeraman kelaparan dan bencana, tidak peduli seberapa pintar atau cakapnya mereka. Nasib buruk menimpa Arclight dengan keras. Alam liar memakan seluruh keluarganya, meninggalkan dia satu-satunya yang selamat."
         ],
         "playstyle": "Mainkan Arclight sebagai vanguard electric. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -793,22 +1811,108 @@
             "type": "Basic Attack",
             "name": "Seek and Hunt",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 5 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 16 Stagger.",
+            "description": "Serangan hingga 5 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 16 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Peal of Thunder",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When an enemy suffers Electrification or after an enemy's Electrification is consumed.Blinks to the enemy's side to unleash a flurry of slashes that deals Physical DMG and recovers some SP.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Saat musuh terkena Elektrifikasi atau setelah Elektrifikasi musuh terpakai. Berkedip ke sisi musuh untuk melancarkan tebasan yang mengakibatkan DMG Fisik dan memulihkan sejumlah SP.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Wildland Trekker",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "Battle skill Tempestuous Arc improved: Triggering the additional effect 3 time(s) grants the team Electric DMG Dealt +0.05% for every point of Arclight's Intellect. This effect has a 15s duration and cannot stack.",
+            "description": "Keterampilan bertarung Tempestuous Arc ditingkatkan: Memicu efek tambahan sebanyak 3 kali akan memberikan Tim DMG Listrik +0,05% untuk setiap poin Intellect Arclight. Efek ini memiliki durasi 15 detik dan tidak dapat ditumpuk.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Frontiers Armor T3",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontier-Smart-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/frontier-smart-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Agility",
+                "value": "+87"
+              },
+              {
+                "name": "Intellect",
+                "value": "+58"
+              },
+              {
+                "name": "Atribut Sekunder",
+                "value": "+10.4%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Efek set 3 bagian: Pengurangan Cooldown Skill Kombo Pemakainya +15%. Setelah skill pemakainya memulihkan SP, tim memperoleh DMG +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Frontiers Armor T3 cocok untuk build armor dan sinergi set Frontiers."
+          },
+          {
+            "name": "Frontiers Blight RES Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Blight-RES-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/frontiers-blight-res-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Agility",
+                "value": "+65"
+              },
+              {
+                "name": "Intellect",
+                "value": "+43"
+              },
+              {
+                "name": "Bonus DMG Battle Skill",
+                "value": "+34.5%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Efek set 3 bagian: Pengurangan Cooldown Skill Kombo Pemakainya +15%. Setelah skill pemakainya memulihkan SP, tim memperoleh DMG +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Frontiers Blight RES Gloves cocok untuk build gloves dan sinergi set Frontiers."
+          },
+          {
+            "name": "Frontiers Extra O2 Tube",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Extra-02-Tube.png",
+            "source": "https://arknightsendfield.gg/kit/frontiers-o2-tether/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Agility",
+                "value": "+32"
+              },
+              {
+                "name": "Intellect",
+                "value": "+21"
+              },
+              {
+                "name": "Atribut Sekunder",
+                "value": "+20.7%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Efek set 3 bagian: Pengurangan Cooldown Skill Kombo Pemakainya +15%. Setelah skill pemakainya memulihkan SP, tim memperoleh DMG +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Frontiers Extra O2 Tube cocok untuk build kit dan sinergi set Frontiers."
           }
         ]
       }
@@ -840,12 +1944,12 @@
         "element": "Physical",
         "weapon": "Polearm",
         "intro": [
-          "Lifeng is a Guard in Arknights Endfields. Lifeng is a Physical character which equips with Polearm.",
-          "Lifeng is a member of Wuling City Guards who currently interns at the Specialist Tech Division of Endfield Industries. When he was little, Lifeng had a happy family like other kids in Wuling. However ... a horrific incident crushed his arm and took the lives of his parents. The less-than-10-year-old boy had no choice but to mature quickly. He accepted a prosthetic arm and poured effort into every step of his recovery."
+          "Lifeng adalah Penjaga di Arknights: Endfield. Lifeng merupakan karakter Fisik yang dilengkapi dengan Polearm.",
+          "Lifeng adalah anggota Wuling City Guards yang saat ini magang di Divisi Teknologi Spesialis Endfield Industries. Saat masih kecil, Lifeng memiliki keluarga bahagia seperti anak-anak Wuling lainnya. Namun... sebuah kejadian mengerikan meremukkan lengannya dan merenggut nyawa orang tuanya. Anak laki-laki berusia kurang dari 10 tahun tidak punya pilihan selain menjadi dewasa dengan cepat. Dia menerima lengan palsu dan berupaya keras dalam setiap langkah kesembuhannya."
         ],
         "storyHighlights": [
-          "Lifeng is a Guard in Arknights Endfields. Lifeng is a Physical character which equips with Polearm.",
-          "Lifeng is a member of Wuling City Guards who currently interns at the Specialist Tech Division of Endfield Industries. When he was little, Lifeng had a happy family like other kids in Wuling. However ... a horrific incident crushed his arm and took the lives of his parents. The less-than-10-year-old boy had no choice but to mature quickly. He accepted a prosthetic arm and poured effort into every step of his recovery."
+          "Lifeng adalah Penjaga di Arknights: Endfield. Lifeng merupakan karakter Fisik yang dilengkapi dengan Polearm.",
+          "Lifeng adalah anggota Wuling City Guards yang saat ini magang di Divisi Teknologi Spesialis Endfield Industries. Saat masih kecil, Lifeng memiliki keluarga bahagia seperti anak-anak Wuling lainnya. Namun... sebuah kejadian mengerikan meremukkan lengannya dan merenggut nyawa orang tuanya. Anak laki-laki berusia kurang dari 10 tahun tidak punya pilihan selain menjadi dewasa dengan cepat. Dia menerima lengan palsu dan berupaya keras dalam setiap langkah kesembuhannya."
         ],
         "playstyle": "Mainkan Lifeng sebagai guard physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -853,22 +1957,192 @@
             "type": "Basic Attack",
             "name": "Ruination",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 19 Stagger.",
+            "description": "Serangan hingga 4 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 19 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Aspect of Wrath",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "When the controlled operator performs a Final Strike on an enemy with Physical Susceptibility or Breach.Unleashes an aspect that performs a spear thrust to deal Physical DMG and grants Link.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Saat operator yang dikontrol melakukan Serangan Terakhir pada musuh yang memiliki Kerentanan atau Pelanggaran Fisik. Melepaskan aspek yang melakukan tusukan tombak untuk mengakibatkan DMG Fisik dan memberikan Tautan.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Illumination",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "Every point of Intellect and Will further grants ATK +0.10%.",
+            "description": "Setiap poin Intellect dan Will selanjutnya memberikan ATK +0,10%.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Swordmancer Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/swordmancer-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Agility",
+                "value": "+87"
+              },
+              {
+                "name": "Strength",
+                "value": "+58"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+20"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Efek set 3 bagian: Bonus Efisiensi Stagger Pemakainya +20%. Setelah pemakainya menerapkan Status Fisik, pemakainya juga melancarkan 1 pukulan yang mengakibatkan 250% ATK Physical DMG dan [10 Stagger]. Cooldown pemicu efek: 15 detik.",
+            "description": "Gear Swordmancer Heavy Armor cocok untuk build armor dan sinergi set Swordmancer."
+          },
+          {
+            "name": "Swordmancer TAC Fists",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Fists-1.png",
+            "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-fists/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Agility",
+                "value": "+65"
+              },
+              {
+                "name": "Strength",
+                "value": "+43"
+              },
+              {
+                "name": "Ultimate DMG Bonus",
+                "value": "+43.1%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Efek set 3 bagian: Bonus Efisiensi Stagger Pemakainya +20%. Setelah pemakainya menerapkan Status Fisik, pemakainya juga melancarkan 1 pukulan yang mengakibatkan 250% ATK Physical DMG dan [10 Stagger]. Cooldown pemicu efek: 15 detik.",
+            "description": "Gear Swordmancer TAC Fists cocok untuk build gloves dan sinergi set Swordmancer."
+          },
+          {
+            "name": "Swordmancer Flint",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+            "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Agility",
+                "value": "+32"
+              },
+              {
+                "name": "Strength",
+                "value": "+21"
+              },
+              {
+                "name": "Bonus DMG Fisik",
+                "value": "+23%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Efek set 3 bagian: Bonus Efisiensi Stagger Pemakainya +20%. Setelah pemakainya menerapkan Status Fisik, pemakainya juga melancarkan 1 pukulan yang mengakibatkan 250% ATK Physical DMG dan [10 Stagger]. Cooldown pemicu efek: 15 detik.",
+            "description": "Gear Swordmancer Flint cocok untuk build kit dan sinergi set Swordmancer."
+          },
+          {
+            "name": "Eternal Xiranite Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/eternal-xiranite-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Will",
+                "value": "+87"
+              },
+              {
+                "name": "Intellect",
+                "value": "+58"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+20"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Armor cocok untuk build armor dan sinergi set Eternal Xiranite."
+          },
+          {
+            "name": "Æthertech Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/AEthertech-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/aethertech-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Agility",
+                "value": "+65"
+              },
+              {
+                "name": "Strength",
+                "value": "+43"
+              },
+              {
+                "name": "Intensitas Arts",
+                "value": "+34"
+              }
+            ],
+            "effectName": "Æthertech",
+            "effectDescription": "Efek set 3 bagian: ATK pemakai +8%. Setelah pemakainya menerapkan Kerentanan, pemakainya memperoleh DMG Fisik +8% selama 15 detik. Efek ini bisa mencapai 4 stack. Jika target sudah mempunyai 4 tumpukan Kerentanan, pemakainya memperoleh tambahan DMG Fisik +16% selama 10 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Æthertech Gloves cocok untuk build gloves dan sinergi set Æthertech."
+          },
+          {
+            "name": "Eternal Xiranite Power Core",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Intellect",
+                "value": "+32"
+              },
+              {
+                "name": "Strength",
+                "value": "+21"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+24.6%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Efek set 3 bagian: HP pemakai +1000. Setelah pemakainya menerapkan Ampli, Terlindungi, Kerentanan, atau Dilemahkan, rekan satu tim lainnya mendapatkan DMG yang Diberikan +16% selama 15 detik. Efek ini tidak dapat ditumpuk.",
+            "description": "Gear Eternal Xiranite Power Core cocok untuk build kit dan sinergi set Eternal Xiranite."
           }
         ]
       }
@@ -900,12 +2174,12 @@
         "element": "Cryo",
         "weapon": "Great Sword",
         "intro": [
-          "Snowshine is a Defender in Arknights Endfields. Snowshine is a Cryo character which equips with Great Sword.",
-          "Snowshine is a Rhodes Island operator under the direct command of Director Warfarin of Rhosed Island Pharmaceuticals Incorporated. Snowshin had jointly carried out multiple search and rescue (WAR) missions with Endfield Industries and solved many technical issues as an SAR profesional. Snowshin is currently working at Endfield Industries as a Rhodes Island SAR specialist and liaison."
+          "Snowshine adalah Pembela di Arknights: Endfield. Snowshine merupakan karakter Cryo yang dilengkapi dengan Great Sword.",
+          "Snowshine adalah operator Rhodes Island di bawah komando langsung Direktur Warfarin dari Rhosed Island Pharmaceuticals Incorporated. Snowshin telah bersama-sama melakukan berbagai misi pencarian dan penyelamatan (WAR) dengan Endfield Industries dan memecahkan banyak masalah teknis sebagai seorang profesional SAR. Snowshin saat ini bekerja di Endfield Industries sebagai spesialis dan penghubung SAR Rhodes Island."
         ],
         "storyHighlights": [
-          "Snowshine is a Defender in Arknights Endfields. Snowshine is a Cryo character which equips with Great Sword.",
-          "Snowshine is a Rhodes Island operator under the direct command of Director Warfarin of Rhosed Island Pharmaceuticals Incorporated. Snowshin had jointly carried out multiple search and rescue (WAR) missions with Endfield Industries and solved many technical issues as an SAR profesional. Snowshin is currently working at Endfield Industries as a Rhodes Island SAR specialist and liaison."
+          "Snowshine adalah Pembela di Arknights: Endfield. Snowshine merupakan karakter Cryo yang dilengkapi dengan Great Sword.",
+          "Snowshine adalah operator Rhodes Island di bawah komando langsung Direktur Warfarin dari Rhosed Island Pharmaceuticals Incorporated. Snowshin telah bersama-sama melakukan berbagai misi pencarian dan penyelamatan (WAR) dengan Endfield Industries dan memecahkan banyak masalah teknis sebagai seorang profesional SAR. Snowshin saat ini bekerja di Endfield Industries sebagai spesialis dan penghubung SAR Rhodes Island."
         ],
         "playstyle": "Mainkan Snowshine sebagai defender cryo. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
         "skills": [
@@ -913,22 +2187,108 @@
             "type": "Basic Attack",
             "name": "Hypothermic Assault",
             "icon": "assets/skill-icons/basic.webp",
-            "description": "An attack with up to 3 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 23 Stagger.",
+            "description": "Serangan hingga 3 rangkaian yang mengakibatkan DMG Fisik. Sebagai operator yang dikendalikan, Final Strike juga menghasilkan 23 Stagger.",
             "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
           },
           {
             "type": "Combo Skill",
             "name": "Polar Rescue",
             "icon": "assets/skill-icons/combo.webp",
-            "description": "After controlled operator gets attacked and drops below 60% HP.Snowshine throws a Snowfield SAR Assistant at the controlled operator. Upon target contact, the Assistant gives massive instant HP Treatment to nearby operators as well as continuous HP Treatment to operators in the area of effect.The attribute of Will increases the amount of HP treatment.",
-            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+            "description": "Setelah operator yang dikontrol diserang dan HPnya turun di bawah 60%. Snowshine melempar Asisten SAR Snowfield ke operator yang dikontrol. Saat terjadi kontak dengan target, Asisten memberikan Perawatan HP instan dalam jumlah besar kepada operator di sekitar serta Perawatan HP terus menerus kepada operator di area yang terkena dampak. Atribut Will meningkatkan jumlah perawatan HP.",
+            "usage": "Aktifkan setelah kondisi trigger terpenuhi agar damage dan utilitas maksimal."
           },
           {
             "type": "Talent",
             "name": "Polar Survival",
             "icon": "assets/skill-icons/talent.webp",
-            "description": "When Snowshine is present, for every surviving Defender in the team, team gains DEF +5%.",
+            "description": "Saat Snowshine hadir, untuk setiap Defender yang bertahan dalam tim, tim memperoleh DEF +5%.",
             "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "LYNX Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/lynx-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+56"
+              },
+              {
+                "name": "Strength",
+                "value": "+87"
+              },
+              {
+                "name": "Will",
+                "value": "+58"
+              },
+              {
+                "name": "Bonus Healing",
+                "value": "+10.4%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Heavy Armor cocok untuk build armor dan sinergi set LYNX."
+          },
+          {
+            "name": "LYNX Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Gloves-1.png",
+            "source": "https://arknightsendfield.gg/gloves/lynx-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+42"
+              },
+              {
+                "name": "Strength",
+                "value": "+65"
+              },
+              {
+                "name": "Will",
+                "value": "+43"
+              },
+              {
+                "name": "Efisiensi Energi Ultimate",
+                "value": "+20.5%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Gloves cocok untuk build gloves dan sinergi set LYNX."
+          },
+          {
+            "name": "LYNX Connector",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Connector.png",
+            "source": "https://arknightsendfield.gg/kit/lynx-connector/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Pertahanan",
+                "value": "+21"
+              },
+              {
+                "name": "Strength",
+                "value": "+32"
+              },
+              {
+                "name": "Will",
+                "value": "+21"
+              },
+              {
+                "name": "Pengurangan DMG Final",
+                "value": "+82.9%"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Efek set 3 bagian: Efisiensi Perawatan HP Pemakainya +20%. Setelah pemakainya memberikan perawatan HP kepada target sekutu, target tersebut juga memperoleh 15% Pengurangan DMG terhadap semua jenis DMG selama 10 detik. Jika perlakuan tersebut melebihi Max HP target, target memperoleh 30% Pengurangan DMG terhadap semua jenis DMG. Efek yang disebutkan di atas tidak dapat ditumpuk.",
+            "description": "Gear LYNX Connector cocok untuk build kit dan sinergi set LYNX."
           }
         ]
       }

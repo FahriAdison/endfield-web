@@ -75,6 +75,36 @@ function sortCharacters(items, mode = "TIER") {
   return sorted;
 }
 
+function getCharacterMeta(character) {
+  const profile = character.profile || {};
+  return {
+    element: profile.element || "-",
+    weapon: profile.weapon || "-",
+    role: profile.role || character.role,
+  };
+}
+
+function characterCardTemplate(character, showDetailLabel = true) {
+  const meta = getCharacterMeta(character);
+  return `
+    <article class="card char-card">
+      <a class="card-link" href="${characterUrl(character.id)}">
+        <div class="char-head">
+          <img class="char-avatar" src="${asset(character.image)}" alt="${esc(character.name)} icon" loading="lazy" />
+          <div>
+            <span class="meta-tier ${tierClassMap[character.tier]}">Tier ${esc(character.tier)}</span>
+            <h3>${esc(character.name)}</h3>
+          </div>
+        </div>
+        <p><strong>Role:</strong> ${esc(character.role)}</p>
+        <p><strong>Element:</strong> ${esc(meta.element)} | <strong>Weapon:</strong> ${esc(meta.weapon)}</p>
+        <p>${esc(character.summary)}</p>
+        ${showDetailLabel ? '<span class="detail-link">Lihat detail karakter</span>' : ""}
+      </a>
+    </article>
+  `;
+}
+
 function buildTierChips(characters) {
   if (!characters.length) return '<span class="tier-empty">-</span>';
 
@@ -106,25 +136,7 @@ function renderHome(data) {
     metaGrid.innerHTML =
       picks.length === 0
         ? emptyState("Belum ada data meta pick.")
-        : picks
-            .map(
-              (character) => `
-          <article class="card char-card">
-            <a class="card-link" href="${characterUrl(character.id)}">
-              <div class="char-head">
-                <img class="char-avatar" src="${asset(character.image)}" alt="${esc(character.name)} icon" loading="lazy" />
-                <div>
-                  <span class="meta-tier ${tierClassMap[character.tier]}">Tier ${esc(character.tier)}</span>
-                  <h3>${esc(character.name)}</h3>
-                </div>
-              </div>
-              <p><strong>Role:</strong> ${esc(character.role)}</p>
-              <p>${esc(character.summary)}</p>
-            </a>
-          </article>
-        `
-            )
-            .join("");
+        : picks.map((character) => characterCardTemplate(character, false)).join("");
   }
 
   const tipsGrid = document.getElementById("home-tips-grid");
@@ -244,7 +256,8 @@ function initTierPage(characters) {
       characters.filter((character) => {
         const byTier = tier === "ALL" || character.tier === tier;
         const byRole = role === "ALL" || character.role === role;
-        const blob = `${character.name} ${character.role} ${character.summary} ${character.tags.join(" ")}`.toLowerCase();
+        const meta = getCharacterMeta(character);
+        const blob = `${character.name} ${character.role} ${meta.element} ${meta.weapon} ${character.summary} ${character.tags.join(" ")}`.toLowerCase();
         const bySearch = !search || blob.includes(search);
         return byTier && byRole && bySearch;
       }),
@@ -256,26 +269,7 @@ function initTierPage(characters) {
     refs.metaGrid.innerHTML =
       filtered.length === 0
         ? emptyState("Karakter tidak ditemukan pada filter saat ini.")
-        : filtered
-            .map(
-              (character) => `
-          <article class="card char-card">
-            <a class="card-link" href="${characterUrl(character.id)}">
-              <div class="char-head">
-                <img class="char-avatar" src="${asset(character.image)}" alt="${esc(character.name)} icon" loading="lazy" />
-                <div>
-                  <span class="meta-tier ${tierClassMap[character.tier]}">Tier ${esc(character.tier)}</span>
-                  <h3>${esc(character.name)}</h3>
-                </div>
-              </div>
-              <p><strong>Role:</strong> ${esc(character.role)}</p>
-              <p>${esc(character.summary)}</p>
-              <span class="detail-link">Lihat detail karakter</span>
-            </a>
-          </article>
-        `
-            )
-            .join("");
+        : filtered.map((character) => characterCardTemplate(character, true)).join("");
 
     refs.table.innerHTML = tierOrder
       .map((tierKey) => {
@@ -324,8 +318,9 @@ function initBuildPage(characters) {
       characters
         .filter((character) => character.build)
         .filter((character) => {
+          const meta = getCharacterMeta(character);
           const byTier = tier === "ALL" || character.tier === tier;
-          const blob = `${character.name} ${character.role} ${character.build.weapon} ${character.build.team}`.toLowerCase();
+          const blob = `${character.name} ${character.role} ${meta.element} ${meta.weapon} ${character.build.weapon} ${character.build.team}`.toLowerCase();
           const bySearch = !search || blob.includes(search);
           return byTier && bySearch;
         }),
@@ -366,6 +361,75 @@ function initBuildPage(characters) {
   redraw();
 }
 
+function initCharactersPage(characters) {
+  const refs = {
+    search: document.getElementById("chars-search"),
+    element: document.getElementById("chars-element"),
+    weapon: document.getElementById("chars-weapon"),
+    sort: document.getElementById("chars-sort"),
+    count: document.getElementById("chars-count"),
+    grid: document.getElementById("chars-grid"),
+  };
+
+  if (!refs.search || !refs.element || !refs.weapon || !refs.sort || !refs.count || !refs.grid) {
+    return;
+  }
+
+  const elementValues = [
+    "ALL",
+    ...new Set(characters.map((c) => getCharacterMeta(c).element).filter((v) => v && v !== "-")),
+  ];
+  const weaponValues = [
+    "ALL",
+    ...new Set(characters.map((c) => getCharacterMeta(c).weapon).filter((v) => v && v !== "-")),
+  ];
+
+  refs.element.innerHTML = elementValues
+    .map((value) => {
+      const label = value === "ALL" ? "Semua Elemen" : value;
+      return `<option value="${esc(value)}">${esc(label)}</option>`;
+    })
+    .join("");
+
+  refs.weapon.innerHTML = weaponValues
+    .map((value) => {
+      const label = value === "ALL" ? "Semua Weapon" : value;
+      return `<option value="${esc(value)}">${esc(label)}</option>`;
+    })
+    .join("");
+
+  function redraw() {
+    const search = refs.search.value.trim().toLowerCase();
+    const element = refs.element.value;
+    const weapon = refs.weapon.value;
+    const sortMode = refs.sort.value;
+
+    const filtered = sortCharacters(
+      characters.filter((character) => {
+        const meta = getCharacterMeta(character);
+        const byElement = element === "ALL" || meta.element === element;
+        const byWeapon = weapon === "ALL" || meta.weapon === weapon;
+        const blob = `${character.name} ${character.role} ${meta.role} ${meta.element} ${meta.weapon} ${character.summary} ${character.tags.join(" ")}`.toLowerCase();
+        const bySearch = !search || blob.includes(search);
+        return byElement && byWeapon && bySearch;
+      }),
+      sortMode
+    );
+
+    refs.count.textContent = `${filtered.length} karakter cocok`;
+    refs.grid.innerHTML =
+      filtered.length === 0
+        ? emptyState("Karakter tidak ditemukan. Ubah filter atau kata kunci.")
+        : filtered.map((character) => characterCardTemplate(character, true)).join("");
+  }
+
+  refs.search.addEventListener("input", redraw);
+  refs.element.addEventListener("change", redraw);
+  refs.weapon.addEventListener("change", redraw);
+  refs.sort.addEventListener("change", redraw);
+  redraw();
+}
+
 function renderCharacterDetail(character) {
   const status = document.getElementById("profile-status");
   const target = document.getElementById("character-detail");
@@ -375,6 +439,7 @@ function renderCharacterDetail(character) {
   const intro = profile.intro || [];
   const story = profile.storyHighlights || [];
   const skills = profile.skills || [];
+  const gears = profile.gearRecommendations || [];
 
   const introHtml =
     intro.length === 0
@@ -402,6 +467,33 @@ function renderCharacterDetail(character) {
           </div>
           <p>${esc(skill.description)}</p>
           <p><strong>Cara pakai:</strong> ${esc(skill.usage || "Lihat rotasi tim dan cooldown saat combat.")}</p>
+        </article>
+      `
+          )
+          .join("");
+
+  const gearHtml =
+    gears.length === 0
+      ? emptyState("Data gear belum tersedia untuk karakter ini.")
+      : gears
+          .map(
+            (gear) => `
+        <article class="card gear-card">
+          <div class="gear-head">
+            <img class="gear-icon" src="${asset(gear.icon)}" alt="${esc(gear.name)} icon" loading="lazy" />
+            <div>
+              <h3>${esc(gear.name)}</h3>
+              <p class="gear-meta">Tipe: ${esc(gear.type || "-")} | Usage Lv: ${esc(gear.usageLevel || "-")}</p>
+            </div>
+          </div>
+          <ul class="gear-stats">
+            ${(gear.stats || [])
+              .map((stat) => `<li><strong>${esc(stat.name)}:</strong> ${esc(stat.value)}</li>`)
+              .join("")}
+          </ul>
+          <p><strong>Efek Set:</strong> ${esc(gear.effectName || "-")}</p>
+          <p>${esc(gear.effectDescription || gear.description || "-")}</p>
+          <a class="detail-link inline-link" href="${esc(gear.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber gear</a>
         </article>
       `
           )
@@ -457,6 +549,13 @@ function renderCharacterDetail(character) {
         <li><strong>Tim Rekomendasi:</strong> ${esc(character.build?.team || "-")}</li>
         <li><strong>Catatan:</strong> ${esc(character.build?.notes || "-")}</li>
       </ul>
+    </article>
+
+    <article class="section-block">
+      <h2>List Gear Rekomendasi</h2>
+      <div class="grid gear-grid">
+        ${gearHtml}
+      </div>
       <p class="stamp">
         Sumber profil:
         <a href="${esc(profile.source || "#")}" target="_blank" rel="noreferrer noopener">${esc(profile.source || "tidak tersedia")}</a>
@@ -475,14 +574,14 @@ function initCharacterPage(characters) {
 
   if (!id) {
     status.textContent = "Karakter belum dipilih.";
-    target.innerHTML = emptyState("Buka detail dari halaman tierlist atau builds.");
+    target.innerHTML = emptyState("Buka detail dari halaman characters, tierlist, atau builds.");
     return;
   }
 
   const character = characters.find((item) => item.id === id);
   if (!character) {
     status.textContent = "Karakter tidak ditemukan.";
-    target.innerHTML = emptyState("ID karakter tidak valid. Coba buka dari daftar tierlist.");
+    target.innerHTML = emptyState("ID karakter tidak valid. Coba buka dari daftar characters.");
     return;
   }
 
@@ -517,6 +616,11 @@ async function bootstrap() {
 
   if (page === "builds") {
     initBuildPage(data.characters);
+    return;
+  }
+
+  if (page === "characters") {
+    initCharactersPage(data.characters);
     return;
   }
 

@@ -619,6 +619,46 @@ a {
   color: var(--ink-dim);
 }
 
+.gear-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gear-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.gear-head {
+  display: flex;
+  align-items: center;
+  gap: 0.68rem;
+}
+
+.gear-icon {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 0.55rem;
+  border: 1px solid #355b7a;
+  background: #0d2031;
+}
+
+.gear-meta {
+  font-size: 0.82rem;
+  color: #a4c8e4;
+}
+
+.gear-stats {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.gear-stats li {
+  margin: 0.22rem 0;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 960px) {
   .profile-grid {
     grid-template-columns: 1fr;
@@ -626,6 +666,10 @@ a {
 
   .skill-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gear-grid {
+    grid-template-columns: 1fr;
   }
 }
 

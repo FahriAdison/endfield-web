@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tips Endfield | Endfield Web</title>
-    <meta name="description" content="Tips dan trik Arknights: Endfield dengan filter, search, dan sort A-Z." />
+    <title>Daftar Karakter | Endfield Web</title>
+    <meta
+      name="description"
+      content="Daftar semua karakter Endfield dengan filter elemen, weapon, search, dan sort A-Z."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +16,7 @@
     />
     <link rel="stylesheet" href="../styles.css" />
   </head>
-  <body data-page="helps" data-base-path="..">
+  <body data-page="characters" data-base-path="..">
     <div class="bg-orb orb-a"></div>
     <div class="bg-orb orb-b"></div>
 
@@ -22,36 +25,42 @@
         <a class="brand" href="../">Endfield Web</a>
         <div class="nav-links">
           <a href="../">Home</a>
-          <a href="../characters/">Characters</a>
+          <a class="active" href="./">Characters</a>
           <a href="../tierlist/">Tierlist</a>
           <a href="../builds/">Builds</a>
-          <a class="active" href="./">Tips</a>
+          <a href="../helps/">Tips</a>
         </div>
       </nav>
       <div class="container page-hero-copy">
-        <p class="kicker">HELP CENTER</p>
-        <h1>Tips & Trik</h1>
-        <p>Search, filter kategori, dan sort A-Z untuk cari tips yang kamu butuh.</p>
+        <p class="kicker">CHARACTER DATABASE</p>
+        <h1>Daftar Semua Karakter</h1>
+        <p>
+          Filter berdasarkan elemen dan weapon (WP), cari cepat, lalu klik
+          karakter untuk melihat profil lengkap, skill, build, dan gear.
+        </p>
       </div>
     </header>
 
     <main>
       <section class="section container">
         <div class="section-controls">
-          <input id="tips-search" type="search" placeholder="Cari tips..." />
-          <select id="tips-category"></select>
-          <select id="tips-sort">
+          <input id="chars-search" type="search" placeholder="Cari karakter..." />
+          <select id="chars-element"></select>
+          <select id="chars-weapon"></select>
+          <select id="chars-sort">
             <option value="AZ">Sort: A-Z</option>
             <option value="ZA">Sort: Z-A</option>
+            <option value="TIER">Sort: Tier</option>
           </select>
         </div>
-        <div class="grid tips-grid" id="tips-grid"></div>
+        <p class="result-count" id="chars-count"></p>
+        <div class="grid meta-grid" id="chars-grid"></div>
       </section>
     </main>
 
     <footer class="footer">
       <div class="container">
-        <p>Endfield Web - Tips</p>
+        <p>Endfield Web - Characters</p>
       </div>
     </footer>
 
