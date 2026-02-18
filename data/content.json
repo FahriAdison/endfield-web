@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "updatedAt": "2026-02-18",
     "patchNote": "Launch window + early global patches"
@@ -9,56 +9,88 @@
       "title": "Fokus ke 1 tim inti",
       "category": "Early Game",
       "description": "Prioritaskan 4 operator utama (DPS, sub-DPS, support, sustain) sampai progression stabil.",
-      "tags": ["resource", "leveling", "team"]
+      "tags": [
+        "resource",
+        "leveling",
+        "team"
+      ]
     },
     {
       "id": "tips-weapon-level",
       "title": "Naikkan level senjata lebih dulu",
       "category": "Early Game",
       "description": "Dampak upgrade weapon biasanya terasa lebih cepat dibanding menaikkan banyak karakter sekaligus.",
-      "tags": ["weapon", "damage", "upgrade"]
+      "tags": [
+        "weapon",
+        "damage",
+        "upgrade"
+      ]
     },
     {
       "id": "tips-skill-priority",
       "title": "Ikuti skill priority",
       "category": "Combat",
       "description": "Jangan rata semua skill. Ikuti prioritas tiap karakter agar material tidak boros.",
-      "tags": ["skill", "combat", "materials"]
+      "tags": [
+        "skill",
+        "combat",
+        "materials"
+      ]
     },
     {
       "id": "tips-element-cover",
       "title": "Siapkan coverage elemen",
       "category": "Combat",
       "description": "Minimal punya 2 elemen damage aktif agar lebih fleksibel lawan musuh di stage berbeda.",
-      "tags": ["element", "stage", "team"]
+      "tags": [
+        "element",
+        "stage",
+        "team"
+      ]
     },
     {
       "id": "tips-aic-logistic",
       "title": "Jangan abaikan AIC dan logistik",
       "category": "Economy",
       "description": "Sistem industri dan energi memengaruhi farming jangka panjang. Stabilkan produksi dari awal.",
-      "tags": ["aic", "logistic", "economy"]
+      "tags": [
+        "aic",
+        "logistic",
+        "economy"
+      ]
     },
     {
       "id": "tips-daily-routine",
       "title": "Rutinkan login + event harian",
       "category": "Economy",
       "description": "Resource event launch biasanya paling efisien untuk account baru, terutama upgrade material.",
-      "tags": ["event", "daily", "resource"]
+      "tags": [
+        "event",
+        "daily",
+        "resource"
+      ]
     },
     {
       "id": "tips-boss-practice",
       "title": "Latihan rotasi di boss fight",
       "category": "Combat",
       "description": "Timing combo, skill cancel, dan burst window jauh lebih penting di konten boss ketimbang auto-spam.",
-      "tags": ["boss", "rotation", "damage"]
+      "tags": [
+        "boss",
+        "rotation",
+        "damage"
+      ]
     },
     {
       "id": "tips-save-currency",
       "title": "Simpan currency untuk banner target",
       "category": "Gacha",
       "description": "Hindari impuls pull. Simpan resource untuk unit yang benar-benar menguatkan core team kamu.",
-      "tags": ["gacha", "currency", "planning"]
+      "tags": [
+        "gacha",
+        "currency",
+        "planning"
+      ]
     }
   ],
   "characters": [
@@ -70,12 +102,56 @@
       "isMeta": true,
       "image": "assets/icons/laevatain.webp",
       "summary": "Burst damage tinggi dan konsisten untuk jadi carry utama tim.",
-      "tags": ["dps", "burst", "core"],
+      "tags": [
+        "dps",
+        "burst",
+        "core"
+      ],
       "build": {
         "weapon": "Dawn's Last Glimmer / Daybreak Caller / Straight Away",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
         "team": "Yvonne + Laevatain + Gilberta + Ardelia",
         "notes": "Fokuskan uptime buff sebelum buka burst window."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/laevatain-build/",
+        "updatedAt": "2026-02-09",
+        "rarity": "6 Stars",
+        "role": "Striker",
+        "element": "Heat",
+        "weapon": "Sword",
+        "intro": [
+          "Laevatain is a Striker in Arknights Endfields. Laevatain is a Heat character which equips with Sword.",
+          "Laevatain is a Rhodes Island Operator assigned to Endfield Industries where she serves as a specialist operator following the framework agreement between the two companies. With Warfarin's authorization, Laevatain once spent years in the north to carry out a solo field mission, thanks to her strong skills in independent operations."
+        ],
+        "storyHighlights": [
+          "Laevatain is a Striker in Arknights Endfields. Laevatain is a Heat character which equips with Sword.",
+          "Laevatain is a Rhodes Island Operator assigned to Endfield Industries where she serves as a specialist operator following the framework agreement between the two companies. With Warfarin's authorization, Laevatain once spent years in the north to carry out a solo field mission, thanks to her strong skills in independent operations."
+        ],
+        "playstyle": "Mainkan Laevatain sebagai striker heat. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Flaming Cinders",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 5 sequences that deals Heat DMG. As the controlled operator, Final Strike also deals 18 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Seethe",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When an enemy suffers Combustion or Corrosion.Fire erupts beneath the feet of any enemy with Combustion or Corrosion, dealing Heat DMG to them.If the skill hits the enemy, Laevatain gains 1 stack of Melting Flame and further gains Ultimate Energy per enemy hit.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Scorching Heart",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "After the controlled operator's Final Strike or Finisher hits the enemy, Laevatain absorbs Heat Infliction from nearby enemies.Every stack of Heat Infliction absorbed gives Laevatain 1 stack of Melting Flame (max stacks: 4).After reaching 4 stacks, DMG dealt by Laevatain ignores {100*ignore_fire_resist:0} Heat Resistance of the enemy for 20s.Laevatain also absorbs Heat Infliction from enemies defeated nearby.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -86,12 +162,56 @@
       "isMeta": true,
       "image": "assets/icons/gilberta.webp",
       "summary": "Buffer kuat dengan kontribusi damage tinggi di komposisi burst.",
-      "tags": ["sub-dps", "buffer", "burst"],
+      "tags": [
+        "sub-dps",
+        "buffer",
+        "burst"
+      ],
       "build": {
         "weapon": "Return to Arcadia / Daybreak Caller / Rocket Belt",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
         "team": "Yvonne + Laevatain + Gilberta + Ardelia",
         "notes": "Sinkronkan skill dengan main DPS agar buff tidak terbuang."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/gilberta-build/",
+        "updatedAt": "2026-02-10",
+        "rarity": "6 Stars",
+        "role": "Support",
+        "element": "Nature",
+        "weapon": "Arts Unit",
+        "intro": [
+          "Gilberta is a Support in Arknights Endfields. Gilberta is a Nature character which equips with Arts Unit.",
+          "Gilberta, serves as a Rhodes Island liaison based at Endfield Industries. Fans of the earlier Arknights game may recognize her. Proficient in the uncommon gravity facet of Originium Arts, she has played a pivotal role in supporting numerous crucial projects across different divisions."
+        ],
+        "storyHighlights": [
+          "Gilberta is a Support in Arknights Endfields. Gilberta is a Nature character which equips with Arts Unit.",
+          "Gilberta, serves as a Rhodes Island liaison based at Endfield Industries. Fans of the earlier Arknights game may recognize her. Proficient in the uncommon gravity facet of Originium Arts, she has played a pivotal role in supporting numerous crucial projects across different divisions."
+        ],
+        "playstyle": "Mainkan Gilberta sebagai support nature. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Arcane Staff: Beam Cohesion Arts",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Nature DMG. As the controlled operator, Final Strike also deals 16 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Arcane Staff: Matrix Displacement",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When an Arts Reaction is applied to an enemy.A quick casting of the Arts that generates a gravity pull, which then deals Nature DMG and forcibly Lifts the target and nearby enemies.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Messenger's Song",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "When fighting in the battlefield, all allied guards, casters, and supporters gain Ultimate Gain Efficiency +4%.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -102,12 +222,55 @@
       "isMeta": true,
       "image": "assets/icons/yvonne.webp",
       "summary": "DPS fleksibel dengan scaling kuat dari early ke endgame.",
-      "tags": ["dps", "flex", "carry"],
+      "tags": [
+        "dps",
+        "flex",
+        "carry"
+      ],
       "build": {
         "weapon": "Daybreak Caller / Old Times in Londinium / Matcha",
         "skills": "Talent > Basic Attack > Active Skill > Combo Skill > Ultimate",
         "team": "Yvonne + Gilberta + Perlica + Ardelia",
         "notes": "Utamakan rotasi basic + skill untuk damage stabil."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/yvonne-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "6 Stars",
+        "role": "Caster",
+        "element": "Cryo",
+        "weapon": "Handcannon",
+        "intro": [
+          "Yvonne is a Caster in Arknights Endfields. Yvonne is a Cryo character which equips with Handcannon."
+        ],
+        "storyHighlights": [
+          "Yvonne is a Caster in Arknights Endfields. Yvonne is a Cryo character which equips with Handcannon.",
+          "Yvonne punya kontribusi penting dalam operasi Endfield berdasarkan sumber komunitas."
+        ],
+        "playstyle": "Mainkan Yvonne sebagai caster cryo. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Exuberant Trigger",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 5 sequences that deals Cryo DMG. As the controlled operator, Final Strike also deals 17 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Flashfreezer u37",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When the controlled operator performs a Final Strike on an enemy with Solidification.Immediately deploys Frost-e-Bytee next to the enemy. While active, Frost-e-Bytee constantly releases energy to attack nearby enemies, deals Cryo DMG to them, and pulls them towards itself. After Frost-e-Bytee expires, it explodes to forcibly apply Solidification and deal Cryo DMG to nearby enemies.After the combo skill successfully hits the enemy, Yvonne gains additional Ultimate Energy. This Ultimate Energy Gain effect can only trigger 1 time, even if the skill hits multiple enemies.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Barrage of Technology",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Battle skill Brr-Brr-Bomb β improved: After applying Solidification, the next basic attack performed becomes a Final Strike.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -118,12 +281,56 @@
       "isMeta": true,
       "image": "assets/icons/ardelia.webp",
       "summary": "Support premium untuk menjaga tempo tim dan memaksimalkan output.",
-      "tags": ["support", "utility", "meta"],
+      "tags": [
+        "support",
+        "utility",
+        "meta"
+      ],
       "build": {
         "weapon": "Return to Arcadia / Old Times in Londinium / Seashell",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
         "team": "Yvonne + Gilberta + Perlica + Ardelia",
         "notes": "Jaga posisi dan timing utility agar tim tetap aman saat burst."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/ardelia-build/",
+        "updatedAt": "2026-01-30",
+        "rarity": "6 Stars",
+        "role": "Support",
+        "element": "Nature",
+        "weapon": "Arts Unit",
+        "intro": [
+          "Ardelia is a Support in Arknights Endfields. Ardelia is a Nature character which equips with Arts Unit.",
+          "Ardelia, serves as a Rhodes Island operator assigned to Endfield Industries where she serves as an expert geologist under the framework agreement between the two companies."
+        ],
+        "storyHighlights": [
+          "Ardelia is a Support in Arknights Endfields. Ardelia is a Nature character which equips with Arts Unit.",
+          "Ardelia, serves as a Rhodes Island operator assigned to Endfield Industries where she serves as an expert geologist under the framework agreement between the two companies."
+        ],
+        "playstyle": "Mainkan Ardelia sebagai support nature. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Rocky Whispers",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Nature DMG. As the controlled operator, Final Strike also deals 18 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Eruption Column",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When the controlled operator performs a Final Strike on an enemy with no stacks of Vulnerability or Arts Infliction.Launches a homing Volcanic Cloud at a target enemy that deals Nature DMG when close enough to the target. The Volcanic Cloud explodes after a short delay, dealing half of the Nature DMG and forcibly applying temporary Corrosion to nearby enemies",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Friendly Presence",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "The battle skill Dolly Rush creates 3 Shadows of Mr. Dolly after hitting the enemy. The copies of Mr. Dolly scattered by the ultimate Wooly Party also have a 10% chance to create Shadows of Mr. Dolly when they fall to the ground. When the controlled operator touches a Shadow of Mr. Dolly, Ardelia restores the said operator's HP by [45 + Will×0.38].If the controlled operator is already at max HP, then restore the HP of the teammate with lowest percentage HP.Shadows of Mr. Dolly last for 10s and up to 10 can exist in the battlefield.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -134,12 +341,56 @@
       "isMeta": false,
       "image": "assets/icons/last-rite.webp",
       "summary": "DPS agresif dengan potensi clear cepat untuk konten padat musuh.",
-      "tags": ["dps", "aggressive", "s-tier"],
+      "tags": [
+        "dps",
+        "aggressive",
+        "s-tier"
+      ],
       "build": {
         "weapon": "High ATK Great Weapon / Return to Arcadia",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
         "team": "Last Rite + Perlica + Gilberta + Ardelia",
         "notes": "Buka skill saat musuh terkumpul untuk value maksimum."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/last-rite-build/",
+        "updatedAt": "2026-02-09",
+        "rarity": "6 Stars",
+        "role": "Striker",
+        "element": "Cryo",
+        "weapon": "Great Sword",
+        "intro": [
+          "Last Rite is a Striker in Arknights Endfields. Last Rite is a Cryo character which equips with Great Sword.",
+          "Last Rite, Before the Sarkaz of the floating city found her, Last Rite was a kind-hearted girl adopted by a Caprinae gravekeeper couple. Shaped by their teachings, the young Nachzehrer refused to disturb the dead, resisting her instinct to feed. But that restraint left her reeling with hunger, and her insecurity made her shrink away from others."
+        ],
+        "storyHighlights": [
+          "Last Rite is a Striker in Arknights Endfields. Last Rite is a Cryo character which equips with Great Sword.",
+          "Last Rite, Before the Sarkaz of the floating city found her, Last Rite was a kind-hearted girl adopted by a Caprinae gravekeeper couple. Shaped by their teachings, the young Nachzehrer refused to disturb the dead, resisting her instinct to feed. But that restraint left her reeling with hunger, and her insecurity made her shrink away from others."
+        ],
+        "playstyle": "Mainkan Last Rite sebagai striker cryo. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Dance of Rime",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Cryo DMG. As the controlled operator, Final Strike also deals 25 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Winter's Devourer",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When an enemy has 3 or more Cryo Infliction stacks.Encases the target enemy in icicles and shatters them to consume all Cryo Infliction stacks of the said enemy. The number of Cryo Infliction stacks consumed determines the amount of Cryo DMG dealt to the said enemy and Ultimate Energy gained by Last Rite.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Hypothermia",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "After Last Rite consumes any Arts Infliction, she applies Cryo Susceptibility to the target with the effect of [Number of Arts Infliction stacks consumed × 2%] for 15s. This effect cannot stack.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -150,12 +401,56 @@
       "isMeta": false,
       "image": "assets/icons/perlica.webp",
       "summary": "Support solid yang memperkuat stabilitas tim jangka panjang.",
-      "tags": ["support", "a-tier", "utility"],
+      "tags": [
+        "support",
+        "a-tier",
+        "utility"
+      ],
       "build": {
         "weapon": "Energy-focused Arts Unit / Utility Weapon",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
         "team": "Yvonne + Perlica + Gilberta + Ardelia",
         "notes": "Cocok untuk tim sustain dan boss fight panjang."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/perlica-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "5 Stars",
+        "role": "Caster",
+        "element": "Electric",
+        "weapon": "Arts Unit",
+        "intro": [
+          "Perlica is a Caster in Arknights Endfields. Perlica is a Electric character which equips with Arts Unit.",
+          "As the Supervisor at Endfield Industries, she adeptly navigates company resources. A disciplined and approachable leader, she engenders anticipation among operators to join her team, known for its attractive incentives such as bonuses, ample leave days, and continuous learning opportunities during assignments."
+        ],
+        "storyHighlights": [
+          "Perlica is a Caster in Arknights Endfields. Perlica is a Electric character which equips with Arts Unit.",
+          "As the Supervisor at Endfield Industries, she adeptly navigates company resources. A disciplined and approachable leader, she engenders anticipation among operators to join her team, known for its attractive incentives such as bonuses, ample leave days, and continuous learning opportunities during assignments."
+        ],
+        "playstyle": "Mainkan Perlica sebagai caster electric. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Protocol a: Breach",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Electric DMG. As the controlled operator, Final Strike also deals 15 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Instant Protocol: Chain",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When controlled operator performs a Final Strike on any enemy.Unleashes stored electro-magnetic energy to bombard the target, dealing Electric DMG and forcibly inflicting temporary Electrification.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Obliteration Protocol",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "DMG Dealt +20% to Staggered enemies.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -166,12 +461,56 @@
       "isMeta": false,
       "image": "assets/icons/pogranichnik.webp",
       "summary": "Sub DPS kuat dengan pressure tinggi saat rotasi tim rapi.",
-      "tags": ["sub-dps", "a-tier", "physical"],
+      "tags": [
+        "sub-dps",
+        "a-tier",
+        "physical"
+      ],
       "build": {
         "weapon": "Physical Sword Core / Burst Weapon",
         "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
         "team": "Pogranichnik + Yvonne + Perlica + Ardelia",
         "notes": "Maksimalkan combo chaining untuk efisiensi damage."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/pogranichnik-build/",
+        "updatedAt": "2026-01-31",
+        "rarity": "6 Stars",
+        "role": "Vanguard",
+        "element": "Physical",
+        "weapon": "Sword",
+        "intro": [
+          "Pogranichnik is a Vanguard in Arknights Endfields. Pogranichnik is a Physical character which equips with Sword.",
+          "Pogranichnik, is a Rhodes Island operator assigned to Endfield Industries where he serves as a military consultant under the framework agreement between the two companies."
+        ],
+        "storyHighlights": [
+          "Pogranichnik is a Vanguard in Arknights Endfields. Pogranichnik is a Physical character which equips with Sword.",
+          "Pogranichnik, is a Rhodes Island operator assigned to Endfield Industries where he serves as a military consultant under the framework agreement between the two companies."
+        ],
+        "playstyle": "Mainkan Pogranichnik sebagai vanguard physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "All-Out Offensive",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 5 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 18 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Full Moon Slash",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When Crush or Breach consumes the enemy's Vulnerability stack(s).Performs a number of slash sequences (up to 3) based on the max number of Vulnerability stacks consumed, dealing Physical DMG and recovering some SP. Each slash deals more DMG and gives better SP recovery.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "The Living Banner",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "During battle, recovering 80 SP with his own skills grants Fervent Morale for 20s. Fervent Morale effects: ATK +4% and Arts Intensity +4.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -182,12 +521,56 @@
       "isMeta": false,
       "image": "assets/icons/ember.webp",
       "summary": "Sub DPS elemen yang efektif untuk membantu break tempo musuh.",
-      "tags": ["sub-dps", "a-tier", "elemental"],
+      "tags": [
+        "sub-dps",
+        "a-tier",
+        "elemental"
+      ],
       "build": {
         "weapon": "Heat-tuned Weapon / Utility Sidearm",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
         "team": "Ember + Laevatain + Perlica + Ardelia",
         "notes": "Pakai saat perlu transisi damage antarelemen."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/ember-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "6 Stars",
+        "role": "Defender",
+        "element": "Heat",
+        "weapon": "Great Sword",
+        "intro": [
+          "Ember is a Defender in Arknights Endfields. Ember is a Heat character which equips with Great Sword.",
+          "Ember, a Tank character in the current game lineup, stands out as a remarkable warrior with extensive combat expertise and a knack for military strategies. While she excels in battle, Ember struggles with everyday communication, prompting caution among fellow Endfield members to communicate with her sensitively to prevent any misunderstandings."
+        ],
+        "storyHighlights": [
+          "Ember is a Defender in Arknights Endfields. Ember is a Heat character which equips with Great Sword.",
+          "Ember, a Tank character in the current game lineup, stands out as a remarkable warrior with extensive combat expertise and a knack for military strategies. While she excels in battle, Ember struggles with everyday communication, prompting caution among fellow Endfield members to communicate with her sensitively to prevent any misunderstandings."
+        ],
+        "playstyle": "Mainkan Ember sebagai defender heat. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Sword Art of Assault",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 25 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Frontline Support",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When the controlled operator is attacked.Leaps at the target enemy and unleashes a heavy slam that deals Physical DMG and Knock Down while giving HP treatment to the controlled operator. The attribute of Will increases the amount of HP treatment.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Inflamed for the Assault",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "When casting the battle skill Forward March and the combo skill Frontline Support, Ember gains 30% Protection and is less likely to be interrupted.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -198,12 +581,56 @@
       "isMeta": false,
       "image": "assets/icons/avywenna.webp",
       "summary": "Support fleksibel untuk memperpanjang uptime tim di stage sulit.",
-      "tags": ["support", "a-tier", "flex"],
+      "tags": [
+        "support",
+        "a-tier",
+        "flex"
+      ],
       "build": {
         "weapon": "Support Utility Weapon",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
         "team": "Avywenna + Yvonne + Gilberta + Ardelia",
         "notes": "Bagus sebagai slot adaptif saat komposisi masih berkembang."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/avywenna-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "5 Stars",
+        "role": "Striker",
+        "element": "Electric",
+        "weapon": "Polearm",
+        "intro": [
+          "Avywenna is a Striker in Arknights Endfields. Avywenna is a Electric character which equips with Polearm.",
+          "Avywenna is widely recognized as an Armed Messenger on the frontier. With extensive experience traversing the rugged terrain, she navigates the wildlands adeptly, shuttling between the frontier and the Civilization Band. A seasoned warrior, Avywenna joined Endfield on the endorsement of the company's longstanding recruitment associate."
+        ],
+        "storyHighlights": [
+          "Avywenna is a Striker in Arknights Endfields. Avywenna is a Electric character which equips with Polearm.",
+          "Avywenna is widely recognized as an Armed Messenger on the frontier. With extensive experience traversing the rugged terrain, she navigates the wildlands adeptly, shuttling between the frontier and the Civilization Band. A seasoned warrior, Avywenna joined Endfield on the endorsement of the company's longstanding recruitment associate."
+        ],
+        "playstyle": "Mainkan Avywenna sebagai striker electric. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Thunderlance: Blitz",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 5 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 17 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Thunderlance: Strike",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When controlled operator performs a Final Strike on a target with active Electric Infliction or Electrification.Leaps into mid-air and throws 3 Thunderlances at the target, then deals 1 hit of Electric DMG to enemies in the area of effect.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Expedited Delivery",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "After a thrown or returning Thunderlance or Thunderlance EX hits the enemy, Avywenna gains 3 Ultimate Energy.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -214,12 +641,56 @@
       "isMeta": false,
       "image": "assets/icons/da-pan.webp",
       "summary": "Sub DPS yang kuat saat dipasangkan dengan tim burst.",
-      "tags": ["sub-dps", "a-tier", "burst"],
+      "tags": [
+        "sub-dps",
+        "a-tier",
+        "burst"
+      ],
       "build": {
         "weapon": "Balanced Damage Weapon",
         "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
         "team": "Da Pan + Laevatain + Perlica + Ardelia",
         "notes": "Prioritaskan timing combo agar tidak overlap cooldown tim."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/da-pan-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "5 Stars",
+        "role": "Striker",
+        "element": "Physical",
+        "weapon": "Great Sword",
+        "intro": [
+          "Da Pan is a Striker in Arknights Endfields. Da Pan is a Physical character which equips with Great Sword.",
+          "Da Pan carries a special bottle with him wherever he goes. It doesn't look like anything special to most people, but anyone familiar with the writing of Yan would wonder about its origins. However, if that person happens to be from Hongshan, they would immediately recognize its origins and significance, because they know very well that the bottle is an item of honor only awarded to \"major contributors to science\"."
+        ],
+        "storyHighlights": [
+          "Da Pan is a Striker in Arknights Endfields. Da Pan is a Physical character which equips with Great Sword.",
+          "Da Pan carries a special bottle with him wherever he goes. It doesn't look like anything special to most people, but anyone familiar with the writing of Yan would wonder about its origins. However, if that person happens to be from Hongshan, they would immediately recognize its origins and significance, because they know very well that the bottle is an item of honor only awarded to \"major contributors to science\"."
+        ],
+        "playstyle": "Mainkan Da Pan sebagai striker physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "ROLLING CUT!",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 20 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "MORE SPICE!",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When an enemy reaches 4 stacks of Vulnerability.Swings the wok at the enemy to deal massive Physical DMG and Crush. This Crush also deals more DMG.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Reduce and Thicken",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "After consuming 1 Vulnerability stack, Da Pan gains Physical DMG Dealt +4% for 10s. This effect can reach 4 stacks.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -230,12 +701,56 @@
       "isMeta": false,
       "image": "assets/icons/catcher.webp",
       "summary": "Bisa dipakai untuk transisi awal sebelum tim S/A tier lengkap.",
-      "tags": ["b-tier", "starter", "sub-dps"],
+      "tags": [
+        "b-tier",
+        "starter",
+        "sub-dps"
+      ],
       "build": {
         "weapon": "Starter-friendly Weapon",
         "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
         "team": "Catcher + Perlica + Ardelia + fleksibel DPS",
         "notes": "Gunakan sebagai unit jembatan sambil kumpulkan resource."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/catcher-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "4 Stars",
+        "role": "Defender",
+        "element": "Physical",
+        "weapon": "Great Sword",
+        "intro": [
+          "Catcher is a Defender in Arknights Endfields. Catcher is a Physical character which equips with Great Sword.",
+          "Catcher, serves on Operations Team Z7 in Endfield, responsible for cover and logistical support. Backed by full military training, he draws on his extensive knowledge to guide his teammates through critical moments."
+        ],
+        "storyHighlights": [
+          "Catcher is a Defender in Arknights Endfields. Catcher is a Physical character which equips with Great Sword.",
+          "Catcher, serves on Operations Team Z7 in Endfield, responsible for cover and logistical support. Backed by full military training, he draws on his extensive knowledge to guide his teammates through critical moments."
+        ],
+        "playstyle": "Mainkan Catcher sebagai defender physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Basic Tactics",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 22 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Timely Suppression",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When an enemy starts charging up a skill, or when the controlled operator is attacked and falls below 40% HP.A powerful downward punch that deals Physical DMG to the enemy, while granting shields to self and another teammate (controlled operator prioritized).DEF can further increase Shield points.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Resilient Defense",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "For every 10 Will, DEF +1.0.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -246,12 +761,56 @@
       "isMeta": false,
       "image": "assets/icons/arclight.webp",
       "summary": "Support yang masih layak dipakai untuk account awal.",
-      "tags": ["b-tier", "support", "early"],
+      "tags": [
+        "b-tier",
+        "support",
+        "early"
+      ],
       "build": {
         "weapon": "Utility Weapon",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
         "team": "Arclight + Yvonne + Perlica + unit sustain",
         "notes": "Fokus fungsi utilitas ketimbang raw damage."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/arclight-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "5 Stars",
+        "role": "Vanguard",
+        "element": "Electric",
+        "weapon": "Sword",
+        "intro": [
+          "Arclight is a Vanguard in Arknights Endfields. Arclight is a Electric character which equips with Sword.",
+          "Arclight is a scabhta of the Fiannæ Circuit. She is currently partnering with Endfield Industries as a technical consultant. No one roaming the wildlands could escape the grip of starvation and disasters, no matter how clever or capable they may think themselves to be. Misfortune struck Arclight hard. The wildlands consumed her entire family, leaving her the only survivor."
+        ],
+        "storyHighlights": [
+          "Arclight is a Vanguard in Arknights Endfields. Arclight is a Electric character which equips with Sword.",
+          "Arclight is a scabhta of the Fiannæ Circuit. She is currently partnering with Endfield Industries as a technical consultant. No one roaming the wildlands could escape the grip of starvation and disasters, no matter how clever or capable they may think themselves to be. Misfortune struck Arclight hard. The wildlands consumed her entire family, leaving her the only survivor."
+        ],
+        "playstyle": "Mainkan Arclight sebagai vanguard electric. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Seek and Hunt",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 5 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 16 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Peal of Thunder",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When an enemy suffers Electrification or after an enemy's Electrification is consumed.Blinks to the enemy's side to unleash a flurry of slashes that deals Physical DMG and recovers some SP.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Wildland Trekker",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Battle skill Tempestuous Arc improved: Triggering the additional effect 3 time(s) grants the team Electric DMG Dealt +0.05% for every point of Arclight's Intellect. This effect has a 15s duration and cannot stack.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -262,12 +821,56 @@
       "isMeta": false,
       "image": "assets/icons/lifeng.webp",
       "summary": "Punya nilai saat tim butuh slot damage tambahan murah resource.",
-      "tags": ["b-tier", "sub-dps", "resource-light"],
+      "tags": [
+        "b-tier",
+        "sub-dps",
+        "resource-light"
+      ],
       "build": {
         "weapon": "Consistent DPS Weapon",
         "skills": "Talent > Active Skill > Combo Skill > Basic Attack > Ultimate",
         "team": "Lifeng + Perlica + Ardelia + main DPS",
         "notes": "Naikkan secukupnya, jangan over-invest saat resource minim."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/lifeng-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "6 Stars",
+        "role": "Guard",
+        "element": "Physical",
+        "weapon": "Polearm",
+        "intro": [
+          "Lifeng is a Guard in Arknights Endfields. Lifeng is a Physical character which equips with Polearm.",
+          "Lifeng is a member of Wuling City Guards who currently interns at the Specialist Tech Division of Endfield Industries. When he was little, Lifeng had a happy family like other kids in Wuling. However ... a horrific incident crushed his arm and took the lives of his parents. The less-than-10-year-old boy had no choice but to mature quickly. He accepted a prosthetic arm and poured effort into every step of his recovery."
+        ],
+        "storyHighlights": [
+          "Lifeng is a Guard in Arknights Endfields. Lifeng is a Physical character which equips with Polearm.",
+          "Lifeng is a member of Wuling City Guards who currently interns at the Specialist Tech Division of Endfield Industries. When he was little, Lifeng had a happy family like other kids in Wuling. However ... a horrific incident crushed his arm and took the lives of his parents. The less-than-10-year-old boy had no choice but to mature quickly. He accepted a prosthetic arm and poured effort into every step of his recovery."
+        ],
+        "playstyle": "Mainkan Lifeng sebagai guard physical. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Ruination",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 4 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 19 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Aspect of Wrath",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "When the controlled operator performs a Final Strike on an enemy with Physical Susceptibility or Breach.Unleashes an aspect that performs a spear thrust to deal Physical DMG and grants Link.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Illumination",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Every point of Intellect and Will further grants ATK +0.10%.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     },
     {
@@ -278,12 +881,56 @@
       "isMeta": false,
       "image": "assets/icons/snowshine.webp",
       "summary": "Pilihan sustain sementara sebelum dapat opsi lebih kuat.",
-      "tags": ["b-tier", "sustain", "early"],
+      "tags": [
+        "b-tier",
+        "sustain",
+        "early"
+      ],
       "build": {
         "weapon": "Durability-focused Weapon",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
         "team": "Snowshine + Perlica + sub DPS + main DPS",
         "notes": "Dipakai saat stage butuh survivability tambahan."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/snowshine-build/",
+        "updatedAt": "2026-01-26",
+        "rarity": "5 Stars",
+        "role": "Defender",
+        "element": "Cryo",
+        "weapon": "Great Sword",
+        "intro": [
+          "Snowshine is a Defender in Arknights Endfields. Snowshine is a Cryo character which equips with Great Sword.",
+          "Snowshine is a Rhodes Island operator under the direct command of Director Warfarin of Rhosed Island Pharmaceuticals Incorporated. Snowshin had jointly carried out multiple search and rescue (WAR) missions with Endfield Industries and solved many technical issues as an SAR profesional. Snowshin is currently working at Endfield Industries as a Rhodes Island SAR specialist and liaison."
+        ],
+        "storyHighlights": [
+          "Snowshine is a Defender in Arknights Endfields. Snowshine is a Cryo character which equips with Great Sword.",
+          "Snowshine is a Rhodes Island operator under the direct command of Director Warfarin of Rhosed Island Pharmaceuticals Incorporated. Snowshin had jointly carried out multiple search and rescue (WAR) missions with Endfield Industries and solved many technical issues as an SAR profesional. Snowshin is currently working at Endfield Industries as a Rhodes Island SAR specialist and liaison."
+        ],
+        "playstyle": "Mainkan Snowshine sebagai defender cryo. Buka rotasi dengan skill pemicu tim, lalu masuk ke jendela burst saat buff aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Hypothermic Assault",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "An attack with up to 3 sequences that deals Physical DMG. As the controlled operator, Final Strike also deals 23 Stagger.",
+            "usage": "Gunakan untuk isi Stagger/SP sambil menunggu jendela combo tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Polar Rescue",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "After controlled operator gets attacked and drops below 60% HP.Snowshine throws a Snowfield SAR Assistant at the controlled operator. Upon target contact, the Assistant gives massive instant HP Treatment to nearby operators as well as continuous HP Treatment to operators in the area of effect.The attribute of Will increases the amount of HP treatment.",
+            "usage": "Aktifkan setelah syarat trigger terpenuhi agar damage dan utility maksimal."
+          },
+          {
+            "type": "Talent",
+            "name": "Polar Survival",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "When Snowshine is present, for every surviving Defender in the team, team gains DEF +5%.",
+            "usage": "Prioritaskan upgrade talent saat core rotation tim sudah stabil."
+          }
+        ]
       }
     }
   ]

@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -6,7 +6,7 @@
     <title>Endfield Web | Guide Indonesia</title>
     <meta
       name="description"
-      content="Website sederhana Arknights: Endfield berisi intro, tips & trik, meta character, tier list, dan build rekomendasi."
+      content="Website fanmade Arknights: Endfield berisi tier list, build, tips, dan profil karakter detail berbasis JSON."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,19 +16,18 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-page="home" data-base-path=".">
     <div class="bg-orb orb-a"></div>
     <div class="bg-orb orb-b"></div>
 
     <header class="hero" id="top">
       <nav class="nav container">
-        <a class="brand" href="#top">Endfield Web</a>
+        <a class="brand" href="./">Endfield Web</a>
         <div class="nav-links">
-          <a href="#about">Tentang</a>
-          <a href="#tips">Tips</a>
-          <a href="#tier">Tier List</a>
-          <a href="#builds">Build</a>
-          <a href="#gallery">Galeri</a>
+          <a class="active" href="./">Home</a>
+          <a href="./tierlist/">Tierlist</a>
+          <a href="./builds/">Builds</a>
+          <a href="./helps/">Tips</a>
         </div>
       </nav>
 
@@ -37,12 +36,12 @@
           <p class="kicker">FANMADE GUIDE INDONESIA</p>
           <h1>Arknights: Endfield Starter Hub</h1>
           <p>
-            Ringkasan cepat tentang apa itu Endfield, tips awal, karakter meta,
-            tier list, dan build yang bisa kamu pakai sebagai fondasi.
+            Portal ringkas untuk kenalan game, cek meta terbaru komunitas,
+            baca tips progression, dan buka profil karakter lengkap.
           </p>
           <div class="hero-cta">
-            <a class="btn primary" href="#about">Mulai Baca</a>
-            <a class="btn ghost" href="#sources">Lihat Sumber</a>
+            <a class="btn primary" href="./tierlist/">Lihat Tierlist</a>
+            <a class="btn ghost" href="./builds/">Lihat Build</a>
           </div>
           <p class="stamp" id="data-stamp">Data disusun: memuat data...</p>
         </div>
@@ -60,74 +59,32 @@
       <section class="section container" id="about">
         <h2>Apa itu Arknights: Endfield?</h2>
         <p>
-          Arknights: Endfield adalah action RPG 3D real-time dengan elemen
-          strategi. Kamu mengendalikan tim Operator di planet Talos-II,
-          eksplorasi area, bertarung, dan mengelola sistem industri/otomasi.
+          Endfield adalah action RPG 3D real-time dengan elemen strategi tim,
+          combo reaction, eksplorasi Talos-II, dan sistem industri (AIC).
         </p>
         <p>
-          Untuk region global, game ini sudah rilis pada 22 Januari 2026 (UTC+8).
-          Meta masih bergerak cepat karena game baru launch.
+          Website ini pakai data JSON agar update patch (tier, build, meta) bisa
+          cepat tanpa edit layout manual.
         </p>
       </section>
 
-      <section class="section container" id="tips">
-        <h2>Tips & Trik Pemula</h2>
-        <div class="section-controls">
-          <input id="tips-search" type="search" placeholder="Cari tips..." />
-          <select id="tips-category"></select>
-        </div>
-        <div class="grid tips-grid" id="tips-grid"></div>
-      </section>
-
-      <section class="section container" id="tier">
+      <section class="section container">
         <div class="section-head">
-          <h2>Meta Character & Tier List (Komunitas)</h2>
+          <h2>Meta Pick Cepat</h2>
           <p>
-            Snapshot awal patch launch. Nilai tier bisa berubah saat ada balance
-            update, banner baru, dan komposisi tim baru.
+            Klik karakter untuk buka profil detail: role, kisah singkat, skill,
+            cara pakai, dan build rekomendasi.
           </p>
         </div>
-        <div class="section-controls">
-          <input id="char-search" type="search" placeholder="Cari karakter / role..." />
-          <select id="tier-filter">
-            <option value="ALL">Semua Tier</option>
-            <option value="S">Tier S</option>
-            <option value="A">Tier A</option>
-            <option value="B">Tier B</option>
-          </select>
-          <select id="role-filter"></select>
-        </div>
-        <p class="result-count" id="char-count"></p>
-        <div class="grid meta-grid" id="meta-grid"></div>
-        <div class="tier-table-wrap">
-          <table class="tier-table">
-            <thead>
-              <tr>
-                <th>Tier</th>
-                <th>Karakter</th>
-                <th>Catatan Singkat</th>
-              </tr>
-            </thead>
-            <tbody id="tier-table-body"></tbody>
-          </table>
-        </div>
+        <div class="grid meta-grid" id="home-meta-grid"></div>
       </section>
 
-      <section class="section container" id="builds">
-        <h2>Build Rekomendasi Awal</h2>
-        <p class="section-sub">
-          Diambil dari build guide komunitas yang sering dipakai pemain saat ini.
-        </p>
-        <div class="section-controls">
-          <input id="build-search" type="search" placeholder="Cari build karakter..." />
-          <select id="build-tier-filter">
-            <option value="ALL">Semua Tier</option>
-            <option value="S">Tier S</option>
-            <option value="A">Tier A</option>
-            <option value="B">Tier B</option>
-          </select>
+      <section class="section container">
+        <div class="section-head">
+          <h2>Tips Pemula Ringkas</h2>
+          <p>Butuh lengkapnya? buka halaman <a href="./helps/">Tips</a>.</p>
         </div>
-        <div class="grid build-grid" id="build-grid"></div>
+        <div class="grid tips-grid" id="home-tips-grid"></div>
       </section>
 
       <section class="section container gallery-section" id="gallery">
@@ -142,60 +99,27 @@
       </section>
 
       <section class="section container" id="sources">
-        <h2>Sumber</h2>
+        <h2>Sumber Data</h2>
         <ul class="source-list">
           <li>
-            Situs resmi Endfield:
+            Official site:
             <a href="https://endfield.gryphline.com/en-us" target="_blank" rel="noreferrer noopener"
               >endfield.gryphline.com</a
             >
           </li>
           <li>
-            Info rilis global:
-            <a
-              href="https://www.gematsu.com/2025/12/arknights-endfield-launches-january-22-2026"
-              target="_blank"
-              rel="noreferrer noopener"
-              >Gematsu (11 Des 2025)</a
-            >
-          </li>
-          <li>
-            Tier list:
-            <a
-              href="https://www.pcgamer.com/games/rpg/arknights-endfield-tier-list/"
-              target="_blank"
-              rel="noreferrer noopener"
-              >PC Gamer</a
-            >
-            dan
-            <a
-              href="https://mobalytics.gg/blog/arknights-endfield/tier-list/"
-              target="_blank"
-              rel="noreferrer noopener"
-              >Mobalytics</a
-            >
-          </li>
-          <li>
-            Build guide karakter:
-            <a
-              href="https://endfield.gg/character-builds/"
-              target="_blank"
-              rel="noreferrer noopener"
-              >Endfield.gg</a
+            Character + build data:
+            <a href="https://arknightsendfield.gg/" target="_blank" rel="noreferrer noopener"
+              >arknightsendfield.gg</a
             >
           </li>
           <li>
             Icon karakter:
             <a href="https://aendfield.com/" target="_blank" rel="noreferrer noopener">aendfield.com</a>
-            dan
-            <a href="https://arknightsendfield.gg/" target="_blank" rel="noreferrer noopener"
-              >arknightsendfield.gg</a
-            >
           </li>
         </ul>
         <p class="disclaimer">
           Website ini fanmade dan tidak berafiliasi dengan Hypergryph/GRYPHLINE.
-          Semua nama karakter dan artwork tetap milik pemegang hak cipta masing-masing.
         </p>
       </section>
     </main>

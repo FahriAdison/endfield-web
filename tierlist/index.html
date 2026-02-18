@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tierlist Endfield | Endfield Web</title>
+    <meta
+      name="description"
+      content="Tier list karakter Arknights Endfield dengan filter role/tier, search, sort A-Z, dan link ke profil detail."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-page="tierlist" data-base-path="..">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="page-hero">
+      <nav class="nav container">
+        <a class="brand" href="../">Endfield Web</a>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <a class="active" href="./">Tierlist</a>
+          <a href="../builds/">Builds</a>
+          <a href="../helps/">Tips</a>
+        </div>
+      </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">META SNAPSHOT</p>
+        <h1>Tier List Karakter</h1>
+        <p>
+          Snapshot komunitas awal patch. Klik karakter untuk lihat profil, kisah,
+          skill, dan build detail.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container">
+        <div class="section-controls">
+          <input id="char-search" type="search" placeholder="Cari karakter / role..." />
+          <select id="tier-filter">
+            <option value="ALL">Semua Tier</option>
+            <option value="S">Tier S</option>
+            <option value="A">Tier A</option>
+            <option value="B">Tier B</option>
+          </select>
+          <select id="role-filter"></select>
+          <select id="char-sort">
+            <option value="TIER">Sort: Tier</option>
+            <option value="AZ">Sort: A-Z</option>
+            <option value="ZA">Sort: Z-A</option>
+          </select>
+        </div>
+        <p class="result-count" id="char-count"></p>
+        <div class="grid meta-grid" id="meta-grid"></div>
+      </section>
+
+      <section class="section container">
+        <h2>Tabel Tier</h2>
+        <div class="tier-table-wrap">
+          <table class="tier-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Karakter</th>
+                <th>Catatan</th>
+              </tr>
+            </thead>
+            <tbody id="tier-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Endfield Web - Tierlist</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

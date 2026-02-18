@@ -1,83 +1,85 @@
 # Endfield Web (Fanmade)
 
-Website sederhana untuk konten **Arknights: Endfield**:
-- Perkenalan game
-- Tips & trik pemula
-- Meta character
-- Tier list
-- Build rekomendasi awal
-- Search + filter (Tips, Tier List, Build)
-- Data-driven dari JSON (mudah update patch)
+Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 
-## Nama Repo yang Direkomendasikan
+## Fitur
 
-Karena username GitHub kamu **FahriAdison**, ada 2 opsi:
+- Multi-halaman:
+- `/` Home
+- `/tierlist/`
+- `/builds/`
+- `/helps/`
+- `/character/?id=...`
+- Search + filter + sort A-Z/Z-A
+- Data-driven dari `data/content.json`
+- Profil karakter detail (kisah ringkas, role/rarity/element/weapon, skill + icon + cara pakai)
 
-1. `endfield-web` (disarankan untuk project ini)
-- URL jadi: `https://fahriadison.github.io/endfield-web/`
-- Cocok kalau ini salah satu dari beberapa project kamu.
-
-2. `FahriAdison.github.io`
-- URL jadi: `https://fahriadison.github.io/`
-- Cocok kalau mau jadikan ini website utama akunmu.
-
-Kalau targetmu sekarang cuma website Endfield, nama `endfield-web` itu sudah bagus.
-
-## Struktur File
+## Struktur
 
 ```text
 .
 |- index.html
 |- styles.css
 |- script.js
+|- tierlist/
+|  |- index.html
+|- builds/
+|  |- index.html
+|- helps/
+|  |- index.html
+|- character/
+|  |- index.html
 |- data/
 |  |- content.json
 |- assets/
-|  |- images/
-|     |- hero-share.jpg
-|     |- banner-gilberta.jpg
-|     |- event-spring.jpg
-|     |- gallery-fanart.png
-|     |- trailer-cg.jpg
-|     |- talos-awakening.jpg
 |  |- icons/
-|     |- laevatain.webp
-|     |- gilberta.webp
-|     |- yvonne.webp
-|     |- ardelia.webp
-|     |- ...
+|  |- images/
+|  |- skill-icons/
 ```
 
 ## Cara Update Data Patch
 
-Semua data utama ada di file:
+Edit file:
 - `data/content.json`
 
-Yang biasa kamu update:
-1. `meta.updatedAt` -> tanggal update data.
-2. `tips` -> tambah/edit tips.
-3. `characters` -> update tier, role, summary, build, dan `image`.
+Field penting:
+- `meta.updatedAt`
+- `tips[]`
+- `characters[].tier`
+- `characters[].build`
+- `characters[].profile`
 
-Contoh edit cepat:
-- Ubah tier karakter: cari objek karakter lalu edit `"tier": "A"` jadi `"tier": "S"`.
-- Ganti build: edit field `build.weapon`, `build.skills`, `build.team`, `build.notes`.
+## Deploy ke GitHub Pages
 
-Tidak perlu edit `index.html` atau `script.js` kalau cuma update data patch.
+1. Buat repo (misal `endfield-web`)
+2. Upload project ke branch `main`
+3. Buka **Settings -> Pages**
+4. Source: `Deploy from a branch`
+5. Branch: `main` + `/root`
+6. Simpan, tunggu deploy
 
-## Cara Deploy ke GitHub Pages
+URL repo project:
+- `https://fahriadison.github.io/endfield-web/`
 
-1. Buat repo baru di GitHub, misal: `endfield-web`.
-2. Upload semua file project ini ke branch `main`.
-3. Buka **Settings** repo.
-4. Masuk ke **Pages**.
-5. Pada **Build and deployment**, pilih:
-- Source: `Deploy from a branch`
-- Branch: `main` / root
-6. Save, tunggu proses deploy (biasanya 1-5 menit).
-7. Akses URL:
-- `https://fahriadison.github.io/endfield-web/` (kalau repo `endfield-web`)
+## Update ke GitHub via Command
+
+Jalankan dari folder project:
+
+```powershell
+git add .
+git commit -m "update endfield web"
+git push origin main
+```
+
+Kalau baru pertama kali set remote:
+
+```powershell
+git remote add origin https://github.com/FahriAdison/endfield-web.git
+git branch -M main
+git push -u origin main
+```
 
 ## Catatan
 
-- Ini website fanmade dan tidak berafiliasi dengan Hypergryph/GRYPHLINE.
-- Data meta/tier/build cepat berubah sesuai patch baru.
+- Ini project fanmade, tidak berafiliasi dengan Hypergryph/GRYPHLINE.
+- Data meta/build cepat berubah tiap patch, jadi update JSON secara berkala.

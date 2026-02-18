@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build Endfield | Endfield Web</title>
+    <meta
+      name="description"
+      content="Build rekomendasi karakter Endfield dengan filter tier, search, sort A-Z, dan tautan profil detail."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-page="builds" data-base-path="..">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="page-hero">
+      <nav class="nav container">
+        <a class="brand" href="../">Endfield Web</a>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <a href="../tierlist/">Tierlist</a>
+          <a class="active" href="./">Builds</a>
+          <a href="../helps/">Tips</a>
+        </div>
+      </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">LOADOUT HUB</p>
+        <h1>Build Rekomendasi</h1>
+        <p>
+          Build awal berbasis komunitas untuk bantu progression. Klik karakter
+          untuk detail skill dan cara main.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container">
+        <div class="section-controls">
+          <input id="build-search" type="search" placeholder="Cari build karakter..." />
+          <select id="build-tier-filter">
+            <option value="ALL">Semua Tier</option>
+            <option value="S">Tier S</option>
+            <option value="A">Tier A</option>
+            <option value="B">Tier B</option>
+          </select>
+          <select id="build-sort">
+            <option value="TIER">Sort: Tier</option>
+            <option value="AZ">Sort: A-Z</option>
+            <option value="ZA">Sort: Z-A</option>
+          </select>
+        </div>
+        <div class="grid build-grid" id="build-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Endfield Web - Builds</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
