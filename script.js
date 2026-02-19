@@ -566,9 +566,7 @@ function initNavDrawer() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setOpen(false);
   });
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 860) setOpen(false);
-  });
+  window.addEventListener("resize", () => setOpen(false));
 }
 
 function renderHome(data) {
