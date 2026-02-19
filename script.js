@@ -26,7 +26,7 @@ const BGM_SOURCES = [
   "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/46/09/6046093f-66c3-712a-cefd-959384fd3d3c/mzaf_12371733613275990005.plus.aac.ep.m4a",
 ];
 const GACHA_BGM_SOURCES = [
-  "https://29571222-arknights-endfield.mp3.pm/song/245759659-headhunting-gacha/",
+  "https://29571222-arknights-endfield.mp3.pm/song/246146600-headhunt/",
   "https://154976-decisions.mp3.pm/song/245238323-arknights-endfield-lofi/",
   "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/46/09/6046093f-66c3-712a-cefd-959384fd3d3c/mzaf_12371733613275990005.plus.aac.ep.m4a",
 ];
@@ -612,12 +612,19 @@ function initGachaPage(data) {
   const characterByName = new Map(
     characters.filter((char) => char?.name).map((char) => [String(char.name).toLowerCase(), char])
   );
+  const gachaIconOverrides = {
+    akekuri: "assets/icons/akekuri.png",
+    wulfgard: "assets/icons/wulfgard.webp",
+    estella: "assets/icons/estella.webp",
+    antal: "assets/icons/antal.webp",
+  };
   const toSimUnitFromCharacter = (char) => ({
+    // Keep icon selection stable for specific operators used in simulator pool.
+    image: gachaIconOverrides[String(char?.name || "").toLowerCase()] || char?.image || "assets/skill-icons/basic.webp",
     id: char?.id || `sim-${String(char?.name || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
     name: char?.name || "Unknown Operator",
     role: char?.role || "-",
     element: char?.profile?.element || "-",
-    image: char?.image || "assets/skill-icons/basic.webp",
     stars: rarityFromCharacter(char),
   });
 
@@ -642,8 +649,8 @@ function initGachaPage(data) {
   const defaultSimulatedPool = [
     { id: "akekuri-sim", name: "Akekuri", stars: 4, role: "Sub DPS", element: "Nature", image: "assets/icons/akekuri.png" },
     { id: "wulfgard-sim", name: "Wulfgard", stars: 4, role: "Support", element: "Frost", image: "assets/icons/wulfgard.webp" },
-    { id: "estella-sim", name: "Estella", stars: 4, role: "DPS", element: "Heat", image: "assets/skill-icons/basic.webp" },
-    { id: "antal-sim", name: "Antal", stars: 4, role: "Support", element: "Electric", image: "assets/skill-icons/basic.webp" },
+    { id: "estella-sim", name: "Estella", stars: 4, role: "DPS", element: "Heat", image: "assets/icons/estella.webp" },
+    { id: "antal-sim", name: "Antal", stars: 4, role: "Support", element: "Electric", image: "assets/icons/antal.webp" },
   ];
   const simulatedPool = Array.isArray(gachaData.simulatedPool) && gachaData.simulatedPool.length
     ? gachaData.simulatedPool
@@ -655,7 +662,7 @@ function initGachaPage(data) {
       stars: item.stars,
       role: item.role || "-",
       element: item.element || "-",
-      image: item.image || "assets/skill-icons/basic.webp",
+      image: gachaIconOverrides[String(item.name || "").toLowerCase()] || item.image || "assets/skill-icons/basic.webp",
     });
   });
 

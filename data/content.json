@@ -154,7 +154,7 @@
         "stars": 4,
         "role": "DPS",
         "element": "Heat",
-        "image": "assets/skill-icons/basic.webp"
+        "image": "assets/icons/estella.webp"
       },
       {
         "id": "antal-sim",
@@ -162,7 +162,7 @@
         "stars": 4,
         "role": "Support",
         "element": "Electric",
-        "image": "assets/skill-icons/basic.webp"
+        "image": "assets/icons/antal.webp"
       }
     ],
     "banners": [
