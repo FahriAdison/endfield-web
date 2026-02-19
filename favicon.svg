@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Endfield Web Icon">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b2a42" />
+      <stop offset="100%" stop-color="#1aa1e8" />
+    </linearGradient>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8f7ff" />
+      <stop offset="100%" stop-color="#9fe5ff" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)" />
+  <rect x="16" y="14" width="10" height="36" rx="4" fill="url(#fg)" />
+  <rect x="16" y="14" width="30" height="8" rx="4" fill="url(#fg)" />
+  <rect x="16" y="28" width="24" height="8" rx="4" fill="#c4efff" />
+  <rect x="16" y="42" width="30" height="8" rx="4" fill="#9fe5ff" />
+</svg>
