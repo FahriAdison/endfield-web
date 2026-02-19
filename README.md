@@ -1,106 +1,64 @@
-# Endfield Web (Fanmade)
+<div align="center">
+  <img src="./assets/images/hero-share.jpg" alt="Arknights Endfield key art" width="100%" />
+  <h1>Endfield Web</h1>
+  <p>Fanmade Indonesian Hub for Arknights: Endfield</p>
+  <p>
+    <a href="https://endfield-ind.my.id/">Live Website</a> |
+    <a href="https://github.com/FahriAdison/endfield-web">GitHub Repository</a>
+  </p>
+</div>
 
-Website fanmade **Arknights: Endfield** berbasis static files + JSON.
+> Proyek ini dibuat untuk pemain Endfield yang ingin panduan berbahasa Indonesia yang ringkas, rapi, dan mudah dipakai.
 
-## Fitur
+## Tentang Project
 
-- Multi-halaman: `/`, `/characters/`, `/tierlist/`, `/builds/`, `/team-comps/`, `/gears/`, `/gear/?id=...`, `/gacha/`, `/helps/`, `/character/?id=...`
-- Search + filter + sort A-Z/Z-A
-- Data-driven dari `data/content.json`
-- Profil karakter detail (kisah ringkas, role/rarity/element/weapon, skill + icon + cara pakai)
-- Narasi profil + penjelasan skill ditulis ulang ke Bahasa Indonesia yang lebih natural
-- Gear list per karakter (nama gear, icon, stats, efek set, deskripsi)
-- Gear database terpisah (`/gears/`) dengan search, filter tipe/set/level, dan daftar karakter pengguna
-- Detail item gear (`/gear/?id=...`) termasuk best-for role, stats, efek, dan karakter pengguna
-- Progression gear per karakter untuk level `70`, `60`, dan `50` dengan slot `armor`, `gloves`, `kit1`, `kit2`
-- Background music global (play/pause + mute) dengan state tersimpan lintas halaman
-- Gacha simulator terpisah (`/gacha/`) dengan banner Chartered/Standard, pity counter, urgent x10, animasi reveal, dan history pull
+`Endfield Web` adalah website fanmade yang mengumpulkan konten guide Endfield dalam satu tempat, mulai dari karakter, build, tierlist, team comps, gear, sampai gacha simulator.
 
-## Struktur
+Fokus utamanya bukan sekadar tampil bagus, tapi juga enak dibaca pemula dan gampang diupdate seiring perubahan meta.
 
-```text
-.
-|- index.html
-|- styles.css
-|- script.js
-|- characters/
-|  |- index.html
-|- tierlist/
-|  |- index.html
-|- builds/
-|  |- index.html
-|- team-comps/
-|  |- index.html
-|- gears/
-|  |- index.html
-|- gacha/
-|  |- index.html
-|- gear/
-|  |- index.html
-|- helps/
-|  |- index.html
-|- character/
-|  |- index.html
-|- data/
-|  |- content.json
-|- assets/
-|  |- icons/
-|  |- images/
-|  |- skill-icons/
+## Dibuat Dengan
+
+- `HTML5` untuk struktur halaman
+- `CSS3` untuk tampilan dan layout
+- `Vanilla JavaScript` untuk logika interaktif
+- `JSON` sebagai sumber data konten
+- `Vercel` untuk deployment
+
+## Dibuat Oleh Siapa?
+
+Project ini dibuat dan dikembangkan oleh:
+
+- `FahriAdison`
+
+Dengan semangat open source dan kontribusi komunitas untuk saling bantu sesama pemain.
+
+## Kenapa Project Ini Dibuat?
+
+- Supaya pemain Indonesia punya referensi Endfield yang lebih mudah dipahami
+- Supaya informasi build dan karakter tidak tercecer di banyak platform
+- Supaya bisa jadi base website fanmade yang terus berkembang
+
+## Tujuan Utama
+
+1. Menyediakan pusat panduan Endfield berbahasa Indonesia.
+2. Menjaga pengalaman baca tetap ringan di desktop dan mobile.
+3. Memudahkan update konten tanpa harus bongkar ulang website.
+
+## Jalankan Lokal (Singkat)
+
+```bash
+git clone https://github.com/FahriAdison/endfield-web.git
+cd endfield-web
 ```
 
-## Cara Update Data Patch
+Lalu buka `index.html` di browser.
 
-Edit file:
-- `data/content.json`
+## Open Source
 
-Field penting:
-- `meta.updatedAt`
-- `tips[]`
-- `characters[].tier`
-- `characters[].build`
-- `characters[].profile`
-- `characters[].profile.gearRecommendations`
-- `characters[].profile.gearProgression`
+Project ini terbuka untuk ide, saran, dan kontribusi.
 
-## SEO Quick Start
+Kalau kamu menemukan data yang kurang tepat atau ingin menambahkan improvement UI/UX, silakan buat issue atau pull request.
 
-- Keyword map dan panduan: `SEO_KEYWORDS.md`
-- Robots: `robots.txt`
-- Sitemap: `sitemap.xml`
-- Verifikasi Google Search Console: tag ada di `index.html`
+## Disclaimer
 
-## Deploy ke GitHub Pages
-
-1. Buat repo (misal `endfield-web`)
-2. Upload project ke branch `main`
-3. Buka **Settings -> Pages**
-4. Source: `Deploy from a branch`
-5. Branch: `main` + `/root`
-6. Simpan, tunggu deploy
-
-URL repo project:
-- `https://fahriadison.github.io/endfield-web/`
-
-## Update ke GitHub via Command
-
-Jalankan dari folder project:
-
-```powershell
-git add .
-git commit -m "update endfield web"
-git push origin main
-```
-
-Kalau baru pertama kali set remote:
-
-```powershell
-git remote add origin https://github.com/FahriAdison/endfield-web.git
-git branch -M main
-git push -u origin main
-```
-
-## Catatan
-
-- Ini project fanmade, tidak berafiliasi dengan Hypergryph/GRYPHLINE.
-- Data meta/build cepat berubah tiap patch, jadi update JSON secara berkala.
+Ini adalah project fanmade dan tidak berafiliasi resmi dengan Hypergryph, GRYPHLINE, atau pihak publisher Arknights: Endfield.
