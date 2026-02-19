@@ -15,6 +15,10 @@ const skillTypeMap = {
 
 const gearTypeMap = { armor: "Armor", gloves: "Gloves", kit: "Kit" };
 const slotTypeMap = { armor: "Armor", gloves: "Gloves", kit1: "Kit Slot 1", kit2: "Kit Slot 2" };
+const teamMemberIconOverrides = {
+  Akekuri: "assets/icons/akekuri.png",
+  Wulfgard: "assets/icons/wulfgard.webp",
+};
 
 const BGM_KEY = "endfield_web_bgm_v1";
 const BGM_SOURCES = [
@@ -356,7 +360,28 @@ function sortTeamComps(teamComps, mode = "TIER") {
   return sorted;
 }
 
-function teamCompCard(comp) {
+function teamCompCard(comp, resolveMember) {
+  const members = Array.isArray(comp.members) ? comp.members : [];
+  const memberIcons = members.length
+    ? `
+      <div class="team-member-row">
+        ${members
+          .map((memberName) => {
+            const resolved = typeof resolveMember === "function" ? resolveMember(memberName) : null;
+            const icon = resolved?.image || teamMemberIconOverrides[memberName] || "assets/skill-icons/basic.webp";
+            const chipBody = `
+              <img src="${asset(icon)}" alt="${esc(memberName)} icon" loading="lazy" />
+              <span>${esc(memberName)}</span>
+            `;
+            if (resolved?.id) {
+              return `<a class="team-member-chip" href="${characterUrl(resolved.id)}" title="Buka profil ${esc(memberName)}">${chipBody}</a>`;
+            }
+            return `<span class="team-member-chip ghost" title="${esc(memberName)}">${chipBody}</span>`;
+          })
+          .join("")}
+      </div>`
+    : "";
+
   return `
     <article class="card team-comp-card">
       <div class="team-comp-head">
@@ -364,6 +389,7 @@ function teamCompCard(comp) {
         <h3>${esc(comp.title || "Team Comp")}</h3>
       </div>
       <p><strong>Komposisi:</strong> ${esc((comp.members || []).join(" + ") || "-")}</p>
+      ${memberIcons}
       <p class="gear-meta"><strong>Peran:</strong> ${esc((comp.roles || []).join(" | ") || "-")}</p>
       <p>${esc(comp.reason || "-")}</p>
       <p><strong>Efek utama:</strong> ${esc(comp.effect || "-")}</p>
@@ -375,7 +401,7 @@ function teamCompCard(comp) {
     </article>`;
 }
 
-function initTeamCompsPage(teamComps = []) {
+function initTeamCompsPage(teamComps = [], characters = []) {
   const refs = {
     search: document.getElementById("team-search"),
     tier: document.getElementById("team-tier-filter"),
@@ -387,6 +413,13 @@ function initTeamCompsPage(teamComps = []) {
   if (!refs.search || !refs.tier || !refs.sort || !refs.count || !refs.stamp || !refs.grid) return;
 
   const allComps = Array.isArray(teamComps) ? teamComps : [];
+  const characterByName = new Map(
+    (Array.isArray(characters) ? characters : [])
+      .filter((char) => char && char.name)
+      .map((char) => [String(char.name).toLowerCase(), { id: char.id, image: char.image }])
+  );
+  const resolveMember = (name) => characterByName.get(String(name || "").toLowerCase()) || null;
+
   const tiers = ["ALL", ...new Set(allComps.map((comp) => String(comp.tier || "-").toUpperCase()))];
   refs.tier.innerHTML = tiers
     .map((tier) => `<option value="${esc(tier)}">${esc(tier === "ALL" ? "Semua Tier" : `Tier ${tier}`)}</option>`)
@@ -418,7 +451,9 @@ function initTeamCompsPage(teamComps = []) {
     );
 
     refs.count.textContent = `${filtered.length} team comp cocok`;
-    refs.grid.innerHTML = filtered.length ? filtered.map((comp) => teamCompCard(comp)).join("") : emptyState("Team comp tidak ditemukan.");
+    refs.grid.innerHTML = filtered.length
+      ? filtered.map((comp) => teamCompCard(comp, resolveMember)).join("")
+      : emptyState("Team comp tidak ditemukan.");
   };
 
   refs.search.addEventListener("input", redraw);
@@ -1253,7 +1288,7 @@ async function bootstrap() {
 
   if (page === "home") return renderHome(data);
   if (page === "helps") return initTipsPage(data.tips);
-  if (page === "team-comps") return initTeamCompsPage(data.teamComps || []);
+  if (page === "team-comps") return initTeamCompsPage(data.teamComps || [], data.characters || []);
   if (page === "tierlist") return initTierPage(data.characters);
   if (page === "builds") return initBuildPage(data.characters);
   if (page === "gears") return initGearsPage(data.characters, data.gearCatalog || []);

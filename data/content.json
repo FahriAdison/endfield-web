@@ -1,7 +1,7 @@
 {
   "meta": {
     "updatedAt": "2026-02-19",
-    "patchNote": "Added missing team-comp characters (Alesh, Xaihi, Fluorite, Chen Qianyu, Endministrator) with full profile/build data."
+    "patchNote": "Fixed portrait icons for new operators, added team-comp member avatars, and social link preview meta tags."
   },
   "tips": [
     {
@@ -5817,7 +5817,7 @@
       "tier": "S",
       "role": "Support",
       "isMeta": true,
-      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72531.png",
+      "image": "assets/icons/alesh.png",
       "summary": "Support Cryo spesialis pemulihan SP untuk mempercepat rotasi skill seluruh tim.",
       "tags": [
         "support",
@@ -6186,7 +6186,7 @@
       "tier": "S",
       "role": "Support",
       "isMeta": true,
-      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72535.png",
+      "image": "assets/icons/xaihi.webp",
       "summary": "Support Cryo dengan utilitas crystal yang stabil untuk bantu trigger reaksi elemen.",
       "tags": [
         "support",
@@ -6555,7 +6555,7 @@
       "tier": "A",
       "role": "Sub DPS",
       "isMeta": false,
-      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72525.png",
+      "image": "assets/icons/fluorite.png",
       "summary": "Caster Nature dengan area damage luas, efektif untuk bersihkan wave musuh.",
       "tags": [
         "sub-dps",
@@ -6924,7 +6924,7 @@
       "tier": "S",
       "role": "Sub DPS",
       "isMeta": true,
-      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72536.png",
+      "image": "assets/icons/chen-qianyu.webp",
       "summary": "Sub DPS Physical dengan aplikasi Lift cepat untuk membuka chain combo.",
       "tags": [
         "sub-dps",
@@ -7293,7 +7293,7 @@
       "tier": "S",
       "role": "Main DPS",
       "isMeta": true,
-      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72546.png",
+      "image": "assets/icons/endministrator.webp",
       "summary": "Main DPS Physical dengan pola Combo Skill -> Battle Skill yang kuat untuk burst.",
       "tags": [
         "main-dps",

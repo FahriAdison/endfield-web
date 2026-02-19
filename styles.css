@@ -967,6 +967,42 @@ a {
   flex-wrap: wrap;
 }
 
+.team-member-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+}
+
+.team-member-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+  border: 1px solid rgba(60, 103, 140, 0.82);
+  border-radius: 999px;
+  background: rgba(11, 27, 40, 0.84);
+  color: #d8ecff;
+  text-decoration: none;
+  padding: 0.16rem 0.46rem 0.16rem 0.16rem;
+  font-size: 0.78rem;
+}
+
+.team-member-chip img {
+  width: 1.38rem;
+  height: 1.38rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid rgba(76, 121, 160, 0.9);
+  background: #102535;
+}
+
+.team-member-chip:hover {
+  border-color: #70c9f3;
+}
+
+.team-member-chip.ghost {
+  cursor: default;
+}
+
 .team-rotation {
   margin: 0.25rem 0 0;
   padding-left: 1rem;
