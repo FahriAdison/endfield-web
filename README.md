@@ -4,17 +4,16 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 
 ## Fitur
 
-- Multi-halaman:
-- `/` Home
-- `/characters/`
-- `/tierlist/`
-- `/builds/`
-- `/helps/`
-- `/character/?id=...`
+- Multi-halaman: `/`, `/characters/`, `/tierlist/`, `/builds/`, `/gears/`, `/gear/?id=...`, `/helps/`, `/character/?id=...`
 - Search + filter + sort A-Z/Z-A
 - Data-driven dari `data/content.json`
 - Profil karakter detail (kisah ringkas, role/rarity/element/weapon, skill + icon + cara pakai)
+- Narasi profil + penjelasan skill ditulis ulang ke Bahasa Indonesia yang lebih natural
 - Gear list per karakter (nama gear, icon, stats, efek set, deskripsi)
+- Gear database terpisah (`/gears/`) dengan search, filter tipe/set/level, dan daftar karakter pengguna
+- Detail item gear (`/gear/?id=...`) termasuk best-for role, stats, efek, dan karakter pengguna
+- Progression gear per karakter untuk level `70`, `60`, dan `50` dengan slot `armor`, `gloves`, `kit1`, `kit2`
+- Background music global (play/pause + mute) dengan state tersimpan lintas halaman
 
 ## Struktur
 
@@ -28,6 +27,10 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 |- tierlist/
 |  |- index.html
 |- builds/
+|  |- index.html
+|- gears/
+|  |- index.html
+|- gear/
 |  |- index.html
 |- helps/
 |  |- index.html
@@ -53,6 +56,7 @@ Field penting:
 - `characters[].build`
 - `characters[].profile`
 - `characters[].profile.gearRecommendations`
+- `characters[].profile.gearProgression`
 
 ## Deploy ke GitHub Pages
 
