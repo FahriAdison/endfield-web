@@ -445,8 +445,17 @@ function initNavDrawer() {
     setOpen(!nav.classList.contains("menu-open"));
   });
   backdrop.addEventListener("click", () => setOpen(false));
-  links.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setOpen(false));
+  links.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+    const href = String(link.getAttribute("href") || "").trim();
+    if (!href) return;
+    if (href.startsWith("#")) {
+      setOpen(false);
+      return;
+    }
+    // Keep navigation default behavior; close drawer right after click dispatch.
+    setTimeout(() => setOpen(false), 10);
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setOpen(false);

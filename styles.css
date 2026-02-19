@@ -63,7 +63,7 @@ body {
   align-items: center;
   padding: 1rem 0;
   position: relative;
-  z-index: 20;
+  z-index: 100;
 }
 
 .brand {
@@ -155,7 +155,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
-  z-index: 70;
+  z-index: 90;
 }
 
 body.nav-open .nav-backdrop {
@@ -947,11 +947,13 @@ a {
     gap: 0.85rem;
     transform: translateX(106%);
     transition: transform 0.28s ease;
-    z-index: 85;
+    z-index: 110;
+    pointer-events: none;
   }
 
   .nav.menu-open .nav-links {
     transform: translateX(0);
+    pointer-events: auto;
   }
 
   .nav-links a {
