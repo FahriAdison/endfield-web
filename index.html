@@ -114,13 +114,72 @@
       <section class="section container gallery-section" id="gallery">
         <h2>Galeri Endfield</h2>
         <div class="gallery">
-          <img src="assets/images/banner-gilberta.jpg" alt="Banner Gilberta" loading="lazy" />
-          <img src="assets/images/event-spring.jpg" alt="Event spring Endfield" loading="lazy" />
-          <img src="assets/images/trailer-cg.jpg" alt="CG trailer Endfield" loading="lazy" />
-          <img src="assets/images/talos-awakening.jpg" alt="Talos II awakening" loading="lazy" />
-          <img src="assets/images/gallery-fanart.png" alt="Themed gallery Endfield" loading="lazy" />
+          <figure class="gallery-item">
+            <img src="assets/images/banner-gilberta.jpg" alt="Banner operator Gilberta" data-caption="Banner operator Gilberta" loading="lazy" />
+            <figcaption>Banner operator Gilberta</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/event-spring.jpg" alt="Event Grand Blessings for the Spring" data-caption="Event Grand Blessings for the Spring" loading="lazy" />
+            <figcaption>Event Grand Blessings for the Spring</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/trailer-cg.jpg" alt="Cover CG Trailer Endfield" data-caption="Cover CG Trailer Endfield" loading="lazy" />
+            <figcaption>Cover CG Trailer Endfield</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/talos-awakening.jpg" alt="Talos II Awakening visual" data-caption="Talos II Awakening visual" loading="lazy" />
+            <figcaption>Talos II Awakening visual</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/hero-share.jpg" alt="Key visual Arknights Endfield" data-caption="Key visual Arknights Endfield" loading="lazy" />
+            <figcaption>Key visual Arknights Endfield</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-fanart.png" alt="Themed fanart collection" data-caption="Themed fanart collection" loading="lazy" />
+            <figcaption>Themed fanart collection</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-beta2-pv.jpg" alt="Beta Test II PV cover" data-caption="Beta Test II PV cover" loading="lazy" />
+            <figcaption>Beta Test II PV cover</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-gameplay-demo2.jpg" alt="Gameplay Demo 02 cover" data-caption="Gameplay Demo 02 cover" loading="lazy" />
+            <figcaption>Gameplay Demo 02 cover</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-dev-comm.png" alt="Zeroth Directive DEV Comm visual" data-caption="Zeroth Directive DEV Comm visual" loading="lazy" />
+            <figcaption>Zeroth Directive DEV Comm visual</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-express-delivery.jpg" alt="Express Delivery Issue notice art" data-caption="Express Delivery Issue notice art" loading="lazy" />
+            <figcaption>Express Delivery Issue notice art</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-notice-nvidia.jpg" alt="Notice NVIDIA optimization visual" data-caption="Notice NVIDIA optimization visual" loading="lazy" />
+            <figcaption>Notice NVIDIA optimization visual</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-social-reward.jpg" alt="Official social media reward event" data-caption="Official social media reward event" loading="lazy" />
+            <figcaption>Official social media reward event</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="assets/images/gallery-tools-guide.jpg" alt="Game tools guide image" data-caption="Game tools guide image" loading="lazy" />
+            <figcaption>Game tools guide image</figcaption>
+          </figure>
         </div>
       </section>
+
+      <div class="lightbox" id="gallery-lightbox" hidden>
+        <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Pratinjau gambar galeri">
+          <button type="button" class="lightbox-close" data-close-lightbox aria-label="Tutup">Tutup</button>
+          <div class="lightbox-stage">
+            <button type="button" class="lightbox-nav lightbox-prev" data-lightbox-nav="-1" aria-label="Gambar sebelumnya">Prev</button>
+            <img class="lightbox-image" src="" alt="" />
+            <button type="button" class="lightbox-nav lightbox-next" data-lightbox-nav="1" aria-label="Gambar selanjutnya">Next</button>
+          </div>
+          <p class="lightbox-caption" hidden></p>
+        </div>
+      </div>
 
       <section class="section container" id="sources">
         <h2>Sumber Data</h2>

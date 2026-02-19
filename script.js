@@ -337,6 +337,83 @@ function renderHome(data) {
           .join("")
       : emptyState("Belum ada tips.");
   }
+
+  initGalleryLightbox();
+}
+
+function initGalleryLightbox() {
+  const gallery = document.querySelector(".gallery");
+  const lightbox = document.getElementById("gallery-lightbox");
+  const stage = lightbox?.querySelector(".lightbox-stage");
+  const frame = lightbox?.querySelector(".lightbox-image");
+  const caption = lightbox?.querySelector(".lightbox-caption");
+  const closeButton = lightbox?.querySelector("[data-close-lightbox]");
+  const prevButton = lightbox?.querySelector("[data-lightbox-nav='-1']");
+  const nextButton = lightbox?.querySelector("[data-lightbox-nav='1']");
+  if (!gallery || !lightbox || !stage || !frame || !caption || !closeButton || !prevButton || !nextButton) return;
+  if (lightbox.dataset.bound === "1") return;
+  lightbox.dataset.bound = "1";
+  const images = Array.from(gallery.querySelectorAll("img"));
+  if (!images.length) return;
+  let activeIndex = 0;
+
+  const renderAt = (index) => {
+    const image = images[index];
+    if (!image) return;
+    const text = image.dataset.caption || image.alt || "";
+    frame.src = image.currentSrc || image.src;
+    frame.alt = image.alt || "Galeri Endfield";
+    caption.textContent = text;
+    caption.hidden = !text.trim();
+  };
+
+  const close = () => {
+    lightbox.hidden = true;
+    document.body.classList.remove("no-scroll");
+    frame.src = "";
+    frame.alt = "";
+    caption.hidden = true;
+    caption.textContent = "";
+  };
+
+  const openAt = (index) => {
+    activeIndex = index;
+    renderAt(activeIndex);
+    lightbox.hidden = false;
+    document.body.classList.add("no-scroll");
+  };
+
+  const navigate = (step) => {
+    if (lightbox.hidden) return;
+    activeIndex = (activeIndex + step + images.length) % images.length;
+    renderAt(activeIndex);
+  };
+
+  images.forEach((image, index) => {
+    image.setAttribute("tabindex", "0");
+    image.addEventListener("click", () => openAt(index));
+    image.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openAt(index);
+      }
+    });
+  });
+
+  prevButton.addEventListener("click", () => navigate(-1));
+  nextButton.addEventListener("click", () => navigate(1));
+  stage.addEventListener("click", (event) => {
+    if (event.target === stage) close();
+  });
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) close();
+  });
+  closeButton.addEventListener("click", close);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.hidden) close();
+    if (event.key === "ArrowLeft") navigate(-1);
+    if (event.key === "ArrowRight") navigate(1);
+  });
 }
 
 function teamTierClass(value) {
