@@ -564,6 +564,37 @@ body.no-scroll {
 
 .gacha-controls .btn {
   min-width: 10rem;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #d9eeff;
+  background: rgba(9, 27, 40, 0.92);
+  border: 1px solid rgba(81, 137, 178, 0.92);
+  cursor: pointer;
+}
+
+.gacha-controls .btn.primary {
+  color: #04101d;
+  border-color: transparent;
+}
+
+.gacha-controls .btn.ghost {
+  color: #d9eeff;
+  background: rgba(9, 27, 40, 0.92);
+}
+
+.gacha-controls .btn:disabled {
+  color: #8faec8;
+  border-color: rgba(60, 94, 120, 0.85);
+  background: rgba(9, 23, 35, 0.55);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.gacha-controls .btn:not(:disabled):hover {
+  border-color: #76cdf5;
 }
 
 .gacha-metrics {

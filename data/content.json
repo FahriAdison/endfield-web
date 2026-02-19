@@ -131,6 +131,40 @@
         "tenPullGuaranteeFivePlus": true
       }
     },
+    "simulatedPool": [
+      {
+        "id": "akekuri-sim",
+        "name": "Akekuri",
+        "stars": 4,
+        "role": "Sub DPS",
+        "element": "Nature",
+        "image": "assets/icons/akekuri.png"
+      },
+      {
+        "id": "wulfgard-sim",
+        "name": "Wulfgard",
+        "stars": 4,
+        "role": "Support",
+        "element": "Frost",
+        "image": "assets/icons/wulfgard.webp"
+      },
+      {
+        "id": "estella-sim",
+        "name": "Estella",
+        "stars": 4,
+        "role": "DPS",
+        "element": "Heat",
+        "image": "assets/skill-icons/basic.webp"
+      },
+      {
+        "id": "antal-sim",
+        "name": "Antal",
+        "stars": 4,
+        "role": "Support",
+        "element": "Electric",
+        "image": "assets/skill-icons/basic.webp"
+      }
+    ],
     "banners": [
       {
         "id": "gilberta-chartered",

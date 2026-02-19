@@ -25,7 +25,11 @@ const BGM_SOURCES = [
   "https://154976-decisions.mp3.pm/song/245238323-arknights-endfield-lofi/",
   "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/46/09/6046093f-66c3-712a-cefd-959384fd3d3c/mzaf_12371733613275990005.plus.aac.ep.m4a",
 ];
-const GACHA_BGM_SOURCE = "https://29571222-arknights-endfield.mp3.pm/song/245759659-headhunting-gacha/";
+const GACHA_BGM_SOURCES = [
+  "https://29571222-arknights-endfield.mp3.pm/song/245759659-headhunting-gacha/",
+  "https://154976-decisions.mp3.pm/song/245238323-arknights-endfield-lofi/",
+  "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/46/09/6046093f-66c3-712a-cefd-959384fd3d3c/mzaf_12371733613275990005.plus.aac.ep.m4a",
+];
 const GACHA_STATE_KEY = "endfield_web_gacha_state_v1";
 const gachaTicketMap = { 6: 2000, 5: 200, 4: 20, 3: 0 };
 
@@ -150,7 +154,11 @@ function ensureBannerState(state, bannerId) {
       totalPulls: 0,
       arsenalTicket: 0,
       urgentUsed: false,
+      lastByRarity: {},
     };
+  }
+  if (!state.byBanner[bannerId].lastByRarity || typeof state.byBanner[bannerId].lastByRarity !== "object") {
+    state.byBanner[bannerId].lastByRarity = {};
   }
   return state.byBanner[bannerId];
 }
@@ -480,16 +488,19 @@ function initGachaPageBgm() {
     if (note) note.textContent = text;
   };
 
-  const audio = new Audio(GACHA_BGM_SOURCE);
+  const audio = new Audio();
   audio.loop = true;
   audio.preload = "auto";
+  let sourceIndex = 0;
+  const activeSource = () => GACHA_BGM_SOURCES[sourceIndex] || "";
+  audio.src = activeSource();
 
   const tryPlay = async () => {
     try {
       await audio.play();
-      setNote("BGM gacha aktif.");
+      setNote(sourceIndex === 0 ? "BGM gacha aktif." : `BGM aktif (fallback ${sourceIndex + 1}).`);
     } catch {
-      setNote("Autoplay diblok browser. Audio akan mulai setelah interaksi pertama.");
+      setNote("Autoplay diblok browser. Audio mulai setelah interaksi pertama.");
     }
   };
 
@@ -497,12 +508,22 @@ function initGachaPageBgm() {
     if (!audio.paused) return;
     void audio
       .play()
-      .then(() => setNote("BGM gacha aktif."))
+      .then(() => {
+        setNote(sourceIndex === 0 ? "BGM gacha aktif." : `BGM aktif (fallback ${sourceIndex + 1}).`);
+      })
       .catch(() => {});
   };
 
   audio.addEventListener("error", () => {
-    setNote("BGM gacha gagal dimuat dari sumber.");
+    if (sourceIndex + 1 < GACHA_BGM_SOURCES.length) {
+      sourceIndex += 1;
+      audio.src = activeSource();
+      audio.load();
+      setNote(`Sumber utama gagal, pindah ke fallback ${sourceIndex + 1}.`);
+      void tryPlay();
+      return;
+    }
+    setNote("Semua sumber audio gagal dimuat.");
   });
 
   document.addEventListener("pointerdown", unlock);
@@ -591,11 +612,51 @@ function initGachaPage(data) {
   const characterByName = new Map(
     characters.filter((char) => char?.name).map((char) => [String(char.name).toLowerCase(), char])
   );
-  const charactersByStars = new Map();
+  const toSimUnitFromCharacter = (char) => ({
+    id: char?.id || `sim-${String(char?.name || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+    name: char?.name || "Unknown Operator",
+    role: char?.role || "-",
+    element: char?.profile?.element || "-",
+    image: char?.image || "assets/skill-icons/basic.webp",
+    stars: rarityFromCharacter(char),
+  });
+
+  const pushUniquePoolUnit = (pool, item) => {
+    if (!item || !item.name) return;
+    if (pool.some((unit) => String(unit.name).toLowerCase() === String(item.name).toLowerCase())) return;
+    pool.push(item);
+  };
+
+  const simPoolByStars = new Map();
+  const addSimUnit = (item) => {
+    const stars = Number(item.stars);
+    if (!Number.isFinite(stars) || stars < 4 || stars > 6) return;
+    if (!simPoolByStars.has(stars)) simPoolByStars.set(stars, []);
+    pushUniquePoolUnit(simPoolByStars.get(stars), item);
+  };
+
   characters.forEach((char) => {
-    const stars = rarityFromCharacter(char);
-    if (!charactersByStars.has(stars)) charactersByStars.set(stars, []);
-    charactersByStars.get(stars).push(char);
+    addSimUnit(toSimUnitFromCharacter(char));
+  });
+
+  const defaultSimulatedPool = [
+    { id: "akekuri-sim", name: "Akekuri", stars: 4, role: "Sub DPS", element: "Nature", image: "assets/icons/akekuri.png" },
+    { id: "wulfgard-sim", name: "Wulfgard", stars: 4, role: "Support", element: "Frost", image: "assets/icons/wulfgard.webp" },
+    { id: "estella-sim", name: "Estella", stars: 4, role: "DPS", element: "Heat", image: "assets/skill-icons/basic.webp" },
+    { id: "antal-sim", name: "Antal", stars: 4, role: "Support", element: "Electric", image: "assets/skill-icons/basic.webp" },
+  ];
+  const simulatedPool = Array.isArray(gachaData.simulatedPool) && gachaData.simulatedPool.length
+    ? gachaData.simulatedPool
+    : defaultSimulatedPool;
+  simulatedPool.forEach((item) => {
+    addSimUnit({
+      id: item.id || `sim-${String(item.name || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+      name: item.name || "Unknown",
+      stars: item.stars,
+      role: item.role || "-",
+      element: item.element || "-",
+      image: item.image || "assets/skill-icons/basic.webp",
+    });
   });
 
   const defaultBanners = [
@@ -678,19 +739,35 @@ function initGachaPage(data) {
     if (stars === 6 && Array.isArray(banner.sixPool) && banner.sixPool.length) {
       pool = banner.sixPool
         .map((name) => characterByName.get(String(name).toLowerCase()))
+        .filter(Boolean)
+        .map((char) => toSimUnitFromCharacter(char))
         .filter(Boolean);
     }
     if (pool.length === 0) {
-      pool = [...(charactersByStars.get(stars) || [])];
+      pool = [...(simPoolByStars.get(stars) || [])];
     }
     if (excludeFeatured && banner.featured) {
       const featuredLower = String(banner.featured).toLowerCase();
       pool = pool.filter((char) => String(char.name).toLowerCase() !== featuredLower);
     }
     if (pool.length === 0) {
-      pool = [...characters];
+      pool = [...(simPoolByStars.get(5) || []), ...(simPoolByStars.get(4) || []), ...(simPoolByStars.get(6) || [])];
     }
     return pool;
+  };
+
+  const pickPoolUnit = (pool, bannerState, stars) => {
+    if (!Array.isArray(pool) || pool.length === 0) return null;
+    const key = String(stars);
+    const lastName = bannerState.lastByRarity?.[key] || "";
+    let candidates = pool;
+    if (pool.length > 1 && lastName) {
+      const filtered = pool.filter((unit) => String(unit.name).toLowerCase() !== String(lastName).toLowerCase());
+      if (filtered.length) candidates = filtered;
+    }
+    const selected = randomPick(candidates) || randomPick(pool);
+    if (selected) bannerState.lastByRarity[key] = selected.name;
+    return selected;
   };
 
   const renderMetrics = () => {
@@ -814,25 +891,26 @@ function initGachaPage(data) {
     if (stars === 6 && banner.featured && banner.type === "Chartered Headhunting") {
       const forceFeatured = counted && bannerState.pityFeatured + 1 >= pity.featuredGuarantee;
       const featuredChar = characterByName.get(String(banner.featured).toLowerCase());
+      const featuredUnit = featuredChar ? toSimUnitFromCharacter(featuredChar) : null;
       const shouldFeatured = forceFeatured || Math.random() < pity.featuredRateOnSix;
-      if (shouldFeatured && featuredChar) {
-        chosen = featuredChar;
+      if (shouldFeatured && featuredUnit) {
+        chosen = featuredUnit;
         isFeatured = true;
       } else {
-        chosen = randomPick(poolForStars(banner, stars, true));
+        chosen = pickPoolUnit(poolForStars(banner, stars, true), bannerState, stars);
       }
     }
 
     if (!chosen) {
-      chosen = randomPick(poolForStars(banner, stars, false));
+      chosen = pickPoolUnit(poolForStars(banner, stars, false), bannerState, stars);
     }
     if (!chosen) {
-      chosen = randomPick(characters) || {
+      chosen = {
         id: "unknown",
         name: "Unknown Operator",
         role: "-",
+        element: "-",
         image: "assets/skill-icons/basic.webp",
-        profile: {},
       };
     }
 
@@ -853,7 +931,7 @@ function initGachaPage(data) {
       name: chosen.name,
       stars,
       role: chosen.role || "-",
-      element: chosen.profile?.element || "-",
+      element: chosen.element || "-",
       image: chosen.image || "assets/skill-icons/basic.webp",
       isFeatured,
     };
@@ -907,7 +985,7 @@ function initGachaPage(data) {
   const setActionDisabled = (value) => {
     refs.pull1.disabled = value;
     refs.pull10.disabled = value;
-    refs.pullUrgent.disabled = value || refs.pullUrgent.disabled;
+    refs.pullUrgent.disabled = value;
     refs.resetBanner.disabled = value;
     refs.bannerSelect.disabled = value;
   };
@@ -979,6 +1057,7 @@ function initGachaPage(data) {
       totalPulls: 0,
       arsenalTicket: 0,
       urgentUsed: false,
+      lastByRarity: {},
     };
     saveGachaState(state);
     renderMetrics();
