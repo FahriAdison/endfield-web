@@ -73,6 +73,30 @@ function toDateLabel(isoDate) {
   return date.toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" });
 }
 
+function toDateTimeLabel(isoDateTime) {
+  if (!isoDateTime) return "-";
+  const date = new Date(isoDateTime);
+  if (Number.isNaN(date.getTime())) return isoDateTime;
+  return date.toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function toCountdownLabel(ms) {
+  if (!Number.isFinite(ms)) return "-";
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const days = Math.floor(total / 86400);
+  const hours = Math.floor((total % 86400) / 3600);
+  const mins = Math.floor((total % 3600) / 60);
+  const secs = total % 60;
+  if (days > 0) return `${days}h ${hours}j ${mins}m ${secs}d`;
+  return `${hours}j ${mins}m ${secs}d`;
+}
+
 function toClock(seconds) {
   if (!Number.isFinite(seconds) || seconds < 0) return "00:00";
   const m = Math.floor(seconds / 60);
@@ -556,6 +580,8 @@ function initGachaPage(data) {
     bannerTitle: document.getElementById("gacha-banner-title"),
     bannerSub: document.getElementById("gacha-banner-sub"),
     status: document.getElementById("gacha-status"),
+    countdownCurrent: document.getElementById("gacha-countdown-current"),
+    countdownNext: document.getElementById("gacha-countdown-next"),
     results: document.getElementById("gacha-results"),
     history: document.getElementById("gacha-history"),
     disclaimer: document.getElementById("gacha-disclaimer-text"),
@@ -579,6 +605,8 @@ function initGachaPage(data) {
     !refs.bannerTitle ||
     !refs.bannerSub ||
     !refs.status ||
+    !refs.countdownCurrent ||
+    !refs.countdownNext ||
     !refs.results ||
     !refs.history ||
     !refs.disclaimer ||
@@ -733,6 +761,23 @@ function initGachaPage(data) {
   state.selectedBannerId = initialBannerId;
   saveGachaState(state);
 
+  const toMillis = (value) => {
+    if (!value) return Number.NaN;
+    const parsed = Date.parse(value);
+    return Number.isNaN(parsed) ? Number.NaN : parsed;
+  };
+
+  const findNextScheduledBanner = (nowMs, excludeBannerId = "") =>
+    banners
+      .map((banner) => ({ banner, startMs: toMillis(banner.startAt) }))
+      .filter(
+        (entry) =>
+          Number.isFinite(entry.startMs) &&
+          entry.startMs > nowMs &&
+          (!excludeBannerId || String(entry.banner.id) !== String(excludeBannerId))
+      )
+      .sort((a, b) => a.startMs - b.startMs)[0]?.banner || null;
+
   const rollRarity = (forceSix = false) => {
     if (forceSix) return 6;
     const roll = Math.random() * 100;
@@ -811,12 +856,49 @@ function initGachaPage(data) {
   const renderBannerPanel = () => {
     const banner = bannerById.get(refs.bannerSelect.value);
     if (!banner) return;
+    const nowMs = Date.now();
+    const startMs = toMillis(banner.startAt);
+    const endMs = toMillis(banner.endAt);
+
     refs.bannerImage.src = asset(banner.image || "assets/images/hero-share.jpg");
     refs.bannerImage.alt = banner.name ? `Banner ${banner.name}` : "Banner gacha Endfield";
     refs.bannerType.textContent = String(banner.type || "Banner").toUpperCase();
     refs.bannerTitle.textContent = `${banner.name || "Banner"}${banner.featured ? ` - ${banner.featured}` : ""}`;
-    refs.bannerSub.textContent = `${banner.description || "-"} Status: ${banner.status || "-"}`;
-    refs.status.textContent = `Siap pull pada banner ${banner.name || "-"}.`;
+    const scheduleInfo = [];
+    if (Number.isFinite(startMs)) scheduleInfo.push(`Mulai: ${toDateTimeLabel(banner.startAt)}`);
+    if (Number.isFinite(endMs)) scheduleInfo.push(`Selesai: ${toDateTimeLabel(banner.endAt)}`);
+    if (banner.timezoneLabel) scheduleInfo.push(`Zona: ${banner.timezoneLabel}`);
+    refs.bannerSub.textContent = `${banner.description || "-"} Status: ${banner.status || "-"}${
+      scheduleInfo.length ? ` (${scheduleInfo.join(" | ")})` : ""
+    }`;
+    if (!isRolling) {
+      refs.status.textContent = `Siap pull pada banner ${banner.name || "-"}.`;
+    }
+
+    if (Number.isFinite(startMs) && nowMs < startMs) {
+      refs.countdownCurrent.textContent = `Banner ini mulai dalam ${toCountdownLabel(startMs - nowMs)} (${toDateTimeLabel(
+        banner.startAt
+      )}).`;
+    } else if (Number.isFinite(endMs) && nowMs <= endMs) {
+      refs.countdownCurrent.textContent = `Banner ini berakhir dalam ${toCountdownLabel(endMs - nowMs)} (${toDateTimeLabel(
+        banner.endAt
+      )}).`;
+    } else if (Number.isFinite(endMs) && nowMs > endMs) {
+      refs.countdownCurrent.textContent = `Banner ini sudah berakhir pada ${toDateTimeLabel(banner.endAt)}.`;
+    } else {
+      refs.countdownCurrent.textContent = "Timer banner: jadwal tidak tersedia.";
+    }
+
+    const nextBanner = findNextScheduledBanner(nowMs, banner.id);
+    if (!nextBanner) {
+      refs.countdownNext.textContent = "Next banner: belum ada jadwal start berikutnya.";
+      return;
+    }
+    const nextStartMs = toMillis(nextBanner.startAt);
+    const estimateTag = nextBanner.isEstimate ? " [Estimasi komunitas]" : "";
+    refs.countdownNext.textContent = `Next banner: ${nextBanner.name} mulai dalam ${toCountdownLabel(
+      nextStartMs - nowMs
+    )} (${toDateTimeLabel(nextBanner.startAt)})${estimateTag}.`;
   };
 
   const pushHistory = (entry) => {
@@ -1036,6 +1118,21 @@ function initGachaPage(data) {
     isRolling = false;
   };
 
+  let countdownTimer = null;
+  const startCountdownTicker = () => {
+    if (countdownTimer) clearInterval(countdownTimer);
+    countdownTimer = setInterval(() => {
+      renderBannerPanel();
+    }, 1000);
+  };
+
+  window.addEventListener("pagehide", () => {
+    if (countdownTimer) {
+      clearInterval(countdownTimer);
+      countdownTimer = null;
+    }
+  });
+
   refs.bannerSelect.addEventListener("change", () => {
     state.selectedBannerId = refs.bannerSelect.value;
     ensureBannerState(state, refs.bannerSelect.value);
@@ -1076,6 +1173,7 @@ function initGachaPage(data) {
   renderMetrics();
   renderHistory();
   refs.results.innerHTML = emptyState("Belum ada hasil pull. Tekan Pull x1 atau Pull x10.");
+  startCountdownTicker();
 }
 
 function teamTierClass(value) {
