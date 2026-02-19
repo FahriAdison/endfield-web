@@ -33,6 +33,26 @@ const GACHA_BGM_SOURCES = [
 const GACHA_STATE_KEY = "endfield_web_gacha_state_v1";
 const gachaTicketMap = { 6: 2000, 5: 200, 4: 20, 3: 0 };
 const SITE_URL = "https://endfield-ind.my.id";
+const NAV_CONTACT_LINKS = [
+  {
+    label: "WhatsApp",
+    value: "085179855248",
+    href: "https://wa.me/6285179855248",
+    icon: "assets/icons/social-whatsapp.svg",
+  },
+  {
+    label: "Instagram Store",
+    value: "@papah.chan.store",
+    href: "https://www.instagram.com/papah.chan.store/",
+    icon: "assets/icons/social-instagram.svg",
+  },
+  {
+    label: "GitHub",
+    value: "FahriAdison",
+    href: "https://github.com/FahriAdison",
+    icon: "assets/icons/social-github.svg",
+  },
+];
 
 const page = document.body?.dataset.page || "home";
 const rawRoot = document.body?.dataset.basePath || ".";
@@ -479,6 +499,27 @@ function initNavDrawer() {
   nav.dataset.drawerReady = "1";
 
   if (!links.id) links.id = "site-nav-links";
+
+  if (!links.querySelector(".nav-contact")) {
+    const contact = document.createElement("section");
+    contact.className = "nav-contact";
+    contact.setAttribute("aria-label", "Contact links");
+    contact.innerHTML = `
+      <p class="nav-contact-title">Contact Me On:</p>
+      ${NAV_CONTACT_LINKS.map(
+        (item) => `
+        <a class="nav-contact-link" href="${esc(item.href)}" target="_blank" rel="noreferrer noopener">
+          <img class="nav-contact-icon" src="${asset(item.icon)}" alt="${esc(item.label)} icon" loading="lazy" />
+          <span class="nav-contact-copy">
+            <strong>${esc(item.label)}</strong>
+            <small>${esc(item.value)}</small>
+          </span>
+        </a>
+      `
+      ).join("")}
+    `;
+    links.appendChild(contact);
+  }
 
   const button = document.createElement("button");
   button.type = "button";
