@@ -106,7 +106,7 @@ function upsertCanonical(href) {
   tag.setAttribute("href", href);
 }
 
-function applyDynamicMeta({ title, description, canonicalUrl, imageUrl }) {
+function applyDynamicMeta({ title, description, canonicalUrl, imageUrl, keywords }) {
   if (title) {
     document.title = title;
     upsertMetaByProperty("og:title", title);
@@ -124,6 +124,10 @@ function applyDynamicMeta({ title, description, canonicalUrl, imageUrl }) {
   if (imageUrl) {
     upsertMetaByProperty("og:image", imageUrl);
     upsertMetaByName("twitter:image", imageUrl);
+  }
+  if (keywords) {
+    const keywordValue = Array.isArray(keywords) ? keywords.join(", ") : String(keywords);
+    upsertMetaByName("keywords", keywordValue);
   }
 }
 
@@ -1998,6 +2002,14 @@ function initGearDetailPage(characters, gearCatalog = []) {
     description: `Detail gear ${item.name}: stats, efek set, usage level, dan rekomendasi karakter pengguna di Endfield Web.`,
     canonicalUrl: toAbsoluteSiteUrl(`/gear/?id=${encodeURIComponent(item.id)}`),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
+    keywords: [
+      `${item.name} endfield gear`,
+      `detail ${item.name} endfield`,
+      "gear endfield terbaik",
+      "stats gear endfield",
+      "efek set endfield",
+      "arknights endfield indonesia",
+    ],
   });
 
   const ownerHtml =
@@ -2196,6 +2208,14 @@ function renderCharacterDetail(character) {
     description: `${character.name} di Arknights: Endfield - role ${profile.role || character.role}, elemen ${profile.element || "-"}, build, skill, dan progression gear lengkap.`,
     canonicalUrl: toAbsoluteSiteUrl(`/character/?id=${encodeURIComponent(character.id)}`),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
+    keywords: [
+      `${character.name} endfield build`,
+      `${character.name} endfield gear`,
+      `${character.name} endfield skill`,
+      `${character.name} endfield team`,
+      "karakter endfield terbaik",
+      "arknights endfield indonesia",
+    ],
   });
 
   target.innerHTML = `

@@ -63,6 +63,13 @@ Field penting:
 - `characters[].profile.gearRecommendations`
 - `characters[].profile.gearProgression`
 
+## SEO Quick Start
+
+- Keyword map dan panduan: `SEO_KEYWORDS.md`
+- Robots: `robots.txt`
+- Sitemap: `sitemap.xml`
+- Verifikasi Google Search Console: tag ada di `index.html`
+
 ## Deploy ke GitHub Pages
 
 1. Buat repo (misal `endfield-web`)
