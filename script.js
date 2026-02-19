@@ -32,6 +32,7 @@ const GACHA_BGM_SOURCES = [
 ];
 const GACHA_STATE_KEY = "endfield_web_gacha_state_v1";
 const gachaTicketMap = { 6: 2000, 5: 200, 4: 20, 3: 0 };
+const SITE_URL = "https://endfield-ind.my.id";
 
 const page = document.body?.dataset.page || "home";
 const rawRoot = document.body?.dataset.basePath || ".";
@@ -64,6 +65,66 @@ function esc(value) {
     .replace(/>/g, "&gt;")
     .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function toAbsoluteSiteUrl(pathOrUrl = "/") {
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+  const cleaned = String(pathOrUrl).startsWith("/") ? String(pathOrUrl) : `/${pathOrUrl}`;
+  return `${SITE_URL}${cleaned}`;
+}
+
+function upsertMetaByName(name, content) {
+  if (!name || !content) return;
+  let tag = document.head.querySelector(`meta[name="${name}"]`);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute("name", name);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+function upsertMetaByProperty(property, content) {
+  if (!property || !content) return;
+  let tag = document.head.querySelector(`meta[property="${property}"]`);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute("property", property);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+function upsertCanonical(href) {
+  if (!href) return;
+  let tag = document.head.querySelector('link[rel="canonical"]');
+  if (!tag) {
+    tag = document.createElement("link");
+    tag.setAttribute("rel", "canonical");
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("href", href);
+}
+
+function applyDynamicMeta({ title, description, canonicalUrl, imageUrl }) {
+  if (title) {
+    document.title = title;
+    upsertMetaByProperty("og:title", title);
+    upsertMetaByName("twitter:title", title);
+  }
+  if (description) {
+    upsertMetaByName("description", description);
+    upsertMetaByProperty("og:description", description);
+    upsertMetaByName("twitter:description", description);
+  }
+  if (canonicalUrl) {
+    upsertCanonical(canonicalUrl);
+    upsertMetaByProperty("og:url", canonicalUrl);
+  }
+  if (imageUrl) {
+    upsertMetaByProperty("og:image", imageUrl);
+    upsertMetaByName("twitter:image", imageUrl);
+  }
 }
 
 function toDateLabel(isoDate) {
@@ -1932,7 +1993,12 @@ function initGearDetailPage(characters, gearCatalog = []) {
   }
 
   status.textContent = "Detail gear berhasil dimuat.";
-  document.title = `${item.name} | Gear Detail | Endfield Web`;
+  applyDynamicMeta({
+    title: `${item.name} | Gear Detail | Endfield Web`,
+    description: `Detail gear ${item.name}: stats, efek set, usage level, dan rekomendasi karakter pengguna di Endfield Web.`,
+    canonicalUrl: toAbsoluteSiteUrl(`/gear/?id=${encodeURIComponent(item.id)}`),
+    imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
+  });
 
   const ownerHtml =
     item.owners.length === 0
@@ -2125,7 +2191,12 @@ function renderCharacterDetail(character) {
     : emptyState("Data gear belum tersedia untuk karakter ini.");
 
   status.textContent = `Profil dimuat dari data update ${toDateLabel(profile.updatedAt)}`;
-  document.title = `${character.name} | Endfield Web`;
+  applyDynamicMeta({
+    title: `${character.name} | Profil Karakter Endfield | Endfield Web`,
+    description: `${character.name} di Arknights: Endfield - role ${profile.role || character.role}, elemen ${profile.element || "-"}, build, skill, dan progression gear lengkap.`,
+    canonicalUrl: toAbsoluteSiteUrl(`/character/?id=${encodeURIComponent(character.id)}`),
+    imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
+  });
 
   target.innerHTML = `
     <article class="card character-shell">

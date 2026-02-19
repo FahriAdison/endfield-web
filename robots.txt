@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://endfield-ind.my.id/sitemap.xml
