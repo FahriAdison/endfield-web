@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gacha Simulator | Endfield Web</title>
+    <meta
+      name="description"
+      content="Simulator headhunting Arknights: Endfield versi fanmade dengan banner Chartered, Standard, animasi reveal, dan perhitungan pity."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-page="gacha" data-base-path="..">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="page-hero">
+      <nav class="nav container">
+        <a class="brand" href="../">Endfield Web</a>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <a href="../characters/">Characters</a>
+          <a href="../tierlist/">Tierlist</a>
+          <a href="../builds/">Builds</a>
+          <a href="../team-comps/">Team Comps</a>
+          <a href="../gears/">Gears</a>
+          <a class="active" href="./">Gacha Sim</a>
+          <a href="../helps/">Tips</a>
+        </div>
+      </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">HEADHUNTING LAB</p>
+        <h1>Gacha Simulator Endfield</h1>
+        <p>
+          Simulasi pull banner berdasarkan informasi resmi + model komunitas.
+          Cocok untuk latihan planning resource sebelum pull di game asli.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container">
+        <article class="card gacha-disclaimer">
+          <h2>Peringatan Akurasi</h2>
+          <p id="gacha-disclaimer-text">
+            Simulasi ini tidak 100% mewakili sistem in-game. Model drop rate dan pity akan terus diperbarui.
+          </p>
+          <ul class="source-list" id="gacha-source-list"></ul>
+          <p class="stamp" id="gacha-stamp">Memuat data banner...</p>
+          <p class="stamp" id="gacha-audio-note">Memuat BGM gacha...</p>
+        </article>
+      </section>
+
+      <section class="section container">
+        <div class="section-controls gacha-controls">
+          <select id="gacha-banner-select"></select>
+          <button class="btn primary" id="gacha-pull-1" type="button">Pull x1</button>
+          <button class="btn ghost" id="gacha-pull-10" type="button">Pull x10</button>
+          <button class="btn ghost" id="gacha-pull-urgent" type="button">Urgent x10</button>
+          <button class="btn ghost" id="gacha-reset-banner" type="button">Reset Banner Counter</button>
+        </div>
+
+        <div class="gacha-metrics">
+          <article class="card metric-card">
+            <p>Pity 6*</p>
+            <h3 id="gacha-pity-six">0</h3>
+          </article>
+          <article class="card metric-card">
+            <p>Counter Featured</p>
+            <h3 id="gacha-pity-featured">0</h3>
+          </article>
+          <article class="card metric-card">
+            <p>Total Pull Banner</p>
+            <h3 id="gacha-total-pulls">0</h3>
+          </article>
+          <article class="card metric-card">
+            <p>Arsenal Ticket</p>
+            <h3 id="gacha-arsenal-ticket">0</h3>
+          </article>
+        </div>
+
+        <article class="card gacha-stage" id="gacha-stage">
+          <img id="gacha-banner-image" src="../assets/images/hero-share.jpg" alt="Banner gacha Endfield" loading="lazy" />
+          <div class="gacha-stage-overlay"></div>
+          <div class="gacha-stage-copy">
+            <p class="kicker" id="gacha-banner-type">CHARTERED HEADHUNTING</p>
+            <h3 id="gacha-banner-title">Banner</h3>
+            <p id="gacha-banner-sub">Memuat deskripsi banner...</p>
+            <p class="stamp" id="gacha-status">Siap simulasi.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section container">
+        <h2>Hasil Pull Terakhir</h2>
+        <div class="gacha-results" id="gacha-results"></div>
+      </section>
+
+      <section class="section container">
+        <h2>Riwayat Singkat</h2>
+        <div class="gacha-history" id="gacha-history"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Endfield Web - Gacha Simulator</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
+

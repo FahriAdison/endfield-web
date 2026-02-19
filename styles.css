@@ -558,6 +558,187 @@ body.no-scroll {
   font-size: 0.9rem;
 }
 
+.gacha-disclaimer p {
+  margin-top: 0.35rem;
+}
+
+.gacha-controls .btn {
+  min-width: 10rem;
+}
+
+.gacha-metrics {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.metric-card {
+  padding: 0.8rem 0.95rem;
+}
+
+.metric-card p {
+  margin: 0;
+  color: var(--ink-dim);
+}
+
+.metric-card h3 {
+  margin: 0.2rem 0 0;
+  font-size: 1.35rem;
+}
+
+.gacha-stage {
+  margin-top: 1rem;
+  position: relative;
+  min-height: 18rem;
+  overflow: hidden;
+  padding: 0;
+}
+
+.gacha-stage img {
+  width: 100%;
+  height: 100%;
+  min-height: 18rem;
+  object-fit: cover;
+  display: block;
+}
+
+.gacha-stage-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(4, 14, 22, 0.86), rgba(4, 14, 22, 0.2)),
+    radial-gradient(circle at 25% 20%, rgba(87, 190, 255, 0.22), transparent 58%);
+  pointer-events: none;
+}
+
+.gacha-stage-copy {
+  position: absolute;
+  inset: auto 1rem 1rem 1rem;
+  z-index: 2;
+}
+
+.gacha-stage-copy h3 {
+  margin: 0.2rem 0;
+}
+
+.gacha-stage-copy p {
+  margin: 0.28rem 0;
+}
+
+.gacha-stage::before {
+  content: "";
+  position: absolute;
+  inset: -4rem 0 auto 0;
+  height: 4.8rem;
+  background: linear-gradient(to bottom, rgba(140, 219, 255, 0.42), rgba(140, 219, 255, 0));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gacha-stage.rolling::before {
+  opacity: 1;
+  animation: gacha-scan 1.05s linear infinite;
+}
+
+.gacha-stage.reveal {
+  box-shadow: 0 0 0 1px rgba(134, 212, 255, 0.45), 0 0 32px rgba(114, 192, 236, 0.22);
+}
+
+@keyframes gacha-scan {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(22rem);
+  }
+}
+
+.gacha-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.2rem, 1fr));
+  gap: 0.6rem;
+}
+
+.gacha-card {
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-align: center;
+  padding: 0.65rem 0.55rem;
+}
+
+.gacha-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.gacha-card.rarity-6 {
+  border-color: rgba(255, 209, 112, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(255, 209, 112, 0.5);
+}
+
+.gacha-card.rarity-5 {
+  border-color: rgba(192, 136, 255, 0.9);
+}
+
+.gacha-card.rarity-4 {
+  border-color: rgba(91, 166, 227, 0.9);
+}
+
+.gacha-rarity {
+  display: inline-block;
+  padding: 0.14rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(93, 149, 191, 0.88);
+  font-size: 0.74rem;
+  margin-bottom: 0.38rem;
+}
+
+.gacha-card-avatar {
+  width: 3.9rem;
+  height: 3.9rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid rgba(86, 142, 184, 0.85);
+  background: #102535;
+}
+
+.gacha-card h3 {
+  margin: 0.45rem 0 0.2rem;
+  font-size: 0.95rem;
+}
+
+.gacha-card p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #a9cce8;
+}
+
+.gacha-featured {
+  display: inline-block;
+  margin-top: 0.36rem;
+  font-size: 0.74rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: 0.3rem;
+  background: rgba(214, 173, 82, 0.25);
+  border: 1px solid rgba(214, 173, 82, 0.72);
+}
+
+.gacha-history {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.6rem;
+}
+
+.history-item h3 {
+  margin: 0.18rem 0 0.3rem;
+}
+
+.history-item p {
+  margin: 0.14rem 0;
+}
+
 .source-list {
   padding-left: 1.05rem;
 }
@@ -604,6 +785,10 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .gacha-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .section-controls input,
   .section-controls select {
     width: 100%;
@@ -635,6 +820,26 @@ a {
 
   .gallery-item figcaption {
     font-size: 0.75rem;
+  }
+
+  .gacha-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .gacha-controls .btn {
+    min-width: 0;
+  }
+
+  .gacha-stage {
+    min-height: 14.2rem;
+  }
+
+  .gacha-stage img {
+    min-height: 14.2rem;
+  }
+
+  .gacha-results {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lightbox-nav {

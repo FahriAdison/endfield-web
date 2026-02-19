@@ -1,7 +1,7 @@
 {
   "meta": {
     "updatedAt": "2026-02-19",
-    "patchNote": "Fixed portrait icons for new operators, added team-comp member avatars, and social link preview meta tags."
+    "patchNote": "Added dedicated gacha simulator page, expanded gallery interaction, and integrated official chartered banner snapshots."
   },
   "tips": [
     {
@@ -93,6 +93,114 @@
       ]
     }
   ],
+  "gacha": {
+    "updatedAt": "2026-02-19",
+    "disclaimer": "Simulator ini fanmade dan tidak 100% mereplikasi hasil in-game. Data serta model peluang akan terus diperbarui agar makin akurat.",
+    "notes": [
+      "Bagian Chartered/Urgent mengikuti detail resmi (rate-up 6* sebesar 50% di banner Chartered, serta jaminan rate-up dalam 120 pull counted).",
+      "Rate dasar 6*/5*/4* dan hard pity 6* adalah model komunitas untuk simulasi, bukan angka resmi final dari server."
+    ],
+    "sources": [
+      {
+        "label": "Official News 4499 - Zeroth Directive DEV Comm",
+        "url": "https://endfield.gryphline.com/en-us/news/4499"
+      },
+      {
+        "label": "Official News 7028 - The Floaty Messenger Chartered Headhunting",
+        "url": "https://endfield.gryphline.com/en-us/news/7028"
+      },
+      {
+        "label": "Official News 3847 - Echoes from Blaze Chartered Headhunting",
+        "url": "https://endfield.gryphline.com/en-us/news/3847"
+      },
+      {
+        "label": "Game8 Guide - Community model (rate/pity simulator)",
+        "url": "https://game8.co/games/Arknights-Endfield/archives/507733"
+      }
+    ],
+    "model": {
+      "baseRates": {
+        "6": 0.8,
+        "5": 8.0,
+        "4": 91.2
+      },
+      "pity": {
+        "hardPitySix": 80,
+        "featuredGuarantee": 120,
+        "featuredRateOnSix": 50,
+        "tenPullGuaranteeFivePlus": true
+      }
+    },
+    "banners": [
+      {
+        "id": "gilberta-chartered",
+        "name": "The Floaty Messenger",
+        "type": "Chartered Headhunting",
+        "status": "Aktif (snapshot resmi 2 Februari 2026)",
+        "featured": "Gilberta",
+        "image": "assets/images/banner-gilberta.jpg",
+        "description": "Banner Chartered untuk Gilberta. 6* rate-up punya peluang 50% saat mendapat 6*.",
+        "supportsUrgent": true,
+        "urgentUnlockPulls": 30,
+        "source": "https://endfield.gryphline.com/en-us/news/7028",
+        "sixPool": [
+          "Gilberta",
+          "Ember",
+          "Yvonne",
+          "Pogranichnik",
+          "Last Rite",
+          "Ardelia",
+          "Laevatain",
+          "Lifeng"
+        ]
+      },
+      {
+        "id": "laevatain-chartered",
+        "name": "Echoes from Blaze",
+        "type": "Chartered Headhunting",
+        "status": "Selesai (tetap tersedia untuk simulasi)",
+        "featured": "Laevatain",
+        "image": "assets/images/banner-laevatain.jpg",
+        "description": "Banner Chartered rerun untuk Laevatain yang sekarang sudah lewat.",
+        "supportsUrgent": true,
+        "urgentUnlockPulls": 30,
+        "source": "https://endfield.gryphline.com/en-us/news/3847",
+        "sixPool": [
+          "Laevatain",
+          "Lifeng",
+          "Yvonne",
+          "Pogranichnik",
+          "Last Rite",
+          "Ardelia",
+          "Ember",
+          "Gilberta"
+        ]
+      },
+      {
+        "id": "basic-standard",
+        "name": "Basic Headhunting",
+        "type": "Standard",
+        "status": "Permanen",
+        "featured": "",
+        "image": "assets/images/hero-share.jpg",
+        "description": "Banner standar permanen untuk pull umum. Tidak ada target 6* rate-up.",
+        "supportsUrgent": false,
+        "urgentUnlockPulls": 0,
+        "source": "https://endfield.gryphline.com/en-us/news/4499",
+        "sixPool": [
+          "Laevatain",
+          "Gilberta",
+          "Yvonne",
+          "Ardelia",
+          "Last Rite",
+          "Pogranichnik",
+          "Ember",
+          "Lifeng",
+          "Snowshine"
+        ]
+      }
+    ]
+  },
   "characters": [
     {
       "id": "laevatain",
@@ -12649,3 +12757,6 @@
     }
   ]
 }
+
+
+

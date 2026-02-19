@@ -4,7 +4,7 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 
 ## Fitur
 
-- Multi-halaman: `/`, `/characters/`, `/tierlist/`, `/builds/`, `/team-comps/`, `/gears/`, `/gear/?id=...`, `/helps/`, `/character/?id=...`
+- Multi-halaman: `/`, `/characters/`, `/tierlist/`, `/builds/`, `/team-comps/`, `/gears/`, `/gear/?id=...`, `/gacha/`, `/helps/`, `/character/?id=...`
 - Search + filter + sort A-Z/Z-A
 - Data-driven dari `data/content.json`
 - Profil karakter detail (kisah ringkas, role/rarity/element/weapon, skill + icon + cara pakai)
@@ -14,6 +14,7 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 - Detail item gear (`/gear/?id=...`) termasuk best-for role, stats, efek, dan karakter pengguna
 - Progression gear per karakter untuk level `70`, `60`, dan `50` dengan slot `armor`, `gloves`, `kit1`, `kit2`
 - Background music global (play/pause + mute) dengan state tersimpan lintas halaman
+- Gacha simulator terpisah (`/gacha/`) dengan banner Chartered/Standard, pity counter, urgent x10, animasi reveal, dan history pull
 
 ## Struktur
 
@@ -31,6 +32,8 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 |- team-comps/
 |  |- index.html
 |- gears/
+|  |- index.html
+|- gacha/
 |  |- index.html
 |- gear/
 |  |- index.html

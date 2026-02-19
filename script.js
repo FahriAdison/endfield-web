@@ -25,6 +25,9 @@ const BGM_SOURCES = [
   "https://154976-decisions.mp3.pm/song/245238323-arknights-endfield-lofi/",
   "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/46/09/6046093f-66c3-712a-cefd-959384fd3d3c/mzaf_12371733613275990005.plus.aac.ep.m4a",
 ];
+const GACHA_BGM_SOURCE = "https://29571222-arknights-endfield.mp3.pm/song/245759659-headhunting-gacha/";
+const GACHA_STATE_KEY = "endfield_web_gacha_state_v1";
+const gachaTicketMap = { 6: 2000, 5: 200, 4: 20, 3: 0 };
 
 const page = document.body?.dataset.page || "home";
 const rawRoot = document.body?.dataset.basePath || ".";
@@ -95,6 +98,61 @@ function sortCharacters(items, mode = "TIER") {
     return t !== 0 ? t : collator.compare(a.name, b.name);
   });
   return sorted;
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function randomPick(list) {
+  if (!Array.isArray(list) || list.length === 0) return null;
+  return list[Math.floor(Math.random() * list.length)] || null;
+}
+
+function rarityFromCharacter(character) {
+  const rarity = character?.profile?.rarity || "";
+  const match = String(rarity).match(/(\d+)/);
+  if (!match) return 4;
+  const stars = Number(match[1]);
+  if (!Number.isFinite(stars)) return 4;
+  return stars;
+}
+
+function readGachaState() {
+  const fallback = { byBanner: {}, history: [], selectedBannerId: "" };
+  try {
+    const raw = localStorage.getItem(GACHA_STATE_KEY);
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return {
+      byBanner: parsed?.byBanner && typeof parsed.byBanner === "object" ? parsed.byBanner : {},
+      history: Array.isArray(parsed?.history) ? parsed.history : [],
+      selectedBannerId: typeof parsed?.selectedBannerId === "string" ? parsed.selectedBannerId : "",
+    };
+  } catch {
+    return fallback;
+  }
+}
+
+function saveGachaState(state) {
+  try {
+    localStorage.setItem(GACHA_STATE_KEY, JSON.stringify(state));
+  } catch {
+    // ignore storage errors
+  }
+}
+
+function ensureBannerState(state, bannerId) {
+  if (!state.byBanner[bannerId]) {
+    state.byBanner[bannerId] = {
+      pitySix: 0,
+      pityFeatured: 0,
+      totalPulls: 0,
+      arsenalTicket: 0,
+      urgentUsed: false,
+    };
+  }
+  return state.byBanner[bannerId];
 }
 
 function getMeta(character) {
@@ -414,6 +472,524 @@ function initGalleryLightbox() {
     if (event.key === "ArrowLeft") navigate(-1);
     if (event.key === "ArrowRight") navigate(1);
   });
+}
+
+function initGachaPageBgm() {
+  const note = document.getElementById("gacha-audio-note");
+  const setNote = (text) => {
+    if (note) note.textContent = text;
+  };
+
+  const audio = new Audio(GACHA_BGM_SOURCE);
+  audio.loop = true;
+  audio.preload = "auto";
+
+  const tryPlay = async () => {
+    try {
+      await audio.play();
+      setNote("BGM gacha aktif.");
+    } catch {
+      setNote("Autoplay diblok browser. Audio akan mulai setelah interaksi pertama.");
+    }
+  };
+
+  const unlock = () => {
+    if (!audio.paused) return;
+    void audio
+      .play()
+      .then(() => setNote("BGM gacha aktif."))
+      .catch(() => {});
+  };
+
+  audio.addEventListener("error", () => {
+    setNote("BGM gacha gagal dimuat dari sumber.");
+  });
+
+  document.addEventListener("pointerdown", unlock);
+  document.addEventListener("keydown", unlock);
+  window.addEventListener("pagehide", () => {
+    document.removeEventListener("pointerdown", unlock);
+    document.removeEventListener("keydown", unlock);
+    audio.pause();
+    audio.src = "";
+  });
+
+  audio.load();
+  void tryPlay();
+}
+
+function initGachaPage(data) {
+  const refs = {
+    bannerSelect: document.getElementById("gacha-banner-select"),
+    pull1: document.getElementById("gacha-pull-1"),
+    pull10: document.getElementById("gacha-pull-10"),
+    pullUrgent: document.getElementById("gacha-pull-urgent"),
+    resetBanner: document.getElementById("gacha-reset-banner"),
+    pitySix: document.getElementById("gacha-pity-six"),
+    pityFeatured: document.getElementById("gacha-pity-featured"),
+    totalPulls: document.getElementById("gacha-total-pulls"),
+    arsenalTicket: document.getElementById("gacha-arsenal-ticket"),
+    stage: document.getElementById("gacha-stage"),
+    bannerImage: document.getElementById("gacha-banner-image"),
+    bannerType: document.getElementById("gacha-banner-type"),
+    bannerTitle: document.getElementById("gacha-banner-title"),
+    bannerSub: document.getElementById("gacha-banner-sub"),
+    status: document.getElementById("gacha-status"),
+    results: document.getElementById("gacha-results"),
+    history: document.getElementById("gacha-history"),
+    disclaimer: document.getElementById("gacha-disclaimer-text"),
+    sourceList: document.getElementById("gacha-source-list"),
+    stamp: document.getElementById("gacha-stamp"),
+  };
+
+  if (
+    !refs.bannerSelect ||
+    !refs.pull1 ||
+    !refs.pull10 ||
+    !refs.pullUrgent ||
+    !refs.resetBanner ||
+    !refs.pitySix ||
+    !refs.pityFeatured ||
+    !refs.totalPulls ||
+    !refs.arsenalTicket ||
+    !refs.stage ||
+    !refs.bannerImage ||
+    !refs.bannerType ||
+    !refs.bannerTitle ||
+    !refs.bannerSub ||
+    !refs.status ||
+    !refs.results ||
+    !refs.history ||
+    !refs.disclaimer ||
+    !refs.sourceList ||
+    !refs.stamp
+  ) {
+    return;
+  }
+
+  initGachaPageBgm();
+
+  const gachaData = data.gacha || {};
+  const model = gachaData.model || {};
+  const baseRates = model.baseRates || {};
+  const pityModel = model.pity || {};
+
+  const rates = {
+    6: Number(baseRates["6"] ?? 0.8),
+    5: Number(baseRates["5"] ?? 8),
+    4: Number(baseRates["4"] ?? 91.2),
+  };
+
+  const pity = {
+    hardPitySix: Number(pityModel.hardPitySix ?? 80),
+    featuredGuarantee: Number(pityModel.featuredGuarantee ?? 120),
+    featuredRateOnSix: Number(pityModel.featuredRateOnSix ?? 50) / 100,
+    tenPullGuaranteeFivePlus: pityModel.tenPullGuaranteeFivePlus !== false,
+  };
+
+  const characters = Array.isArray(data.characters) ? data.characters : [];
+  const characterByName = new Map(
+    characters.filter((char) => char?.name).map((char) => [String(char.name).toLowerCase(), char])
+  );
+  const charactersByStars = new Map();
+  characters.forEach((char) => {
+    const stars = rarityFromCharacter(char);
+    if (!charactersByStars.has(stars)) charactersByStars.set(stars, []);
+    charactersByStars.get(stars).push(char);
+  });
+
+  const defaultBanners = [
+    {
+      id: "gilberta-chartered",
+      name: "The Floaty Messenger",
+      type: "Chartered Headhunting",
+      status: "Aktif (snapshot)",
+      featured: "Gilberta",
+      image: "assets/images/banner-gilberta.jpg",
+      description: "Banner Chartered untuk Gilberta.",
+      supportsUrgent: true,
+      urgentUnlockPulls: 30,
+      source: "https://endfield.gryphline.com/en-us/news/7028",
+    },
+    {
+      id: "laevatain-chartered",
+      name: "Echoes from Blaze",
+      type: "Chartered Headhunting",
+      status: "Selesai (simulasi arsip)",
+      featured: "Laevatain",
+      image: "assets/images/banner-laevatain.jpg",
+      description: "Banner Chartered untuk Laevatain.",
+      supportsUrgent: true,
+      urgentUnlockPulls: 30,
+      source: "https://endfield.gryphline.com/en-us/news/3847",
+    },
+    {
+      id: "basic-standard",
+      name: "Basic Headhunting",
+      type: "Standard",
+      status: "Permanen",
+      featured: "",
+      image: "assets/images/hero-share.jpg",
+      description: "Banner standar permanen.",
+      supportsUrgent: false,
+      urgentUnlockPulls: 0,
+      source: "https://endfield.gryphline.com/en-us/news/4499",
+    },
+  ];
+
+  const banners = Array.isArray(gachaData.banners) && gachaData.banners.length ? gachaData.banners : defaultBanners;
+  const bannerById = new Map(banners.map((banner) => [banner.id, banner]));
+
+  refs.disclaimer.textContent =
+    gachaData.disclaimer ||
+    "Simulasi ini tidak 100% merepresentasikan hasil in-game. Data dan model akan terus disesuaikan.";
+  refs.sourceList.innerHTML = (gachaData.sources || [])
+    .map((item) => `<li><a href="${esc(item.url || "#")}" target="_blank" rel="noreferrer noopener">${esc(item.label || item.url || "Sumber")}</a></li>`)
+    .join("");
+  refs.stamp.textContent = gachaData.updatedAt
+    ? `Snapshot model: ${toDateLabel(gachaData.updatedAt)}`
+    : "Snapshot model belum tersedia.";
+
+  const state = readGachaState();
+  const firstBannerId = banners[0]?.id || "";
+  const initialBannerId = bannerById.has(state.selectedBannerId) ? state.selectedBannerId : firstBannerId;
+  if (!initialBannerId) return;
+
+  refs.bannerSelect.innerHTML = banners
+    .map((banner) => {
+      const featured = banner.featured ? ` - Rate Up: ${banner.featured}` : "";
+      return `<option value="${esc(banner.id)}">${esc(banner.type || "Banner")} | ${esc(banner.name || "Unknown")}${esc(featured)}</option>`;
+    })
+    .join("");
+  refs.bannerSelect.value = initialBannerId;
+  state.selectedBannerId = initialBannerId;
+  saveGachaState(state);
+
+  const rollRarity = (forceSix = false) => {
+    if (forceSix) return 6;
+    const roll = Math.random() * 100;
+    if (roll < rates[6]) return 6;
+    if (roll < rates[6] + rates[5]) return 5;
+    return 4;
+  };
+
+  const poolForStars = (banner, stars, excludeFeatured = false) => {
+    let pool = [];
+    if (stars === 6 && Array.isArray(banner.sixPool) && banner.sixPool.length) {
+      pool = banner.sixPool
+        .map((name) => characterByName.get(String(name).toLowerCase()))
+        .filter(Boolean);
+    }
+    if (pool.length === 0) {
+      pool = [...(charactersByStars.get(stars) || [])];
+    }
+    if (excludeFeatured && banner.featured) {
+      const featuredLower = String(banner.featured).toLowerCase();
+      pool = pool.filter((char) => String(char.name).toLowerCase() !== featuredLower);
+    }
+    if (pool.length === 0) {
+      pool = [...characters];
+    }
+    return pool;
+  };
+
+  const renderMetrics = () => {
+    const banner = bannerById.get(refs.bannerSelect.value);
+    const bannerState = ensureBannerState(state, banner.id);
+    refs.pitySix.textContent = String(bannerState.pitySix || 0);
+    refs.pityFeatured.textContent =
+      banner.type === "Chartered Headhunting" && banner.featured
+        ? `${bannerState.pityFeatured || 0} / ${pity.featuredGuarantee}`
+        : "-";
+    refs.totalPulls.textContent = String(bannerState.totalPulls || 0);
+    refs.arsenalTicket.textContent = String(bannerState.arsenalTicket || 0);
+
+    if (!banner.supportsUrgent) {
+      refs.pullUrgent.disabled = true;
+      refs.pullUrgent.textContent = "Urgent x10 (Tidak tersedia)";
+      return;
+    }
+    if (bannerState.urgentUsed) {
+      refs.pullUrgent.disabled = true;
+      refs.pullUrgent.textContent = "Urgent x10 (Sudah dipakai)";
+      return;
+    }
+    const unlockAt = Number(banner.urgentUnlockPulls || 30);
+    if ((bannerState.totalPulls || 0) < unlockAt) {
+      refs.pullUrgent.disabled = true;
+      refs.pullUrgent.textContent = `Urgent x10 (Buka di ${unlockAt} pull)`;
+      return;
+    }
+    refs.pullUrgent.disabled = false;
+    refs.pullUrgent.textContent = "Urgent x10 (Gratis)";
+  };
+
+  const renderBannerPanel = () => {
+    const banner = bannerById.get(refs.bannerSelect.value);
+    if (!banner) return;
+    refs.bannerImage.src = asset(banner.image || "assets/images/hero-share.jpg");
+    refs.bannerImage.alt = banner.name ? `Banner ${banner.name}` : "Banner gacha Endfield";
+    refs.bannerType.textContent = String(banner.type || "Banner").toUpperCase();
+    refs.bannerTitle.textContent = `${banner.name || "Banner"}${banner.featured ? ` - ${banner.featured}` : ""}`;
+    refs.bannerSub.textContent = `${banner.description || "-"} Status: ${banner.status || "-"}`;
+    refs.status.textContent = `Siap pull pada banner ${banner.name || "-"}.`;
+  };
+
+  const pushHistory = (entry) => {
+    const safeEntry = {
+      time: new Date().toISOString(),
+      bannerId: entry.bannerId,
+      bannerName: entry.bannerName,
+      type: entry.type,
+      count: entry.count,
+      summary: entry.summary,
+      highlight: entry.highlight,
+    };
+    state.history = [safeEntry, ...state.history].slice(0, 20);
+    saveGachaState(state);
+  };
+
+  const renderHistory = () => {
+    if (!state.history.length) {
+      refs.history.innerHTML = emptyState("Belum ada riwayat pull.");
+      return;
+    }
+    refs.history.innerHTML = state.history
+      .map((entry) => {
+        const date = new Date(entry.time);
+        const timeLabel = Number.isNaN(date.getTime())
+          ? "-"
+          : date.toLocaleString("id-ID", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+        return `
+          <article class="card history-item">
+            <p class="stamp">${esc(timeLabel)}</p>
+            <h3>${esc(entry.bannerName || "-")}</h3>
+            <p><strong>Mode:</strong> ${esc(entry.type || "-")} | <strong>Jumlah:</strong> ${esc(entry.count || 0)}</p>
+            <p><strong>Hasil:</strong> ${esc(entry.summary || "-")}</p>
+            <p><strong>Highlight:</strong> ${esc(entry.highlight || "-")}</p>
+          </article>`;
+      })
+      .join("");
+  };
+
+  const renderPullResults = (results) => {
+    if (!results.length) {
+      refs.results.innerHTML = emptyState("Belum ada hasil pull.");
+      return;
+    }
+
+    refs.results.innerHTML = results
+      .map(
+        (item, index) => `
+          <article class="card gacha-card rarity-${item.stars}" data-index="${index}">
+            <span class="gacha-rarity">${esc(`Rarity ${item.stars}*`)}</span>
+            <img class="gacha-card-avatar" src="${asset(item.image || "assets/skill-icons/basic.webp")}" alt="${esc(item.name)} icon" loading="lazy" />
+            <h3>${esc(item.name)}</h3>
+            <p>${esc(item.role || "-")} | ${esc(item.element || "-")}</p>
+            ${item.isFeatured ? '<span class="gacha-featured">Rate Up Hit</span>' : ""}
+          </article>`
+      )
+      .join("");
+
+    const cards = Array.from(refs.results.querySelectorAll(".gacha-card"));
+    cards.forEach((card, idx) => {
+      setTimeout(() => card.classList.add("show"), 90 * idx + 90);
+    });
+  };
+
+  const pullOne = (banner, bannerState, counted, forceFivePlus = false) => {
+    const forceSix = counted && bannerState.pitySix + 1 >= pity.hardPitySix;
+    let stars = rollRarity(forceSix);
+    if (forceFivePlus && stars < 5) stars = 5;
+
+    let chosen = null;
+    let isFeatured = false;
+
+    if (stars === 6 && banner.featured && banner.type === "Chartered Headhunting") {
+      const forceFeatured = counted && bannerState.pityFeatured + 1 >= pity.featuredGuarantee;
+      const featuredChar = characterByName.get(String(banner.featured).toLowerCase());
+      const shouldFeatured = forceFeatured || Math.random() < pity.featuredRateOnSix;
+      if (shouldFeatured && featuredChar) {
+        chosen = featuredChar;
+        isFeatured = true;
+      } else {
+        chosen = randomPick(poolForStars(banner, stars, true));
+      }
+    }
+
+    if (!chosen) {
+      chosen = randomPick(poolForStars(banner, stars, false));
+    }
+    if (!chosen) {
+      chosen = randomPick(characters) || {
+        id: "unknown",
+        name: "Unknown Operator",
+        role: "-",
+        image: "assets/skill-icons/basic.webp",
+        profile: {},
+      };
+    }
+
+    if (counted) {
+      bannerState.totalPulls += 1;
+      bannerState.pitySix = stars === 6 ? 0 : bannerState.pitySix + 1;
+      if (banner.type === "Chartered Headhunting" && banner.featured) {
+        bannerState.pityFeatured = stars === 6 && isFeatured ? 0 : bannerState.pityFeatured + 1;
+      } else {
+        bannerState.pityFeatured = 0;
+      }
+    }
+
+    bannerState.arsenalTicket += gachaTicketMap[stars] || 0;
+
+    return {
+      id: chosen.id,
+      name: chosen.name,
+      stars,
+      role: chosen.role || "-",
+      element: chosen.profile?.element || "-",
+      image: chosen.image || "assets/skill-icons/basic.webp",
+      isFeatured,
+    };
+  };
+
+  const runBatch = (count, mode) => {
+    const banner = bannerById.get(refs.bannerSelect.value);
+    const bannerState = ensureBannerState(state, banner.id);
+    const counted = mode !== "urgent";
+    const isTen = count >= 10 && pity.tenPullGuaranteeFivePlus;
+
+    const batch = [];
+    let seenFivePlus = false;
+    for (let i = 0; i < count; i += 1) {
+      const forceFivePlus = isTen && i === count - 1 && !seenFivePlus;
+      const result = pullOne(banner, bannerState, counted, forceFivePlus);
+      if (result.stars >= 5) seenFivePlus = true;
+      batch.push(result);
+    }
+
+    if (mode === "urgent") {
+      bannerState.urgentUsed = true;
+    }
+
+    const summaryMap = new Map();
+    batch.forEach((item) => {
+      const key = `${item.stars}*`;
+      summaryMap.set(key, (summaryMap.get(key) || 0) + 1);
+    });
+    const summary = [...summaryMap.entries()]
+      .sort((a, b) => Number(b[0].replace("*", "")) - Number(a[0].replace("*", "")))
+      .map(([k, v]) => `${v}x ${k}`)
+      .join(", ");
+
+    const featuredHits = batch.filter((item) => item.isFeatured).length;
+    const bestDrop = [...batch].sort((a, b) => b.stars - a.stars)[0];
+    pushHistory({
+      bannerId: banner.id,
+      bannerName: banner.name,
+      type: mode,
+      count,
+      summary,
+      highlight: featuredHits > 0 ? `${featuredHits}x Rate Up (${banner.featured})` : `${bestDrop.name} (${bestDrop.stars}*)`,
+    });
+
+    saveGachaState(state);
+    return { batch, banner };
+  };
+
+  let isRolling = false;
+  const setActionDisabled = (value) => {
+    refs.pull1.disabled = value;
+    refs.pull10.disabled = value;
+    refs.pullUrgent.disabled = value || refs.pullUrgent.disabled;
+    refs.resetBanner.disabled = value;
+    refs.bannerSelect.disabled = value;
+  };
+
+  const animatePull = async (count, mode = "normal") => {
+    if (isRolling) return;
+    const banner = bannerById.get(refs.bannerSelect.value);
+    if (!banner) return;
+
+    if (mode === "urgent") {
+      const bannerState = ensureBannerState(state, banner.id);
+      if (!banner.supportsUrgent || bannerState.urgentUsed || bannerState.totalPulls < Number(banner.urgentUnlockPulls || 30)) {
+        return;
+      }
+    }
+
+    isRolling = true;
+    setActionDisabled(true);
+    refs.stage.classList.remove("reveal");
+    refs.stage.classList.add("rolling");
+    refs.status.textContent = "Membuka kanal headhunting...";
+    refs.results.innerHTML = "";
+
+    await wait(380);
+    refs.status.textContent = "Sinkronisasi sinyal Talos-II...";
+    await wait(640);
+
+    const { batch, banner: activeBanner } = runBatch(count, mode);
+    refs.stage.classList.remove("rolling");
+    refs.stage.classList.add("reveal");
+    refs.status.textContent = `Pull selesai di ${activeBanner.name}.`;
+
+    renderPullResults(batch);
+    renderHistory();
+    renderMetrics();
+
+    await wait(360);
+    refs.stage.classList.remove("reveal");
+    setActionDisabled(false);
+    renderMetrics();
+    isRolling = false;
+  };
+
+  refs.bannerSelect.addEventListener("change", () => {
+    state.selectedBannerId = refs.bannerSelect.value;
+    ensureBannerState(state, refs.bannerSelect.value);
+    saveGachaState(state);
+    renderBannerPanel();
+    renderMetrics();
+    refs.results.innerHTML = emptyState("Banner berganti. Mulai pull untuk lihat hasil.");
+    refs.status.textContent = "Banner berganti. Siap simulasi.";
+  });
+
+  refs.pull1.addEventListener("click", () => {
+    void animatePull(1, "single");
+  });
+  refs.pull10.addEventListener("click", () => {
+    void animatePull(10, "multi");
+  });
+  refs.pullUrgent.addEventListener("click", () => {
+    void animatePull(10, "urgent");
+  });
+  refs.resetBanner.addEventListener("click", () => {
+    const banner = bannerById.get(refs.bannerSelect.value);
+    if (!banner) return;
+    state.byBanner[banner.id] = {
+      pitySix: 0,
+      pityFeatured: 0,
+      totalPulls: 0,
+      arsenalTicket: 0,
+      urgentUsed: false,
+    };
+    saveGachaState(state);
+    renderMetrics();
+    refs.results.innerHTML = emptyState("Counter banner direset.");
+    refs.status.textContent = `Counter untuk ${banner.name} direset.`;
+  });
+
+  renderBannerPanel();
+  renderMetrics();
+  renderHistory();
+  refs.results.innerHTML = emptyState("Belum ada hasil pull. Tekan Pull x1 atau Pull x10.");
 }
 
 function teamTierClass(value) {
@@ -1360,10 +1936,11 @@ async function fetchData() {
 }
 
 async function bootstrap() {
-  initGlobalBgm();
+  if (page !== "gacha") initGlobalBgm();
   const data = await fetchData();
 
   if (page === "home") return renderHome(data);
+  if (page === "gacha") return initGachaPage(data);
   if (page === "helps") return initTipsPage(data.tips);
   if (page === "team-comps") return initTeamCompsPage(data.teamComps || [], data.characters || []);
   if (page === "tierlist") return initTierPage(data.characters);
