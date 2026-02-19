@@ -406,6 +406,56 @@ function initGlobalBgm() {
   }
 }
 
+function initNavDrawer() {
+  const nav = document.querySelector(".nav");
+  const links = nav?.querySelector(".nav-links");
+  if (!nav || !links) return;
+  if (nav.dataset.drawerReady === "1") return;
+  nav.dataset.drawerReady = "1";
+
+  if (!links.id) links.id = "site-nav-links";
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "nav-toggle";
+  button.setAttribute("aria-label", "Buka menu navigasi");
+  button.setAttribute("aria-expanded", "false");
+  button.setAttribute("aria-controls", links.id);
+  button.innerHTML = `
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  `;
+  nav.appendChild(button);
+
+  let backdrop = document.querySelector(".nav-backdrop");
+  if (!backdrop) {
+    backdrop = document.createElement("div");
+    backdrop.className = "nav-backdrop";
+    document.body.appendChild(backdrop);
+  }
+
+  const setOpen = (open) => {
+    nav.classList.toggle("menu-open", open);
+    document.body.classList.toggle("nav-open", open);
+    button.setAttribute("aria-expanded", String(open));
+  };
+
+  button.addEventListener("click", () => {
+    setOpen(!nav.classList.contains("menu-open"));
+  });
+  backdrop.addEventListener("click", () => setOpen(false));
+  links.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 860) setOpen(false);
+  });
+}
+
 function renderHome(data) {
   const stamp = document.getElementById("data-stamp");
   if (stamp) stamp.textContent = `Data disusun: ${toDateLabel(data.meta.updatedAt)}`;
@@ -2151,6 +2201,7 @@ async function fetchData() {
 
 async function bootstrap() {
   if (page !== "gacha") initGlobalBgm();
+  initNavDrawer();
   const data = await fetchData();
 
   if (page === "home") return renderHome(data);
