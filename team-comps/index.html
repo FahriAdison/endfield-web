@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profil Karakter | Endfield Web</title>
+    <title>Team Comps | Endfield Web</title>
     <meta
       name="description"
-      content="Profil karakter Endfield: kisah, role, elemen, skill, icon skill, dan build rekomendasi."
+      content="Daftar tim meta Arknights: Endfield, lengkap dengan rotasi, alasan komposisi, dan efek utamanya."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,11 +16,11 @@
     />
     <link rel="stylesheet" href="../styles.css" />
   </head>
-  <body data-page="character" data-base-path="..">
+  <body data-page="team-comps" data-base-path="..">
     <div class="bg-orb orb-a"></div>
     <div class="bg-orb orb-b"></div>
 
-    <header class="page-hero page-hero-compact">
+    <header class="page-hero">
       <nav class="nav container">
         <a class="brand" href="../">Endfield Web</a>
         <div class="nav-links">
@@ -28,25 +28,41 @@
           <a href="../characters/">Characters</a>
           <a href="../tierlist/">Tierlist</a>
           <a href="../builds/">Builds</a>
-          <a href="../team-comps/">Team Comps</a>
+          <a class="active" href="./">Team Comps</a>
           <a href="../gears/">Gears</a>
           <a href="../helps/">Tips</a>
         </div>
       </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">TEAM META</p>
+        <h1>Komposisi Tim Meta Endfield</h1>
+        <p>
+          Cari komposisi berdasarkan tier, cek rotasi dasar, alasan pemilihan,
+          dan efek yang dihasilkan pada pertarungan.
+        </p>
+      </div>
     </header>
 
     <main>
       <section class="section container">
-        <a class="back-link" href="../characters/">&larr; Kembali ke Characters</a>
-        <p class="stamp" id="profile-status">Memuat profil karakter...</p>
+        <p class="stamp" id="team-comps-stamp">Memuat snapshot meta...</p>
+        <div class="section-controls">
+          <input id="team-search" type="search" placeholder="Cari nama tim / anggota / role..." />
+          <select id="team-tier-filter"></select>
+          <select id="team-sort">
+            <option value="TIER">Sort: Tier</option>
+            <option value="AZ">Sort: A-Z</option>
+            <option value="ZA">Sort: Z-A</option>
+          </select>
+        </div>
+        <p class="result-count" id="team-count"></p>
+        <div class="grid team-comp-grid" id="team-comps-grid"></div>
       </section>
-
-      <section class="section container" id="character-detail"></section>
     </main>
 
     <footer class="footer">
       <div class="container">
-        <p>Endfield Web - Character Profile</p>
+        <p>Endfield Web - Team Comps</p>
       </div>
     </footer>
 

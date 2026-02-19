@@ -4,7 +4,7 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 
 ## Fitur
 
-- Multi-halaman: `/`, `/characters/`, `/tierlist/`, `/builds/`, `/gears/`, `/gear/?id=...`, `/helps/`, `/character/?id=...`
+- Multi-halaman: `/`, `/characters/`, `/tierlist/`, `/builds/`, `/team-comps/`, `/gears/`, `/gear/?id=...`, `/helps/`, `/character/?id=...`
 - Search + filter + sort A-Z/Z-A
 - Data-driven dari `data/content.json`
 - Profil karakter detail (kisah ringkas, role/rarity/element/weapon, skill + icon + cara pakai)
@@ -27,6 +27,8 @@ Website fanmade **Arknights: Endfield** berbasis static files + JSON.
 |- tierlist/
 |  |- index.html
 |- builds/
+|  |- index.html
+|- team-comps/
 |  |- index.html
 |- gears/
 |  |- index.html

@@ -1,7 +1,7 @@
 {
   "meta": {
     "updatedAt": "2026-02-19",
-    "patchNote": "Navbar BGM controls, full gear catalog, GameWith-based gear progression, and meta team comps."
+    "patchNote": "Added missing team-comp characters (Alesh, Xaihi, Fluorite, Chen Qianyu, Endministrator) with full profile/build data."
   },
   "tips": [
     {
@@ -108,10 +108,10 @@
         "core"
       ],
       "build": {
-        "weapon": "Dawn's Last Glimmer / Daybreak Caller / Straight Away",
-        "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
-        "team": "Yvonne + Laevatain + Gilberta + Ardelia",
-        "notes": "Fokuskan uptime buff sebelum buka burst window."
+        "weapon": "Dawn's Last Glimmer / Daybreak Caller / Former Finery",
+        "skills": "Talent > Ultimate > Active Skill > Basic Attack > Combo Skill",
+        "team": "Laevatain + Wulfgard + Akekuri + Ardelia",
+        "notes": "Konsensus sumber saat ini: build campuran Tide Fall + Hot Work. Akekuri memakai build berbeda (Frontiers/Eternal), jadi jangan tertukar. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/laevatain-build/",
@@ -127,7 +127,8 @@
         "storyHighlights": [
           "Operator Rhodes Island yang ditugaskan ke Endfield Industries. Ia dikenal mampu menuntaskan misi mandiri jangka panjang di wilayah utara.",
           "Di banyak komposisi, Laevatain paling nyaman dipakai sebagai main dps dengan rotasi skill yang disiplin.",
-          "Untuk progression akun, naikkan skill inti lebih dulu, stabilkan gear level 60, lalu kunci set final saat masuk level 70."
+          "Untuk progression akun, naikkan skill inti lebih dulu, stabilkan gear level 60, lalu kunci set final saat masuk level 70.",
+          "Catatan build: Laevatain bukan memakai paket Frontiers (itu lebih identik dengan Akekuri)."
         ],
         "playstyle": "Mainkan Laevatain sebagai core damage. Mulai dengan setup buff/debuff tim, aktifkan combo saat trigger terpenuhi, lalu habiskan burst di jendela damage tertinggi.",
         "skills": [
@@ -290,7 +291,7 @@
         "gearProgression": {
           "50": {
             "label": "Level 50 (Blue) - Transisi",
-            "focus": "Set Mordvolt Insulation untuk leveling stabil sebelum Purple/Gold.",
+            "focus": "Set early-game Mordvolt Insulation untuk leveling awal sebelum Purple.",
             "upgradeNote": "Prioritaskan Armor dan Gloves dulu, lalu Kit 1/2 setelah resource aman.",
             "slots": {
               "armor": {
@@ -331,9 +332,9 @@
               },
               "kit1": {
                 "slot": "Kit Slot 1",
-                "name": "Mordvolt Insulation Wrench",
-                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-1.png",
-                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench/",
+                "name": "Mordvolt Insulation Battery",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery/",
                 "type": "kit",
                 "usageLevel": "50",
                 "stats": [
@@ -343,15 +344,15 @@
                   }
                 ],
                 "effectName": "Mordvolt Insulation",
-                "effectDescription": "Sinergi set - untuk level 50.",
-                "description": "Gear Mordvolt Insulation Wrench direkomendasikan karena cocok dengan set - pada level 50.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "effectDescription": "Rekomendasi early dari Game8 memakai Battery; versi Wrench tetap bisa dipakai sebagai alternatif dari referensi GameWith.",
+                "description": "Kit early-game untuk menjaga output stabil sambil menunggu material set Purple/Gold.",
+                "recommendation": "Prioritas awal: Battery. Alternatif: Wrench jika drop/material lebih dulu tersedia."
               },
               "kit2": {
                 "slot": "Kit Slot 2",
-                "name": "Mordvolt Insulation Wrench",
-                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-1.png",
-                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench/",
+                "name": "Mordvolt Insulation Battery",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery/",
                 "type": "kit",
                 "usageLevel": "50",
                 "stats": [
@@ -361,15 +362,15 @@
                   }
                 ],
                 "effectName": "Mordvolt Insulation",
-                "effectDescription": "Sinergi set - untuk level 50.",
-                "description": "Gear Mordvolt Insulation Wrench direkomendasikan karena cocok dengan set - pada level 50.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "effectDescription": "Rekomendasi early dari Game8 memakai Battery; versi Wrench tetap bisa dipakai sebagai alternatif dari referensi GameWith.",
+                "description": "Kit early-game untuk menjaga output stabil sambil menunggu material set Purple/Gold.",
+                "recommendation": "Prioritas awal: Battery. Alternatif: Wrench jika drop/material lebih dulu tersedia."
               }
             }
           },
           "60": {
             "label": "Level 60 (Purple) - Mid Game",
-            "focus": "Pakai set Aburrey untuk jembatan sebelum gear Gold.",
+            "focus": "Set transisi Purple sebelum pindah ke kombinasi Tide Fall + Hot Work di level 70.",
             "upgradeNote": "Prioritaskan Armor dan Gloves dulu, lalu Kit 1/2 setelah resource aman.",
             "slots": {
               "armor": {
@@ -388,7 +389,7 @@
                 "effectName": "Aburrey",
                 "effectDescription": "Sinergi set - untuk level 60.",
                 "description": "Gear Aburrey Light Armor direkomendasikan karena cocok dengan set - pada level 60.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "recommendation": "Ini set transisi mid game. Fokus stabilitas stat, lalu pindah ke build endgame saat material cukup."
               },
               "gloves": {
                 "slot": "Gloves",
@@ -406,7 +407,7 @@
                 "effectName": "Aburrey",
                 "effectDescription": "Sinergi set - untuk level 60.",
                 "description": "Gear Miner Gloves T2 direkomendasikan karena cocok dengan set - pada level 60.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "recommendation": "Ini set transisi mid game. Fokus stabilitas stat, lalu pindah ke build endgame saat material cukup."
               },
               "kit1": {
                 "slot": "Kit Slot 1",
@@ -424,7 +425,7 @@
                 "effectName": "Aburrey",
                 "effectDescription": "Sinergi set - untuk level 60.",
                 "description": "Gear Aburrey Flashlight direkomendasikan karena cocok dengan set - pada level 60.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "recommendation": "Ini set transisi mid game. Fokus stabilitas stat, lalu pindah ke build endgame saat material cukup."
               },
               "kit2": {
                 "slot": "Kit Slot 2",
@@ -442,13 +443,13 @@
                 "effectName": "Aburrey",
                 "effectDescription": "Sinergi set - untuk level 60.",
                 "description": "Gear Aburrey Flashlight direkomendasikan karena cocok dengan set - pada level 60.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "recommendation": "Ini set transisi mid game. Fokus stabilitas stat, lalu pindah ke build endgame saat material cukup."
               }
             }
           },
           "70": {
-            "label": "Level 70 (Gold) - Endgame",
-            "focus": "Fokus ke set Hot Work untuk output maksimal.",
+            "label": "Level 70 (Gold) - Endgame Mix Set",
+            "focus": "Build campuran: Tide Fall (off-piece) + 3 set Hot Work untuk burst Heat.",
             "upgradeNote": "Setelah set lengkap, optimalkan substat dan sinkronkan dengan rotasi tim.",
             "slots": {
               "armor": {
@@ -464,10 +465,10 @@
                     "value": "Ultimate Gain Efficiency+0.123"
                   }
                 ],
-                "effectName": "Hot Work",
-                "effectDescription": "Sinergi set the Hot Work Set untuk level 70.",
+                "effectName": "Tide Surge",
+                "effectDescription": "Off-piece untuk stat. Sinergi utama build tetap dari 3-set Hot Work pada Gloves + Kit 1 + Kit 2.",
                 "description": "Gear Tide Fall Light Armor direkomendasikan karena cocok dengan set the Hot Work Set pada level 70.",
-                "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
+                "recommendation": "Pertahankan Tide Fall sebagai off-piece, lalu kunci 3 slot lain ke Hot Work."
               },
               "gloves": {
                 "slot": "Gloves",
@@ -527,7 +528,18 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72539",
-        "gearUpdatedFrom": "February 17, 2026"
+        "gearUpdatedFrom": "February 17, 2026",
+        "buildValidation": {
+          "checkedAt": "2026-02-19",
+          "sources": [
+            "https://gamewith.net/akendfield/72539",
+            "https://game8.co/games/Arknights-Endfield/archives/540603",
+            "https://www.ldplayer.net/blog/arknights-endfield-laevatain-build-guide.html",
+            "https://arknightsendfield.gg/character/laevatain-build/"
+          ],
+          "summary": "Endgame Laevatain konsisten memakai Tide Fall Light Armor + Hot Work Gauntlets + Hot Work Pyrometer x2.",
+          "gamewithUpdatedAt": "February 18, 2026 9:59 PM"
+        }
       }
     },
     {
@@ -544,10 +556,10 @@
         "burst"
       ],
       "build": {
-        "weapon": "Return to Arcadia / Daybreak Caller / Rocket Belt",
+        "weapon": "Delivery Guaranteed",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
-        "team": "Yvonne + Laevatain + Gilberta + Ardelia",
-        "notes": "Sinkronkan skill dengan main DPS agar buff tidak terbuang."
+        "team": "Gilberta + Laevatain + Wulfgard + Ardelia",
+        "notes": "Sinkronkan skill dengan main DPS agar buff tidak terbuang. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/gilberta-build/",
@@ -694,7 +706,7 @@
                     "value": "HP+10.5%"
                   }
                 ],
-                "effectName": "Mordvolt Resistant increases Will",
+                "effectName": "Mordvolt Resistant",
                 "effectDescription": "Sinergi set Mordvolt Resistant increases Will untuk level 50.",
                 "description": "Gear Mordvolt Resistant Vest direkomendasikan karena cocok dengan set Mordvolt Resistant increases Will pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -712,7 +724,7 @@
                     "value": "Treatment Efficiency UP 8.8%"
                   }
                 ],
-                "effectName": "Mordvolt Resistant increases Will",
+                "effectName": "Mordvolt Resistant",
                 "effectDescription": "Sinergi set Mordvolt Resistant increases Will untuk level 50.",
                 "description": "Gear Mordvolt Resistant Gloves direkomendasikan karena cocok dengan set Mordvolt Resistant increases Will pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -730,7 +742,7 @@
                     "value": "ATK+10.5%"
                   }
                 ],
-                "effectName": "Mordvolt Resistant increases Will",
+                "effectName": "Mordvolt Resistant",
                 "effectDescription": "Sinergi set Mordvolt Resistant increases Will untuk level 50.",
                 "description": "Gear Mordvolt Resistant Wrench direkomendasikan karena cocok dengan set Mordvolt Resistant increases Will pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -748,7 +760,7 @@
                     "value": "ATK+10.5%"
                   }
                 ],
-                "effectName": "Mordvolt Resistant increases Will",
+                "effectName": "Mordvolt Resistant",
                 "effectDescription": "Sinergi set Mordvolt Resistant increases Will untuk level 50.",
                 "description": "Gear Mordvolt Resistant Wrench direkomendasikan karena cocok dengan set Mordvolt Resistant increases Will pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -915,7 +927,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72540",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/gilberta-build/",
+            "https://gamewith.net/akendfield/72540"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 7:09 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -932,10 +953,10 @@
         "carry"
       ],
       "build": {
-        "weapon": "Daybreak Caller / Old Times in Londinium / Matcha",
+        "weapon": "Navigator / Wedge",
         "skills": "Talent > Basic Attack > Active Skill > Combo Skill > Ultimate",
-        "team": "Yvonne + Gilberta + Perlica + Ardelia",
-        "notes": "Utamakan rotasi basic + skill untuk damage stabil."
+        "team": "Yvonne + Alesh + Xaihi + Ardelia",
+        "notes": "Utamakan rotasi basic + skill untuk damage stabil. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/yvonne-build/",
@@ -1082,7 +1103,7 @@
                     "value": "ATK+16"
                   }
                 ],
-                "effectName": "Mordvolt Insulation to Increase Intellect",
+                "effectName": "Mordvolt Insulation",
                 "effectDescription": "Sinergi set Mordvolt Insulation to Increase Intellect untuk level 50.",
                 "description": "Gear Mordvolt Insulation Vest direkomendasikan karena cocok dengan set Mordvolt Insulation to Increase Intellect pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -1100,7 +1121,7 @@
                     "value": "Arts DMG+9.2%"
                   }
                 ],
-                "effectName": "Mordvolt Insulation to Increase Intellect",
+                "effectName": "Mordvolt Insulation",
                 "effectDescription": "Sinergi set Mordvolt Insulation to Increase Intellect untuk level 50.",
                 "description": "Gear Mordvolt Insulation Gloves direkomendasikan karena cocok dengan set Mordvolt Insulation to Increase Intellect pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -1118,7 +1139,7 @@
                     "value": "Cryo & Electric DMG UP +11.7%"
                   }
                 ],
-                "effectName": "Mordvolt Insulation to Increase Intellect",
+                "effectName": "Mordvolt Insulation",
                 "effectDescription": "Sinergi set Mordvolt Insulation to Increase Intellect untuk level 50.",
                 "description": "Gear Mordvolt Insulation Wrench T1 direkomendasikan karena cocok dengan set Mordvolt Insulation to Increase Intellect pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -1136,7 +1157,7 @@
                     "value": "Cryo & Electric DMG UP +11.7%"
                   }
                 ],
-                "effectName": "Mordvolt Insulation to Increase Intellect",
+                "effectName": "Mordvolt Insulation",
                 "effectDescription": "Sinergi set Mordvolt Insulation to Increase Intellect untuk level 50.",
                 "description": "Gear Mordvolt Insulation Wrench T1 direkomendasikan karena cocok dengan set Mordvolt Insulation to Increase Intellect pada level 50.",
                 "recommendation": "Utamakan upgrade pada stat utama set ini sebelum mengejar set endgame."
@@ -1303,7 +1324,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72538",
-        "gearUpdatedFrom": "February 17, 2026"
+        "gearUpdatedFrom": "February 17, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/yvonne-build/",
+            "https://gamewith.net/akendfield/72538"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 9:03 PM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -1320,10 +1350,10 @@
         "meta"
       ],
       "build": {
-        "weapon": "Return to Arcadia / Old Times in Londinium / Seashell",
+        "weapon": "Dreams of the Starry Beach",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
-        "team": "Yvonne + Gilberta + Perlica + Ardelia",
-        "notes": "Jaga posisi dan timing utility agar tim tetap aman saat burst."
+        "team": "Ardelia + Laevatain + Wulfgard + Akekuri",
+        "notes": "Jaga posisi dan timing utility agar tim tetap aman saat burst. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/ardelia-build/",
@@ -1691,7 +1721,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72545",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/ardelia-build/",
+            "https://gamewith.net/akendfield/72545"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 2:54 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -1708,10 +1747,10 @@
         "s-tier"
       ],
       "build": {
-        "weapon": "High ATK Great Weapon / Return to Arcadia",
+        "weapon": "Khravengger",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
-        "team": "Last Rite + Perlica + Gilberta + Ardelia",
-        "notes": "Buka skill saat musuh terkumpul untuk value maksimum."
+        "team": "Last Rite + Fluorite + Xaihi + Snowshine",
+        "notes": "Buka skill saat musuh terkumpul untuk value maksimum. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/last-rite-build/",
@@ -2079,7 +2118,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72543",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/last-rite-build/",
+            "https://gamewith.net/akendfield/72543"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 3:28 PM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -2096,10 +2144,10 @@
         "utility"
       ],
       "build": {
-        "weapon": "Energy-focused Arts Unit / Utility Weapon",
+        "weapon": "Wild Wanderer",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
-        "team": "Yvonne + Perlica + Gilberta + Ardelia",
-        "notes": "Cocok untuk tim sustain dan boss fight panjang."
+        "team": "Avywenna + Arclight + Perlica + Ardelia",
+        "notes": "Cocok untuk tim sustain dan boss fight panjang. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/perlica-build/",
@@ -2463,7 +2511,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72537",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/perlica-build/",
+            "https://gamewith.net/akendfield/72537"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 2:54 PM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -2480,10 +2537,10 @@
         "physical"
       ],
       "build": {
-        "weapon": "Physical Sword Core / Burst Weapon",
+        "weapon": "Never Rest",
         "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
-        "team": "Pogranichnik + Yvonne + Perlica + Ardelia",
-        "notes": "Maksimalkan combo chaining untuk efisiensi damage."
+        "team": "Pogranichnik + Lifeng + Chen Qianyu + Ardelia",
+        "notes": "Maksimalkan combo chaining untuk efisiensi damage. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/pogranichnik-build/",
@@ -2879,7 +2936,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72544",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/pogranichnik-build/",
+            "https://gamewith.net/akendfield/72544"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 10:45 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -2896,10 +2962,10 @@
         "elemental"
       ],
       "build": {
-        "weapon": "Heat-tuned Weapon / Utility Sidearm",
+        "weapon": "Thunderberge",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
-        "team": "Ember + Laevatain + Perlica + Ardelia",
-        "notes": "Pakai saat perlu transisi damage antarelemen."
+        "team": "Ember + Lifeng + Pogranichnik + Ardelia",
+        "notes": "Pakai saat perlu transisi damage antarelemen. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/ember-build/",
@@ -3267,7 +3333,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72542",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/ember-build/",
+            "https://gamewith.net/akendfield/72542"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 2:28 PM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -3284,10 +3359,10 @@
         "flex"
       ],
       "build": {
-        "weapon": "Support Utility Weapon",
+        "weapon": "J.E.T",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
-        "team": "Avywenna + Yvonne + Gilberta + Ardelia",
-        "notes": "Bagus sebagai slot adaptif saat komposisi masih berkembang."
+        "team": "Avywenna + Perlica + Arclight + Gilberta",
+        "notes": "Bagus sebagai slot adaptif saat komposisi masih berkembang. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/avywenna-build/",
@@ -3655,7 +3730,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72532",
-        "gearUpdatedFrom": "February 17, 2026"
+        "gearUpdatedFrom": "February 17, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/avywenna-build/",
+            "https://gamewith.net/akendfield/72532"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 17, 2026 8:20 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -3672,10 +3756,10 @@
         "burst"
       ],
       "build": {
-        "weapon": "Balanced Damage Weapon",
+        "weapon": "Ancient Canal",
         "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
-        "team": "Da Pan + Laevatain + Perlica + Ardelia",
-        "notes": "Prioritaskan timing combo agar tidak overlap cooldown tim."
+        "team": "Da Pan + Chen Qianyu + Ember + Ardelia",
+        "notes": "Prioritaskan timing combo agar tidak overlap cooldown tim. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/da-pan-build/",
@@ -4043,7 +4127,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72533",
-        "gearUpdatedFrom": "February 17, 2026"
+        "gearUpdatedFrom": "February 17, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/da-pan-build/",
+            "https://gamewith.net/akendfield/72533"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 9:03 PM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -4060,10 +4153,10 @@
         "sub-dps"
       ],
       "build": {
-        "weapon": "Starter-friendly Weapon",
+        "weapon": "Former Finery",
         "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
-        "team": "Catcher + Perlica + Ardelia + fleksibel DPS",
-        "notes": "Gunakan sebagai unit jembatan sambil kumpulkan resource."
+        "team": "Catcher + Endministrator + Chen Qianyu + Alesh",
+        "notes": "Gunakan sebagai unit jembatan sambil kumpulkan resource. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/catcher-build/",
@@ -4431,7 +4524,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72527",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/catcher-build/",
+            "https://gamewith.net/akendfield/72527"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 2:54 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -4448,10 +4550,10 @@
         "early"
       ],
       "build": {
-        "weapon": "Utility Weapon",
+        "weapon": "OBJ Edge of Lightness",
         "skills": "Talent > Active Skill > Ultimate > Combo Skill > Basic Attack",
-        "team": "Arclight + Yvonne + Perlica + unit sustain",
-        "notes": "Fokus fungsi utilitas ketimbang raw damage."
+        "team": "Avywenna + Perlica + Arclight + Gilberta",
+        "notes": "Fokus fungsi utilitas ketimbang raw damage. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/arclight-build/",
@@ -4819,7 +4921,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72530",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/arclight-build/",
+            "https://gamewith.net/akendfield/72530"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 6:39 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -4836,10 +4947,10 @@
         "resource-light"
       ],
       "build": {
-        "weapon": "Consistent DPS Weapon",
+        "weapon": "Mountain Bearer",
         "skills": "Talent > Active Skill > Combo Skill > Basic Attack > Ultimate",
-        "team": "Lifeng + Perlica + Ardelia + main DPS",
-        "notes": "Naikkan secukupnya, jangan over-invest saat resource minim."
+        "team": "Lifeng + Chen Qianyu + Pogranichnik + Ardelia",
+        "notes": "Naikkan secukupnya, jangan over-invest saat resource minim. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/lifeng-build/",
@@ -5291,7 +5402,16 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72541",
-        "gearUpdatedFrom": "February 18, 2026"
+        "gearUpdatedFrom": "February 18, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/lifeng-build/",
+            "https://gamewith.net/akendfield/72541"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 6:04 AM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
       }
     },
     {
@@ -5308,10 +5428,10 @@
         "early"
       ],
       "build": {
-        "weapon": "Durability-focused Weapon",
+        "weapon": "Thunderberge",
         "skills": "Talent > Active Skill > Ultimate > Basic Attack > Combo Skill",
-        "team": "Snowshine + Perlica + sub DPS + main DPS",
-        "notes": "Dipakai saat stage butuh survivability tambahan."
+        "team": "Last Rite + Fluorite + Xaihi + Snowshine",
+        "notes": "Dipakai saat stage butuh survivability tambahan. Core team/weapon divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek juga halaman Team Comps."
       },
       "profile": {
         "source": "https://arknightsendfield.gg/character/snowshine-build/",
@@ -5679,7 +5799,1861 @@
           }
         },
         "gamewithSource": "https://gamewith.net/akendfield/72529",
-        "gearUpdatedFrom": "February 17, 2026"
+        "gearUpdatedFrom": "February 17, 2026",
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/snowshine-build/",
+            "https://gamewith.net/akendfield/72529"
+          ],
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 10:12 PM",
+          "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
+        }
+      }
+    },
+    {
+      "id": "alesh",
+      "name": "Alesh",
+      "tier": "S",
+      "role": "Support",
+      "isMeta": true,
+      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72531.png",
+      "summary": "Support Cryo spesialis pemulihan SP untuk mempercepat rotasi skill seluruh tim.",
+      "tags": [
+        "support",
+        "vanguard",
+        "cryo",
+        "guide"
+      ],
+      "build": {
+        "weapon": "Finchaser 3.0",
+        "skills": "Basic Attack > Active Skill > Combo Skill > Ultimate",
+        "team": "Alesh + Endministrator + Chen Qianyu + Ardelia",
+        "notes": "Data build divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek halaman Team Comps."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/alesh-build/",
+        "updatedAt": "2026-02-18",
+        "rarity": "5 Stars",
+        "role": "Vanguard",
+        "element": "Cryo",
+        "weapon": "Sword",
+        "intro": [
+          "Alesh adalah operator Vanguard berelemen Cryo dengan senjata Sword.",
+          "Dalam komposisi tim, Alesh umumnya dimainkan sebagai support sesuai kebutuhan stage."
+        ],
+        "storyHighlights": [
+          "Core team rekomendasi komunitas saat ini: Alesh + Endministrator + Chen Qianyu + Ardelia.",
+          "Progression gear disusun bertahap dari Blue -> Purple -> Gold agar transisi resource lebih aman.",
+          "Build Alesh sudah divalidasi silang dari GameWith dan ArknightsEndfield."
+        ],
+        "playstyle": "Mainkan Alesh dengan pola rotasi berurutan: aktifkan setup skill, pancing trigger combo, lalu tutup dengan ultimate pada window damage.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Basic Rod Casting",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar untuk menjaga tempo rotasi dan mengisi jeda cooldown skill utama.",
+            "usage": "Gunakan sebagai filler saat menunggu setup combo berikutnya."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Unconventional Lure",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill aktif inti untuk membuka pressure awal dan menyiapkan kondisi combo tim.",
+            "usage": "Aktifkan setelah buff/debuff tim siap agar damage window lebih efisien."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Skill Combo",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill combo yang dipicu saat syarat status/reaksi terpenuhi untuk transisi burst.",
+            "usage": "Pastikan trigger elemen aktif dulu, baru eksekusi combo untuk value maksimal."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Ultimate",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Sumber burst utama karakter untuk menutup phase elite atau boss.",
+            "usage": "Simpan Ultimate untuk target prioritas atau saat seluruh buff tim aktif."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Frontiers Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontier-Smart-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/frontiers-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Ultimate DMG UP+25.9%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Sinergi set Frontiers untuk level 70.",
+            "description": "Gear Frontiers Armor dipakai sebagai rekomendasi endgame untuk Alesh."
+          },
+          {
+            "name": "Eternal Xiranite Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Ultimate Energy Treatment Efficiency +0.205"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Sinergi set Frontiers untuk level 70.",
+            "description": "Gear Eternal Xiranite Gloves dipakai sebagai rekomendasi endgame untuk Alesh."
+          },
+          {
+            "name": "Frontiers Comm I",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Comm.png",
+            "source": "https://arknightsendfield.gg/kit/frontiers-comm-mod/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Cryo & Electric DMG UP+23.0%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Sinergi set Frontiers untuk level 70.",
+            "description": "Gear Frontiers Comm I dipakai sebagai rekomendasi endgame untuk Alesh."
+          }
+        ],
+        "gearProgression": {
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set Frontiers untuk konten endgame.",
+            "upgradeNote": "Setelah set lengkap, lanjut optimasi substat dan sinkronkan rotasi tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Frontiers Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontier-Smart-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/frontiers-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate DMG UP+25.9%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Frontiers Armor direkomendasikan untuk slot Armor pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Eternal Xiranite Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate Energy Treatment Efficiency +0.205"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Eternal Xiranite Gloves direkomendasikan untuk slot Gloves pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Frontiers Comm I",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Comm.png",
+                "source": "https://arknightsendfield.gg/kit/frontiers-comm-mod/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Cryo & Electric DMG UP+23.0%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Frontiers Comm I direkomendasikan untuk slot Kit Slot 1 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Frontiers Comm I",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Comm.png",
+                "source": "https://arknightsendfield.gg/kit/frontiers-comm-mod/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Cryo & Electric DMG UP+23.0%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Frontiers Comm I direkomendasikan untuk slot Kit Slot 2 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Gunakan set Catastrophe sebagai jembatan menuju Gold.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Catastrophe Heavy Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Heavy-Armor-T1.png",
+                "source": "https://arknightsendfield.gg/armor/catastrophe-heavy-armor/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate DMG UP+18.4%"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Catastrophe Heavy Armor direkomendasikan untuk slot Armor pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Mordvolt Insulation Gloves I",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Gloves-T1.png",
+                "source": "https://arknightsendfield.gg/gloves/mordvolt-insulation-gloves-mod/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+12.3%"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Mordvolt Insulation Gloves I direkomendasikan untuk slot Gloves pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Catastrophe Gauze Cartridge",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Gauze-Cartridge.png",
+                "source": "https://arknightsendfield.gg/kit/catastrophe-gauze-cartridge/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate DMG UP+36.8%"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Catastrophe Gauze Cartridge direkomendasikan untuk slot Kit Slot 1 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Catastrophe Gauze Cartridge",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Gauze-Cartridge.png",
+                "source": "https://arknightsendfield.gg/kit/catastrophe-gauze-cartridge/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate DMG UP+36.8%"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Catastrophe Gauze Cartridge direkomendasikan untuk slot Kit Slot 2 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Set Armored MSGR untuk progression awal akun.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Armored MSGR Jacket",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Armored-MSGR-Jacket-1.png",
+                "source": "https://arknightsendfield.gg/armor/armored-msgr-jacket/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "HP+10.5%"
+                  }
+                ],
+                "effectName": "Armored MSGR",
+                "effectDescription": "Sinergi set Armored MSGR untuk level 50.",
+                "description": "Gear Armored MSGR Jacket direkomendasikan untuk slot Armor pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Armored MSGR Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Armored-MSGR-Gloves-1.png",
+                "source": "https://arknightsendfield.gg/gloves/armored-msgr-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "All DMG RES+8.0%"
+                  }
+                ],
+                "effectName": "Armored MSGR",
+                "effectDescription": "Sinergi set Armored MSGR untuk level 50.",
+                "description": "Gear Armored MSGR Gloves direkomendasikan untuk slot Gloves pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Armored MSGR Gyro",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Armored-MSGR-Gyro-1.png",
+                "source": "https://arknightsendfield.gg/kit/armored-msgr-gyro/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+10.5%"
+                  }
+                ],
+                "effectName": "Armored MSGR",
+                "effectDescription": "Sinergi set Armored MSGR untuk level 50.",
+                "description": "Gear Armored MSGR Gyro direkomendasikan untuk slot Kit Slot 1 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Armored MSGR Gyro",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Armored-MSGR-Gyro-1.png",
+                "source": "https://arknightsendfield.gg/kit/armored-msgr-gyro/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+10.5%"
+                  }
+                ],
+                "effectName": "Armored MSGR",
+                "effectDescription": "Sinergi set Armored MSGR untuk level 50.",
+                "description": "Gear Armored MSGR Gyro direkomendasikan untuk slot Kit Slot 2 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          }
+        },
+        "gamewithSource": "https://gamewith.net/akendfield/72531",
+        "gearUpdatedFrom": "February 18, 2026 5:41 PM",
+        "buildValidation": {
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 5:41 PM",
+          "sources": [
+            "https://arknightsendfield.gg/character/alesh-build/",
+            "https://gamewith.net/akendfield/72531"
+          ],
+          "summary": "Build Alesh diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
+        }
+      }
+    },
+    {
+      "id": "xaihi",
+      "name": "Xaihi",
+      "tier": "S",
+      "role": "Support",
+      "isMeta": true,
+      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72535.png",
+      "summary": "Support Cryo dengan utilitas crystal yang stabil untuk bantu trigger reaksi elemen.",
+      "tags": [
+        "support",
+        "support",
+        "cryo",
+        "guide"
+      ],
+      "build": {
+        "weapon": "Chivalric Virtues",
+        "skills": "Basic Attack > Active Skill > Combo Skill > Ultimate",
+        "team": "Yvonne + Last Rite + Xaihi + Gilberta",
+        "notes": "Data build divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek halaman Team Comps."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/xaihi-build/",
+        "updatedAt": "2026-02-18",
+        "rarity": "5 Stars",
+        "role": "Support",
+        "element": "Cryo",
+        "weapon": "Arts Unit",
+        "intro": [
+          "Xaihi adalah operator Support berelemen Cryo dengan senjata Arts Unit.",
+          "Dalam komposisi tim, Xaihi umumnya dimainkan sebagai support sesuai kebutuhan stage."
+        ],
+        "storyHighlights": [
+          "Core team rekomendasi komunitas saat ini: Yvonne + Last Rite + Xaihi + Gilberta.",
+          "Progression gear disusun bertahap dari Blue -> Purple -> Gold agar transisi resource lebih aman.",
+          "Build Xaihi sudah divalidasi silang dari GameWith dan ArknightsEndfield."
+        ],
+        "playstyle": "Mainkan Xaihi dengan pola rotasi berurutan: aktifkan setup skill, pancing trigger combo, lalu tutup dengan ultimate pada window damage.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Serangan Dasar",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar untuk menjaga tempo rotasi dan mengisi jeda cooldown skill utama.",
+            "usage": "Gunakan sebagai filler saat menunggu setup combo berikutnya."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Skill Aktif",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill aktif inti untuk membuka pressure awal dan menyiapkan kondisi combo tim.",
+            "usage": "Aktifkan setelah buff/debuff tim siap agar damage window lebih efisien."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Skill Combo",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill combo yang dipicu saat syarat status/reaksi terpenuhi untuk transisi burst.",
+            "usage": "Pastikan trigger elemen aktif dulu, baru eksekusi combo untuk value maksimal."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Ultimate",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Sumber burst utama karakter untuk menutup phase elite atau boss.",
+            "usage": "Simpan Ultimate untuk target prioritas atau saat seluruh buff tim aktif."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "LYNX Cuirass",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Cuirass.png",
+            "source": "https://arknightsendfield.gg/armor/lynx-cuirass/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Treatment Efficiency UP+10.4%"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+            "description": "Gear LYNX Cuirass dipakai sebagai rekomendasi endgame untuk Xaihi."
+          },
+          {
+            "name": "Eternal Xiranite Gloves T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves-t1/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Ultimate Energy Recovery Efficiency+0.205"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+            "description": "Gear Eternal Xiranite Gloves T1 dipakai sebagai rekomendasi endgame untuk Xaihi."
+          },
+          {
+            "name": "Eternal Xiranite Auxiliary Arm",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Ultimate Energy Recovery Efficiency+0.246"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+            "description": "Gear Eternal Xiranite Auxiliary Arm dipakai sebagai rekomendasi endgame untuk Xaihi."
+          }
+        ],
+        "gearProgression": {
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set Eternal Xiranite untuk konten endgame.",
+            "upgradeNote": "Setelah set lengkap, lanjut optimasi substat dan sinkronkan rotasi tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "LYNX Cuirass",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Cuirass.png",
+                "source": "https://arknightsendfield.gg/armor/lynx-cuirass/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Treatment Efficiency UP+10.4%"
+                  }
+                ],
+                "effectName": "Eternal Xiranite",
+                "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+                "description": "Gear LYNX Cuirass direkomendasikan untuk slot Armor pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Eternal Xiranite Gloves T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves-t1/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate Energy Recovery Efficiency+0.205"
+                  }
+                ],
+                "effectName": "Eternal Xiranite",
+                "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+                "description": "Gear Eternal Xiranite Gloves T1 direkomendasikan untuk slot Gloves pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Eternal Xiranite Auxiliary Arm",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate Energy Recovery Efficiency+0.246"
+                  }
+                ],
+                "effectName": "Eternal Xiranite",
+                "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+                "description": "Gear Eternal Xiranite Auxiliary Arm direkomendasikan untuk slot Kit Slot 1 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Eternal Xiranite Auxiliary Arm",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate Energy Recovery Efficiency+0.246"
+                  }
+                ],
+                "effectName": "Eternal Xiranite",
+                "effectDescription": "Sinergi set Eternal Xiranite untuk level 70.",
+                "description": "Gear Eternal Xiranite Auxiliary Arm direkomendasikan untuk slot Kit Slot 2 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Gunakan set Catastrophe sebagai jembatan menuju Gold.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Resistant Vest T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Resistant-Vest-T1.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-resistant-vest-mod/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "HP+14.7%"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Mordvolt Resistant Vest T1 direkomendasikan untuk slot Armor pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Catastrophe Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/catastrophe-gloves/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Arts Intensity +24"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Catastrophe Gloves direkomendasikan untuk slot Gloves pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Catastrophe Filter",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Filter.png",
+                "source": "https://arknightsendfield.gg/kit/catastrophe-filter/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Arts Intensity +29"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Catastrophe Filter direkomendasikan untuk slot Kit Slot 1 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Catastrophe Filter",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Filter.png",
+                "source": "https://arknightsendfield.gg/kit/catastrophe-filter/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Arts Intensity +29"
+                  }
+                ],
+                "effectName": "Catastrophe",
+                "effectDescription": "Sinergi set Catastrophe untuk level 60.",
+                "description": "Gear Catastrophe Filter direkomendasikan untuk slot Kit Slot 2 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Set Mordvolt Resistant untuk progression awal akun.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Resistant Vest",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Resistant-Vest-2.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-resistant-vest/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "HP+10.5%"
+                  }
+                ],
+                "effectName": "Mordvolt Resistant",
+                "effectDescription": "Sinergi set Mordvolt Resistant untuk level 50.",
+                "description": "Gear Mordvolt Resistant Vest direkomendasikan untuk slot Armor pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Mordvolt Resistant Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Resistant-Gloves-1.png",
+                "source": "https://arknightsendfield.gg/gloves/mordvolt-resistant-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Treatment Efficiency UP+8.8%"
+                  }
+                ],
+                "effectName": "Mordvolt Resistant",
+                "effectDescription": "Sinergi set Mordvolt Resistant untuk level 50.",
+                "description": "Gear Mordvolt Resistant Gloves direkomendasikan untuk slot Gloves pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Resistant Battery",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Resistant-Battery-1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-resistant-battery/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Treatment Efficiency UP+10.5%"
+                  }
+                ],
+                "effectName": "Mordvolt Resistant",
+                "effectDescription": "Sinergi set Mordvolt Resistant untuk level 50.",
+                "description": "Gear Mordvolt Resistant Battery direkomendasikan untuk slot Kit Slot 1 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Mordvolt Insulation Battery",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Critical Rate+5.3%"
+                  }
+                ],
+                "effectName": "Mordvolt Resistant",
+                "effectDescription": "Sinergi set Mordvolt Resistant untuk level 50.",
+                "description": "Gear Mordvolt Insulation Battery direkomendasikan untuk slot Kit Slot 2 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          }
+        },
+        "gamewithSource": "https://gamewith.net/akendfield/72535",
+        "gearUpdatedFrom": "February 18, 2026 6:34 AM",
+        "buildValidation": {
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 6:34 AM",
+          "sources": [
+            "https://arknightsendfield.gg/character/xaihi-build/",
+            "https://gamewith.net/akendfield/72535"
+          ],
+          "summary": "Build Xaihi diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
+        }
+      }
+    },
+    {
+      "id": "fluorite",
+      "name": "Fluorite",
+      "tier": "A",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72525.png",
+      "summary": "Caster Nature dengan area damage luas, efektif untuk bersihkan wave musuh.",
+      "tags": [
+        "sub-dps",
+        "caster",
+        "nature",
+        "guide"
+      ],
+      "build": {
+        "weapon": "Clannibal",
+        "skills": "Basic Attack > Active Skill > Combo Skill > Ultimate",
+        "team": "Last Rite + Fluorite + Xaihi + Snowshine",
+        "notes": "Data build divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek halaman Team Comps."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/fluorite-build/",
+        "updatedAt": "2026-02-18",
+        "rarity": "4 Stars",
+        "role": "Caster",
+        "element": "Nature",
+        "weapon": "Handcannon",
+        "intro": [
+          "Fluorite adalah operator Caster berelemen Nature dengan senjata Handcannon.",
+          "Dalam komposisi tim, Fluorite umumnya dimainkan sebagai sub dps sesuai kebutuhan stage."
+        ],
+        "storyHighlights": [
+          "Core team rekomendasi komunitas saat ini: Last Rite + Fluorite + Xaihi + Snowshine.",
+          "Progression gear disusun bertahap dari Blue -> Purple -> Gold agar transisi resource lebih aman.",
+          "Build Fluorite sudah divalidasi silang dari GameWith dan ArknightsEndfield."
+        ],
+        "playstyle": "Mainkan Fluorite dengan pola rotasi berurutan: aktifkan setup skill, pancing trigger combo, lalu tutup dengan ultimate pada window damage.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Signature Gun Kata",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar untuk menjaga tempo rotasi dan mengisi jeda cooldown skill utama.",
+            "usage": "Gunakan sebagai filler saat menunggu setup combo berikutnya."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Skill Aktif",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill aktif inti untuk membuka pressure awal dan menyiapkan kondisi combo tim.",
+            "usage": "Aktifkan setelah buff/debuff tim siap agar damage window lebih efisien."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Free Giveaway",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill combo yang dipicu saat syarat status/reaksi terpenuhi untuk transisi burst.",
+            "usage": "Pastikan trigger elemen aktif dulu, baru eksekusi combo untuk value maksimal."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Ultimate",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Sumber burst utama karakter untuk menutup phase elite atau boss.",
+            "usage": "Simpan Ultimate untuk target prioritas atau saat seluruh buff tim aktif."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Frontiers Armor T3",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontier-Smart-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/frontier-smart-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Secondary Stat+10.4%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Sinergi set Frontiers untuk level 70.",
+            "description": "Gear Frontiers Armor T3 dipakai sebagai rekomendasi endgame untuk Fluorite."
+          },
+          {
+            "name": "Type 50 Yinglung Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Type-50-Yinglung-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/type-50-yinglung-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Combo Skill DMG UP+34.5%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Sinergi set Frontiers untuk level 70.",
+            "description": "Gear Type 50 Yinglung Gloves dipakai sebagai rekomendasi endgame untuk Fluorite."
+          },
+          {
+            "name": "Frontiers Extra O2 Tube",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Extra-02-Tube.png",
+            "source": "https://arknightsendfield.gg/kit/frontiers-o2-tether/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Secondary Stat+20.7%"
+              }
+            ],
+            "effectName": "Frontiers",
+            "effectDescription": "Sinergi set Frontiers untuk level 70.",
+            "description": "Gear Frontiers Extra O2 Tube dipakai sebagai rekomendasi endgame untuk Fluorite."
+          }
+        ],
+        "gearProgression": {
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set Frontiers untuk konten endgame.",
+            "upgradeNote": "Setelah set lengkap, lanjut optimasi substat dan sinkronkan rotasi tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Frontiers Armor T3",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontier-Smart-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/frontier-smart-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Secondary Stat+10.4%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Frontiers Armor T3 direkomendasikan untuk slot Armor pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Type 50 Yinglung Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Type-50-Yinglung-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/type-50-yinglung-gloves/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+34.5%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Type 50 Yinglung Gloves direkomendasikan untuk slot Gloves pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Frontiers Extra O2 Tube",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Extra-02-Tube.png",
+                "source": "https://arknightsendfield.gg/kit/frontiers-o2-tether/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Secondary Stat+20.7%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Frontiers Extra O2 Tube direkomendasikan untuk slot Kit Slot 1 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Frontiers Extra O2 Tube",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Frontiers-Extra-02-Tube.png",
+                "source": "https://arknightsendfield.gg/kit/frontiers-o2-tether/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Secondary Stat+20.7%"
+                  }
+                ],
+                "effectName": "Frontiers",
+                "effectDescription": "Sinergi set Frontiers untuk level 70.",
+                "description": "Gear Frontiers Extra O2 Tube direkomendasikan untuk slot Kit Slot 2 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Gunakan set Roving MSGR sebagai jembatan menuju Gold.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Roving MSGR Jacket T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Jacket-T1.png",
+                "source": "https://arknightsendfield.gg/armor/roving-msgr-jacket-mod/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "HP+14.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Jacket T1 direkomendasikan untuk slot Armor pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Miner Gloves T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Miner-Gloves-T2.png",
+                "source": "https://arknightsendfield.gg/gloves/miner-gloves-t2/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+13.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Miner Gloves T2 direkomendasikan untuk slot Gloves pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Roving MSGR Gyro T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Gyro-T1.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-gyro-mod/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+14.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Gyro T1 direkomendasikan untuk slot Kit Slot 1 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Gyro T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Gyro-T1.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-gyro-mod/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+14.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Gyro T1 direkomendasikan untuk slot Kit Slot 2 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Set Roving MSGR untuk progression awal akun.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Roving MSGR Jacket",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Jacket-1.png",
+                "source": "https://arknightsendfield.gg/armor/roving-msgr-jacket/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+16"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Jacket direkomendasikan untuk slot Armor pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Roving MSGR Fists",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Fists-1.png",
+                "source": "https://arknightsendfield.gg/gloves/roving-msgr-fists/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+9.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Fists direkomendasikan untuk slot Gloves pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Roving MSGR Flashlight",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+21.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Flashlight direkomendasikan untuk slot Kit Slot 1 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+21.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Flashlight direkomendasikan untuk slot Kit Slot 2 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          }
+        },
+        "gamewithSource": "https://gamewith.net/akendfield/72525",
+        "gearUpdatedFrom": "February 18, 2026 1:57 PM",
+        "buildValidation": {
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 1:57 PM",
+          "sources": [
+            "https://arknightsendfield.gg/character/fluorite-build/",
+            "https://gamewith.net/akendfield/72525"
+          ],
+          "summary": "Build Fluorite diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
+        }
+      }
+    },
+    {
+      "id": "chen-qianyu",
+      "name": "Chen Qianyu",
+      "tier": "S",
+      "role": "Sub DPS",
+      "isMeta": true,
+      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72536.png",
+      "summary": "Sub DPS Physical dengan aplikasi Lift cepat untuk membuka chain combo.",
+      "tags": [
+        "sub-dps",
+        "guard",
+        "physical",
+        "guide"
+      ],
+      "build": {
+        "weapon": "Rapid Ascent",
+        "skills": "Basic Attack > Active Skill > Combo Skill > Ultimate",
+        "team": "Chen Qianyu + Lifeng + Pogranichnik + Ardelia",
+        "notes": "Data build divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek halaman Team Comps."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/chen-qianyu-build/",
+        "updatedAt": "2026-02-18",
+        "rarity": "5 Stars",
+        "role": "Guard",
+        "element": "Physical",
+        "weapon": "Sword",
+        "intro": [
+          "Chen Qianyu adalah operator Guard berelemen Physical dengan senjata Sword.",
+          "Dalam komposisi tim, Chen Qianyu umumnya dimainkan sebagai sub dps sesuai kebutuhan stage."
+        ],
+        "storyHighlights": [
+          "Core team rekomendasi komunitas saat ini: Chen Qianyu + Lifeng + Pogranichnik + Ardelia.",
+          "Progression gear disusun bertahap dari Blue -> Purple -> Gold agar transisi resource lebih aman.",
+          "Build Chen Qianyu sudah divalidasi silang dari GameWith dan ArknightsEndfield."
+        ],
+        "playstyle": "Mainkan Chen Qianyu dengan pola rotasi berurutan: aktifkan setup skill, pancing trigger combo, lalu tutup dengan ultimate pada window damage.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Soaring Break",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar untuk menjaga tempo rotasi dan mengisi jeda cooldown skill utama.",
+            "usage": "Gunakan sebagai filler saat menunggu setup combo berikutnya."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Skill Aktif",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill aktif inti untuk membuka pressure awal dan menyiapkan kondisi combo tim.",
+            "usage": "Aktifkan setelah buff/debuff tim siap agar damage window lebih efisien."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Skill Combo",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill combo yang dipicu saat syarat status/reaksi terpenuhi untuk transisi burst.",
+            "usage": "Pastikan trigger elemen aktif dulu, baru eksekusi combo untuk value maksimal."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Ultimate",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Sumber burst utama karakter untuk menutup phase elite atau boss.",
+            "usage": "Simpan Ultimate untuk target prioritas atau saat seluruh buff tim aktif."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Bonekrusha Heavy Armor T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Bonekrusha-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/bonekrusha-heavy-armor-t1/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Combo Skill DMG UP+20.7%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+            "description": "Gear Bonekrusha Heavy Armor T1 dipakai sebagai rekomendasi endgame untuk Chen Qianyu."
+          },
+          {
+            "name": "Swordmancer TAC Fists",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Fists-1.png",
+            "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-fists/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Ultimate DMG UP+43.1%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+            "description": "Gear Swordmancer TAC Fists dipakai sebagai rekomendasi endgame untuk Chen Qianyu."
+          },
+          {
+            "name": "Swordmancer Flint",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+            "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Physical DMG UP+23.0%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+            "description": "Gear Swordmancer Flint dipakai sebagai rekomendasi endgame untuk Chen Qianyu."
+          }
+        ],
+        "gearProgression": {
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set Swordmancer untuk konten endgame.",
+            "upgradeNote": "Setelah set lengkap, lanjut optimasi substat dan sinkronkan rotasi tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Bonekrusha Heavy Armor T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Bonekrusha-Heavy-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/bonekrusha-heavy-armor-t1/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+20.7%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Bonekrusha Heavy Armor T1 direkomendasikan untuk slot Armor pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Swordmancer TAC Fists",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Fists-1.png",
+                "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-fists/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Ultimate DMG UP+43.1%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer TAC Fists direkomendasikan untuk slot Gloves pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Swordmancer Flint",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+                "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+23.0%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer Flint direkomendasikan untuk slot Kit Slot 1 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Swordmancer Flint",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+                "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+23.0%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer Flint direkomendasikan untuk slot Kit Slot 2 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Gunakan set Roving MSGR sebagai jembatan menuju Gold.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Aburrey Heavy Armor T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Aburrey-Heavy-Armor-T1.png",
+                "source": "https://arknightsendfield.gg/armor/aburrey-heavy-armor-t1/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+14.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Aburrey Heavy Armor T1 direkomendasikan untuk slot Armor pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Roving MSGR Fists T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Fists-T1.png",
+                "source": "https://arknightsendfield.gg/gloves/roving-msgr-fists-mod/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+12.3%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Fists T1 direkomendasikan untuk slot Gloves pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Roving MSGR Flashlight T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T1.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike-mod/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+29.4%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Flashlight T1 direkomendasikan untuk slot Kit Slot 1 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T1.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike-mod/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+29.4%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Flashlight T1 direkomendasikan untuk slot Kit Slot 2 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Set Roving MSGR untuk progression awal akun.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Roving MSGR Jacket",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Jacket-1.png",
+                "source": "https://arknightsendfield.gg/armor/roving-msgr-jacket/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+16"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Jacket direkomendasikan untuk slot Armor pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Roving MSGR Fists",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Fists-1.png",
+                "source": "https://arknightsendfield.gg/gloves/roving-msgr-fists/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+9.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Fists direkomendasikan untuk slot Gloves pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Roving MSGR Flashlight",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+21.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Flashlight direkomendasikan untuk slot Kit Slot 1 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+21.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Flashlight direkomendasikan untuk slot Kit Slot 2 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          }
+        },
+        "gamewithSource": "https://gamewith.net/akendfield/72536",
+        "gearUpdatedFrom": "February 18, 2026 2:30 AM",
+        "buildValidation": {
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 2:30 AM",
+          "sources": [
+            "https://arknightsendfield.gg/character/chen-qianyu-build/",
+            "https://gamewith.net/akendfield/72536"
+          ],
+          "summary": "Build Chen Qianyu diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
+        }
+      }
+    },
+    {
+      "id": "endministrator",
+      "name": "Endministrator",
+      "tier": "S",
+      "role": "Main DPS",
+      "isMeta": true,
+      "image": "https://img.gamewith.net/article/thumbnail/rectangle/72546.png",
+      "summary": "Main DPS Physical dengan pola Combo Skill -> Battle Skill yang kuat untuk burst.",
+      "tags": [
+        "main-dps",
+        "guard",
+        "physical",
+        "guide"
+      ],
+      "build": {
+        "weapon": "Grand Vision",
+        "skills": "Basic Attack > Active Skill > Combo Skill > Ultimate",
+        "team": "Endministrator + Lifeng + Pogranichnik + Ardelia",
+        "notes": "Data build divalidasi dari halaman karakter GameWith. Untuk komposisi konten endgame, cek halaman Team Comps."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/endministrator-build/",
+        "updatedAt": "2026-02-18",
+        "rarity": "6 Stars",
+        "role": "Guard",
+        "element": "Physical",
+        "weapon": "Sword",
+        "intro": [
+          "Endministrator adalah operator Guard berelemen Physical dengan senjata Sword.",
+          "Dalam komposisi tim, Endministrator umumnya dimainkan sebagai main dps sesuai kebutuhan stage."
+        ],
+        "storyHighlights": [
+          "Core team rekomendasi komunitas saat ini: Endministrator + Lifeng + Pogranichnik + Ardelia.",
+          "Progression gear disusun bertahap dari Blue -> Purple -> Gold agar transisi resource lebih aman.",
+          "Build Endministrator sudah divalidasi silang dari GameWith dan ArknightsEndfield."
+        ],
+        "playstyle": "Mainkan Endministrator dengan pola rotasi berurutan: aktifkan setup skill, pancing trigger combo, lalu tutup dengan ultimate pada window damage.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Destructive Sequence",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar untuk menjaga tempo rotasi dan mengisi jeda cooldown skill utama.",
+            "usage": "Gunakan sebagai filler saat menunggu setup combo berikutnya."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Skill Aktif",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill aktif inti untuk membuka pressure awal dan menyiapkan kondisi combo tim.",
+            "usage": "Aktifkan setelah buff/debuff tim siap agar damage window lebih efisien."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Skill Combo",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Skill combo yang dipicu saat syarat status/reaksi terpenuhi untuk transisi burst.",
+            "usage": "Pastikan trigger elemen aktif dulu, baru eksekusi combo untuk value maksimal."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Bombardment Sequence",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Sumber burst utama karakter untuk menutup phase elite atau boss.",
+            "usage": "Simpan Ultimate untuk target prioritas atau saat seluruh buff tim aktif."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Swordmancer Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/swordmancer-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Originium Arts Intensity+20"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+            "description": "Gear Swordmancer Heavy Armor dipakai sebagai rekomendasi endgame untuk Endministrator."
+          },
+          {
+            "name": "Swordmancer TAC Gauntlets",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Gauntlets-1.png",
+            "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-gauntlets/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Physical DMG UP+19.2%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+            "description": "Gear Swordmancer TAC Gauntlets dipakai sebagai rekomendasi endgame untuk Endministrator."
+          },
+          {
+            "name": "Swordmancer Flint",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+            "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Stat Utama",
+                "value": "Physical DMG UP+23.0%"
+              }
+            ],
+            "effectName": "Swordmancer",
+            "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+            "description": "Gear Swordmancer Flint dipakai sebagai rekomendasi endgame untuk Endministrator."
+          }
+        ],
+        "gearProgression": {
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set Swordmancer untuk konten endgame.",
+            "upgradeNote": "Setelah set lengkap, lanjut optimasi substat dan sinkronkan rotasi tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Swordmancer Heavy Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Heavy-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/swordmancer-heavy-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Originium Arts Intensity+20"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer Heavy Armor direkomendasikan untuk slot Armor pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Swordmancer TAC Gauntlets",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Gauntlets-1.png",
+                "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-gauntlets/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+19.2%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer TAC Gauntlets direkomendasikan untuk slot Gloves pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Swordmancer Flint",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+                "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+23.0%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer Flint direkomendasikan untuk slot Kit Slot 1 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Swordmancer Flint",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-Flint.png",
+                "source": "https://arknightsendfield.gg/kit/swordmancer-flint/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+23.0%"
+                  }
+                ],
+                "effectName": "Swordmancer",
+                "effectDescription": "Sinergi set Swordmancer untuk level 70.",
+                "description": "Gear Swordmancer Flint direkomendasikan untuk slot Kit Slot 2 pada level 70.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Gunakan set Roving MSGR sebagai jembatan menuju Gold.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Aburrey Heavy Armor T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Aburrey-Heavy-Armor-T1.png",
+                "source": "https://arknightsendfield.gg/armor/aburrey-heavy-armor-t1/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+14.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Aburrey Heavy Armor T1 direkomendasikan untuk slot Armor pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Roving MSGR Fists T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Fists-T1.png",
+                "source": "https://arknightsendfield.gg/gloves/roving-msgr-fists-mod/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+12.3%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Fists T1 direkomendasikan untuk slot Gloves pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Roving MSGR Flashlight T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T1.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike-mod/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+29.4%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Flashlight T1 direkomendasikan untuk slot Kit Slot 1 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T1.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike-mod/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+29.4%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 60.",
+                "description": "Gear Roving MSGR Flashlight T1 direkomendasikan untuk slot Kit Slot 2 pada level 60.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          },
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Set Roving MSGR untuk progression awal akun.",
+            "upgradeNote": "Prioritaskan Armor dan Gloves, lalu lengkapi Kit 1/2 setelah resource aman.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Roving MSGR Jacket",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Jacket-1.png",
+                "source": "https://arknightsendfield.gg/armor/roving-msgr-jacket/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "ATK+16"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Jacket direkomendasikan untuk slot Armor pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Roving MSGR Fists",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Fists-1.png",
+                "source": "https://arknightsendfield.gg/gloves/roving-msgr-fists/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Physical DMG UP+9.7%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Fists direkomendasikan untuk slot Gloves pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Roving MSGR Flashlight",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+21.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Flashlight direkomendasikan untuk slot Kit Slot 1 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashspike/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Stat Utama",
+                    "value": "Combo Skill DMG UP+21.0%"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR untuk level 50.",
+                "description": "Gear Roving MSGR Flashlight direkomendasikan untuk slot Kit Slot 2 pada level 50.",
+                "recommendation": "Ikuti urutan upgrade gear sesuai progression agar resource tetap efisien."
+              }
+            }
+          }
+        },
+        "gamewithSource": "https://gamewith.net/akendfield/72546",
+        "gearUpdatedFrom": "February 18, 2026 2:33 AM",
+        "buildValidation": {
+          "checkedAt": "2026-02-19",
+          "gamewithUpdatedAt": "February 18, 2026 2:33 AM",
+          "sources": [
+            "https://arknightsendfield.gg/character/endministrator-build/",
+            "https://gamewith.net/akendfield/72546"
+          ],
+          "summary": "Build Endministrator diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
+        }
       }
     }
   ],
@@ -5712,7 +7686,8 @@
         "Antal menggantikan Akekuri jika butuh Heat Amp tambahan."
       ],
       "source": "https://gamewith.net/akendfield/72598",
-      "updatedAt": "2026-02-16"
+      "updatedAt": "2026-02-16",
+      "checkedAt": "2026-02-19"
     },
     {
       "id": "comp-yvonne-cryo",
@@ -5742,7 +7717,8 @@
         "Snowshine atau Estella bisa mengganti Xaihi/Gilberta."
       ],
       "source": "https://gamewith.net/akendfield/72598",
-      "updatedAt": "2026-02-16"
+      "updatedAt": "2026-02-16",
+      "checkedAt": "2026-02-19"
     },
     {
       "id": "comp-last-rite-cryo",
@@ -5772,7 +7748,8 @@
         "Ardelia atau Gilberta bisa ganti Snowshine untuk utilitas tambahan."
       ],
       "source": "https://gamewith.net/akendfield/72598",
-      "updatedAt": "2026-02-16"
+      "updatedAt": "2026-02-16",
+      "checkedAt": "2026-02-19"
     },
     {
       "id": "comp-lifeng-physical",
@@ -5802,7 +7779,8 @@
         "Endministrator bisa jadi opsi sub-DPS jika butuh konsumsi Vulnerable tambahan."
       ],
       "source": "https://gamewith.net/akendfield/72598",
-      "updatedAt": "2026-02-16"
+      "updatedAt": "2026-02-16",
+      "checkedAt": "2026-02-19"
     },
     {
       "id": "comp-avywenna-electric-budget",
@@ -5832,7 +7810,8 @@
         "Ardelia atau Gilberta bisa ganti Snowshine untuk support utility."
       ],
       "source": "https://gamewith.net/akendfield/72598",
-      "updatedAt": "2026-02-16"
+      "updatedAt": "2026-02-16",
+      "checkedAt": "2026-02-19"
     }
   ],
   "gearCatalog": [

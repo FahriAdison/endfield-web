@@ -342,57 +342,92 @@ function teamTierClass(value) {
   return "tier-b";
 }
 
-function renderTeamComps(teamComps) {
-  const grid = document.getElementById("team-comps-grid");
-  const stamp = document.getElementById("team-comps-stamp");
-  if (!grid) return;
-
-  const comps = Array.isArray(teamComps) ? [...teamComps] : [];
-  comps.sort((a, b) => {
-    const order = { S: 0, "A+": 1, A: 2, B: 3 };
+function sortTeamComps(teamComps, mode = "TIER") {
+  const order = { S: 0, "A+": 1, A: 2, B: 3 };
+  const sorted = [...teamComps];
+  sorted.sort((a, b) => {
+    if (mode === "AZ") return collator.compare(a.title || "", b.title || "");
+    if (mode === "ZA") return collator.compare(b.title || "", a.title || "");
     const rankA = order[String(a.tier || "B").toUpperCase()] ?? 99;
     const rankB = order[String(b.tier || "B").toUpperCase()] ?? 99;
     if (rankA !== rankB) return rankA - rankB;
     return collator.compare(a.title || "", b.title || "");
   });
-
-  if (stamp) {
-    const latest = comps
-      .map((comp) => comp.updatedAt)
-      .filter(Boolean)
-      .sort((a, b) => (a < b ? 1 : -1))[0];
-    stamp.textContent = latest
-      ? `Snapshot meta referensi: ${toDateLabel(latest)}`
-      : "Snapshot meta belum tersedia.";
-  }
-
-  grid.innerHTML = comps.length
-    ? comps
-        .map(
-          (comp) => `
-        <article class="card team-comp-card">
-          <div class="team-comp-head">
-            <span class="meta-tier ${teamTierClass(comp.tier)}">Tier ${esc(comp.tier || "-")}</span>
-            <h3>${esc(comp.title || "Team Comp")}</h3>
-          </div>
-          <p><strong>Komposisi:</strong> ${esc((comp.members || []).join(" + ") || "-")}</p>
-          <p class="gear-meta"><strong>Peran:</strong> ${esc((comp.roles || []).join(" | ") || "-")}</p>
-          <p>${esc(comp.reason || "-")}</p>
-          <p><strong>Efek utama:</strong> ${esc(comp.effect || "-")}</p>
-          <ol class="team-rotation">
-            ${(comp.rotation || []).map((step) => `<li>${esc(step)}</li>`).join("")}
-          </ol>
-          <p class="stamp"><strong>Alternatif:</strong> ${esc((comp.alternatives || []).join(" ") || "-")}</p>
-          <a class="detail-link inline-link" href="${esc(comp.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber tim</a>
-        </article>`
-        )
-        .join("")
-    : emptyState("Data team comp belum tersedia.");
+  return sorted;
 }
 
-function initTipsPage(tips, teamComps = []) {
-  renderTeamComps(teamComps);
+function teamCompCard(comp) {
+  return `
+    <article class="card team-comp-card">
+      <div class="team-comp-head">
+        <span class="meta-tier ${teamTierClass(comp.tier)}">Tier ${esc(comp.tier || "-")}</span>
+        <h3>${esc(comp.title || "Team Comp")}</h3>
+      </div>
+      <p><strong>Komposisi:</strong> ${esc((comp.members || []).join(" + ") || "-")}</p>
+      <p class="gear-meta"><strong>Peran:</strong> ${esc((comp.roles || []).join(" | ") || "-")}</p>
+      <p>${esc(comp.reason || "-")}</p>
+      <p><strong>Efek utama:</strong> ${esc(comp.effect || "-")}</p>
+      <ol class="team-rotation">
+        ${(comp.rotation || []).map((step) => `<li>${esc(step)}</li>`).join("")}
+      </ol>
+      <p class="stamp"><strong>Alternatif:</strong> ${esc((comp.alternatives || []).join(" ") || "-")}</p>
+      <a class="detail-link inline-link" href="${esc(comp.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber tim</a>
+    </article>`;
+}
 
+function initTeamCompsPage(teamComps = []) {
+  const refs = {
+    search: document.getElementById("team-search"),
+    tier: document.getElementById("team-tier-filter"),
+    sort: document.getElementById("team-sort"),
+    count: document.getElementById("team-count"),
+    stamp: document.getElementById("team-comps-stamp"),
+    grid: document.getElementById("team-comps-grid"),
+  };
+  if (!refs.search || !refs.tier || !refs.sort || !refs.count || !refs.stamp || !refs.grid) return;
+
+  const allComps = Array.isArray(teamComps) ? teamComps : [];
+  const tiers = ["ALL", ...new Set(allComps.map((comp) => String(comp.tier || "-").toUpperCase()))];
+  refs.tier.innerHTML = tiers
+    .map((tier) => `<option value="${esc(tier)}">${esc(tier === "ALL" ? "Semua Tier" : `Tier ${tier}`)}</option>`)
+    .join("");
+
+  const latest = allComps
+    .map((comp) => comp.updatedAt)
+    .filter(Boolean)
+    .sort((a, b) => (a < b ? 1 : -1))[0];
+  refs.stamp.textContent = latest
+    ? `Snapshot meta referensi: ${toDateLabel(latest)}`
+    : "Snapshot meta belum tersedia.";
+
+  const redraw = () => {
+    const search = refs.search.value.trim().toLowerCase();
+    const tier = refs.tier.value;
+    const sortMode = refs.sort.value;
+
+    const filtered = sortTeamComps(
+      allComps.filter((comp) => {
+        const thisTier = String(comp.tier || "-").toUpperCase();
+        const byTier = tier === "ALL" || thisTier === tier;
+        const blob =
+          `${comp.title || ""} ${(comp.members || []).join(" ")} ${(comp.roles || []).join(" ")} ${comp.reason || ""} ${comp.effect || ""} ${(comp.rotation || []).join(" ")}`.toLowerCase();
+        const bySearch = !search || blob.includes(search);
+        return byTier && bySearch;
+      }),
+      sortMode
+    );
+
+    refs.count.textContent = `${filtered.length} team comp cocok`;
+    refs.grid.innerHTML = filtered.length ? filtered.map((comp) => teamCompCard(comp)).join("") : emptyState("Team comp tidak ditemukan.");
+  };
+
+  refs.search.addEventListener("input", redraw);
+  refs.tier.addEventListener("change", redraw);
+  refs.sort.addEventListener("change", redraw);
+  redraw();
+}
+
+function initTipsPage(tips) {
   const refs = {
     search: document.getElementById("tips-search"),
     category: document.getElementById("tips-category"),
@@ -1217,7 +1252,8 @@ async function bootstrap() {
   const data = await fetchData();
 
   if (page === "home") return renderHome(data);
-  if (page === "helps") return initTipsPage(data.tips, data.teamComps || []);
+  if (page === "helps") return initTipsPage(data.tips);
+  if (page === "team-comps") return initTeamCompsPage(data.teamComps || []);
   if (page === "tierlist") return initTierPage(data.characters);
   if (page === "builds") return initBuildPage(data.characters);
   if (page === "gears") return initGearsPage(data.characters, data.gearCatalog || []);
