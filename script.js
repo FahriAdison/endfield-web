@@ -17,7 +17,7 @@ const gearTypeMap = { armor: "Armor", gloves: "Gloves", kit: "Kit" };
 const slotTypeMap = { armor: "Armor", gloves: "Gloves", kit1: "Kit Slot 1", kit2: "Kit Slot 2" };
 const teamMemberIconOverrides = {
   Akekuri: "assets/icons/akekuri.png",
-  Wulfgard: "assets/icons/wulfgard.webp",
+  Wulfgard: "https://endfieldtools.dev/assets/images/endfield/charicon/icon_chr_0006_wolfgd.png",
 };
 
 const BGM_KEY = "endfield_web_bgm_v1";
@@ -614,7 +614,7 @@ function initGachaPage(data) {
   );
   const gachaIconOverrides = {
     akekuri: "assets/icons/akekuri.png",
-    wulfgard: "assets/icons/wulfgard.webp",
+    wulfgard: "https://endfieldtools.dev/assets/images/endfield/charicon/icon_chr_0006_wolfgd.png",
     estella: "assets/icons/estella.webp",
     antal: "assets/icons/antal.webp",
   };
@@ -647,9 +647,9 @@ function initGachaPage(data) {
   });
 
   const defaultSimulatedPool = [
-    { id: "akekuri-sim", name: "Akekuri", stars: 4, role: "Sub DPS", element: "Nature", image: "assets/icons/akekuri.png" },
-    { id: "wulfgard-sim", name: "Wulfgard", stars: 4, role: "Support", element: "Frost", image: "assets/icons/wulfgard.webp" },
-    { id: "estella-sim", name: "Estella", stars: 4, role: "DPS", element: "Heat", image: "assets/icons/estella.webp" },
+    { id: "akekuri-sim", name: "Akekuri", stars: 4, role: "Support", element: "Heat", image: "assets/icons/akekuri.png" },
+    { id: "wulfgard-sim", name: "Wulfgard", stars: 5, role: "Sub DPS", element: "Heat", image: "https://endfieldtools.dev/assets/images/endfield/charicon/icon_chr_0006_wolfgd.png" },
+    { id: "estella-sim", name: "Estella", stars: 4, role: "Sub DPS", element: "Cryo", image: "assets/icons/estella.webp" },
     { id: "antal-sim", name: "Antal", stars: 4, role: "Support", element: "Electric", image: "assets/icons/antal.webp" },
   ];
   const simulatedPool = Array.isArray(gachaData.simulatedPool) && gachaData.simulatedPool.length

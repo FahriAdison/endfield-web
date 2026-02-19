@@ -1,7 +1,7 @@
 {
   "meta": {
     "updatedAt": "2026-02-19",
-    "patchNote": "Added dedicated gacha simulator page, expanded gallery interaction, and integrated official chartered banner snapshots."
+    "patchNote": "Expanded character database (Akekuri, Antal, Estella, Wulfgard, Fjall), fixed Wulfgard gacha icon mapping, and aligned progression data."
   },
   "tips": [
     {
@@ -136,24 +136,24 @@
         "id": "akekuri-sim",
         "name": "Akekuri",
         "stars": 4,
-        "role": "Sub DPS",
-        "element": "Nature",
+        "role": "Support",
+        "element": "Heat",
         "image": "assets/icons/akekuri.png"
       },
       {
         "id": "wulfgard-sim",
         "name": "Wulfgard",
-        "stars": 4,
-        "role": "Support",
-        "element": "Frost",
-        "image": "assets/icons/wulfgard.webp"
+        "stars": 5,
+        "role": "Sub DPS",
+        "element": "Heat",
+        "image": "https://endfieldtools.dev/assets/images/endfield/charicon/icon_chr_0006_wolfgd.png"
       },
       {
         "id": "estella-sim",
         "name": "Estella",
         "stars": 4,
-        "role": "DPS",
-        "element": "Heat",
+        "role": "Sub DPS",
+        "element": "Cryo",
         "image": "assets/icons/estella.webp"
       },
       {
@@ -7797,6 +7797,2441 @@
           "summary": "Build Endministrator diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
         }
       }
+    },
+    {
+      "id": "akekuri",
+      "name": "Akekuri",
+      "tier": "A",
+      "role": "Support",
+      "isMeta": true,
+      "image": "assets/icons/akekuri.png",
+      "summary": "Support Heat untuk bantu SP dan tempo rotasi tim.",
+      "tags": [
+        "support",
+        "heat",
+        "sp"
+      ],
+      "build": {
+        "weapon": "Thermite Cutter / OBJ Edge of Lightness",
+        "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
+        "team": "Akekuri + Laevatain + Antal + Ardelia",
+        "notes": "Fungsi utama Akekuri adalah dukungan rotasi, bukan burst solo."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/akekuri-build/",
+        "updatedAt": "2026-01-27",
+        "rarity": "4 Stars",
+        "role": "Vanguard",
+        "element": "Heat",
+        "weapon": "Sword",
+        "intro": [
+          "Akekuri adalah Vanguard Heat bersenjata Sword yang dimainkan sebagai support aktif.",
+          "Ia memimpin Team Z7 dan dikenal membantu menjaga ritme rotasi tim."
+        ],
+        "storyHighlights": [
+          "Akekuri kuat sebagai penghubung setup ke phase burst.",
+          "Nilainya ada pada stabilitas tempo, bukan angka burst mentah.",
+          "Cocok dipasangkan dengan carry Heat seperti Laevatain."
+        ],
+        "playstyle": "Masuk lebih awal untuk setup, lalu tukar ke core DPS saat jendela burst aktif.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Sword of Aspiration",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar beruntun untuk filler saat cooldown skill utama.",
+            "usage": "Dipakai singkat untuk menjaga pressure sambil menunggu trigger."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Burst of Passion",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Tebasan frontal yang memberi Heat DMG dan Heat Infliction.",
+            "usage": "Aktifkan di awal rotasi agar sinergi Heat cepat terbentuk."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Flash and Dash",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Combo lanjutan untuk menekan target setelah trigger aktif.",
+            "usage": "Pakai di window combo agar perpindahan ke DPS utama mulus."
+          },
+          {
+            "type": "Ultimate",
+            "name": "SQUAD! ON ME!",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Mode channeling yang menembakkan flare dukungan dan memulihkan SP.",
+            "usage": "Gunakan saat tim butuh isi ulang resource untuk rotasi berikutnya."
+          },
+          {
+            "type": "Talent",
+            "name": "Cheer of Victory",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Meningkatkan efisiensi pemulihan SP dari skill berdasarkan Intellect.",
+            "usage": "Naikkan talent untuk meningkatkan nilai support jangka panjang."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Tide Fall Light Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "Hot Work",
+            "effectDescription": "Sinergi set the Hot Work Set. Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Tide Fall Light Armor dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Eternal Xiranite Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Eternal Xiranite Gloves dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Eternal Xiranite Power Core",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Eternal Xiranite Power Core dari katalog gear Endfield (Lv 70)."
+          }
+        ],
+        "gearProgression": {
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Pakai set biru untuk leveling dan farming awal.",
+            "upgradeNote": "Prioritaskan Armor/Gloves dulu, lalu Kit Slot 1/2.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-1.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: ATK, Intellect, Strength.",
+                "description": "Item Mordvolt Insulation Vest dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Set awal untuk menjaga stat sambil kumpulkan material."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Mordvolt Insulation Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Gloves-1.png",
+                "source": "https://arknightsendfield.gg/gloves/mordvolt-insulation-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Gloves dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Gloves transisi untuk menjaga output tetap stabil."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T1 dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Kit awal yang aman untuk progression account."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Mordvolt Insulation Battery T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Intellect, Ultimate Bonus.",
+                "description": "Item Mordvolt Insulation Battery T1 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Pelengkap slot kedua sebelum naik set ungu."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Naikkan set T2 untuk jembatan sebelum gold endgame.",
+            "upgradeNote": "Fase 60 penting agar resource tidak habis saat masuk level 70.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-T2.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest-t2/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "HP",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: HP, Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Vest T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Armor T2 untuk transisi damage + sustain."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Miner Gloves T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Miner-Gloves-T2.png",
+                "source": "https://arknightsendfield.gg/gloves/miner-gloves-t2/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Miner Gloves T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Gloves T2 yang efisien untuk konten menengah."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T2.webp",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Utamakan kit ini untuk stabilitas rotasi skill."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T2.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashlight-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ULTIMATEDMG",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Agility, Strength, ULTIMATEDMG.",
+                "description": "Item Roving MSGR Flashlight T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Slot pelengkap sampai set endgame terkunci."
+              }
+            }
+          },
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set endgame untuk utilitas support dan rotasi tim.",
+            "upgradeNote": "Setelah set lengkap, optimalkan substat sesuai kebutuhan tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Tide Fall Light Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Hot Work",
+                "effectDescription": "Sinergi set the Hot Work Set. Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Tide Fall Light Armor dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Slot inti build endgame."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Eternal Xiranite Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Eternal Xiranite Gloves dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Sesuaikan dengan gaya main tim."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Eternal Xiranite Power Core",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Eternal Xiranite Power Core dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Prioritaskan untuk konsistensi."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Eternal Xiranite Power Core",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Eternal Xiranite Power Core dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Pelengkap efek set endgame."
+              }
+            }
+          }
+        },
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/akekuri-build/"
+          ],
+          "checkedAt": "2026-02-19",
+          "summary": "Data build Akekuri diambil dari pembaruan terbaru halaman build."
+        }
+      }
+    },
+    {
+      "id": "antal",
+      "name": "Antal",
+      "tier": "S",
+      "role": "Support",
+      "isMeta": true,
+      "image": "assets/icons/antal.webp",
+      "summary": "Support Electric untuk amplifikasi tim dan debuff target.",
+      "tags": [
+        "support",
+        "electric",
+        "amp"
+      ],
+      "build": {
+        "weapon": "Detonation Unit / Stanza of Memorials",
+        "skills": "Talent > Ultimate > Active Skill > Combo Skill > Basic Attack",
+        "team": "Antal + Laevatain + Wulfgard + Ardelia",
+        "notes": "Antal memaksimalkan damage tim lewat Focus dan buff Ultimate."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/antal-build/",
+        "updatedAt": "2026-01-27",
+        "rarity": "4 Stars",
+        "role": "Support",
+        "element": "Electric",
+        "weapon": "Arts Unit",
+        "intro": [
+          "Antal adalah Support Electric dengan Arts Unit untuk membantu burst tim.",
+          "Ia anggota Team Z7 dengan spesialisasi Originium Arts."
+        ],
+        "storyHighlights": [
+          "Antal unggul dalam support berbasis susceptibility dan amp.",
+          "Ia mempermudah tim menekan target prioritas.",
+          "Ultimate-nya penting untuk membuka burst window tim."
+        ],
+        "playstyle": "Buka dengan skill marker target, lanjut combo, lalu sinkronkan ultimate saat tim siap burst.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Exchange Current",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar Arts sebagai filler di sela rotasi.",
+            "usage": "Bukan sumber damage utama, pakai secukupnya."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Specified Research Subject",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Memberi Focus sekaligus Electric/Heat susceptibility ke target.",
+            "usage": "Prioritaskan untuk boss/elite sebelum fase burst tim."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "EMP Test Site",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Combo area untuk menjaga kontrol tempo pertempuran.",
+            "usage": "Aktifkan saat trigger muncul agar momentum tim terjaga."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Overclocked Moment",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Memberi Electric Amp dan Heat Amp sementara untuk seluruh tim.",
+            "usage": "Sinkronkan dengan cooldown DPS utama."
+          },
+          {
+            "type": "Talent",
+            "name": "Improviser",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Dapat memulihkan HP rekan saat kondisi Amp aktif terpenuhi.",
+            "usage": "Meningkatkan keamanan tim di konten panjang."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Tide Fall Light Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "Hot Work",
+            "effectDescription": "Sinergi set the Hot Work Set. Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Tide Fall Light Armor dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Eternal Xiranite Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Eternal Xiranite Gloves dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Eternal Xiranite Power Core",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Eternal Xiranite Power Core dari katalog gear Endfield (Lv 70)."
+          }
+        ],
+        "gearProgression": {
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Pakai set biru untuk leveling dan farming awal.",
+            "upgradeNote": "Prioritaskan Armor/Gloves dulu, lalu Kit Slot 1/2.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-1.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: ATK, Intellect, Strength.",
+                "description": "Item Mordvolt Insulation Vest dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Set awal untuk menjaga stat sambil kumpulkan material."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Mordvolt Insulation Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Gloves-1.png",
+                "source": "https://arknightsendfield.gg/gloves/mordvolt-insulation-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Gloves dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Gloves transisi untuk menjaga output tetap stabil."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T1 dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Kit awal yang aman untuk progression account."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Mordvolt Insulation Battery T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Intellect, Ultimate Bonus.",
+                "description": "Item Mordvolt Insulation Battery T1 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Pelengkap slot kedua sebelum naik set ungu."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Naikkan set T2 untuk jembatan sebelum gold endgame.",
+            "upgradeNote": "Fase 60 penting agar resource tidak habis saat masuk level 70.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-T2.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest-t2/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "HP",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: HP, Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Vest T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Armor T2 untuk transisi damage + sustain."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Miner Gloves T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Miner-Gloves-T2.png",
+                "source": "https://arknightsendfield.gg/gloves/miner-gloves-t2/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Miner Gloves T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Gloves T2 yang efisien untuk konten menengah."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T2.webp",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Utamakan kit ini untuk stabilitas rotasi skill."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T2.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashlight-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ULTIMATEDMG",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Agility, Strength, ULTIMATEDMG.",
+                "description": "Item Roving MSGR Flashlight T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Slot pelengkap sampai set endgame terkunci."
+              }
+            }
+          },
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set endgame untuk utilitas dan kestabilan rotasi support.",
+            "upgradeNote": "Setelah set lengkap, optimalkan substat sesuai kebutuhan tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Tide Fall Light Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Hot Work",
+                "effectDescription": "Sinergi set the Hot Work Set. Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Tide Fall Light Armor dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Slot inti build endgame."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Eternal Xiranite Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Eternal Xiranite Gloves dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Sesuaikan dengan gaya main tim."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Eternal Xiranite Power Core",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Eternal Xiranite Power Core dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Prioritaskan untuk konsistensi."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Eternal Xiranite Power Core",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Power-Core.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-power-core/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Eternal Xiranite Power Core dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Pelengkap efek set endgame."
+              }
+            }
+          }
+        },
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/antal-build/"
+          ],
+          "checkedAt": "2026-02-19",
+          "summary": "Data build Antal diselaraskan dari sumber build terbaru."
+        }
+      }
+    },
+    {
+      "id": "estella",
+      "name": "Estella",
+      "tier": "A",
+      "role": "Sub DPS",
+      "isMeta": false,
+      "image": "assets/icons/estella.webp",
+      "summary": "Sub DPS Cryo dengan kontrol garis dan combo window kuat.",
+      "tags": [
+        "sub-dps",
+        "cryo",
+        "control"
+      ],
+      "build": {
+        "weapon": "JET / OBJ Razorhorn",
+        "skills": "Active Skill > Combo Skill > Talent > Ultimate > Basic Attack",
+        "team": "Estella + Endministrator + Alesh + Chen Qianyu",
+        "notes": "Estella dipakai sebagai pengatur tempo sebelum finisher tim masuk."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/estella-build/",
+        "updatedAt": "2026-02-17",
+        "rarity": "4 Stars",
+        "role": "Guard",
+        "element": "Cryo",
+        "weapon": "Polearm",
+        "intro": [
+          "Estella adalah Guard Cryo bersenjata Polearm dengan pola main sub DPS.",
+          "Ia menangani intel/komunikasi Team Z7 dan berfokus pada kontrol tempo."
+        ],
+        "storyHighlights": [
+          "Estella efektif untuk pressure garis lurus pada banyak target.",
+          "Nilai utility-nya naik ketika trigger combo tim konsisten.",
+          "Cocok dipakai sebagai penghubung setup ke finisher."
+        ],
+        "playstyle": "Setup Cryo lebih dulu, manfaatkan combo trigger, lalu masuk ultimate saat area padat musuh.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Audio Noise",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Serangan dasar polearm sebagai filler rotasi.",
+            "usage": "Gunakan sambil menunggu active/combo siap."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Onomatopoeia",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Tusukan linear yang memberi Cryo DMG dan Cryo Infliction.",
+            "usage": "Bidik jalur musuh terbanyak agar setup maksimal."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Distortion",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Combo lanjutan setelah syarat trigger terpenuhi.",
+            "usage": "Aktifkan segera saat trigger tersedia."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Tremolo",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Serangan area yang dapat memberi efek kontrol tambahan.",
+            "usage": "Cocok untuk momen musuh berkumpul."
+          },
+          {
+            "type": "Talent",
+            "name": "Commiseration",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Mendukung pemulihan SP pada pola rotasi tertentu.",
+            "usage": "Naikkan talent untuk menjaga siklus skill."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Tide Fall Light Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "Hot Work",
+            "effectDescription": "Sinergi set the Hot Work Set. Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Tide Fall Light Armor dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Eternal Xiranite Gloves T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves-t1/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "Pulser Labs",
+            "effectDescription": "Sinergi set Pulser Labs. Gear rarity Gold dengan fokus stat: Intellect, Ultimate Bonus, Willpower.",
+            "description": "Item Eternal Xiranite Gloves T1 dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Eternal Xiranite Auxiliary Arm",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+            "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "Eternal Xiranite",
+            "effectDescription": "Sinergi set Eternal Xiranite. Gear rarity Gold dengan fokus stat: Intellect, Ultimate Bonus, Willpower.",
+            "description": "Item Eternal Xiranite Auxiliary Arm dari katalog gear Endfield (Lv 70)."
+          }
+        ],
+        "gearProgression": {
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Pakai set biru untuk leveling dan farming awal.",
+            "upgradeNote": "Prioritaskan Armor/Gloves dulu, lalu Kit Slot 1/2.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-1.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: ATK, Intellect, Strength.",
+                "description": "Item Mordvolt Insulation Vest dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Set awal untuk menjaga stat sambil kumpulkan material."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Mordvolt Insulation Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Gloves-1.png",
+                "source": "https://arknightsendfield.gg/gloves/mordvolt-insulation-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Gloves dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Gloves transisi untuk menjaga output tetap stabil."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T1 dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Kit awal yang aman untuk progression account."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Mordvolt Insulation Battery T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Intellect, Ultimate Bonus.",
+                "description": "Item Mordvolt Insulation Battery T1 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Pelengkap slot kedua sebelum naik set ungu."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Naikkan set T2 untuk jembatan sebelum gold endgame.",
+            "upgradeNote": "Fase 60 penting agar resource tidak habis saat masuk level 70.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-T2.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest-t2/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "HP",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: HP, Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Vest T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Armor T2 untuk transisi damage + sustain."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Miner Gloves T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Miner-Gloves-T2.png",
+                "source": "https://arknightsendfield.gg/gloves/miner-gloves-t2/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Miner Gloves T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Gloves T2 yang efisien untuk konten menengah."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T2.webp",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Utamakan kit ini untuk stabilitas rotasi skill."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T2.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashlight-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ULTIMATEDMG",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Agility, Strength, ULTIMATEDMG.",
+                "description": "Item Roving MSGR Flashlight T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Slot pelengkap sampai set endgame terkunci."
+              }
+            }
+          },
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set endgame untuk konsistensi output skill/combo.",
+            "upgradeNote": "Setelah set lengkap, optimalkan substat sesuai kebutuhan tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Tide Fall Light Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Tide-Fall-Light-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/tide-fall-light-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Hot Work",
+                "effectDescription": "Sinergi set the Hot Work Set. Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+                "description": "Item Tide Fall Light Armor dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Slot inti build endgame."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Eternal Xiranite Gloves T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves-t1/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Pulser Labs",
+                "effectDescription": "Sinergi set Pulser Labs. Gear rarity Gold dengan fokus stat: Intellect, Ultimate Bonus, Willpower.",
+                "description": "Item Eternal Xiranite Gloves T1 dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Sesuaikan dengan gaya main tim."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Eternal Xiranite Auxiliary Arm",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Eternal Xiranite",
+                "effectDescription": "Sinergi set Eternal Xiranite. Gear rarity Gold dengan fokus stat: Intellect, Ultimate Bonus, Willpower.",
+                "description": "Item Eternal Xiranite Auxiliary Arm dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Prioritaskan untuk konsistensi."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Eternal Xiranite Auxiliary Arm",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Auxiliary-Arm.png",
+                "source": "https://arknightsendfield.gg/kit/eternal-xiranite-auxiliary-arm/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Eternal Xiranite",
+                "effectDescription": "Sinergi set Eternal Xiranite. Gear rarity Gold dengan fokus stat: Intellect, Ultimate Bonus, Willpower.",
+                "description": "Item Eternal Xiranite Auxiliary Arm dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Pelengkap efek set endgame."
+              }
+            }
+          }
+        },
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/estella-build/"
+          ],
+          "checkedAt": "2026-02-19",
+          "summary": "Data Estella mengikuti pembaruan build terbaru dari sumber."
+        }
+      }
+    },
+    {
+      "id": "wulfgard",
+      "name": "Wulfgard",
+      "tier": "B",
+      "role": "Sub DPS",
+      "isMeta": true,
+      "image": "https://endfieldtools.dev/assets/images/endfield/charicon/icon_chr_0006_wolfgd.png",
+      "summary": "Utility sub DPS Heat untuk bantu stack infliction tim Fire.",
+      "tags": [
+        "sub-dps",
+        "heat",
+        "utility"
+      ],
+      "build": {
+        "weapon": "Clannibal / Rational Farewell",
+        "skills": "Talent > Active Skill > Combo Skill > Ultimate > Basic Attack",
+        "team": "Wulfgard + Laevatain + Akekuri + Ardelia",
+        "notes": "Di meta saat ini, Wulfgard lebih kuat sebagai enabler daripada carry utama."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/wulfgard-build/",
+        "updatedAt": "2026-01-27",
+        "rarity": "5 Stars",
+        "role": "Caster",
+        "element": "Heat",
+        "weapon": "Handcannon",
+        "intro": [
+          "Wulfgard adalah Caster Heat bersenjata Handcannon untuk utilitas infliction.",
+          "Latar belakangnya kontroversial, tetapi performanya sangat berguna di komposisi Fire."
+        ],
+        "storyHighlights": [
+          "Kekuatan utama Wulfgard adalah konsistensi Heat Infliction.",
+          "Ia sering dipakai untuk membuka window burst carry utama.",
+          "Paling efektif jika dipadukan dengan Laevatain."
+        ],
+        "playstyle": "Masuk setelah setup awal, terapkan infliction cepat, lalu serahkan burst ke carry tim.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Rapid Fire Akimbo",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Tembakan dasar cepat sebagai filler.",
+            "usage": "Gunakan saat menunggu skill inti."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Thermite Tracers",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Rentetan Heat DMG yang menguat saat kondisi reaksi terpenuhi.",
+            "usage": "Pakai setelah setup elemen aktif."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Frag Grenade B",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Combo lanjutan untuk mempertahankan pressure Heat.",
+            "usage": "Aktifkan segera saat trigger terbuka."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Wolven Fury",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Barrage area yang memaksa Combustion pada target.",
+            "usage": "Sinkronkan ke jendela burst tim."
+          },
+          {
+            "type": "Talent",
+            "name": "Scorching Fangs",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Memberi buff Heat DMG saat berhasil menerapkan Combustion.",
+            "usage": "Talent penting untuk menaikkan kontribusi on-field."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "Hot Work Exoskeleton",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Exo-Rig.png",
+            "source": "https://arknightsendfield.gg/armor/hot-work-exoskeleton/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Agility",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Agility, Strength.",
+            "description": "Item Hot Work Exoskeleton dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Swordmancer TAC Gauntlets",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Gauntlets-1.png",
+            "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-gauntlets/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "PHYSICAL",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "Aethertech",
+            "effectDescription": "Sinergi set Aethertech. Gear rarity Gold dengan fokus stat: PHYSICAL, Strength, Willpower.",
+            "description": "Item Swordmancer TAC Gauntlets dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Hot Work Power Bank",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Power-Bank.png",
+            "source": "https://arknightsendfield.gg/kit/hot-work-power-bank/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Agility",
+                "value": "Boost"
+              },
+              {
+                "name": "ARTSINTEN",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Agility, ARTSINTEN, Strength.",
+            "description": "Item Hot Work Power Bank dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "Catastrophe Heavy Armor T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Heavy-Armor-T1.png",
+            "source": "https://arknightsendfield.gg/armor/catastrophe-heavy-armor-t1/",
+            "type": "armor",
+            "usageLevel": "50",
+            "stats": [
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Blue dengan fokus stat: Strength, Ultimate Bonus, Willpower.",
+            "description": "Item Catastrophe Heavy Armor T1 dari katalog gear Endfield (Lv 50)."
+          },
+          {
+            "name": "Catastrophe Gauze Cartridge T1",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Gauze-Cartridge-T1.png",
+            "source": "https://arknightsendfield.gg/kit/catastrophe-gauze-cartridge-t1/",
+            "type": "kit",
+            "usageLevel": "50",
+            "stats": [
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Blue dengan fokus stat: Strength, Willpower.",
+            "description": "Item Catastrophe Gauze Cartridge T1 dari katalog gear Endfield (Lv 50)."
+          },
+          {
+            "name": "Eternal Xiranite Gloves",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/Eternal-Xiranite-Gloves.png",
+            "source": "https://arknightsendfield.gg/gloves/eternal-xiranite-gloves/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Intellect",
+                "value": "Boost"
+              },
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "Ultimate Bonus",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "-",
+            "effectDescription": "Gear rarity Gold dengan fokus stat: Intellect, Strength, Ultimate Bonus.",
+            "description": "Item Eternal Xiranite Gloves dari katalog gear Endfield (Lv 70)."
+          }
+        ],
+        "gearProgression": {
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Pakai set Catastrophe untuk utilitas awal dan efisiensi SP.",
+            "upgradeNote": "Utamakan Armor/Kit untuk percepat utilitas support.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Catastrophe Heavy Armor T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Heavy-Armor-T1.png",
+                "source": "https://arknightsendfield.gg/armor/catastrophe-heavy-armor-t1/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Strength, Ultimate Bonus, Willpower.",
+                "description": "Item Catastrophe Heavy Armor T1 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Set awal utilitas support."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Catastrophe Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Gloves.png",
+                "source": "https://arknightsendfield.gg/gloves/catastrophe-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "ARTSINTEN",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: ARTSINTEN, Intellect, Willpower.",
+                "description": "Item Catastrophe Gloves dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Pelengkap efek set transisi."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Catastrophe Gauze Cartridge T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Gauze-Cartridge-T1.png",
+                "source": "https://arknightsendfield.gg/kit/catastrophe-gauze-cartridge-t1/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Strength, Willpower.",
+                "description": "Item Catastrophe Gauze Cartridge T1 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Kit awal yang sesuai role utilitas."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Catastrophe Filter",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Catastrophe-Filter.png",
+                "source": "https://arknightsendfield.gg/kit/catastrophe-filter/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "ARTSINTEN",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Catastrophe Set + Mordvolt Resistant Vest T1",
+                "effectDescription": "Sinergi set the Catastrophe Set + Mordvolt Resistant Vest T1. Gear rarity Blue dengan fokus stat: ARTSINTEN, Intellect, Willpower.",
+                "description": "Item Catastrophe Filter dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Isi slot kedua sampai masuk purple."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Naikkan set T2 untuk jembatan sebelum gold endgame.",
+            "upgradeNote": "Fase 60 penting agar resource tidak habis saat masuk level 70.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-T2.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest-t2/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "HP",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: HP, Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Vest T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Armor T2 untuk transisi damage + sustain."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Miner Gloves T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Miner-Gloves-T2.png",
+                "source": "https://arknightsendfield.gg/gloves/miner-gloves-t2/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Miner Gloves T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Gloves T2 yang efisien untuk konten menengah."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T2.webp",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Utamakan kit ini untuk stabilitas rotasi skill."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T2.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashlight-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ULTIMATEDMG",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Agility, Strength, ULTIMATEDMG.",
+                "description": "Item Roving MSGR Flashlight T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Slot pelengkap sampai set endgame terkunci."
+              }
+            }
+          },
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Set Hot Work untuk kontribusi Heat endgame.",
+            "upgradeNote": "Setelah lengkap, optimalkan substat untuk tim Fire.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Hot Work Exoskeleton",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Exo-Rig.png",
+                "source": "https://arknightsendfield.gg/armor/hot-work-exoskeleton/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Agility, Strength.",
+                "description": "Item Hot Work Exoskeleton dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Armor inti paket Hot Work."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Swordmancer TAC Gauntlets",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Swordmancer-TAC-Gauntlets-1.png",
+                "source": "https://arknightsendfield.gg/gloves/swordmancer-tac-gauntlets/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "PHYSICAL",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Aethertech",
+                "effectDescription": "Sinergi set Aethertech. Gear rarity Gold dengan fokus stat: PHYSICAL, Strength, Willpower.",
+                "description": "Item Swordmancer TAC Gauntlets dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Gloves utility-damage untuk endgame."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Hot Work Power Bank",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Power-Bank.png",
+                "source": "https://arknightsendfield.gg/kit/hot-work-power-bank/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ARTSINTEN",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Agility, ARTSINTEN, Strength.",
+                "description": "Item Hot Work Power Bank dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Kit inti paket endgame."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Hot Work Power Bank",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Hot-Work-Power-Bank.png",
+                "source": "https://arknightsendfield.gg/kit/hot-work-power-bank/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ARTSINTEN",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Gold dengan fokus stat: Agility, ARTSINTEN, Strength.",
+                "description": "Item Hot Work Power Bank dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Duplikat kit untuk konsistensi."
+              }
+            }
+          }
+        },
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/wulfgard-build/"
+          ],
+          "checkedAt": "2026-02-19",
+          "summary": "Wulfgard divalidasi sebagai utility Heat enabler dari sumber build terbaru."
+        }
+      }
+    },
+    {
+      "id": "fjall",
+      "name": "Fjall",
+      "tier": "S",
+      "role": "Sustain / Support",
+      "isMeta": false,
+      "image": "https://arknightsendfield.gg/wp-content/uploads/Fjall-Build.webp",
+      "summary": "Defender Cryo dengan kombinasi frontline, heal, dan buff tim.",
+      "tags": [
+        "defender",
+        "sustain",
+        "cryo"
+      ],
+      "build": {
+        "weapon": "-",
+        "skills": "Ultimate > Active Skill > Basic Attack > Combo Skill > Talent",
+        "team": "Fjall + Estella + Snowshine + Perlica",
+        "notes": "Sebagian data skill Fjall di sumber masih TBC, jadi build ini baseline sementara."
+      },
+      "profile": {
+        "source": "https://arknightsendfield.gg/character/fjall-build/",
+        "updatedAt": "2026-02-10",
+        "rarity": "5 Stars",
+        "role": "Defender",
+        "element": "Cryo",
+        "weapon": "Sword",
+        "intro": [
+          "Fjall adalah Defender Cryo bersenjata Sword yang berfungsi sebagai frontline sustain.",
+          "Ia dikenal sebagai field surgeon dengan dukungan tim yang kuat."
+        ],
+        "storyHighlights": [
+          "Fjall memadukan gaya tank garis depan dengan utilitas heal.",
+          "Ultimate-nya memberi heal tim dan buff serangan sementara.",
+          "Beberapa detail skill lanjutan masih menunggu pembaruan resmi."
+        ],
+        "playstyle": "Jaga frontline, pakai active untuk stabilisasi, lalu ult saat tim butuh heal + burst support.",
+        "skills": [
+          {
+            "type": "Basic Attack",
+            "name": "Basic Sequence (TBC)",
+            "icon": "assets/skill-icons/basic.webp",
+            "description": "Rangkaian serangan fisik dengan opsi finisher pada target stagger.",
+            "usage": "Pakai untuk tahan garis depan sambil tunggu cooldown utama."
+          },
+          {
+            "type": "Active Skill",
+            "name": "Terminal Disassembly",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Dash 2-hit yang juga memulihkan HP rekan dengan persentase HP terendah.",
+            "usage": "Simpan untuk momen tim butuh heal cepat."
+          },
+          {
+            "type": "Combo Skill",
+            "name": "Combo Data (TBC)",
+            "icon": "assets/skill-icons/combo.webp",
+            "description": "Detail trigger combo belum dipublikasikan penuh di sumber.",
+            "usage": "Sementara fokus ke basic + active + ultimate."
+          },
+          {
+            "type": "Ultimate",
+            "name": "Hyperdose Formula",
+            "icon": "assets/skill-icons/ultimate.webp",
+            "description": "Memulihkan HP seluruh tim dan memberi buff attack sementara.",
+            "usage": "Aktifkan saat tim memasuki fase burst atau krisis HP."
+          },
+          {
+            "type": "Talent",
+            "name": "Talent Data (TBC)",
+            "icon": "assets/skill-icons/talent.webp",
+            "description": "Informasi talent belum final pada sumber utama.",
+            "usage": "Upgrade secukupnya sampai ada data final."
+          }
+        ],
+        "gearRecommendations": [
+          {
+            "name": "LYNX Heavy Armor",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Heavy-Armor.png",
+            "source": "https://arknightsendfield.gg/armor/lynx-heavy-armor/",
+            "type": "armor",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "TREATMENT",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: Strength, TREATMENT, Willpower.",
+            "description": "Item LYNX Heavy Armor dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "LYNX Gauntlets",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Gauntlets.png",
+            "source": "https://arknightsendfield.gg/gloves/lynx-gauntlets/",
+            "type": "gloves",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "Strength",
+                "value": "Boost"
+              },
+              {
+                "name": "TREATMENT",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: Strength, TREATMENT, Willpower.",
+            "description": "Item LYNX Gauntlets dari katalog gear Endfield (Lv 70)."
+          },
+          {
+            "name": "LYNX Aegis Injector",
+            "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Aegis-Injector-1.png",
+            "source": "https://arknightsendfield.gg/kit/lynx-aegis-injector/",
+            "type": "kit",
+            "usageLevel": "70",
+            "stats": [
+              {
+                "name": "TREATMENT",
+                "value": "Boost"
+              },
+              {
+                "name": "Willpower",
+                "value": "Boost"
+              }
+            ],
+            "effectName": "LYNX",
+            "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: TREATMENT, Willpower.",
+            "description": "Item LYNX Aegis Injector dari katalog gear Endfield (Lv 70)."
+          }
+        ],
+        "gearProgression": {
+          "50": {
+            "label": "Level 50 (Blue) - Transisi",
+            "focus": "Pakai set biru untuk leveling dan farming awal.",
+            "upgradeNote": "Prioritaskan Armor/Gloves dulu, lalu Kit Slot 1/2.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-1.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest/",
+                "type": "armor",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: ATK, Intellect, Strength.",
+                "description": "Item Mordvolt Insulation Vest dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Set awal untuk menjaga stat sambil kumpulkan material."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Mordvolt Insulation Gloves",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Gloves-1.png",
+                "source": "https://arknightsendfield.gg/gloves/mordvolt-insulation-gloves/",
+                "type": "gloves",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Gloves dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Gloves transisi untuk menjaga output tetap stabil."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T1 dari katalog gear Endfield (Lv 36).",
+                "recommendation": "Kit awal yang aman untuk progression account."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Mordvolt Insulation Battery T1",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Battery-T1.png",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-battery-mod/",
+                "type": "kit",
+                "usageLevel": "50",
+                "stats": [
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Ultimate Bonus",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Intellect, Ultimate Bonus.",
+                "description": "Item Mordvolt Insulation Battery T1 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Pelengkap slot kedua sebelum naik set ungu."
+              }
+            }
+          },
+          "60": {
+            "label": "Level 60 (Purple) - Mid Game",
+            "focus": "Naikkan set T2 untuk jembatan sebelum gold endgame.",
+            "upgradeNote": "Fase 60 penting agar resource tidak habis saat masuk level 70.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "Mordvolt Insulation Vest T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Vest-T2.png",
+                "source": "https://arknightsendfield.gg/armor/mordvolt-insulation-vest-t2/",
+                "type": "armor",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "HP",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: HP, Intellect, Willpower.",
+                "description": "Item Mordvolt Insulation Vest T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Armor T2 untuk transisi damage + sustain."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "Miner Gloves T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Miner-Gloves-T2.png",
+                "source": "https://arknightsendfield.gg/gloves/miner-gloves-t2/",
+                "type": "gloves",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Roving MSGR",
+                "effectDescription": "Sinergi set Roving MSGR. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Miner Gloves T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Gloves T2 yang efisien untuk konten menengah."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "Mordvolt Insulation Wrench T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Mordvolt-Insulation-Wrench-T2.webp",
+                "source": "https://arknightsendfield.gg/kit/mordvolt-insulation-wrench-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ATK",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Intellect",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "Mordvolt Insulation",
+                "effectDescription": "Sinergi set Mordvolt Insulation. Gear rarity Blue dengan fokus stat: Agility, ATK, Intellect.",
+                "description": "Item Mordvolt Insulation Wrench T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Utamakan kit ini untuk stabilitas rotasi skill."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "Roving MSGR Flashlight T2",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/Roving-MSGR-Flashlight-T2.png",
+                "source": "https://arknightsendfield.gg/kit/roving-msgr-flashlight-t2/",
+                "type": "kit",
+                "usageLevel": "60",
+                "stats": [
+                  {
+                    "name": "Agility",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "ULTIMATEDMG",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "-",
+                "effectDescription": "Gear rarity Blue dengan fokus stat: Agility, Strength, ULTIMATEDMG.",
+                "description": "Item Roving MSGR Flashlight T2 dari katalog gear Endfield (Lv 50).",
+                "recommendation": "Slot pelengkap sampai set endgame terkunci."
+              }
+            }
+          },
+          "70": {
+            "label": "Level 70 (Gold) - Endgame",
+            "focus": "Fokus set LYNX untuk sustain frontline dan stabilitas tim.",
+            "upgradeNote": "Setelah set lengkap, optimalkan substat sesuai kebutuhan tim.",
+            "slots": {
+              "armor": {
+                "slot": "Armor",
+                "name": "LYNX Heavy Armor",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Heavy-Armor.png",
+                "source": "https://arknightsendfield.gg/armor/lynx-heavy-armor/",
+                "type": "armor",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "TREATMENT",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "LYNX",
+                "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: Strength, TREATMENT, Willpower.",
+                "description": "Item LYNX Heavy Armor dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Slot inti build endgame."
+              },
+              "gloves": {
+                "slot": "Gloves",
+                "name": "LYNX Gauntlets",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Gauntlets.png",
+                "source": "https://arknightsendfield.gg/gloves/lynx-gauntlets/",
+                "type": "gloves",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "Strength",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "TREATMENT",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "LYNX",
+                "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: Strength, TREATMENT, Willpower.",
+                "description": "Item LYNX Gauntlets dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Sesuaikan dengan gaya main tim."
+              },
+              "kit1": {
+                "slot": "Kit Slot 1",
+                "name": "LYNX Aegis Injector",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Aegis-Injector-1.png",
+                "source": "https://arknightsendfield.gg/kit/lynx-aegis-injector/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "TREATMENT",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "LYNX",
+                "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: TREATMENT, Willpower.",
+                "description": "Item LYNX Aegis Injector dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Prioritaskan untuk konsistensi."
+              },
+              "kit2": {
+                "slot": "Kit Slot 2",
+                "name": "LYNX Aegis Injector",
+                "icon": "https://arknightsendfield.gg/wp-content/uploads/LYNX-Aegis-Injector-1.png",
+                "source": "https://arknightsendfield.gg/kit/lynx-aegis-injector/",
+                "type": "kit",
+                "usageLevel": "70",
+                "stats": [
+                  {
+                    "name": "TREATMENT",
+                    "value": "Boost"
+                  },
+                  {
+                    "name": "Willpower",
+                    "value": "Boost"
+                  }
+                ],
+                "effectName": "LYNX",
+                "effectDescription": "Sinergi set LYNX. Gear rarity Gold dengan fokus stat: TREATMENT, Willpower.",
+                "description": "Item LYNX Aegis Injector dari katalog gear Endfield (Lv 70).",
+                "recommendation": "Pelengkap efek set endgame."
+              }
+            }
+          }
+        },
+        "buildValidation": {
+          "sources": [
+            "https://arknightsendfield.gg/character/fjall-build/"
+          ],
+          "checkedAt": "2026-02-19",
+          "summary": "Fjall ditambahkan dengan catatan bahwa sebagian data masih TBC di sumber."
+        }
+      }
     }
   ],
   "teamComps": [
@@ -12791,6 +15226,3 @@
     }
   ]
 }
-
-
-
