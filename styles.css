@@ -73,6 +73,44 @@ body {
   letter-spacing: 0.06em;
 }
 
+.nav-brand-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.music-inline-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  border: 1px solid #355f83;
+  border-radius: 999px;
+  background: rgba(9, 23, 36, 0.82);
+  padding: 0.22rem 0.3rem;
+}
+
+.music-btn-inline {
+  border: 1px solid #3b678c;
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  background: rgba(15, 33, 50, 0.95);
+  color: #d7ecff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.music-btn-inline:hover {
+  border-color: #68c3f0;
+}
+
+.music-mini-state {
+  font-size: 0.72rem;
+  color: #9dc9e7;
+  min-width: 3.9rem;
+  text-align: center;
+}
+
 .nav-links {
   display: flex;
   gap: 1.1rem;
@@ -230,6 +268,10 @@ p {
 }
 
 .tips-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.team-comp-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -449,6 +491,10 @@ a {
   }
 
   .meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-comp-grid {
     grid-template-columns: 1fr;
   }
 
@@ -908,71 +954,28 @@ a {
   font-size: 0.86rem;
 }
 
-.bgm-player {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  width: min(19rem, calc(100% - 2rem));
-  border: 1px solid #356084;
-  border-radius: 0.85rem;
-  background: rgba(7, 18, 28, 0.92);
-  backdrop-filter: blur(5px);
-  padding: 0.78rem;
-  z-index: 50;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.33);
-}
-
-.bgm-kicker {
-  margin: 0;
-  color: #8ddcff;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-}
-
-.bgm-title {
-  margin: 0.15rem 0 0.45rem;
-  color: #e8f4ff;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 1.08rem;
-}
-
-.bgm-row {
+.team-comp-card {
   display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.team-comp-head {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.bgm-btn {
-  border: 1px solid #356084;
-  border-radius: 999px;
-  padding: 0.35rem 0.72rem;
-  background: rgba(13, 31, 47, 0.95);
-  color: #d7ebff;
-  font-family: "Space Grotesk", sans-serif;
-  cursor: pointer;
+.team-rotation {
+  margin: 0.25rem 0 0;
+  padding-left: 1rem;
 }
 
-.bgm-btn:hover {
-  border-color: #5fb3e0;
-}
-
-.bgm-time,
-.bgm-status {
-  margin: 0.38rem 0 0;
-  font-size: 0.8rem;
-}
-
-.bgm-time {
-  color: #a8cbe4;
-}
-
-.bgm-status {
-  color: #84c7eb;
-}
-
-.bgm-source {
-  display: inline-flex;
-  margin-top: 0.34rem;
-  font-size: 0.78rem;
+.team-rotation li {
+  margin: 0.2rem 0;
+  color: var(--ink-dim);
+  font-size: 0.92rem;
 }
 
 @media (max-width: 960px) {
@@ -1026,10 +1029,16 @@ a {
     height: 4.5rem;
   }
 
-  .bgm-player {
-    right: 0.7rem;
-    left: 0.7rem;
-    width: auto;
-    bottom: 0.7rem;
+  .nav-brand-cluster {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .music-inline-controls {
+    padding: 0.2rem 0.26rem;
+  }
+
+  .music-mini-state {
+    min-width: 3.1rem;
   }
 }

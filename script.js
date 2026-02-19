@@ -170,27 +170,29 @@ function saveBgmState(state) {
 }
 
 function initGlobalBgm() {
-  const panel = document.createElement("aside");
-  panel.className = "bgm-player";
+  const nav = document.querySelector(".nav");
+  const brand = nav?.querySelector(".brand");
+  if (!nav || !brand) return;
+
+  const cluster = document.createElement("div");
+  cluster.className = "nav-brand-cluster";
+
+  const panel = document.createElement("div");
+  panel.className = "music-inline-controls";
   panel.innerHTML = `
-    <p class="bgm-kicker">MUSIK LATAR</p>
-    <p class="bgm-title">Endfield Lofi</p>
-    <div class="bgm-row">
-      <button class="bgm-btn" id="bgm-play" type="button">Putar</button>
-      <button class="bgm-btn" id="bgm-mute" type="button">Mute</button>
-    </div>
-    <p class="bgm-time" id="bgm-time">00:00 / 00:00</p>
-    <p class="bgm-status" id="bgm-status">Memuat musik...</p>
-    <a class="bgm-source" id="bgm-source" href="${esc(BGM_SOURCES[0])}" target="_blank" rel="noreferrer noopener">Sumber lagu</a>
+    <button class="music-btn-inline" id="bgm-play" type="button" aria-label="Play atau pause musik">Play</button>
+    <button class="music-btn-inline" id="bgm-mute" type="button" aria-label="Mute atau unmute musik">Mute</button>
+    <span class="music-mini-state" id="bgm-status" aria-live="polite">Memuat...</span>
   `;
-  document.body.appendChild(panel);
+
+  brand.replaceWith(cluster);
+  cluster.appendChild(brand);
+  cluster.appendChild(panel);
 
   const btnPlay = panel.querySelector("#bgm-play");
   const btnMute = panel.querySelector("#bgm-mute");
-  const labelTime = panel.querySelector("#bgm-time");
   const labelStatus = panel.querySelector("#bgm-status");
-  const labelSource = panel.querySelector("#bgm-source");
-  if (!btnPlay || !btnMute || !labelTime || !labelStatus || !labelSource) return;
+  if (!btnPlay || !btnMute || !labelStatus) return;
 
   const state = readBgmState();
   let sourceIndex = Math.max(0, Math.min(state.sourceIndex, BGM_SOURCES.length - 1));
@@ -218,14 +220,17 @@ function initGlobalBgm() {
   };
 
   const refresh = (msg) => {
-    btnPlay.textContent = audio.paused ? "Putar" : "Jeda";
+    btnPlay.textContent = audio.paused ? "Play" : "Pause";
     btnMute.textContent = audio.muted ? "Unmute" : "Mute";
-    labelTime.textContent = `${toClock(audio.currentTime)} / ${toClock(audio.duration || 0)}`;
-    if (msg) labelStatus.textContent = msg;
-    else if (audio.paused) labelStatus.textContent = "Musik siap diputar.";
-    else if (audio.muted) labelStatus.textContent = "Musik aktif (mute).";
-    else labelStatus.textContent = "Musik aktif.";
-    labelSource.href = BGM_SOURCES[sourceIndex] || "#";
+    if (msg) {
+      labelStatus.textContent = msg;
+      return;
+    }
+    if (audio.paused) {
+      labelStatus.textContent = "BGM Off";
+      return;
+    }
+    labelStatus.textContent = audio.muted ? "BGM On (Mute)" : "BGM On";
   };
 
   const safePlay = async () => {
@@ -236,7 +241,7 @@ function initGlobalBgm() {
       persist();
     } catch {
       wantsPlay = true;
-      refresh("Autoplay diblokir browser. Klik Putar.");
+      refresh("Klik Play");
       persist();
     }
   };
@@ -254,12 +259,12 @@ function initGlobalBgm() {
       sourceIndex += 1;
       audio.src = BGM_SOURCES[sourceIndex];
       audio.load();
-      refresh("Sumber utama gagal. Pakai sumber cadangan.");
+      refresh("Pindah sumber BGM");
       if (wantsPlay) void safePlay();
       else persist();
       return;
     }
-    refresh("Musik belum tersedia. Ganti URL di script.js.");
+    refresh("BGM error");
     persist();
   });
 
@@ -271,7 +276,7 @@ function initGlobalBgm() {
     }
     wantsPlay = false;
     audio.pause();
-    refresh("Musik dijeda.");
+    refresh();
     persist();
   });
 
@@ -281,7 +286,7 @@ function initGlobalBgm() {
       void safePlay();
       return;
     }
-    refresh(audio.muted ? "Mode mute aktif." : undefined);
+    refresh();
     persist();
   });
 
@@ -299,11 +304,11 @@ function initGlobalBgm() {
   });
 
   audio.load();
-  refresh("Memuat musik...");
+  refresh("Memuat...");
   if (wantsPlay) void safePlay();
   else {
     persist();
-    refresh("Musik siap. Klik Putar.");
+    refresh("Siap");
   }
 }
 
@@ -330,7 +335,64 @@ function renderHome(data) {
   }
 }
 
-function initTipsPage(tips) {
+function teamTierClass(value) {
+  const tier = String(value || "A").toUpperCase();
+  if (tier.startsWith("S")) return "tier-s";
+  if (tier.startsWith("A")) return "tier-a";
+  return "tier-b";
+}
+
+function renderTeamComps(teamComps) {
+  const grid = document.getElementById("team-comps-grid");
+  const stamp = document.getElementById("team-comps-stamp");
+  if (!grid) return;
+
+  const comps = Array.isArray(teamComps) ? [...teamComps] : [];
+  comps.sort((a, b) => {
+    const order = { S: 0, "A+": 1, A: 2, B: 3 };
+    const rankA = order[String(a.tier || "B").toUpperCase()] ?? 99;
+    const rankB = order[String(b.tier || "B").toUpperCase()] ?? 99;
+    if (rankA !== rankB) return rankA - rankB;
+    return collator.compare(a.title || "", b.title || "");
+  });
+
+  if (stamp) {
+    const latest = comps
+      .map((comp) => comp.updatedAt)
+      .filter(Boolean)
+      .sort((a, b) => (a < b ? 1 : -1))[0];
+    stamp.textContent = latest
+      ? `Snapshot meta referensi: ${toDateLabel(latest)}`
+      : "Snapshot meta belum tersedia.";
+  }
+
+  grid.innerHTML = comps.length
+    ? comps
+        .map(
+          (comp) => `
+        <article class="card team-comp-card">
+          <div class="team-comp-head">
+            <span class="meta-tier ${teamTierClass(comp.tier)}">Tier ${esc(comp.tier || "-")}</span>
+            <h3>${esc(comp.title || "Team Comp")}</h3>
+          </div>
+          <p><strong>Komposisi:</strong> ${esc((comp.members || []).join(" + ") || "-")}</p>
+          <p class="gear-meta"><strong>Peran:</strong> ${esc((comp.roles || []).join(" | ") || "-")}</p>
+          <p>${esc(comp.reason || "-")}</p>
+          <p><strong>Efek utama:</strong> ${esc(comp.effect || "-")}</p>
+          <ol class="team-rotation">
+            ${(comp.rotation || []).map((step) => `<li>${esc(step)}</li>`).join("")}
+          </ol>
+          <p class="stamp"><strong>Alternatif:</strong> ${esc((comp.alternatives || []).join(" ") || "-")}</p>
+          <a class="detail-link inline-link" href="${esc(comp.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber tim</a>
+        </article>`
+        )
+        .join("")
+    : emptyState("Data team comp belum tersedia.");
+}
+
+function initTipsPage(tips, teamComps = []) {
+  renderTeamComps(teamComps);
+
   const refs = {
     search: document.getElementById("tips-search"),
     category: document.getElementById("tips-category"),
@@ -551,14 +613,14 @@ function renderBestForChips(bestFor) {
     .join("");
 }
 
-function buildGearDatabase(characters) {
+function buildGearDatabase(characters, gearCatalog = []) {
   const map = new Map();
   const usedIds = new Set();
 
   function upsertGear(character, gear, slotKey, fallbackLevel) {
     if (!gear || !gear.name) return;
 
-    const key = String(gear.source || gear.name).toLowerCase().trim();
+    const key = `${toSlug(gear.name)}::${String(gear.type || "-").toLowerCase().trim()}`;
     if (!key) return;
 
     const level = String(gear.usageLevel || fallbackLevel || "").trim();
@@ -589,16 +651,20 @@ function buildGearDatabase(characters) {
     }
     if (slotKey) {
       entry.slots.add(slotTypeMap[slotKey] || slotKey);
+    } else if (gear.type && gear.type !== "-") {
+      entry.slots.add(gearType(gear.type));
     }
 
-    entry.owners.set(character.id, {
-      id: character.id,
-      name: character.name,
-      image: character.image,
-      role: character.role,
-      tier: character.tier,
-      tags: roleTagsForCharacter(character),
-    });
+    if (character && character.id) {
+      entry.owners.set(character.id, {
+        id: character.id,
+        name: character.name,
+        image: character.image,
+        role: character.role,
+        tier: character.tier,
+        tags: roleTagsForCharacter(character),
+      });
+    }
 
     if ((!entry.effectName || entry.effectName === "-") && gear.effectName) {
       entry.effectName = gear.effectName;
@@ -613,6 +679,10 @@ function buildGearDatabase(characters) {
       entry.stats = gear.stats;
     }
   }
+
+  gearCatalog.forEach((gear) => {
+    upsertGear(null, gear, null, gear.usageLevel || "");
+  });
 
   characters.forEach((character) => {
     const profile = character.profile || {};
@@ -693,22 +763,23 @@ function buildGearDatabase(characters) {
     .sort((a, b) => collator.compare(a.name, b.name));
 }
 
-function initGearsPage(characters) {
+function initGearsPage(characters, gearCatalog = []) {
   const refs = {
     search: document.getElementById("gear-search"),
     type: document.getElementById("gear-type-filter"),
     level: document.getElementById("gear-level-filter"),
     set: document.getElementById("gear-set-filter"),
+    bestfor: document.getElementById("gear-bestfor-filter"),
     sort: document.getElementById("gear-sort"),
     count: document.getElementById("gear-count"),
     grid: document.getElementById("gear-db-grid"),
   };
 
-  if (!refs.search || !refs.type || !refs.level || !refs.set || !refs.sort || !refs.count || !refs.grid) {
+  if (!refs.search || !refs.type || !refs.level || !refs.set || !refs.bestfor || !refs.sort || !refs.count || !refs.grid) {
     return;
   }
 
-  const gearItems = buildGearDatabase(characters);
+  const gearItems = buildGearDatabase(characters, gearCatalog);
 
   const typeValues = [...new Set(gearItems.flatMap((item) => item.types))].sort((a, b) =>
     collator.compare(gearType(a), gearType(b))
@@ -732,6 +803,21 @@ function initGearsPage(characters) {
   refs.set.innerHTML = [
     '<option value="ALL">Semua Set</option>',
     ...setValues.map((setValue) => `<option value="${esc(setValue)}">${esc(setValue)}</option>`),
+  ].join("");
+
+  const bestForValues = [...new Set(gearItems.flatMap((item) => item.bestFor))]
+    .filter(Boolean)
+    .sort((a, b) => {
+      const idxA = roleTagOrder.indexOf(a);
+      const idxB = roleTagOrder.indexOf(b);
+      if (idxA === -1 && idxB === -1) return collator.compare(a, b);
+      if (idxA === -1) return 1;
+      if (idxB === -1) return -1;
+      return idxA - idxB;
+    });
+  refs.bestfor.innerHTML = [
+    '<option value="ALL">Best for: Semua</option>',
+    ...bestForValues.map((value) => `<option value="${esc(value)}">${esc(value)}</option>`),
   ].join("");
 
   const sortList = (items, mode) => {
@@ -763,6 +849,7 @@ function initGearsPage(characters) {
     const type = refs.type.value;
     const level = refs.level.value;
     const setName = refs.set.value;
+    const bestFor = refs.bestfor.value;
     const sortMode = refs.sort.value;
 
     const filtered = sortList(
@@ -770,10 +857,11 @@ function initGearsPage(characters) {
         const byType = type === "ALL" || item.types.includes(type);
         const byLevel = level === "ALL" || item.usageLevels.includes(level);
         const bySet = setName === "ALL" || item.effectName === setName;
+        const byBestFor = bestFor === "ALL" || item.bestFor.includes(bestFor);
         const blob =
           `${item.name} ${item.effectName} ${item.effectDescription} ${item.description} ${item.types.join(" ")} ${item.usageLevels.join(" ")} ${item.slots.join(" ")} ${item.bestFor.join(" ")} ${item.owners.map((owner) => owner.name).join(" ")}`.toLowerCase();
         const bySearch = !search || blob.includes(search);
-        return byType && byLevel && bySet && bySearch;
+        return byType && byLevel && bySet && byBestFor && bySearch;
       }),
       sortMode
     );
@@ -819,11 +907,12 @@ function initGearsPage(characters) {
   refs.type.addEventListener("change", redraw);
   refs.level.addEventListener("change", redraw);
   refs.set.addEventListener("change", redraw);
+  refs.bestfor.addEventListener("change", redraw);
   refs.sort.addEventListener("change", redraw);
   redraw();
 }
 
-function initGearDetailPage(characters) {
+function initGearDetailPage(characters, gearCatalog = []) {
   const status = document.getElementById("gear-detail-status");
   const target = document.getElementById("gear-detail");
   if (!status || !target) return;
@@ -837,7 +926,7 @@ function initGearDetailPage(characters) {
     return;
   }
 
-  const gearItems = buildGearDatabase(characters);
+  const gearItems = buildGearDatabase(characters, gearCatalog);
   const item = gearItems.find((gear) => gear.id === id);
 
   if (!item) {
@@ -1128,11 +1217,11 @@ async function bootstrap() {
   const data = await fetchData();
 
   if (page === "home") return renderHome(data);
-  if (page === "helps") return initTipsPage(data.tips);
+  if (page === "helps") return initTipsPage(data.tips, data.teamComps || []);
   if (page === "tierlist") return initTierPage(data.characters);
   if (page === "builds") return initBuildPage(data.characters);
-  if (page === "gears") return initGearsPage(data.characters);
-  if (page === "gear") return initGearDetailPage(data.characters);
+  if (page === "gears") return initGearsPage(data.characters, data.gearCatalog || []);
+  if (page === "gear") return initGearDetailPage(data.characters, data.gearCatalog || []);
   if (page === "characters") return initCharactersPage(data.characters);
   if (page === "character") return initCharacterPage(data.characters);
 }
