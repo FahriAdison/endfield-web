@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updatedAt": "2026-02-19",
-    "patchNote": "Removed unreleased Fjall from public list, updated gacha schedule with official Gilberta timing, added Yvonne next-banner estimate, and enabled countdown-ready banner timestamps."
+    "updatedAt": "2026-02-20",
+    "patchNote": "Expanded Tips section with researched combat, progression, AIC, mining, delivery, and gacha-planning guidance from latest community references."
   },
   "tips": [
     {
@@ -89,6 +89,171 @@
       "tags": [
         "gacha",
         "currency",
+        "planning"
+      ]
+    },
+    {
+      "id": "tips-interrupt-red-window",
+      "title": "Interrupt musuh di red window, bukan white window",
+      "category": "Combat",
+      "description": "Saat musuh charge serangan, tunggu lingkaran merah lalu interrupt pakai Battle Skill/Combo/Ultimate. Hit di lingkaran putih umumnya belum memutus cast.",
+      "tags": [
+        "interrupt",
+        "boss",
+        "timing"
+      ]
+    },
+    {
+      "id": "tips-perfect-dodge-sp",
+      "title": "Manfaatkan perfect dodge untuk regen SP",
+      "category": "Combat",
+      "description": "Kamu bisa dodge cepat dua kali. Perfect dodge memberi SP tambahan, jadi sangat berguna untuk jaga rotasi skill tetap hidup.",
+      "tags": [
+        "dodge",
+        "sp",
+        "rotation"
+      ]
+    },
+    {
+      "id": "tips-stagger-finisher-value",
+      "title": "Kejar stagger lalu eksekusi finisher",
+      "category": "Combat",
+      "description": "Saat bar stagger penuh, musuh masuk jendela damage besar. Finisher biasanya memberi burst tinggi sekaligus mengembalikan SP tim.",
+      "tags": [
+        "stagger",
+        "finisher",
+        "burst"
+      ]
+    },
+    {
+      "id": "tips-manage-shared-sp",
+      "title": "Ingat: SP dipakai bareng satu tim",
+      "category": "Combat",
+      "description": "Battle Skill semua operator memakai pool SP yang sama. Jangan spam semua tombol bersamaan, atur giliran biar rotasi tidak kosong.",
+      "tags": [
+        "sp",
+        "team",
+        "resource"
+      ]
+    },
+    {
+      "id": "tips-combo-ultimate-cycle",
+      "title": "Bangun rotasi Combo Skill untuk isi Ultimate",
+      "category": "Combat",
+      "description": "Combo Skill tidak makan SP dan membantu isi energi Ultimate. Pilih tim yang trigger combo-nya konsisten agar siklus burst lebih rapat.",
+      "tags": [
+        "combo",
+        "ultimate",
+        "synergy"
+      ]
+    },
+    {
+      "id": "tips-story-feature-priority",
+      "title": "Prioritaskan Main Quest dan unlock fitur",
+      "category": "Early Game",
+      "description": "Di awal akun, dorong Main Quest dulu untuk membuka fitur inti. Setelah itu fokus ke quest bertanda New Feature/Event agar progres tidak ketahan.",
+      "tags": [
+        "story",
+        "feature",
+        "progression"
+      ]
+    },
+    {
+      "id": "tips-do-simulations-early",
+      "title": "Kerjakan Simulation segera saat terbuka",
+      "category": "Early Game",
+      "description": "Simulation awal membantu percepat level akun serta memberi blueprint/material tambahan yang berguna untuk setup produksi dan gear.",
+      "tags": [
+        "simulation",
+        "blueprint",
+        "leveling"
+      ]
+    },
+    {
+      "id": "tips-unlock-outpost-before-heavy-aic",
+      "title": "Buka outpost pertama sebelum AIC terlalu kompleks",
+      "category": "Economy",
+      "description": "Unlock outpost awal dulu supaya map resource terbuka. Ini memudahkan lihat mineral bed dan menentukan jalur produksi dari awal.",
+      "tags": [
+        "outpost",
+        "aic",
+        "map"
+      ]
+    },
+    {
+      "id": "tips-take-mining-nodes-early",
+      "title": "Kuasai node mining sedini mungkin",
+      "category": "Economy",
+      "description": "Pasang mining rig di node yang sudah terbuka dan sambungkan ke grid listrik. Produksi mineral stabil akan sangat membantu upgrade berikutnya.",
+      "tags": [
+        "mining",
+        "rig",
+        "resource"
+      ]
+    },
+    {
+      "id": "tips-pylon-relay-network",
+      "title": "Bangun jaringan pylon dan relay yang rapi",
+      "category": "Economy",
+      "description": "Infrastruktur listrik adalah tulang punggung AIC. Rencanakan relay/pylon dari awal agar ekspansi fasilitas tidak bongkar pasang terus.",
+      "tags": [
+        "pylon",
+        "relay",
+        "power"
+      ]
+    },
+    {
+      "id": "tips-stock-redistribution-routine",
+      "title": "Aktifkan Stock Redistribution secara rutin",
+      "category": "Economy",
+      "description": "Stock Redistribution adalah sumber Stock Bills yang efisien. Income ini penting untuk upgrade fasilitas, produksi, dan progres region.",
+      "tags": [
+        "stockbill",
+        "trade",
+        "income"
+      ]
+    },
+    {
+      "id": "tips-depot-delivery-careful",
+      "title": "Hati-hati saat antar paket Depot",
+      "category": "Economy",
+      "description": "Nilai bayar paket bisa turun kalau kamu teleport atau terlalu sering kena hit. Baca syarat delivery lalu pilih rute paling aman.",
+      "tags": [
+        "depot",
+        "delivery",
+        "route"
+      ]
+    },
+    {
+      "id": "tips-place-ziplines-for-farming",
+      "title": "Pasang zipline untuk jalur farming harian",
+      "category": "Exploration",
+      "description": "Zipline yang dipasang di spot penting (mining, rare growth, objective event) menghemat waktu rotasi harian secara signifikan.",
+      "tags": [
+        "zipline",
+        "exploration",
+        "farming"
+      ]
+    },
+    {
+      "id": "tips-reroll-not-mandatory",
+      "title": "Reroll bukan keharusan untuk mayoritas pemain",
+      "category": "Gacha",
+      "description": "Reroll biasanya memakan waktu cukup lama per percobaan. Untuk kebanyakan pemain, progres akun aktif + planning banner lebih efisien.",
+      "tags": [
+        "reroll",
+        "efficiency",
+        "time"
+      ]
+    },
+    {
+      "id": "tips-plan-chartered-to-spark",
+      "title": "Saat target banner spesifik, rencanakan sampai spark",
+      "category": "Gacha",
+      "description": "Di Chartered, rate-up tetap bisa meleset. Kalau incar satu karakter tertentu, rencanakan resource seolah perlu mendekati batas spark banner.",
+      "tags": [
+        "chartered",
+        "spark",
         "planning"
       ]
     }
