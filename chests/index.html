@@ -1,0 +1,134 @@
+﻿<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chest Map Endfield Indonesia | Talos-II & Wuling</title>
+    <meta
+      name="description"
+      content="Lokasi chest Arknights: Endfield untuk Talos-II (Valley IV) dan Wuling, lengkap dengan peta area, gambar posisi, caption lokasi, dan cara ambil chest."
+    />
+    <meta
+      name="keywords"
+      content="chest endfield indonesia, lokasi chest talos ii, lokasi chest wuling, treasure chest endfield, map chest endfield"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#071019" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Chest Map Endfield Indonesia | Talos-II & Wuling" />
+    <meta
+      property="og:description"
+      content="Database lokasi chest Endfield: Talos-II dan Wuling, plus peta area, gambar marker, dan cara ambil chest."
+    />
+    <meta property="og:url" content="https://endfield-ind.my.id/chests/" />
+    <meta property="og:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
+    <meta property="og:image:alt" content="Arknights Endfield key visual - Endfield Web" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chest Map Endfield Indonesia | Talos-II & Wuling" />
+    <meta
+      name="twitter:description"
+      content="Lokasi chest Endfield lengkap untuk Talos-II dan Wuling, termasuk peta area, gambar marker, dan cara ambil."
+    />
+    <meta name="twitter:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
+    <link rel="canonical" href="https://endfield-ind.my.id/chests/" />
+    <link rel="sitemap" type="application/xml" href="https://endfield-ind.my.id/sitemap.xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/assets/images/hero-share.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-page="chests" data-base-path="..">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="page-hero">
+      <nav class="nav container">
+        <a class="brand" href="../">Endfield Web</a>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <a href="../characters/">Characters</a>
+          <a href="../tierlist/">Tierlist</a>
+          <a href="../builds/">Builds</a>
+          <a href="../team-comps/">Team Comps</a>
+          <a href="../gears/">Gears</a>
+          <a class="active" href="./">Chest Map</a>
+          <a href="../gacha/">Gacha Sim</a>
+          <a href="../helps/">Tips</a>
+        </div>
+      </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">CHEST ATLAS</p>
+        <h1>Lokasi Chest Talos-II & Wuling</h1>
+        <p>
+          Database chest skala besar berisi peta region, peta area, lokasi marker,
+          dan cara ambil chest untuk Talos-II (Valley IV) serta Wuling.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container">
+        <p class="stamp" id="chests-stamp">Memuat peta dan data chest...</p>
+        <div class="grid chest-map-grid" id="chests-region-grid"></div>
+      </section>
+
+      <section class="section container">
+        <div class="section-head">
+          <h2>Peta per Area</h2>
+          <p>Klik gambar map area untuk membuka referensi peta original.</p>
+        </div>
+        <div class="grid chest-area-map-grid" id="chests-area-map-grid"></div>
+      </section>
+
+      <section class="section container">
+        <div class="section-controls">
+          <input id="chests-search" type="search" placeholder="Cari area / marker / cara ambil chest..." />
+          <select id="chests-region-filter"></select>
+          <select id="chests-area-filter"></select>
+          <select id="chests-hidden-filter">
+            <option value="ALL">Semua Chest</option>
+            <option value="HIDDEN">Hidden Hint</option>
+            <option value="STANDARD">Standard</option>
+          </select>
+          <select id="chests-sort">
+            <option value="HIDDEN">Sort: Hidden First</option>
+            <option value="AREA_AZ">Sort: Area A-Z</option>
+            <option value="AREA_ZA">Sort: Area Z-A</option>
+            <option value="MARKER_ASC">Sort: Marker Asc</option>
+          </select>
+          <select id="chests-limit">
+            <option value="60">Tampil 60</option>
+            <option value="120">Tampil 120</option>
+            <option value="240">Tampil 240</option>
+            <option value="ALL">Tampilkan Semua</option>
+          </select>
+        </div>
+        <p class="result-count" id="chests-count"></p>
+        <div class="grid chest-grid" id="chests-grid"></div>
+      </section>
+
+      <section class="section container">
+        <h2>Sumber Data Chest</h2>
+        <ul class="source-list" id="chests-source-list"></ul>
+        <p class="disclaimer">
+          Lokasi chest dapat berubah jika ada update patch. Halaman ini akan terus disesuaikan dengan data terbaru.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Endfield Web - Chest Map</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

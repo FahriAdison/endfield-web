@@ -2478,9 +2478,283 @@ function initCharacterPage(characters) {
   renderCharacterDetail(character);
 }
 
+function chestMarkerNumber(entry) {
+  const value = Number.parseInt(entry?.markerId || "", 10);
+  return Number.isFinite(value) ? value : Number.MAX_SAFE_INTEGER;
+}
+
+function sortChests(items, mode = "HIDDEN") {
+  const list = [...items];
+  list.sort((a, b) => {
+    if (mode === "AREA_AZ") {
+      const areaCmp = collator.compare(a.area || "", b.area || "");
+      if (areaCmp !== 0) return areaCmp;
+      return chestMarkerNumber(a) - chestMarkerNumber(b);
+    }
+
+    if (mode === "AREA_ZA") {
+      const areaCmp = collator.compare(b.area || "", a.area || "");
+      if (areaCmp !== 0) return areaCmp;
+      return chestMarkerNumber(a) - chestMarkerNumber(b);
+    }
+
+    if (mode === "MARKER_ASC") {
+      const markerCmp = chestMarkerNumber(a) - chestMarkerNumber(b);
+      if (markerCmp !== 0) return markerCmp;
+      return collator.compare(a.area || "", b.area || "");
+    }
+
+    const hiddenCmp = Number(Boolean(b.isHiddenHint)) - Number(Boolean(a.isHiddenHint));
+    if (hiddenCmp !== 0) return hiddenCmp;
+    const areaCmp = collator.compare(a.area || "", b.area || "");
+    if (areaCmp !== 0) return areaCmp;
+    return chestMarkerNumber(a) - chestMarkerNumber(b);
+  });
+  return list;
+}
+
+async function initChestsPage() {
+  const refs = {
+    stamp: document.getElementById("chests-stamp"),
+    regionMapGrid: document.getElementById("chests-region-grid"),
+    areaMapGrid: document.getElementById("chests-area-map-grid"),
+    search: document.getElementById("chests-search"),
+    region: document.getElementById("chests-region-filter"),
+    area: document.getElementById("chests-area-filter"),
+    hidden: document.getElementById("chests-hidden-filter"),
+    sort: document.getElementById("chests-sort"),
+    limit: document.getElementById("chests-limit"),
+    count: document.getElementById("chests-count"),
+    grid: document.getElementById("chests-grid"),
+    sourceList: document.getElementById("chests-source-list"),
+  };
+  if (
+    !refs.stamp ||
+    !refs.regionMapGrid ||
+    !refs.areaMapGrid ||
+    !refs.search ||
+    !refs.region ||
+    !refs.area ||
+    !refs.hidden ||
+    !refs.sort ||
+    !refs.limit ||
+    !refs.count ||
+    !refs.grid ||
+    !refs.sourceList
+  ) {
+    return;
+  }
+
+  let chestData;
+  try {
+    chestData = await fetchChestsData();
+  } catch (error) {
+    refs.stamp.textContent = "Gagal memuat data chest.";
+    refs.grid.innerHTML = emptyState("Data chest belum bisa dimuat. Coba refresh halaman.");
+    console.error(error);
+    return;
+  }
+
+  const regions = Array.isArray(chestData.regions) ? chestData.regions : [];
+  const areas = Array.isArray(chestData.areas) ? chestData.areas : [];
+  const entries = Array.isArray(chestData.entries) ? chestData.entries : [];
+
+  const regionById = new Map(regions.map((region) => [region.id, region]));
+  const areaByName = new Map(areas.map((area) => [area.name, area]));
+  const areaByRegion = new Map();
+  areas.forEach((area) => {
+    const key = area.regionId || "";
+    if (!areaByRegion.has(key)) areaByRegion.set(key, []);
+    areaByRegion.get(key).push(area);
+  });
+
+  const totalChests = Number(chestData.meta?.totalChests) || entries.length;
+  const hiddenHints = Number(chestData.meta?.hiddenHintCount) || entries.filter((entry) => entry.isHiddenHint).length;
+  refs.stamp.textContent = `Update data: ${toDateLabel(chestData.meta?.updatedAt)} | Total chest: ${totalChests} | Hidden hint: ${hiddenHints}`;
+
+  applyDynamicMeta({
+    title: "Chest Map Endfield Indonesia | Talos-II & Wuling | Endfield Web",
+    description:
+      "Lokasi chest Arknights: Endfield untuk Talos-II (Valley IV) dan Wuling, lengkap dengan peta area, gambar marker, caption, dan cara ambil chest.",
+    canonicalUrl: toAbsoluteSiteUrl("/chests/"),
+    imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
+    keywords: [
+      "chest endfield indonesia",
+      "lokasi chest talos-ii endfield",
+      "lokasi chest wuling endfield",
+      "treasure chest endfield map",
+      "hidden chest endfield",
+      "endfield guide indonesia",
+      "arknights endfield indonesia",
+    ],
+  });
+
+  refs.regionMapGrid.innerHTML = regions.length
+    ? regions
+        .map(
+          (region) => `
+        <article class="card chest-map-card">
+          <a class="card-link" href="${esc(region.mapPage || "#")}" target="_blank" rel="noreferrer noopener">
+            <img
+              class="chest-map-image"
+              src="${asset(region.mapImage || "assets/images/hero-share.jpg")}"
+              alt="${esc(`Peta ${region.name}`)}"
+              loading="lazy"
+            />
+            <div class="chest-map-copy">
+              <h3>${esc(region.name || "-")}</h3>
+              <p><strong>Total chest:</strong> ${esc(region.chestCount || 0)}</p>
+              <p>${esc(region.mapCaption || "Peta region chest.")}</p>
+              <span class="detail-link">Buka map referensi</span>
+            </div>
+          </a>
+        </article>`
+        )
+        .join("")
+    : emptyState("Peta region belum tersedia.");
+
+  refs.areaMapGrid.innerHTML = areas.length
+    ? areas
+        .map(
+          (area) => `
+        <article class="card chest-map-card area">
+          <a class="card-link" href="${esc(area.mapPage || "#")}" target="_blank" rel="noreferrer noopener">
+            <img
+              class="chest-map-image"
+              src="${asset(area.mapImage || "assets/images/hero-share.jpg")}"
+              alt="${esc(`Peta ${area.name}`)}"
+              loading="lazy"
+            />
+            <div class="chest-map-copy">
+              <h3>${esc(area.name || "-")}</h3>
+              <p><strong>Total chest:</strong> ${esc(area.chestCount || 0)}</p>
+              <p>${esc(area.mapCaption || "Peta area chest.")}</p>
+            </div>
+          </a>
+        </article>`
+        )
+        .join("")
+    : emptyState("Peta area belum tersedia.");
+
+  refs.sourceList.innerHTML = Array.isArray(chestData.sources)
+    ? chestData.sources
+        .map((source) => normalizeSourceEntry(source))
+        .filter(Boolean)
+        .map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noreferrer noopener">${esc(source.label)}</a></li>`)
+        .join("")
+    : "";
+
+  refs.region.innerHTML = [
+    '<option value="ALL">Semua Region</option>',
+    ...regions.map((region) => `<option value="${esc(region.id)}">${esc(region.name)}</option>`),
+  ].join("");
+
+  const updateAreaOptions = () => {
+    const regionId = refs.region.value;
+    const options = regionId === "ALL" ? areas : areaByRegion.get(regionId) || [];
+    refs.area.innerHTML = [
+      '<option value="ALL">Semua Area</option>',
+      ...sortByName(options, "name", "AZ").map((area) => `<option value="${esc(area.name)}">${esc(area.name)}</option>`),
+    ].join("");
+  };
+
+  const redraw = () => {
+    const search = refs.search.value.trim().toLowerCase();
+    const selectedRegion = refs.region.value;
+    const selectedArea = refs.area.value;
+    const hiddenMode = refs.hidden.value;
+    const sortMode = refs.sort.value;
+    const limitValue = refs.limit.value;
+
+    const filtered = sortChests(
+      entries.filter((entry) => {
+        const byRegion = selectedRegion === "ALL" || entry.regionId === selectedRegion;
+        const byArea = selectedArea === "ALL" || entry.area === selectedArea;
+        const byHidden =
+          hiddenMode === "ALL" ||
+          (hiddenMode === "HIDDEN" && Boolean(entry.isHiddenHint)) ||
+          (hiddenMode === "STANDARD" && !entry.isHiddenHint);
+
+        const blob = `${entry.title || ""} ${entry.area || ""} ${entry.markerId || ""} ${entry.howToGet || ""} ${(entry.tags || []).join(" ")}`.toLowerCase();
+        const bySearch = !search || blob.includes(search);
+        return byRegion && byArea && byHidden && bySearch;
+      }),
+      sortMode
+    );
+
+    const limit = limitValue === "ALL" ? filtered.length : Number.parseInt(limitValue, 10) || 60;
+    const visible = filtered.slice(0, limit);
+
+    refs.count.textContent =
+      filtered.length === visible.length
+        ? `${filtered.length} chest cocok`
+        : `${filtered.length} chest cocok (menampilkan ${visible.length})`;
+
+    refs.grid.innerHTML = visible.length
+      ? visible
+          .map((entry) => {
+            const region = regionById.get(entry.regionId);
+            const area = areaByName.get(entry.area);
+            const fallbackImage = area?.mapImage || region?.mapImage || "assets/images/hero-share.jpg";
+            const image = entry.image || fallbackImage;
+            const imageFull = entry.imageFull || image;
+            const markerLabel = entry.markerId ? `Marker #${entry.markerId}` : "Marker tidak tersedia";
+            const difficulty = entry.difficulty || "Low";
+            const chips = (entry.tags || []).slice(0, 6);
+            const source = normalizeSourceEntry((entry.sources || [])[0]) || { label: "Sumber", url: "#" };
+            const areaSource = normalizeSourceEntry((entry.sources || [])[1]) || null;
+
+            return `
+              <article class="card chest-card">
+                <img class="chest-thumb" src="${asset(image)}" alt="${esc(`${entry.area} chest ${entry.markerId || ""}`)}" loading="lazy" />
+                <div class="chest-meta-row">
+                  <span class="tip-category ${entry.isHiddenHint ? "chest-tip-hidden" : "chest-tip-standard"}">${entry.isHiddenHint ? "Hidden Hint" : "Standard"}</span>
+                  <span class="tip-category chest-tip-diff">Difficulty ${esc(difficulty)}</span>
+                </div>
+                <h3>${esc(entry.area)} - ${esc(markerLabel)}</h3>
+                <p class="chest-caption"><strong>Region:</strong> ${esc(region?.name || "-")} | <strong>Area:</strong> ${esc(entry.area || "-")}</p>
+                <p class="chest-howto">${esc(entry.howToGet || "-")}</p>
+                ${
+                  chips.length
+                    ? `<div class="chest-chip-row">${chips
+                        .map((chip) => `<span class="chest-chip">${esc(chip)}</span>`)
+                        .join("")}</div>`
+                    : ""
+                }
+                <div class="chest-action-row">
+                  <a class="detail-link inline-link" href="${esc(imageFull || "#")}" target="_blank" rel="noreferrer noopener">Lihat gambar penuh</a>
+                  ${areaSource ? `<a class="detail-link inline-link" href="${esc(areaSource.url)}" target="_blank" rel="noreferrer noopener">Peta area</a>` : ""}
+                  <a class="detail-link inline-link" href="${esc(source.url)}" target="_blank" rel="noreferrer noopener">${esc(source.label)}</a>
+                </div>
+              </article>`;
+          })
+          .join("")
+      : emptyState("Chest tidak ditemukan untuk filter ini. Coba ubah keyword atau area.");
+  };
+
+  refs.search.addEventListener("input", redraw);
+  refs.region.addEventListener("change", () => {
+    updateAreaOptions();
+    redraw();
+  });
+  refs.area.addEventListener("change", redraw);
+  refs.hidden.addEventListener("change", redraw);
+  refs.sort.addEventListener("change", redraw);
+  refs.limit.addEventListener("change", redraw);
+
+  updateAreaOptions();
+  redraw();
+}
+
 async function fetchData() {
   const response = await fetch(withRoot("data/content.json"));
   if (!response.ok) throw new Error("Gagal memuat data JSON");
+  return response.json();
+}
+
+async function fetchChestsData() {
+  const response = await fetch(withRoot("data/chests.json"));
+  if (!response.ok) throw new Error("Gagal memuat data chest JSON");
   return response.json();
 }
 
@@ -2496,6 +2770,7 @@ async function bootstrap() {
   if (page === "tierlist") return initTierPage(data.characters);
   if (page === "builds") return initBuildPage(data.characters);
   if (page === "gears") return initGearsPage(data.characters, data.gearCatalog || []);
+  if (page === "chests") return initChestsPage();
   if (page === "gear") return initGearDetailPage(data.characters, data.gearCatalog || []);
   if (page === "characters") return initCharactersPage(data.characters);
   if (page === "character") return initCharacterPage(data.characters);
@@ -2503,6 +2778,10 @@ async function bootstrap() {
 
 bootstrap().catch((error) => {
   console.error(error);
-  const stamp = document.getElementById("data-stamp") || document.getElementById("profile-status");
+  const stamp =
+    document.getElementById("data-stamp") ||
+    document.getElementById("profile-status") ||
+    document.getElementById("gear-detail-status") ||
+    document.getElementById("chests-stamp");
   if (stamp) stamp.textContent = "Data gagal dimuat";
 });
