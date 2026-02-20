@@ -1583,6 +1583,10 @@ select:focus-visible {
   align-items: stretch;
 }
 
+.creator-layout.container {
+  width: min(1680px, 98%);
+}
+
 .creator-controls {
   position: static;
   order: 2;
@@ -1590,6 +1594,20 @@ select:focus-visible {
 
 .creator-preview-shell {
   order: 1;
+}
+
+.creator-preview-shell.card {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.creator-preview-shell.card:hover {
+  transform: none;
+  border: none;
+  box-shadow: none;
 }
 
 .creator-field {
@@ -2161,13 +2179,21 @@ select:focus-visible {
 }
 
 .creator-showcase-preview {
-  width: min(100%, 1180px);
+  width: 100%;
+  max-width: none;
   aspect-ratio: 16 / 9;
   min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 0.62rem;
-  padding: 0.86rem 0.86rem 0.7rem;
+  padding: 0.86rem 1rem 0.7rem;
+  border: none;
+  border-radius: 0.34rem;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35);
+}
+
+.creator-showcase-preview::before {
+  display: none;
 }
 
 .creator-showcase-preview::after {
