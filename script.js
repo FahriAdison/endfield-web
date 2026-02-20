@@ -2067,16 +2067,18 @@ function initGearDetailPage(characters, gearCatalog = []) {
 
   status.textContent = "Detail gear berhasil dimuat.";
   applyDynamicMeta({
-    title: `${item.name} | Gear Detail | Endfield Web`,
-    description: `Detail gear ${item.name}: stats, efek set, usage level, dan rekomendasi karakter pengguna di Endfield Web.`,
+    title: `${item.name} Gear Endfield Indonesia | Endfield Web`,
+    description: `Detail gear ${item.name} di Arknights: Endfield Indonesia: stats, efek set, usage level, best for, dan rekomendasi karakter pengguna.`,
     canonicalUrl: toAbsoluteSiteUrl(`/gear/?id=${encodeURIComponent(item.id)}`),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
     keywords: [
-      `${item.name} endfield gear`,
+      `${item.name} gear endfield indonesia`,
       `detail ${item.name} endfield`,
+      `stats ${item.name} endfield`,
       "gear endfield terbaik",
       "stats gear endfield",
       "efek set endfield",
+      "endfield guide indonesia",
       "arknights endfield indonesia",
     ],
   });
@@ -2343,8 +2345,8 @@ function renderCharacterDetail(character) {
 
   status.textContent = `Profil dimuat dari data update ${toDateLabel(profile.updatedAt)}`;
   applyDynamicMeta({
-    title: `${character.name} | Profil Karakter Endfield | Endfield Web`,
-    description: `${character.name} di Arknights: Endfield - role ${profile.role || character.role}, elemen ${profile.element || "-"}, build, skill, dan progression gear lengkap.`,
+    title: `${character.name} Build & Profil Endfield Indonesia | Endfield Web`,
+    description: `${character.name} di Arknights: Endfield Indonesia - role ${profile.role || character.role}, elemen ${profile.element || "-"}, build, skill, tips, dan progression gear lengkap.`,
     canonicalUrl: toAbsoluteSiteUrl(`/character/?id=${encodeURIComponent(character.id)}`),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
     keywords: [
@@ -2352,6 +2354,8 @@ function renderCharacterDetail(character) {
       `${character.name} endfield gear`,
       `${character.name} endfield skill`,
       `${character.name} endfield team`,
+      `${character.name} endfield indonesia`,
+      "endfield guide indonesia",
       "karakter endfield terbaik",
       "arknights endfield indonesia",
     ],
