@@ -400,6 +400,26 @@ function randomPick(list) {
   return list[Math.floor(Math.random() * list.length)] || null;
 }
 
+function clampNumber(value, min, max, fallback = min) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return fallback;
+  return Math.min(max, Math.max(min, Math.round(num)));
+}
+
+function creatorStars(rarity) {
+  return "★".repeat(clampNumber(rarity, 1, 6, 5));
+}
+
+function creatorProfileId(character, state) {
+  const level = clampNumber(state?.level, 1, 90, 70);
+  const affinity = clampNumber(state?.affinity, 0, 10, 10);
+  const token = String(character?.id || "endf")
+    .replace(/[^a-z0-9]/gi, "")
+    .slice(0, 4)
+    .toUpperCase();
+  return `AEND-${String(level).padStart(2, "0")}${String(affinity).padStart(2, "0")}-${token || "UNIT"}`;
+}
+
 let revealObserver = null;
 function ensureRevealObserver() {
   if (revealObserver) return revealObserver;
@@ -3468,6 +3488,8 @@ function buildCreatorCharacterData(character) {
     Wulfgard: "assets/icons/wulfgard.webp",
   };
   const image = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
+  const rarityMatch = String(character?.profile?.rarity || "").match(/(\d+)/);
+  const rarity = rarityMatch ? Number(rarityMatch[1]) : 5;
   return {
     id: character?.id || "",
     name: character?.name || "Unknown",
@@ -3475,6 +3497,7 @@ function buildCreatorCharacterData(character) {
     tier: character?.tier || "-",
     element: character?.profile?.element || "-",
     weapon: character?.profile?.weapon || "-",
+    rarity: Number.isFinite(rarity) ? rarity : 5,
     image,
   };
 }
@@ -3508,90 +3531,181 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
     return null;
   }
 
+  const accent = preset.accent || "#fdfd1f";
+  const ink = preset.ink || "#f6f8fb";
+  const level = clampNumber(state?.level, 1, 90, 70);
+  const affinity = clampNumber(state?.affinity, 0, 10, 10);
+  const profileId = creatorProfileId(character, state);
+  const starText = creatorStars(character?.rarity);
   const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, preset.bgA || "#123349");
-  gradient.addColorStop(1, preset.bgB || "#09131d");
+  gradient.addColorStop(0, preset.bgA || "#23262b");
+  gradient.addColorStop(1, preset.bgB || "#090b0e");
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.globalAlpha = 0.2;
-  ctx.fillStyle = preset.accent || "#70d9ff";
-  ctx.fillRect(72, 72, 560, 14);
-  ctx.fillRect(72, 820, 1456, 8);
-  ctx.fillRect(980, 120, 520, 10);
+  // Grid overlay to mimic tactical board UI.
+  ctx.save();
+  ctx.strokeStyle = "rgba(255,255,255,0.045)";
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= canvas.width; x += 48) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvas.height);
+    ctx.stroke();
+  }
+  for (let y = 0; y <= canvas.height; y += 48) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  const drawRoundedPanel = (x, y, w, h, r, fill, stroke, strokeWidth = 1.4) => {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+    if (fill) {
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+    if (stroke) {
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = strokeWidth;
+      ctx.stroke();
+    }
+  };
+
+  drawRoundedPanel(70, 88, 1460, 732, 14, "rgba(0,0,0,0.34)", "rgba(255,255,255,0.12)", 2);
+  drawRoundedPanel(96, 132, 840, 566, 16, "rgba(0,0,0,0.35)", "rgba(255,255,255,0.08)");
+
+  ctx.globalAlpha = 0.85;
+  ctx.fillStyle = accent;
+  ctx.fillRect(96, 108, 360, 10);
+  ctx.fillRect(96, 806, 370, 7);
+  ctx.fillRect(1238, 132, 292, 7);
   ctx.globalAlpha = 1;
 
-  ctx.fillStyle = "rgba(0,0,0,0.24)";
-  ctx.fillRect(70, 90, 1460, 730);
-  ctx.strokeStyle = preset.accent || "#70d9ff";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(70, 90, 1460, 730);
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 2;
+  ctx.strokeRect(95, 131, 842, 568);
 
+  const artBounds = { x: 892, y: 128, w: 608, h: 632 };
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(942, 128);
+  ctx.lineTo(1500, 128);
+  ctx.lineTo(1500, 708);
+  ctx.lineTo(1458, 760);
+  ctx.lineTo(892, 760);
+  ctx.lineTo(892, 186);
+  ctx.closePath();
+  ctx.fillStyle = "rgba(0,0,0,0.35)";
+  ctx.fill();
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.clip();
+
+  ctx.fillStyle = "rgba(0,0,0,0.22)";
+  ctx.fillRect(artBounds.x, artBounds.y, artBounds.w, artBounds.h);
   const imageUrl = asset(character.image);
   try {
     const img = await loadCanvasImage(imageUrl);
-    const cx = 330;
-    const cy = 455;
-    const radius = 220;
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.closePath();
-    ctx.clip();
-    const size = Math.max(img.width, img.height);
-    const sx = (img.width - size) / 2;
-    const sy = (img.height - size) / 2;
-    ctx.drawImage(img, sx, sy, size, size, cx - radius, cy - radius, radius * 2, radius * 2);
-    ctx.restore();
-    ctx.strokeStyle = preset.accent || "#70d9ff";
-    ctx.lineWidth = 8;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius + 4, 0, Math.PI * 2);
-    ctx.stroke();
+    const scale = Math.max(artBounds.w / img.width, artBounds.h / img.height);
+    const drawW = img.width * scale;
+    const drawH = img.height * scale;
+    const drawX = artBounds.x + (artBounds.w - drawW) / 2;
+    const drawY = artBounds.y + (artBounds.h - drawH) / 2;
+    ctx.drawImage(img, drawX, drawY, drawW, drawH);
   } catch {
     ctx.fillStyle = "rgba(255,255,255,0.12)";
-    ctx.fillRect(130, 250, 400, 400);
+    ctx.fillRect(artBounds.x, artBounds.y, artBounds.w, artBounds.h);
     ctx.fillStyle = "#dcefff";
-    ctx.font = "700 36px Rajdhani, sans-serif";
-    ctx.fillText("NO IMAGE", 235, 470);
+    ctx.font = "700 40px Rajdhani, sans-serif";
+    ctx.fillText("NO IMAGE", artBounds.x + 186, artBounds.y + 320);
+  }
+  ctx.restore();
+  ctx.globalAlpha = 0.92;
+  ctx.fillStyle = accent;
+  ctx.fillRect(940, 736, 514, 9);
+  ctx.globalAlpha = 1;
+
+  ctx.fillStyle = "rgba(245,249,255,0.7)";
+  ctx.font = "600 24px Rajdhani, sans-serif";
+  ctx.fillText("OPERATOR SHOWCASE", 128, 170);
+
+  ctx.fillStyle = ink;
+  ctx.font = "700 46px Rajdhani, sans-serif";
+  ctx.fillText((state.alias || "Frontier Cadre").slice(0, 28), 128, 220);
+
+  if (state.showTier) {
+    drawRoundedPanel(622, 174, 168, 44, 22, "rgba(0,0,0,0.3)", accent, 1.8);
+    ctx.fillStyle = ink;
+    ctx.font = "700 24px Rajdhani, sans-serif";
+    ctx.fillText(`TIER ${character.tier || "-"}`, 648, 203);
+  }
+  ctx.fillStyle = accent;
+  ctx.font = "700 30px Rajdhani, sans-serif";
+  ctx.fillText(starText, 804, 205);
+
+  ctx.fillStyle = ink;
+  ctx.font = "700 110px Rajdhani, sans-serif";
+  ctx.fillText((character.name || "Unknown").slice(0, 18), 128, 362);
+
+  if (state.showRole) {
+    ctx.fillStyle = "rgba(234,243,252,0.84)";
+    ctx.font = "700 34px Rajdhani, sans-serif";
+    ctx.fillText((character.role || "-").toUpperCase().slice(0, 30), 128, 412);
   }
 
-  const ink = preset.ink || "#e9f8ff";
   ctx.fillStyle = ink;
-  ctx.font = "700 38px Rajdhani, sans-serif";
-  ctx.fillText((state.alias || "Frontier Cadre").slice(0, 34), 620, 186);
-
-  ctx.font = "700 94px Rajdhani, sans-serif";
-  ctx.fillText((character.name || "Unknown").slice(0, 18), 620, 320);
-
-  ctx.font = "500 40px Space Grotesk, sans-serif";
-  ctx.fillText((state.tagline || "High Priority Deployment").slice(0, 48), 620, 390);
+  ctx.font = "500 35px Space Grotesk, sans-serif";
+  ctx.fillText((state.tagline || "High Priority Deployment").slice(0, 40), 128, 462);
 
   const chips = [];
-  if (state.showRole) chips.push(`Role: ${character.role}`);
   chips.push(`Element: ${character.element}`);
   chips.push(`Weapon: ${character.weapon}`);
-  if (state.showTier) chips.push(`Tier ${character.tier}`);
 
-  let chipY = 470;
-  ctx.font = "600 33px Rajdhani, sans-serif";
-  chips.slice(0, 4).forEach((chip) => {
-    const w = Math.ceil(ctx.measureText(chip).width) + 36;
-    ctx.fillStyle = "rgba(255,255,255,0.12)";
-    ctx.fillRect(620, chipY - 34, w, 46);
-    ctx.strokeStyle = preset.accent || "#70d9ff";
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(620, chipY - 34, w, 46);
-    ctx.fillStyle = ink;
-    ctx.fillText(chip, 638, chipY - 3);
-    chipY += 64;
+  let chipX = 128;
+  const chipY = 512;
+  ctx.font = "600 30px Rajdhani, sans-serif";
+  chips.forEach((chip) => {
+    const w = Math.ceil(ctx.measureText(chip).width) + 46;
+    drawRoundedPanel(chipX, chipY - 34, w, 48, 24, "rgba(0,0,0,0.34)", "rgba(255,255,255,0.12)", 1.5);
+    ctx.fillStyle = "rgba(236,243,249,0.92)";
+    ctx.fillText(chip, chipX + 22, chipY - 2);
+    chipX += w + 16;
   });
 
-  ctx.globalAlpha = 0.92;
-  ctx.fillStyle = ink;
+  const statRows = [
+    { label: "LEVEL", value: String(level) },
+    { label: "AFFINITY", value: String(affinity) },
+    { label: "ID", value: profileId },
+  ];
+
+  let statX = 100;
+  statRows.forEach((item, idx) => {
+    const cellW = idx < 2 ? 226 : 388;
+    drawRoundedPanel(statX, 732, cellW, 68, 12, "rgba(0,0,0,0.34)", "rgba(255,255,255,0.14)", 1.6);
+    ctx.fillStyle = "rgba(207,219,230,0.76)";
+    ctx.font = "600 18px Rajdhani, sans-serif";
+    ctx.fillText(item.label, statX + 18, 758);
+    ctx.fillStyle = accent;
+    ctx.font = "700 34px Rajdhani, sans-serif";
+    ctx.fillText(item.value.slice(0, 20), statX + 18, 790);
+    statX += cellW + 14;
+  });
+
+  ctx.fillStyle = "rgba(222,233,242,0.84)";
   ctx.font = "500 24px Space Grotesk, sans-serif";
-  ctx.fillText("endfield-ind.my.id · Fanmade Card Creator", 620, 790);
-  ctx.globalAlpha = 1;
+  ctx.textAlign = "right";
+  ctx.fillText("endfield-ind.my.id · fanmade showcase", 1496, 790);
+  ctx.textAlign = "left";
   return canvas;
 }
 
@@ -3626,6 +3740,8 @@ async function initCardCreatorPage(characters) {
     style: document.getElementById("creator-style"),
     alias: document.getElementById("creator-alias"),
     tagline: document.getElementById("creator-tagline"),
+    level: document.getElementById("creator-level"),
+    affinity: document.getElementById("creator-affinity"),
     showTier: document.getElementById("creator-show-tier"),
     showRole: document.getElementById("creator-show-role"),
     random: document.getElementById("creator-random"),
@@ -3635,16 +3751,24 @@ async function initCardCreatorPage(characters) {
     preview: document.getElementById("creator-preview"),
     previewAlias: document.getElementById("creator-preview-alias"),
     previewTier: document.getElementById("creator-preview-tier"),
+    previewStars: document.getElementById("creator-preview-stars"),
     previewImage: document.getElementById("creator-preview-image"),
     previewName: document.getElementById("creator-preview-name"),
     previewRole: document.getElementById("creator-preview-role"),
     previewTagline: document.getElementById("creator-preview-tagline"),
+    previewElement: document.getElementById("creator-preview-element"),
+    previewWeapon: document.getElementById("creator-preview-weapon"),
+    previewLevel: document.getElementById("creator-preview-level"),
+    previewAffinity: document.getElementById("creator-preview-affinity"),
+    previewUid: document.getElementById("creator-preview-uid"),
   };
   if (
     !refs.character ||
     !refs.style ||
     !refs.alias ||
     !refs.tagline ||
+    !refs.level ||
+    !refs.affinity ||
     !refs.showTier ||
     !refs.showRole ||
     !refs.random ||
@@ -3654,10 +3778,16 @@ async function initCardCreatorPage(characters) {
     !refs.preview ||
     !refs.previewAlias ||
     !refs.previewTier ||
+    !refs.previewStars ||
     !refs.previewImage ||
     !refs.previewName ||
     !refs.previewRole ||
-    !refs.previewTagline
+    !refs.previewTagline ||
+    !refs.previewElement ||
+    !refs.previewWeapon ||
+    !refs.previewLevel ||
+    !refs.previewAffinity ||
+    !refs.previewUid
   ) {
     return;
   }
@@ -3670,12 +3800,35 @@ async function initCardCreatorPage(characters) {
   }
 
   const builtCharacters = sortByName((characters || []).map(buildCreatorCharacterData), "name", "AZ");
-  const presets = Array.isArray(liveHub?.cardCreator?.presets) && liveHub.cardCreator.presets.length
+  const rawPresets = Array.isArray(liveHub?.cardCreator?.presets) && liveHub.cardCreator.presets.length
     ? liveHub.cardCreator.presets
     : [
+        { id: "showcase-noir", name: "Showcase Noir", bgA: "#2a2a2e", bgB: "#090b0e", accent: "#fdfd1f", ink: "#f6f8fb" },
         { id: "frontier", name: "Frontier Amber", bgA: "#1d2c3d", bgB: "#0d1622", accent: "#f7cb6b", ink: "#fef5dd" },
         { id: "talos", name: "Talos Steel", bgA: "#123349", bgB: "#09131d", accent: "#70d9ff", ink: "#e9f8ff" },
       ];
+  const presets = rawPresets.map((item) => {
+    if (item?.id === "frontier") {
+      return {
+        ...item,
+        bgA: "#2a2a2e",
+        bgB: "#090b0e",
+        accent: "#fdfd1f",
+        ink: "#f6f8fb",
+      };
+    }
+    return item;
+  });
+  if (!presets.some((item) => item?.id === "showcase-noir")) {
+    presets.unshift({
+      id: "showcase-noir",
+      name: "Showcase Noir",
+      bgA: "#2a2a2e",
+      bgB: "#090b0e",
+      accent: "#fdfd1f",
+      ink: "#f6f8fb",
+    });
+  }
   const taglines = Array.isArray(liveHub?.cardCreator?.taglines) && liveHub.cardCreator.taglines.length
     ? liveHub.cardCreator.taglines
     : ["High Priority Deployment", "AIC Tactical Unit", "Wuling Response Team"];
@@ -3690,12 +3843,16 @@ async function initCardCreatorPage(characters) {
     styleId: presets[0]?.id || "",
     alias: "Frontier Cadre",
     tagline: taglines[0] || "High Priority Deployment",
+    level: 70,
+    affinity: 10,
     showTier: true,
     showRole: true,
   };
 
   refs.alias.value = state.alias;
   refs.tagline.value = state.tagline;
+  refs.level.value = String(state.level);
+  refs.affinity.value = String(state.affinity);
   refs.character.value = state.characterId;
   refs.style.value = state.styleId;
   refs.showTier.checked = state.showTier;
@@ -3712,20 +3869,26 @@ async function initCardCreatorPage(characters) {
     const preset = findPreset();
     if (!character || !preset) return;
 
-    refs.preview.style.setProperty("--creator-bg-a", preset.bgA || "#123349");
-    refs.preview.style.setProperty("--creator-bg-b", preset.bgB || "#09131d");
-    refs.preview.style.setProperty("--creator-accent", preset.accent || "#70d9ff");
-    refs.preview.style.setProperty("--creator-ink", preset.ink || "#e9f8ff");
+    refs.preview.style.setProperty("--creator-bg-a", preset.bgA || "#23262b");
+    refs.preview.style.setProperty("--creator-bg-b", preset.bgB || "#090b0e");
+    refs.preview.style.setProperty("--creator-accent", preset.accent || "#fdfd1f");
+    refs.preview.style.setProperty("--creator-ink", preset.ink || "#f6f8fb");
 
     refs.previewAlias.textContent = state.alias || "Frontier Cadre";
     refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
     refs.previewTier.hidden = !state.showTier;
+    refs.previewStars.textContent = creatorStars(character.rarity);
     refs.previewImage.src = asset(character.image);
     refs.previewImage.alt = `${character.name} icon`;
     refs.previewName.textContent = character.name;
     refs.previewRole.textContent = state.showRole ? character.role || "-" : "";
     refs.previewRole.hidden = !state.showRole;
     refs.previewTagline.textContent = state.tagline || "High Priority Deployment";
+    refs.previewElement.textContent = `Element: ${character.element || "-"}`;
+    refs.previewWeapon.textContent = `Weapon: ${character.weapon || "-"}`;
+    refs.previewLevel.textContent = String(clampNumber(state.level, 1, 90, 70));
+    refs.previewAffinity.textContent = String(clampNumber(state.affinity, 0, 10, 10));
+    refs.previewUid.textContent = creatorProfileId(character, state);
   };
 
   const randomize = () => {
@@ -3735,9 +3898,13 @@ async function initCardCreatorPage(characters) {
     if (randomCharacter) state.characterId = randomCharacter.id;
     if (randomPreset) state.styleId = randomPreset.id;
     if (randomTagline) state.tagline = randomTagline;
+    state.level = clampNumber(Math.floor(Math.random() * 41) + 50, 1, 90, 70);
+    state.affinity = clampNumber(Math.floor(Math.random() * 11), 0, 10, 10);
     refs.character.value = state.characterId;
     refs.style.value = state.styleId;
     refs.tagline.value = state.tagline;
+    refs.level.value = String(state.level);
+    refs.affinity.value = String(state.affinity);
     applyPreview();
     refs.status.textContent = "Preset diacak. Siap di-export.";
   };
@@ -3756,6 +3923,16 @@ async function initCardCreatorPage(characters) {
   });
   refs.tagline.addEventListener("input", () => {
     state.tagline = refs.tagline.value.trim();
+    applyPreview();
+  });
+  refs.level.addEventListener("input", () => {
+    state.level = clampNumber(refs.level.value, 1, 90, 70);
+    refs.level.value = String(state.level);
+    applyPreview();
+  });
+  refs.affinity.addEventListener("input", () => {
+    state.affinity = clampNumber(refs.affinity.value, 0, 10, 10);
+    refs.affinity.value = String(state.affinity);
     applyPreview();
   });
   refs.showTier.addEventListener("change", () => {

@@ -81,6 +81,16 @@
             <label for="creator-tagline">Tagline</label>
             <input id="creator-tagline" type="text" placeholder="Contoh: High Priority Deployment" />
           </div>
+          <div class="creator-field creator-grid-two">
+            <div>
+              <label for="creator-level">Level</label>
+              <input id="creator-level" type="number" min="1" max="90" value="70" />
+            </div>
+            <div>
+              <label for="creator-affinity">Affinity</label>
+              <input id="creator-affinity" type="number" min="0" max="10" value="10" />
+            </div>
+          </div>
           <div class="creator-field creator-checks">
             <label><input id="creator-show-tier" type="checkbox" checked /> Tampilkan Tier</label>
             <label><input id="creator-show-role" type="checkbox" checked /> Tampilkan Role</label>
@@ -95,17 +105,47 @@
 
         <article class="card creator-preview-shell">
           <div class="creator-preview" id="creator-preview">
+            <div class="creator-grid-overlay"></div>
             <div class="creator-preview-top">
-              <span id="creator-preview-alias">Frontier Cadre</span>
-              <span id="creator-preview-tier">TIER S</span>
+              <div class="creator-id-block">
+                <span class="creator-top-label">OPERATOR SHOWCASE</span>
+                <span id="creator-preview-alias">Frontier Cadre</span>
+              </div>
+              <div class="creator-top-right">
+                <span id="creator-preview-tier" class="creator-tier-pill">TIER S</span>
+                <span id="creator-preview-stars" class="creator-stars">★★★★★</span>
+              </div>
             </div>
-            <div class="creator-preview-mid">
-              <img id="creator-preview-image" src="../assets/icons/laevatain.webp" alt="Operator preview" />
+            <div class="creator-preview-main">
+              <div class="creator-preview-mid">
+                <div class="creator-image-frame">
+                  <img id="creator-preview-image" src="../assets/icons/laevatain.webp" alt="Operator preview" />
+                </div>
+              </div>
+              <div class="creator-preview-copy">
+                <p id="creator-preview-name">Laevatain</p>
+                <p id="creator-preview-role">Main DPS</p>
+                <p id="creator-preview-tagline">High Priority Deployment</p>
+                <div class="creator-meta-row">
+                  <span class="creator-meta-chip" id="creator-preview-element">Element: Thermal</span>
+                  <span class="creator-meta-chip" id="creator-preview-weapon">Weapon: Greatsword</span>
+                </div>
+              </div>
             </div>
             <div class="creator-preview-bottom">
-              <p id="creator-preview-name">Laevatain</p>
-              <p id="creator-preview-role">Main DPS</p>
-              <p id="creator-preview-tagline">High Priority Deployment</p>
+              <div class="creator-stat-cell">
+                <small>LEVEL</small>
+                <strong id="creator-preview-level">70</strong>
+              </div>
+              <div class="creator-stat-cell">
+                <small>AFFINITY</small>
+                <strong id="creator-preview-affinity">10</strong>
+              </div>
+              <div class="creator-stat-cell">
+                <small>ID</small>
+                <strong id="creator-preview-uid">AEND-0001</strong>
+              </div>
+              <p class="creator-brand-sign">endfield-ind.my.id • fanmade showcase</p>
             </div>
           </div>
         </article>
