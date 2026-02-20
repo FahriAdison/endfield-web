@@ -3543,6 +3543,7 @@ function buildCreatorCharacterData(character) {
   const image = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
   const rarityMatch = String(character?.profile?.rarity || "").match(/(\d+)/);
   const rarity = rarityMatch ? Number(rarityMatch[1]) : 5;
+  const build = character?.build && typeof character.build === "object" ? character.build : {};
   return {
     id: character?.id || "",
     name: character?.name || "Unknown",
@@ -3551,6 +3552,9 @@ function buildCreatorCharacterData(character) {
     element: character?.profile?.element || "-",
     weapon: character?.profile?.weapon || "-",
     rarity: Number.isFinite(rarity) ? rarity : 5,
+    buildWeapon: String(build.weapon || "Belum ada data"),
+    buildSkills: String(build.skills || "Belum ada data"),
+    buildTeam: String(build.team || "Belum ada data"),
     image,
   };
 }
@@ -3793,6 +3797,9 @@ async function initCardCreatorPage(characters) {
     style: document.getElementById("creator-style"),
     alias: document.getElementById("creator-alias"),
     tagline: document.getElementById("creator-tagline"),
+    buildWeapon: document.getElementById("creator-build-weapon"),
+    buildSkills: document.getElementById("creator-build-skills"),
+    buildTeam: document.getElementById("creator-build-team"),
     level: document.getElementById("creator-level"),
     affinity: document.getElementById("creator-affinity"),
     showTier: document.getElementById("creator-show-tier"),
@@ -3823,6 +3830,9 @@ async function initCardCreatorPage(characters) {
     !refs.style ||
     !refs.alias ||
     !refs.tagline ||
+    !refs.buildWeapon ||
+    !refs.buildSkills ||
+    !refs.buildTeam ||
     !refs.level ||
     !refs.affinity ||
     !refs.showTier ||
@@ -3946,6 +3956,25 @@ async function initCardCreatorPage(characters) {
     showRole: Boolean(state.showRole),
   });
 
+  const errorSummary = (error) => {
+    if (!error) return "Unknown error";
+    const parts = [error.code, error.message, error.details].filter((item) => String(item || "").trim());
+    const summary = parts.join(" | ");
+    return summary.length > 220 ? `${summary.slice(0, 217)}...` : summary;
+  };
+
+  const explainSupabaseError = (error, actionLabel) => {
+    const code = String(error?.code || "").toUpperCase();
+    const message = String(error?.message || "");
+    if (code === "PGRST205" || /Could not find the table/i.test(message)) {
+      return `${actionLabel}: table \`${CREATOR_SHARE_TABLE}\` belum ada. Jalankan \`supabase/creator_showcases.sql\` di SQL Editor dulu.`;
+    }
+    if (code === "42501" || /permission denied|row-level security|not allowed/i.test(message)) {
+      return `${actionLabel}: policy RLS belum benar. Pastikan policy \`select\` dan \`insert\` untuk \`anon\`/\`authenticated\` sudah aktif.`;
+    }
+    return `${actionLabel}: ${errorSummary(error)}`;
+  };
+
   const applyPayloadState = (payload) => {
     const safe = payload && typeof payload === "object" ? payload : {};
     const byId = (list, id) => list.some((item) => item.id === id);
@@ -3985,7 +4014,7 @@ async function initCardCreatorPage(characters) {
       refs.status.textContent = "Showcase online berhasil dimuat.";
       return true;
     } catch (error) {
-      refs.status.textContent = "Gagal memuat showcase online.";
+      refs.status.textContent = explainSupabaseError(error, "Gagal memuat showcase online");
       console.error(error);
       return false;
     }
@@ -4021,7 +4050,7 @@ async function initCardCreatorPage(characters) {
       url.searchParams.set("sid", shareId);
       window.history.replaceState({}, "", url.toString());
     } catch (error) {
-      refs.status.textContent = "Gagal simpan online. Pastikan table/policy Supabase sudah dibuat.";
+      refs.status.textContent = explainSupabaseError(error, "Gagal simpan online");
       console.error(error);
     }
   };
@@ -4048,6 +4077,9 @@ async function initCardCreatorPage(characters) {
     refs.previewTagline.textContent = state.tagline || "High Priority Deployment";
     refs.previewElement.textContent = `Element: ${character.element || "-"}`;
     refs.previewWeapon.textContent = `Weapon: ${character.weapon || "-"}`;
+    refs.buildWeapon.value = character.buildWeapon || "-";
+    refs.buildSkills.value = character.buildSkills || "-";
+    refs.buildTeam.value = character.buildTeam || "-";
     refs.previewLevel.textContent = String(clampNumber(state.level, 1, 90, 70));
     refs.previewAffinity.textContent = String(clampNumber(state.affinity, 0, 10, 10));
     refs.previewUid.textContent = creatorProfileId(character, state);
@@ -4152,15 +4184,15 @@ async function initCardCreatorPage(characters) {
   });
 
   applyDynamicMeta({
-    title: "Card Creator Endfield Indonesia | Buat Kartu Karakter | Endfield Web",
+    title: "Showcase Build Creator Endfield Indonesia | Endfield Web",
     description:
-      "Buat kartu karakter Endfield versi kamu sendiri: pilih operator, style kartu, tagline, lalu export PNG langsung dari browser.",
+      "Buat showcase build operator Endfield: tampilkan profil, ringkas build, simpan link online, lalu export PNG langsung dari browser.",
     canonicalUrl: toAbsoluteSiteUrl("/card-creator/"),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
     keywords: [
+      "endfield showcase build",
+      "showcase build creator",
       "endfield card creator",
-      "kartu karakter endfield",
-      "endfield fan card",
       "endfield indonesia",
     ],
   });

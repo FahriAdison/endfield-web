@@ -3,28 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Card Creator Endfield Indonesia | Buat Kartu Karakter</title>
+    <title>Showcase Build Creator Endfield Indonesia</title>
     <meta
       name="description"
-      content="Buat kartu karakter Endfield versi kamu sendiri: pilih operator, style kartu, tagline, lalu export PNG langsung dari browser."
+      content="Buat showcase build operator Endfield: profil, ringkas build, save link online, lalu export PNG langsung dari browser."
     />
-    <meta name="keywords" content="endfield card creator, kartu karakter endfield, endfield fan card" />
+    <meta name="keywords" content="endfield showcase build, showcase build creator, endfield card creator" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="theme-color" content="#071019" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Card Creator Endfield Indonesia | Buat Kartu Karakter" />
+    <meta property="og:title" content="Showcase Build Creator Endfield Indonesia" />
     <meta
       property="og:description"
-      content="Tool fanmade untuk membuat kartu karakter Endfield dan export PNG secara instan."
+      content="Tool fanmade untuk membuat showcase build Endfield dan export PNG secara instan."
     />
     <meta property="og:url" content="https://endfield-ind.my.id/card-creator/" />
     <meta property="og:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
     <meta property="og:image:alt" content="Card creator Endfield Indonesia" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Card Creator Endfield Indonesia | Buat Kartu Karakter" />
+    <meta name="twitter:title" content="Showcase Build Creator Endfield Indonesia" />
     <meta
       name="twitter:description"
-      content="Pilih karakter, style, tagline, lalu generate kartu Endfield versi kamu."
+      content="Pilih karakter, cek ringkas build, lalu generate showcase Endfield versi kamu."
     />
     <meta name="twitter:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
     <link rel="canonical" href="https://endfield-ind.my.id/card-creator/" />
@@ -52,11 +52,11 @@
         </div>
       </nav>
       <div class="container page-hero-copy">
-        <p class="kicker">FAN TOOL</p>
-        <h1>Character Card Creator</h1>
+        <p class="kicker">SHOWCASE BUILDER</p>
+        <h1>Showcase Build Creator</h1>
         <p>
-          Bikin kartu karakter Endfield dengan style pilihanmu, lalu export PNG
-          untuk dibagikan.
+          Buat showcase build operator Endfield: tampilkan profil, ringkas build,
+          lalu export PNG atau simpan link online.
         </p>
       </div>
     </header>
@@ -64,7 +64,7 @@
     <main>
       <section class="section container creator-layout">
         <article class="card creator-controls">
-          <h2>Pengaturan Kartu</h2>
+          <h2>Pengaturan Showcase</h2>
           <div class="creator-field">
             <label for="creator-character">Karakter</label>
             <select id="creator-character"></select>
@@ -74,12 +74,26 @@
             <select id="creator-style"></select>
           </div>
           <div class="creator-field">
-            <label for="creator-alias">Label Atas</label>
-            <input id="creator-alias" type="text" placeholder="Contoh: Frontier Cadre" />
+            <label for="creator-alias">Nama Build</label>
+            <input id="creator-alias" type="text" placeholder="Contoh: Hypercarry Heat Core" />
           </div>
           <div class="creator-field">
-            <label for="creator-tagline">Tagline</label>
-            <input id="creator-tagline" type="text" placeholder="Contoh: High Priority Deployment" />
+            <label for="creator-tagline">Catatan Rotasi</label>
+            <input id="creator-tagline" type="text" placeholder="Contoh: Stack -> Burst -> Reset" />
+          </div>
+          <div class="creator-field creator-build-grid">
+            <div>
+              <label for="creator-build-weapon">Rekomendasi Weapon</label>
+              <input id="creator-build-weapon" type="text" readonly />
+            </div>
+            <div>
+              <label for="creator-build-skills">Prioritas Skill</label>
+              <input id="creator-build-skills" type="text" readonly />
+            </div>
+            <div class="creator-build-wide">
+              <label for="creator-build-team">Core Team</label>
+              <input id="creator-build-team" type="text" readonly />
+            </div>
           </div>
           <div class="creator-field creator-grid-two">
             <div>

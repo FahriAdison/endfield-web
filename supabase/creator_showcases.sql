@@ -16,6 +16,9 @@ create index if not exists creator_showcases_created_at_idx
 
 alter table public.creator_showcases enable row level security;
 
+grant usage on schema public to anon, authenticated;
+grant select, insert on table public.creator_showcases to anon, authenticated;
+
 drop policy if exists creator_showcases_public_read on public.creator_showcases;
 create policy creator_showcases_public_read
   on public.creator_showcases
@@ -32,4 +35,3 @@ create policy creator_showcases_public_insert
     jsonb_typeof(payload) = 'object'
     and length(id) between 8 and 64
   );
-

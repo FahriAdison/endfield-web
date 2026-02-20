@@ -427,10 +427,18 @@ p {
 
 .btn {
   display: inline-block;
+  appearance: none;
+  -webkit-appearance: none;
   border-radius: 999px;
   padding: 0.6rem 1rem;
   text-decoration: none;
   border: 1px solid var(--line);
+  background: rgba(12, 24, 36, 0.86);
+  color: var(--ink);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -447,7 +455,13 @@ p {
 }
 
 .btn.ghost {
+  background: rgba(12, 24, 36, 0.92);
   color: var(--ink);
+  border-color: var(--line);
+}
+
+.btn.ghost:hover {
+  background: rgba(16, 34, 50, 0.96);
 }
 
 .stamp {
@@ -1584,6 +1598,23 @@ select:focus-visible {
   gap: 0.55rem;
 }
 
+.creator-build-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.creator-build-wide {
+  grid-column: 1 / -1;
+}
+
+.creator-build-grid input[readonly] {
+  opacity: 0.95;
+  cursor: default;
+  background: rgba(10, 20, 31, 0.9);
+  color: #d5e9f9;
+}
+
 .creator-field label {
   display: block;
   margin-bottom: 0.28rem;
@@ -1605,6 +1636,19 @@ select:focus-visible {
   margin-top: 0.28rem;
 }
 
+.creator-actions .btn,
+.creator-link-row .btn {
+  background: rgba(12, 24, 36, 0.92);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.creator-actions .btn.primary {
+  background: linear-gradient(120deg, var(--accent), #6ca3ff);
+  color: #04101d;
+  border-color: transparent;
+}
+
 .creator-link-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -1616,6 +1660,10 @@ select:focus-visible {
   min-width: 0;
   font-size: 0.78rem;
   color: #b8d2e8;
+}
+
+.creator-link-row .btn {
+  white-space: nowrap;
 }
 
 .creator-preview-shell {
@@ -2908,6 +2956,11 @@ select:focus-visible {
 
 @media (max-width: 560px) {
   .creator-grid-two {
+    grid-template-columns: 1fr;
+    gap: 0.46rem;
+  }
+
+  .creator-build-grid {
     grid-template-columns: 1fr;
     gap: 0.46rem;
   }
