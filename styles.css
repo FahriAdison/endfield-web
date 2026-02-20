@@ -1577,15 +1577,19 @@ select:focus-visible {
 }
 
 .creator-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 430px) minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.28rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .creator-controls {
-  position: sticky;
-  top: 5.35rem;
+  position: static;
+  order: 2;
+}
+
+.creator-preview-shell {
+  order: 1;
 }
 
 .creator-field {
@@ -2480,14 +2484,6 @@ select:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .creator-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .creator-controls {
-    position: static;
-  }
-
   .creator-preview-shell {
     min-height: 0;
   }
@@ -2502,7 +2498,7 @@ select:focus-visible {
 
   .creator-showcase-preview {
     aspect-ratio: 16 / 9;
-    min-height: clamp(360px, 65vw, 540px);
+    min-height: 0;
   }
 
   .creator-showcase-main {

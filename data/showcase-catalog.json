@@ -1,96 +1,96 @@
 ﻿{
     "characterImages":  {
                             "laevatain":  [
-                                              "https://endfield.wiki.gg/images/Laevatain_Splash_Art.png",
+                                              "assets/images/showcase-splash/laevatain.png",
                                               "https://img.game8.co/4182923/168c68d19c1ea0391e7aad8cec8627f7.png/show"
                                           ],
                             "gilberta":  [
-                                             "https://endfield.wiki.gg/images/Gilberta_Splash_Art.png",
+                                             "assets/images/showcase-splash/gilberta.png",
                                              "https://img.game8.co/4181217/0b8754ce1452b436a640867115ed5321.png/show"
                                          ],
                             "yvonne":  [
-                                           "https://endfield.wiki.gg/images/Yvonne_Splash_Art.png",
+                                           "assets/images/showcase-splash/yvonne.png",
                                            "https://img.game8.co/4181212/617e02e816a962afcdc637d7c640e49e.png/show"
                                        ],
                             "ardelia":  [
-                                            "https://endfield.wiki.gg/images/Ardelia_Splash_Art.png",
+                                            "assets/images/showcase-splash/ardelia.png",
                                             "https://img.game8.co/4395430/952398ff7bad28c2c5dec0d37bd5c2bb.png/show"
                                         ],
                             "last-rite":  [
-                                               "https://endfield.wiki.gg/images/Last_Rite_Splash_Art.png",
+                                               "assets/images/showcase-splash/last-rite.png",
                                                "https://img.game8.co/4321969/d703c3f82d638112ffc8c60d3476bfb5.png/show"
                                            ],
                             "perlica":  [
-                                            "https://endfield.wiki.gg/images/Perlica_Splash_Art.png",
+                                            "assets/images/showcase-splash/perlica.png",
                                             "https://img.game8.co/4175822/3181de3358152c3b5fff7ef5001152a0.png/show"
                                         ],
                             "pogranichnik":  [
-                                                  "https://endfield.wiki.gg/images/Pogranichnik_Splash_Art.png",
+                                                  "assets/images/showcase-splash/pogranichnik.png",
                                                   "https://img.game8.co/4395440/146dc16633f07ebb7be0fcdd9834b973.png/show"
                                               ],
                             "ember":  [
-                                          "https://endfield.wiki.gg/images/Ember_Splash_Art.png",
+                                          "assets/images/showcase-splash/ember.png",
                                           "https://img.game8.co/4181214/4aa5afd40eb2ab7d0129d4a1738ea930.png/show"
                                       ],
                             "avywenna":  [
-                                             "https://endfield.wiki.gg/images/Avywenna_Splash_Art.png",
+                                             "assets/images/showcase-splash/avywenna.png",
                                              "https://img.game8.co/4181215/e18630778a7c0c57ff03f19e21f833cb.png/show"
                                          ],
                             "da-pan":  [
-                                           "https://endfield.wiki.gg/images/Da_Pan_Splash_Art.png",
+                                           "assets/images/showcase-splash/da-pan.png",
                                            "https://img.game8.co/4181209/967c357f9ea7bccb1640ee31a45a252f.png/show"
                                        ],
                             "catcher":  [
-                                            "https://endfield.wiki.gg/images/Catcher_Splash_Art.png",
+                                            "assets/images/showcase-splash/catcher.png",
                                             "https://img.game8.co/4321981/047cbf0ab9925a7b0653e65214d85ac1.png/show"
                                         ],
                             "arclight":  [
-                                             "https://endfield.wiki.gg/images/Arclight_Splash_Art.png",
+                                             "assets/images/showcase-splash/arclight.png",
                                              "https://img.game8.co/4181208/e91fa2796196f06a5d37bea8ef23f6a9.png/show"
                                          ],
                             "lifeng":  [
-                                           "https://endfield.wiki.gg/images/Lifeng_Splash_Art.png",
+                                           "assets/images/showcase-splash/lifeng.png",
                                            "https://img.game8.co/4181213/d63509bf1980c3fd93f8090ac7b540fd.png/show"
                                        ],
                             "snowshine":  [
-                                              "https://endfield.wiki.gg/images/Snowshine_Splash_Art.png",
+                                              "assets/images/showcase-splash/snowshine.png",
                                               "https://img.game8.co/4181207/f15fdf170ed3f40aa761dfcb8de971f8.png/show"
                                           ],
                             "alesh":  [
-                                          "https://endfield.wiki.gg/images/Alesh_Splash_Art.png",
+                                          "assets/images/showcase-splash/alesh.png",
                                           "https://img.game8.co/4321994/56c65f3d11aee6232b450967d3b9e97e.png/show"
                                       ],
                             "xaihi":  [
-                                          "https://endfield.wiki.gg/images/Xaihi_Splash_Art.png",
+                                          "assets/images/showcase-splash/xaihi.png",
                                           "https://img.game8.co/4181218/99fa5e13cdab6782076963284e8ee830.png/show"
                                       ],
                             "fluorite":  [
-                                             "https://endfield.wiki.gg/images/Fluorite_Splash_Art.png",
+                                             "assets/images/showcase-splash/fluorite.png",
                                              "https://img.game8.co/4321944/aaa9c149e38643d143813a871991457c.png/show"
                                          ],
                             "chen-qianyu":  [
-                                                "https://endfield.wiki.gg/images/Chen_Qianyu_Splash_Art.png",
+                                                "assets/images/showcase-splash/chen-qianyu.png",
                                                 "https://img.game8.co/4181211/0e3a8760c0188e1e94940778b9ddccd8.png/show"
                                             ],
                             "endministrator":  [
-                                                   "https://endfield.wiki.gg/images/Endministrator_%28Female%29_Splash_Art.png",
-                                                   "https://endfield.wiki.gg/images/Endministrator_%28Male%29_Splash_Art.png",
+                                                   "assets/images/showcase-splash/endministrator-female.png",
+                                                   "assets/images/showcase-splash/endministrator-male.png",
                                                    "https://img.game8.co/4181210/655cb8b814b5b1a3be7df856e5cfee10.png/show"
                                                ],
                             "akekuri":  [
-                                            "https://endfield.wiki.gg/images/Akekuri_Splash_Art.png",
+                                            "assets/images/showcase-splash/akekuri.png",
                                             "https://img.game8.co/4321984/0a9b8b9ba4dfc323535371d24c99e599.png/show"
                                         ],
                             "antal":  [
-                                          "https://endfield.wiki.gg/images/Antal_Splash_Art.png",
+                                          "assets/images/showcase-splash/antal.png",
                                           "https://img.game8.co/4321995/c1d96f3defe241f071bb28af39e35237.png/show"
                                       ],
                             "estella":  [
-                                            "https://endfield.wiki.gg/images/Estella_Splash_Art.png",
+                                            "assets/images/showcase-splash/estella.png",
                                             "https://img.game8.co/4321956/2d8d0eee6b586ed8bcf411ba8a456e6e.png/show"
                                         ],
                             "wulfgard":  [
-                                              "https://endfield.wiki.gg/images/Wulfgard_Splash_Art.png",
+                                              "assets/images/showcase-splash/wulfgard.png",
                                               "https://img.game8.co/4181206/08ccc8a16bc6e723793ee23f22c1f739.png/show"
                                           ]
                         },
@@ -380,3 +380,4 @@
                           "J.E.T":  "JET"
                       }
 }
+

@@ -37,19 +37,19 @@ const CREATOR_SHARE_TABLE = "creator_showcases";
 const SUPABASE_PUBLIC_URL = "https://axuitiqljniyqsbpxatf.supabase.co";
 const SUPABASE_PUBLIC_KEY = "sb_publishable_bF-mkQgNJ68W4yPQiX1TRg_HLj9W-T1";
 const CREATOR_ELITE_ICON_URLS = [
-  "https://endfield.wiki.gg/images/thumb/Elite_0.png/30px-Elite_0.png?669d20",
-  "https://endfield.wiki.gg/images/thumb/Elite_1.png/25px-Elite_1.png?50ae69",
-  "https://endfield.wiki.gg/images/thumb/Elite_2.png/25px-Elite_2.png?a9e22b",
-  "https://endfield.wiki.gg/images/thumb/Elite_3.png/25px-Elite_3.png?855f89",
-  "https://endfield.wiki.gg/images/thumb/Elite_4.png/25px-Elite_4.png?474541",
+  "assets/icons/showcase/elite-0.png",
+  "assets/icons/showcase/elite-1.png",
+  "assets/icons/showcase/elite-2.png",
+  "assets/icons/showcase/elite-3.png",
+  "assets/icons/showcase/elite-4.png",
 ];
 const CREATOR_POTENTIAL_ICON_URLS = [
-  "https://endfield.wiki.gg/images/thumb/Potential_0.png/25px-Potential_0.png",
-  "https://endfield.wiki.gg/images/thumb/Potential_1.png/25px-Potential_1.png?44d538",
-  "https://endfield.wiki.gg/images/thumb/Potential_2.png/25px-Potential_2.png?4f2099",
-  "https://endfield.wiki.gg/images/thumb/Potential_3.png/25px-Potential_3.png?3a7143",
-  "https://endfield.wiki.gg/images/thumb/Potential_4.png/25px-Potential_4.png?efae06",
-  "https://endfield.wiki.gg/images/thumb/Potential_5.png/25px-Potential_5.png?c9250d",
+  "assets/icons/showcase/potential-0.png",
+  "assets/icons/showcase/potential-1.png",
+  "assets/icons/showcase/potential-2.png",
+  "assets/icons/showcase/potential-3.png",
+  "assets/icons/showcase/potential-4.png",
+  "assets/icons/showcase/potential-5.png",
 ];
 const CREATOR_AFFINITY_BADGES = ["A0", "A1", "A2", "A3", "A4"];
 const NAV_CONTACT_LINKS = [
@@ -3694,6 +3694,12 @@ function buildCreatorCharacterData(character, catalog = {}) {
   const mergeGearMeta = (item, slotType, usageLevel = "70") => {
     const token = normalizeCreatorToken(item?.name);
     const rec = recommendationByName.get(token);
+    const slotIconFallback =
+      slotType === "armor"
+        ? "assets/skill-icons/talent.webp"
+        : slotType === "gloves"
+        ? "assets/skill-icons/combo.webp"
+        : "assets/skill-icons/ultimate.webp";
     const stats = Array.isArray(item?.stats) && item.stats.length ? item.stats : Array.isArray(rec?.stats) ? rec.stats : [];
     const normalizedStats = stats
       .slice(0, 3)
@@ -3704,7 +3710,11 @@ function buildCreatorCharacterData(character, catalog = {}) {
       .filter((stat) => stat.name);
     return {
       name: String(item?.name || rec?.name || "-").trim() || "-",
-      icon: String(item?.icon || rec?.icon || "assets/skill-icons/basic.webp").trim() || "assets/skill-icons/basic.webp",
+      icon: (() => {
+        const candidate = String(item?.icon || rec?.icon || slotIconFallback).trim();
+        if (!candidate) return slotIconFallback;
+        return /^https?:\/\//i.test(candidate) ? slotIconFallback : candidate;
+      })(),
       source: String(item?.source || rec?.source || "").trim(),
       type: String(item?.type || rec?.type || slotType || "").trim(),
       usageLevel: String(item?.usageLevel || rec?.usageLevel || usageLevel || "70").trim(),
@@ -3802,7 +3812,6 @@ async function exportCreatorCardPng(character, preset, state, statusEl, previewE
     canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
     if (!canvas) return;
     dataUrl = canvas.toDataURL("image/png");
-    if (statusEl) statusEl.textContent = "Capture langsung dibatasi browser. Dipakai render fallback.";
   }
   const link = document.createElement("a");
   link.href = dataUrl;
@@ -3820,7 +3829,6 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
         logging: false,
       });
     } catch (error) {
-      if (statusEl) statusEl.textContent = "Capture preview gagal, fallback ke mode render.";
       console.error(error);
     }
   }
@@ -3849,6 +3857,8 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   const weaponSkillLevel = clampNumber(state?.weaponSkillLevel, 1, 9, 7);
   const gearArmor = String(state?.gearArmor || "-");
   const gearGloves = String(state?.gearGloves || "-");
+  const gearKit1 = String(state?.gearKit1 || "-");
+  const gearKit2 = String(state?.gearKit2 || "-");
   const profileId = creatorProfileId(character, state);
   const starText = creatorStars(character?.rarity);
   const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -4018,11 +4028,41 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
     chipX += w + 16;
   });
 
+  const getPreviewImgSrc = (id) => {
+    if (typeof document === "undefined") return "";
+    const node = document.getElementById(id);
+    return String(node?.getAttribute("src") || node?.src || "").trim();
+  };
+  const drawMiniIcon = async (src, x, y, size = 30) => {
+    if (!src) return;
+    try {
+      const icon = await loadCanvasImage(src);
+      drawRoundedPanel(x, y, size, size, 8, "rgba(0,0,0,0.32)", "rgba(255,255,255,0.2)", 1.2);
+      ctx.drawImage(icon, x + 2, y + 2, size - 4, size - 4);
+    } catch {}
+  };
+
   ctx.fillStyle = "rgba(233,242,251,0.9)";
   ctx.font = "600 24px Rajdhani, sans-serif";
-  ctx.fillText(`WEAPON: ${weaponName.slice(0, 48)} (Lv ${weaponLevel} | Skill ${weaponSkillLevel})`, 128, 576);
-  ctx.font = "500 20px Space Grotesk, sans-serif";
-  ctx.fillText(`GEAR: ${gearArmor.slice(0, 34)} | ${gearGloves.slice(0, 34)}`, 128, 610);
+  await drawMiniIcon(getPreviewImgSrc("creator-preview-weapon-icon"), 128, 548, 30);
+  ctx.fillText(`WEAPON: ${weaponName.slice(0, 44)} (Lv ${weaponLevel} | Skill ${weaponSkillLevel})`, 168, 574);
+
+  const gearEntries = [
+    { label: "Armor", name: gearArmor, iconId: "creator-preview-gear-armor-icon" },
+    { label: "Gloves", name: gearGloves, iconId: "creator-preview-gear-gloves-icon" },
+    { label: "Kit 1", name: gearKit1, iconId: "creator-preview-gear-kit1-icon" },
+    { label: "Kit 2", name: gearKit2, iconId: "creator-preview-gear-kit2-icon" },
+  ];
+  ctx.font = "500 19px Space Grotesk, sans-serif";
+  for (let index = 0; index < gearEntries.length; index += 1) {
+    const entry = gearEntries[index];
+    const col = index % 2;
+    const row = Math.floor(index / 2);
+    const baseX = 128 + col * 405;
+    const baseY = 588 + row * 34;
+    await drawMiniIcon(getPreviewImgSrc(entry.iconId), baseX, baseY - 22, 24);
+    ctx.fillText(`${entry.label}: ${entry.name.slice(0, 28)}`, baseX + 30, baseY - 2);
+  }
 
   const statRows = [
     { label: "LEVEL", value: String(level), width: 160 },
@@ -4069,7 +4109,6 @@ async function shareCreatorCardPng(character, preset, state, statusEl, previewEl
     canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
     if (!canvas) return;
     blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-    if (statusEl) statusEl.textContent = "Share memakai render fallback karena capture langsung dibatasi browser.";
   }
   if (!blob) throw new Error("Gagal membentuk file PNG.");
 
@@ -4370,7 +4409,7 @@ async function initCardCreatorPage(characters) {
     const set = getIconSet(kind);
     const rows = [];
     for (let index = 0; index <= max; index += 1) {
-      const src = set[index] || svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
+      const src = set[index] ? toImageSrc(set[index], "") : svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
       const activeClass = index <= activeValue ? " is-active" : "";
       rows.push(`<span class="creator-icon-pill${activeClass}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></span>`);
     }
@@ -4380,7 +4419,7 @@ async function initCardCreatorPage(characters) {
     const set = getIconSet(kind);
     const rows = [];
     for (let index = 0; index <= max; index += 1) {
-      const src = set[index] || svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
+      const src = set[index] ? toImageSrc(set[index], "") : svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
       const activeClass = index === activeValue ? " is-active" : "";
       rows.push(
         `<button type="button" class="creator-icon-choice${activeClass}" data-icon-kind="${esc(kind)}" data-icon-target="${esc(target)}" data-icon-value="${index}" aria-label="${esc(
@@ -4615,9 +4654,15 @@ async function initCardCreatorPage(characters) {
     const artifice = sanitizeGearArtifice(slotKey, statCount);
     return `Artifice: ${artifice.map((value) => `+${value}`).join(" / ")}`;
   };
+  const creatorSafeImageSrc = (value, fallback = "assets/skill-icons/basic.webp") => {
+    const cleaned = String(value || "").trim();
+    if (!cleaned) return toImageSrc(fallback, fallback);
+    if (/^https?:\/\//i.test(cleaned)) return toImageSrc(fallback, fallback);
+    return toImageSrc(cleaned, fallback);
+  };
   const syncWeaponIcon = () => {
     const weaponMeta = findWeaponMeta(state.weaponName);
-    const icon = toImageSrc(weaponMeta?.icon || "", "assets/skill-icons/basic.webp");
+    const icon = creatorSafeImageSrc(weaponMeta?.icon || "", "assets/skill-icons/basic.webp");
     refs.weaponIcon.src = icon;
     refs.weaponIcon.alt = `${state.weaponName} icon`;
     refs.previewWeaponIcon.src = icon;
@@ -4643,12 +4688,12 @@ async function initCardCreatorPage(characters) {
       const selected = findGearEntry(character, slotKey, selectedName) || options[0] || null;
       const iconRef = refs[slotIconRefKeys[slotKey]];
       if (iconRef) {
-        iconRef.src = toImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
+        iconRef.src = creatorSafeImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
         iconRef.alt = `${selectedName || slotKey} icon`;
       }
       const previewIconRef = refs[slotPreviewIconRefKeys[slotKey]];
       if (previewIconRef) {
-        previewIconRef.src = toImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
+        previewIconRef.src = creatorSafeImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
         previewIconRef.alt = `${selectedName || slotKey} icon`;
       }
     });
@@ -4705,7 +4750,13 @@ async function initCardCreatorPage(characters) {
   };
   const setImageWithFallback = (imgEl, candidates, altText) => {
     if (!imgEl) return;
-    const queue = [...new Set((Array.isArray(candidates) ? candidates : [candidates]).map((item) => toImageSrc(item, "")).filter(Boolean))];
+    const queue = [
+      ...new Set(
+        (Array.isArray(candidates) ? candidates : [candidates])
+          .map((item) => toImageSrc(item, ""))
+          .filter((item) => item && !/^https?:\/\//i.test(String(item)))
+      ),
+    ];
     if (!queue.length) {
       imgEl.src = asset("assets/skill-icons/basic.webp");
       imgEl.alt = altText;
