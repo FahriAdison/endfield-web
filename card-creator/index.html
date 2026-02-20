@@ -64,46 +64,134 @@
     <main>
       <section class="section container creator-layout">
         <article class="card creator-controls">
-          <h2>Pengaturan Showcase</h2>
-          <div class="creator-field">
-            <label for="creator-character">Karakter</label>
-            <select id="creator-character"></select>
+          <h2>Pengaturan Showcase Build</h2>
+          <div class="creator-field creator-grid-two">
+            <div>
+              <label for="creator-character">Karakter</label>
+              <select id="creator-character"></select>
+            </div>
+            <div>
+              <label for="creator-style">Style</label>
+              <select id="creator-style"></select>
+            </div>
           </div>
           <div class="creator-field">
-            <label for="creator-style">Style</label>
-            <select id="creator-style"></select>
-          </div>
-          <div class="creator-field">
-            <label for="creator-alias">Nama Build</label>
+            <label for="creator-alias">Nama Showcase</label>
             <input id="creator-alias" type="text" placeholder="Contoh: Hypercarry Heat Core" />
-          </div>
-          <div class="creator-field">
-            <label for="creator-tagline">Catatan Rotasi</label>
-            <input id="creator-tagline" type="text" placeholder="Contoh: Stack -> Burst -> Reset" />
-          </div>
-          <div class="creator-field creator-build-grid">
-            <div>
-              <label for="creator-build-weapon">Rekomendasi Weapon</label>
-              <input id="creator-build-weapon" type="text" readonly />
-            </div>
-            <div>
-              <label for="creator-build-skills">Prioritas Skill</label>
-              <input id="creator-build-skills" type="text" readonly />
-            </div>
-            <div class="creator-build-wide">
-              <label for="creator-build-team">Core Team</label>
-              <input id="creator-build-team" type="text" readonly />
-            </div>
           </div>
           <div class="creator-field creator-grid-two">
             <div>
-              <label for="creator-level">Level</label>
+              <label for="creator-uid">UID</label>
+              <input id="creator-uid" type="text" placeholder="Contoh: AEND-231901" />
+            </div>
+            <div>
+              <label for="creator-region">Region</label>
+              <select id="creator-region">
+                <option value="SEA">SEA</option>
+                <option value="Global">Global</option>
+                <option value="NA">NA</option>
+                <option value="EU">EU</option>
+                <option value="JP">JP</option>
+              </select>
+            </div>
+          </div>
+          <div class="creator-field creator-grid-four">
+            <div>
+              <label for="creator-level">Level Karakter</label>
               <input id="creator-level" type="number" min="1" max="90" value="70" />
+            </div>
+            <div>
+              <label for="creator-potential">Potensial</label>
+              <input id="creator-potential" type="number" min="0" max="6" value="3" />
+            </div>
+            <div>
+              <label for="creator-breakthrough">Terobosan</label>
+              <input id="creator-breakthrough" type="number" min="0" max="6" value="2" />
             </div>
             <div>
               <label for="creator-affinity">Affinity</label>
               <input id="creator-affinity" type="number" min="0" max="10" value="10" />
             </div>
+          </div>
+          <div class="creator-field creator-grid-two">
+            <div>
+              <label for="creator-weapon-name">Weapon (Nama)</label>
+              <input id="creator-weapon-name" type="text" placeholder="Nama weapon" />
+            </div>
+            <div>
+              <label for="creator-weapon-level">Level Weapon</label>
+              <input id="creator-weapon-level" type="number" min="1" max="90" value="70" />
+            </div>
+          </div>
+          <div class="creator-field creator-grid-three">
+            <div>
+              <label for="creator-weapon-breakthrough">Terobosan Weapon</label>
+              <input id="creator-weapon-breakthrough" type="number" min="0" max="6" value="2" />
+            </div>
+            <div>
+              <label for="creator-weapon-potential">Potensial Weapon</label>
+              <input id="creator-weapon-potential" type="number" min="0" max="6" value="1" />
+            </div>
+            <div>
+              <label for="creator-weapon-skill-level">Level Skill Weapon</label>
+              <input id="creator-weapon-skill-level" type="number" min="1" max="10" value="7" />
+            </div>
+          </div>
+          <div class="creator-field creator-grid-two">
+            <div>
+              <label for="creator-gear-armor">Gear Armor</label>
+              <input id="creator-gear-armor" type="text" placeholder="Nama armor" />
+            </div>
+            <div>
+              <label for="creator-gear-gloves">Gear Gloves</label>
+              <input id="creator-gear-gloves" type="text" placeholder="Nama gloves" />
+            </div>
+          </div>
+          <div class="creator-field creator-grid-two">
+            <div>
+              <label for="creator-gear-kit1">Kit Slot 1</label>
+              <input id="creator-gear-kit1" type="text" placeholder="Nama kit 1" />
+            </div>
+            <div>
+              <label for="creator-gear-kit2">Kit Slot 2</label>
+              <input id="creator-gear-kit2" type="text" placeholder="Nama kit 2" />
+            </div>
+          </div>
+          <div class="creator-field creator-grid-five">
+            <div>
+              <label for="creator-skill-basic">Basic</label>
+              <input id="creator-skill-basic" type="number" min="1" max="10" value="7" />
+            </div>
+            <div>
+              <label for="creator-skill-combo">Combo</label>
+              <input id="creator-skill-combo" type="number" min="1" max="10" value="7" />
+            </div>
+            <div>
+              <label for="creator-skill-active">Active</label>
+              <input id="creator-skill-active" type="number" min="1" max="10" value="8" />
+            </div>
+            <div>
+              <label for="creator-skill-ultimate">Ultimate</label>
+              <input id="creator-skill-ultimate" type="number" min="1" max="10" value="8" />
+            </div>
+            <div>
+              <label for="creator-skill-talent">Talent</label>
+              <input id="creator-skill-talent" type="number" min="1" max="10" value="9" />
+            </div>
+          </div>
+          <div class="creator-field creator-grid-two">
+            <div>
+              <label for="creator-build-skills">Prioritas Skill (Referensi)</label>
+              <input id="creator-build-skills" type="text" readonly />
+            </div>
+            <div>
+              <label for="creator-build-team">Core Team (Referensi)</label>
+              <input id="creator-build-team" type="text" readonly />
+            </div>
+          </div>
+          <div class="creator-field">
+            <label for="creator-tagline">Catatan Rotasi</label>
+            <input id="creator-tagline" type="text" placeholder="Contoh: Stack -> Burst -> Reset" />
           </div>
           <div class="creator-field creator-checks">
             <label><input id="creator-show-tier" type="checkbox" checked /> Tampilkan Tier</label>
@@ -123,49 +211,88 @@
         </article>
 
         <article class="card creator-preview-shell">
-          <div class="creator-preview" id="creator-preview">
+          <div class="creator-preview creator-showcase-preview" id="creator-preview">
             <div class="creator-grid-overlay"></div>
-            <div class="creator-preview-top">
+            <div class="creator-showcase-head">
               <div class="creator-id-block">
-                <span class="creator-top-label">OPERATOR SHOWCASE</span>
-                <span id="creator-preview-alias">Frontier Cadre</span>
+                <span class="creator-top-label">ENDMINSYNC SHOWCASE</span>
+                <span id="creator-preview-alias">Hypercarry Heat Core</span>
+                <p class="creator-showcase-meta">
+                  <span id="creator-preview-uid">UID AEND-0001</span>
+                  <span id="creator-preview-region">SEA</span>
+                </p>
               </div>
               <div class="creator-top-right">
                 <span id="creator-preview-tier" class="creator-tier-pill">TIER S</span>
                 <span id="creator-preview-stars" class="creator-stars">★★★★★</span>
               </div>
             </div>
-            <div class="creator-preview-main">
-              <div class="creator-preview-mid">
+            <div class="creator-showcase-main">
+              <div class="creator-showcase-portrait">
                 <div class="creator-image-frame">
                   <img id="creator-preview-image" src="../assets/icons/laevatain.webp" alt="Operator preview" />
                 </div>
+                <div class="creator-portrait-caption">
+                  <p id="creator-preview-name">Laevatain</p>
+                  <p id="creator-preview-role">Main DPS</p>
+                </div>
               </div>
-              <div class="creator-preview-copy">
-                <p id="creator-preview-name">Laevatain</p>
-                <p id="creator-preview-role">Main DPS</p>
+
+              <div class="creator-showcase-content">
                 <p id="creator-preview-tagline">High Priority Deployment</p>
                 <div class="creator-meta-row">
                   <span class="creator-meta-chip" id="creator-preview-element">Element: Thermal</span>
                   <span class="creator-meta-chip" id="creator-preview-weapon">Weapon: Greatsword</span>
+                  <span class="creator-meta-chip" id="creator-preview-level">Lv 70</span>
+                  <span class="creator-meta-chip" id="creator-preview-affinity">Affinity 10</span>
+                  <span class="creator-meta-chip" id="creator-preview-potential">Potential 3</span>
+                  <span class="creator-meta-chip" id="creator-preview-breakthrough">Breakthrough 2</span>
+                </div>
+
+                <div class="creator-showcase-grid">
+                  <article class="creator-showcase-card">
+                    <h4>Weapon</h4>
+                    <ul>
+                      <li><span>Nama</span><strong id="creator-preview-weapon-name">Dawn's Last Glimmer</strong></li>
+                      <li><span>Level</span><strong id="creator-preview-weapon-level">70</strong></li>
+                      <li><span>Terobosan</span><strong id="creator-preview-weapon-breakthrough">2</strong></li>
+                      <li><span>Potensial</span><strong id="creator-preview-weapon-potential">1</strong></li>
+                      <li><span>Skill Lv</span><strong id="creator-preview-weapon-skill-level">7</strong></li>
+                    </ul>
+                  </article>
+
+                  <article class="creator-showcase-card">
+                    <h4>Equipment</h4>
+                    <ul>
+                      <li><span>Armor</span><strong id="creator-preview-gear-armor">Tide Fall Light Armor</strong></li>
+                      <li><span>Gloves</span><strong id="creator-preview-gear-gloves">Hot Work Gauntlets</strong></li>
+                      <li><span>Kit 1</span><strong id="creator-preview-gear-kit1">Hot Work Pyrometer</strong></li>
+                      <li><span>Kit 2</span><strong id="creator-preview-gear-kit2">Hot Work Pyrolysis</strong></li>
+                    </ul>
+                  </article>
+
+                  <article class="creator-showcase-card">
+                    <h4>Skill & Talent</h4>
+                    <ul>
+                      <li><span>Basic</span><strong id="creator-preview-skill-basic">7</strong></li>
+                      <li><span>Combo</span><strong id="creator-preview-skill-combo">7</strong></li>
+                      <li><span>Active</span><strong id="creator-preview-skill-active">8</strong></li>
+                      <li><span>Ultimate</span><strong id="creator-preview-skill-ultimate">8</strong></li>
+                      <li><span>Talent</span><strong id="creator-preview-skill-talent">9</strong></li>
+                    </ul>
+                  </article>
+
+                  <article class="creator-showcase-card">
+                    <h4>Ringkasan Build</h4>
+                    <ul>
+                      <li><span>Prioritas</span><strong id="creator-preview-build-skills">Talent > Ultimate > Active</strong></li>
+                      <li><span>Core Team</span><strong id="creator-preview-build-team">Laevatain + Wulfgard + Akekuri + Ardelia</strong></li>
+                    </ul>
+                  </article>
                 </div>
               </div>
             </div>
-            <div class="creator-preview-bottom">
-              <div class="creator-stat-cell">
-                <small>LEVEL</small>
-                <strong id="creator-preview-level">70</strong>
-              </div>
-              <div class="creator-stat-cell">
-                <small>AFFINITY</small>
-                <strong id="creator-preview-affinity">10</strong>
-              </div>
-              <div class="creator-stat-cell">
-                <small>ID</small>
-                <strong id="creator-preview-uid">AEND-0001</strong>
-              </div>
-              <p class="creator-brand-sign">endfield-ind.my.id • fanmade showcase</p>
-            </div>
+            <p class="creator-brand-sign">endfield-ind.my.id • fanmade showcase</p>
           </div>
         </article>
       </section>

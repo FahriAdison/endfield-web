@@ -414,6 +414,13 @@ function creatorStars(rarity) {
 }
 
 function creatorProfileId(character, state) {
+  const manualUid = String(state?.uid || "").trim();
+  if (manualUid) {
+    return manualUid
+      .replace(/\s+/g, "")
+      .slice(0, 24)
+      .toUpperCase();
+  }
   const level = clampNumber(state?.level, 1, 90, 70);
   const affinity = clampNumber(state?.affinity, 0, 10, 10);
   const token = String(character?.id || "endf")
@@ -3541,20 +3548,88 @@ function buildCreatorCharacterData(character) {
     Wulfgard: "assets/icons/wulfgard.webp",
   };
   const image = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
+  const profile = character?.profile && typeof character.profile === "object" ? character.profile : {};
   const rarityMatch = String(character?.profile?.rarity || "").match(/(\d+)/);
   const rarity = rarityMatch ? Number(rarityMatch[1]) : 5;
   const build = character?.build && typeof character.build === "object" ? character.build : {};
+  const progression70 = profile?.gearProgression?.["70"]?.slots || {};
+  const recommendations = Array.isArray(profile?.gearRecommendations) ? profile.gearRecommendations : [];
+  const usage70 = (item) => String(item?.usageLevel || "70").trim() === "70";
+  const byType = (typeValue) =>
+    recommendations.filter((item) => usage70(item) && String(item?.type || "").toLowerCase().startsWith(typeValue));
+  const firstChoice = (value, fallback = "-") => {
+    const source = String(value || "")
+      .split("|")[0]
+      .split("/")[0]
+      .trim();
+    return source || fallback;
+  };
+  const cleanText = (value, max = 84, fallback = "-") => {
+    const text = String(value || "").trim();
+    return text ? text.slice(0, max) : fallback;
+  };
+  const skillLevelDefaults = (() => {
+    const defaults = { basic: 7, combo: 7, active: 8, ultimate: 8, talent: 8 };
+    const rows = String(build?.skills || "")
+      .toLowerCase()
+      .split(">")
+      .map((item) => item.trim())
+      .filter(Boolean);
+    const table = [
+      { key: "talent", tags: ["talent", "talenta"] },
+      { key: "ultimate", tags: ["ultimate", "ult"] },
+      { key: "active", tags: ["active skill", "skill aktif", "active"] },
+      { key: "combo", tags: ["combo skill", "skill combo", "combo"] },
+      { key: "basic", tags: ["basic attack", "serangan dasar", "basic"] },
+    ];
+    rows.forEach((row, index) => {
+      const level = clampNumber(10 - index, 6, 10, 7);
+      const found = table.find((entry) => entry.tags.some((tag) => row.includes(tag)));
+      if (!found) return;
+      defaults[found.key] = Math.max(defaults[found.key], level);
+    });
+    return defaults;
+  })();
+  const armorFallback = byType("armor")[0]?.name || "-";
+  const glovesFallback = byType("gloves")[0]?.name || "-";
+  const kitsFallback = byType("kit");
+  const uidToken = String(character?.id || "unit")
+    .replace(/[^a-z0-9]/gi, "")
+    .slice(0, 6)
+    .toUpperCase();
+  const raritySafe = Number.isFinite(rarity) ? rarity : 5;
+  const potentialDefault = raritySafe >= 6 ? 3 : raritySafe >= 5 ? 2 : 1;
+  const breakthroughDefault = raritySafe >= 6 ? 2 : 1;
   return {
     id: character?.id || "",
     name: character?.name || "Unknown",
     role: character?.role || "-",
     tier: character?.tier || "-",
-    element: character?.profile?.element || "-",
-    weapon: character?.profile?.weapon || "-",
-    rarity: Number.isFinite(rarity) ? rarity : 5,
+    element: profile?.element || "-",
+    weapon: profile?.weapon || "-",
+    rarity: raritySafe,
     buildWeapon: String(build.weapon || "Belum ada data"),
     buildSkills: String(build.skills || "Belum ada data"),
     buildTeam: String(build.team || "Belum ada data"),
+    defaultUid: `AEND-${uidToken || "UNIT"}-${String(raritySafe).padStart(2, "0")}01`,
+    defaultRegion: "SEA",
+    defaultLevel: 70,
+    defaultPotential: potentialDefault,
+    defaultBreakthrough: breakthroughDefault,
+    defaultWeaponName: cleanText(firstChoice(build.weapon, profile?.weapon || "-"), 64, "-"),
+    defaultWeaponLevel: 70,
+    defaultWeaponBreakthrough: breakthroughDefault,
+    defaultWeaponPotential: Math.max(1, potentialDefault - 1),
+    defaultWeaponSkillLevel: 7,
+    defaultGearArmor: cleanText(progression70?.armor?.name || armorFallback, 68, "-"),
+    defaultGearGloves: cleanText(progression70?.gloves?.name || glovesFallback, 68, "-"),
+    defaultGearKit1: cleanText(progression70?.kit1?.name || kitsFallback[0]?.name || "-", 68, "-"),
+    defaultGearKit2: cleanText(progression70?.kit2?.name || kitsFallback[1]?.name || kitsFallback[0]?.name || "-", 68, "-"),
+    defaultSkillBasic: skillLevelDefaults.basic,
+    defaultSkillCombo: skillLevelDefaults.combo,
+    defaultSkillActive: skillLevelDefaults.active,
+    defaultSkillUltimate: skillLevelDefaults.ultimate,
+    defaultSkillTalent: skillLevelDefaults.talent,
     image,
   };
 }
@@ -3591,7 +3666,15 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   const accent = preset.accent || "#fdfd1f";
   const ink = preset.ink || "#f6f8fb";
   const level = clampNumber(state?.level, 1, 90, 70);
+  const potential = clampNumber(state?.potential, 0, 6, 3);
+  const breakthrough = clampNumber(state?.breakthrough, 0, 6, 2);
   const affinity = clampNumber(state?.affinity, 0, 10, 10);
+  const region = String(state?.region || "SEA").slice(0, 8);
+  const weaponName = String(state?.weaponName || character?.buildWeapon || "-");
+  const weaponLevel = clampNumber(state?.weaponLevel, 1, 90, level);
+  const weaponSkillLevel = clampNumber(state?.weaponSkillLevel, 1, 10, 7);
+  const gearArmor = String(state?.gearArmor || "-");
+  const gearGloves = String(state?.gearGloves || "-");
   const profileId = creatorProfileId(character, state);
   const starText = creatorStars(character?.rarity);
   const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -3699,6 +3782,9 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   ctx.fillStyle = ink;
   ctx.font = "700 46px Rajdhani, sans-serif";
   ctx.fillText((state.alias || "Frontier Cadre").slice(0, 28), 128, 220);
+  ctx.fillStyle = "rgba(230,240,249,0.84)";
+  ctx.font = "600 21px Rajdhani, sans-serif";
+  ctx.fillText(`UID ${profileId}  |  REGION ${region}`, 128, 252);
 
   if (state.showTier) {
     drawRoundedPanel(622, 174, 168, 44, 22, "rgba(0,0,0,0.3)", accent, 1.8);
@@ -3726,7 +3812,7 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 
   const chips = [];
   chips.push(`Element: ${character.element}`);
-  chips.push(`Weapon: ${character.weapon}`);
+  chips.push(`Weapon Type: ${character.weapon}`);
 
   let chipX = 128;
   const chipY = 512;
@@ -3739,23 +3825,32 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
     chipX += w + 16;
   });
 
+  ctx.fillStyle = "rgba(233,242,251,0.9)";
+  ctx.font = "600 24px Rajdhani, sans-serif";
+  ctx.fillText(`WEAPON: ${weaponName.slice(0, 48)} (Lv ${weaponLevel} | Skill ${weaponSkillLevel})`, 128, 576);
+  ctx.font = "500 20px Space Grotesk, sans-serif";
+  ctx.fillText(`GEAR: ${gearArmor.slice(0, 34)} | ${gearGloves.slice(0, 34)}`, 128, 610);
+
   const statRows = [
-    { label: "LEVEL", value: String(level) },
-    { label: "AFFINITY", value: String(affinity) },
-    { label: "ID", value: profileId },
+    { label: "LEVEL", value: String(level), width: 160 },
+    { label: "POT", value: String(potential), width: 140 },
+    { label: "BT", value: String(breakthrough), width: 140 },
+    { label: "AFF", value: String(affinity), width: 150 },
+    { label: "UID/REG", value: `${profileId} • ${region}`, width: 688 },
   ];
 
   let statX = 100;
-  statRows.forEach((item, idx) => {
-    const cellW = idx < 2 ? 226 : 388;
+  statRows.forEach((item) => {
+    const cellW = item.width || 180;
     drawRoundedPanel(statX, 732, cellW, 68, 12, "rgba(0,0,0,0.34)", "rgba(255,255,255,0.14)", 1.6);
     ctx.fillStyle = "rgba(207,219,230,0.76)";
     ctx.font = "600 18px Rajdhani, sans-serif";
     ctx.fillText(item.label, statX + 18, 758);
     ctx.fillStyle = accent;
     ctx.font = "700 34px Rajdhani, sans-serif";
-    ctx.fillText(item.value.slice(0, 20), statX + 18, 790);
-    statX += cellW + 14;
+    const maxChars = item.label === "UID/REG" ? 40 : 20;
+    ctx.fillText(item.value.slice(0, maxChars), statX + 18, 790);
+    statX += cellW + 10;
   });
 
   ctx.fillStyle = "rgba(222,233,242,0.84)";
@@ -3796,12 +3891,29 @@ async function initCardCreatorPage(characters) {
     character: document.getElementById("creator-character"),
     style: document.getElementById("creator-style"),
     alias: document.getElementById("creator-alias"),
+    uid: document.getElementById("creator-uid"),
+    region: document.getElementById("creator-region"),
     tagline: document.getElementById("creator-tagline"),
-    buildWeapon: document.getElementById("creator-build-weapon"),
     buildSkills: document.getElementById("creator-build-skills"),
     buildTeam: document.getElementById("creator-build-team"),
     level: document.getElementById("creator-level"),
+    potential: document.getElementById("creator-potential"),
+    breakthrough: document.getElementById("creator-breakthrough"),
     affinity: document.getElementById("creator-affinity"),
+    weaponName: document.getElementById("creator-weapon-name"),
+    weaponLevel: document.getElementById("creator-weapon-level"),
+    weaponBreakthrough: document.getElementById("creator-weapon-breakthrough"),
+    weaponPotential: document.getElementById("creator-weapon-potential"),
+    weaponSkillLevel: document.getElementById("creator-weapon-skill-level"),
+    gearArmor: document.getElementById("creator-gear-armor"),
+    gearGloves: document.getElementById("creator-gear-gloves"),
+    gearKit1: document.getElementById("creator-gear-kit1"),
+    gearKit2: document.getElementById("creator-gear-kit2"),
+    skillBasic: document.getElementById("creator-skill-basic"),
+    skillCombo: document.getElementById("creator-skill-combo"),
+    skillActive: document.getElementById("creator-skill-active"),
+    skillUltimate: document.getElementById("creator-skill-ultimate"),
+    skillTalent: document.getElementById("creator-skill-talent"),
     showTier: document.getElementById("creator-show-tier"),
     showRole: document.getElementById("creator-show-role"),
     random: document.getElementById("creator-random"),
@@ -3819,47 +3931,32 @@ async function initCardCreatorPage(characters) {
     previewName: document.getElementById("creator-preview-name"),
     previewRole: document.getElementById("creator-preview-role"),
     previewTagline: document.getElementById("creator-preview-tagline"),
+    previewRegion: document.getElementById("creator-preview-region"),
     previewElement: document.getElementById("creator-preview-element"),
     previewWeapon: document.getElementById("creator-preview-weapon"),
     previewLevel: document.getElementById("creator-preview-level"),
+    previewPotential: document.getElementById("creator-preview-potential"),
+    previewBreakthrough: document.getElementById("creator-preview-breakthrough"),
     previewAffinity: document.getElementById("creator-preview-affinity"),
     previewUid: document.getElementById("creator-preview-uid"),
+    previewWeaponName: document.getElementById("creator-preview-weapon-name"),
+    previewWeaponLevel: document.getElementById("creator-preview-weapon-level"),
+    previewWeaponBreakthrough: document.getElementById("creator-preview-weapon-breakthrough"),
+    previewWeaponPotential: document.getElementById("creator-preview-weapon-potential"),
+    previewWeaponSkillLevel: document.getElementById("creator-preview-weapon-skill-level"),
+    previewGearArmor: document.getElementById("creator-preview-gear-armor"),
+    previewGearGloves: document.getElementById("creator-preview-gear-gloves"),
+    previewGearKit1: document.getElementById("creator-preview-gear-kit1"),
+    previewGearKit2: document.getElementById("creator-preview-gear-kit2"),
+    previewSkillBasic: document.getElementById("creator-preview-skill-basic"),
+    previewSkillCombo: document.getElementById("creator-preview-skill-combo"),
+    previewSkillActive: document.getElementById("creator-preview-skill-active"),
+    previewSkillUltimate: document.getElementById("creator-preview-skill-ultimate"),
+    previewSkillTalent: document.getElementById("creator-preview-skill-talent"),
+    previewBuildSkills: document.getElementById("creator-preview-build-skills"),
+    previewBuildTeam: document.getElementById("creator-preview-build-team"),
   };
-  if (
-    !refs.character ||
-    !refs.style ||
-    !refs.alias ||
-    !refs.tagline ||
-    !refs.buildWeapon ||
-    !refs.buildSkills ||
-    !refs.buildTeam ||
-    !refs.level ||
-    !refs.affinity ||
-    !refs.showTier ||
-    !refs.showRole ||
-    !refs.random ||
-    !refs.publish ||
-    !refs.share ||
-    !refs.download ||
-    !refs.shareLink ||
-    !refs.copyLink ||
-    !refs.status ||
-    !refs.preview ||
-    !refs.previewAlias ||
-    !refs.previewTier ||
-    !refs.previewStars ||
-    !refs.previewImage ||
-    !refs.previewName ||
-    !refs.previewRole ||
-    !refs.previewTagline ||
-    !refs.previewElement ||
-    !refs.previewWeapon ||
-    !refs.previewLevel ||
-    !refs.previewAffinity ||
-    !refs.previewUid
-  ) {
-    return;
-  }
+  if (Object.values(refs).some((item) => !item)) return;
 
   let liveHub;
   try {
@@ -3869,6 +3966,10 @@ async function initCardCreatorPage(characters) {
   }
 
   const builtCharacters = sortByName((characters || []).map(buildCreatorCharacterData), "name", "AZ");
+  if (!builtCharacters.length) {
+    refs.status.textContent = "Belum ada data karakter untuk showcase.";
+    return;
+  }
   const rawPresets = Array.isArray(liveHub?.cardCreator?.presets) && liveHub.cardCreator.presets.length
     ? liveHub.cardCreator.presets
     : [
@@ -3907,38 +4008,109 @@ async function initCardCreatorPage(characters) {
     .join("");
   refs.style.innerHTML = presets.map((item) => `<option value="${esc(item.id)}">${esc(item.name)}</option>`).join("");
 
+  const cleanText = (value, max = 72, fallback = "") => {
+    const text = String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const sliced = text.slice(0, max);
+    return sliced || fallback;
+  };
+  const sanitizeUid = (value, fallback = "") =>
+    cleanText(value, 24, fallback)
+      .replace(/[^A-Za-z0-9_-]/g, "")
+      .toUpperCase();
+  const normalizeRegion = (value, fallback = "SEA") => {
+    const current = String(value || "").trim();
+    const options = [...refs.region.options].map((opt) => String(opt.value || "").trim());
+    return options.includes(current) ? current : fallback;
+  };
+
+  const characterTemplate = (character) => {
+    const target = character || builtCharacters[0] || {};
+    const fallbackUid = creatorProfileId(target, { level: target.defaultLevel || 70, affinity: 10 });
+    return {
+      alias: cleanText(`${target.name || "Operator"} Showcase`, 42, "Operator Showcase"),
+      uid: sanitizeUid(target.defaultUid || fallbackUid, fallbackUid),
+      region: normalizeRegion(target.defaultRegion || "SEA", "SEA"),
+      tagline: cleanText(taglines[0] || "High Priority Deployment", 120, "High Priority Deployment"),
+      level: clampNumber(target.defaultLevel, 1, 90, 70),
+      potential: clampNumber(target.defaultPotential, 0, 6, 3),
+      breakthrough: clampNumber(target.defaultBreakthrough, 0, 6, 2),
+      affinity: 10,
+      weaponName: cleanText(target.defaultWeaponName || target.buildWeapon || "-", 72, "-"),
+      weaponLevel: clampNumber(target.defaultWeaponLevel, 1, 90, 70),
+      weaponBreakthrough: clampNumber(target.defaultWeaponBreakthrough, 0, 6, 2),
+      weaponPotential: clampNumber(target.defaultWeaponPotential, 0, 6, 1),
+      weaponSkillLevel: clampNumber(target.defaultWeaponSkillLevel, 1, 10, 7),
+      gearArmor: cleanText(target.defaultGearArmor || "-", 72, "-"),
+      gearGloves: cleanText(target.defaultGearGloves || "-", 72, "-"),
+      gearKit1: cleanText(target.defaultGearKit1 || "-", 72, "-"),
+      gearKit2: cleanText(target.defaultGearKit2 || "-", 72, "-"),
+      skillBasic: clampNumber(target.defaultSkillBasic, 1, 10, 7),
+      skillCombo: clampNumber(target.defaultSkillCombo, 1, 10, 7),
+      skillActive: clampNumber(target.defaultSkillActive, 1, 10, 8),
+      skillUltimate: clampNumber(target.defaultSkillUltimate, 1, 10, 8),
+      skillTalent: clampNumber(target.defaultSkillTalent, 1, 10, 9),
+    };
+  };
+
+  const initialCharacter = builtCharacters[0];
+  const initialTemplate = characterTemplate(initialCharacter);
   const state = {
-    characterId: builtCharacters[0]?.id || "",
+    characterId: initialCharacter?.id || "",
     styleId: presets[0]?.id || "",
-    alias: "Frontier Cadre",
-    tagline: taglines[0] || "High Priority Deployment",
-    level: 70,
-    affinity: 10,
+    alias: initialTemplate.alias,
+    uid: initialTemplate.uid,
+    region: initialTemplate.region,
+    tagline: initialTemplate.tagline,
+    level: initialTemplate.level,
+    potential: initialTemplate.potential,
+    breakthrough: initialTemplate.breakthrough,
+    affinity: initialTemplate.affinity,
+    weaponName: initialTemplate.weaponName,
+    weaponLevel: initialTemplate.weaponLevel,
+    weaponBreakthrough: initialTemplate.weaponBreakthrough,
+    weaponPotential: initialTemplate.weaponPotential,
+    weaponSkillLevel: initialTemplate.weaponSkillLevel,
+    gearArmor: initialTemplate.gearArmor,
+    gearGloves: initialTemplate.gearGloves,
+    gearKit1: initialTemplate.gearKit1,
+    gearKit2: initialTemplate.gearKit2,
+    skillBasic: initialTemplate.skillBasic,
+    skillCombo: initialTemplate.skillCombo,
+    skillActive: initialTemplate.skillActive,
+    skillUltimate: initialTemplate.skillUltimate,
+    skillTalent: initialTemplate.skillTalent,
     showTier: true,
     showRole: true,
   };
-
-  refs.alias.value = state.alias;
-  refs.tagline.value = state.tagline;
-  refs.level.value = String(state.level);
-  refs.affinity.value = String(state.affinity);
-  refs.character.value = state.characterId;
-  refs.style.value = state.styleId;
-  refs.showTier.checked = state.showTier;
-  refs.showRole.checked = state.showRole;
-  refs.shareLink.value = "";
-  if (typeof navigator === "undefined" || typeof navigator.share !== "function") {
-    refs.share.textContent = "Share (Fallback)";
-  }
 
   const findCharacter = () => builtCharacters.find((item) => item.id === state.characterId) || builtCharacters[0];
   const findPreset = () => presets.find((item) => item.id === state.styleId) || presets[0];
 
   const syncFormFromState = () => {
     refs.alias.value = state.alias;
+    refs.uid.value = state.uid;
+    refs.region.value = normalizeRegion(state.region, "SEA");
     refs.tagline.value = state.tagline;
     refs.level.value = String(state.level);
+    refs.potential.value = String(state.potential);
+    refs.breakthrough.value = String(state.breakthrough);
     refs.affinity.value = String(state.affinity);
+    refs.weaponName.value = state.weaponName;
+    refs.weaponLevel.value = String(state.weaponLevel);
+    refs.weaponBreakthrough.value = String(state.weaponBreakthrough);
+    refs.weaponPotential.value = String(state.weaponPotential);
+    refs.weaponSkillLevel.value = String(state.weaponSkillLevel);
+    refs.gearArmor.value = state.gearArmor;
+    refs.gearGloves.value = state.gearGloves;
+    refs.gearKit1.value = state.gearKit1;
+    refs.gearKit2.value = state.gearKit2;
+    refs.skillBasic.value = String(state.skillBasic);
+    refs.skillCombo.value = String(state.skillCombo);
+    refs.skillActive.value = String(state.skillActive);
+    refs.skillUltimate.value = String(state.skillUltimate);
+    refs.skillTalent.value = String(state.skillTalent);
     refs.character.value = state.characterId;
     refs.style.value = state.styleId;
     refs.showTier.checked = state.showTier;
@@ -3948,10 +4120,28 @@ async function initCardCreatorPage(characters) {
   const snapshotState = () => ({
     characterId: state.characterId,
     styleId: state.styleId,
-    alias: state.alias,
-    tagline: state.tagline,
+    alias: cleanText(state.alias, 42, "Operator Showcase"),
+    uid: sanitizeUid(state.uid),
+    region: normalizeRegion(state.region, "SEA"),
+    tagline: cleanText(state.tagline, 120, "High Priority Deployment"),
     level: clampNumber(state.level, 1, 90, 70),
+    potential: clampNumber(state.potential, 0, 6, 3),
+    breakthrough: clampNumber(state.breakthrough, 0, 6, 2),
     affinity: clampNumber(state.affinity, 0, 10, 10),
+    weaponName: cleanText(state.weaponName, 72, "-"),
+    weaponLevel: clampNumber(state.weaponLevel, 1, 90, 70),
+    weaponBreakthrough: clampNumber(state.weaponBreakthrough, 0, 6, 2),
+    weaponPotential: clampNumber(state.weaponPotential, 0, 6, 1),
+    weaponSkillLevel: clampNumber(state.weaponSkillLevel, 1, 10, 7),
+    gearArmor: cleanText(state.gearArmor, 72, "-"),
+    gearGloves: cleanText(state.gearGloves, 72, "-"),
+    gearKit1: cleanText(state.gearKit1, 72, "-"),
+    gearKit2: cleanText(state.gearKit2, 72, "-"),
+    skillBasic: clampNumber(state.skillBasic, 1, 10, 7),
+    skillCombo: clampNumber(state.skillCombo, 1, 10, 7),
+    skillActive: clampNumber(state.skillActive, 1, 10, 8),
+    skillUltimate: clampNumber(state.skillUltimate, 1, 10, 8),
+    skillTalent: clampNumber(state.skillTalent, 1, 10, 9),
     showTier: Boolean(state.showTier),
     showRole: Boolean(state.showRole),
   });
@@ -3980,15 +4170,37 @@ async function initCardCreatorPage(characters) {
     const byId = (list, id) => list.some((item) => item.id === id);
     const nextCharacterId = byId(builtCharacters, String(safe.characterId || "")) ? String(safe.characterId) : builtCharacters[0]?.id || "";
     const nextStyleId = byId(presets, String(safe.styleId || "")) ? String(safe.styleId) : presets[0]?.id || "";
-    const nextTagline = String(safe.tagline || taglines[0] || "High Priority Deployment").trim();
+    const character = builtCharacters.find((item) => item.id === nextCharacterId) || builtCharacters[0];
+    const template = characterTemplate(character);
     state.characterId = nextCharacterId;
     state.styleId = nextStyleId;
-    state.alias = String(safe.alias || "Frontier Cadre").trim().slice(0, 42) || "Frontier Cadre";
-    state.tagline = nextTagline.slice(0, 80);
-    state.level = clampNumber(safe.level, 1, 90, 70);
-    state.affinity = clampNumber(safe.affinity, 0, 10, 10);
-    state.showTier = Boolean(safe.showTier);
-    state.showRole = Boolean(safe.showRole);
+    state.alias = cleanText(safe.alias, 42, template.alias);
+    state.uid = sanitizeUid(safe.uid, template.uid);
+    state.region = normalizeRegion(safe.region, template.region);
+    state.tagline = cleanText(safe.tagline, 120, template.tagline);
+    state.level = clampNumber(safe.level, 1, 90, template.level);
+    state.potential = clampNumber(safe.potential, 0, 6, template.potential);
+    state.breakthrough = clampNumber(safe.breakthrough, 0, 6, template.breakthrough);
+    state.affinity = clampNumber(safe.affinity, 0, 10, template.affinity);
+    state.weaponName = cleanText(safe.weaponName, 72, template.weaponName);
+    state.weaponLevel = clampNumber(safe.weaponLevel, 1, 90, template.weaponLevel);
+    state.weaponBreakthrough = clampNumber(safe.weaponBreakthrough, 0, 6, template.weaponBreakthrough);
+    state.weaponPotential = clampNumber(safe.weaponPotential, 0, 6, template.weaponPotential);
+    state.weaponSkillLevel = clampNumber(safe.weaponSkillLevel, 1, 10, template.weaponSkillLevel);
+    state.gearArmor = cleanText(safe.gearArmor, 72, template.gearArmor);
+    state.gearGloves = cleanText(safe.gearGloves, 72, template.gearGloves);
+    state.gearKit1 = cleanText(safe.gearKit1, 72, template.gearKit1);
+    state.gearKit2 = cleanText(safe.gearKit2, 72, template.gearKit2);
+    state.skillBasic = clampNumber(safe.skillBasic, 1, 10, template.skillBasic);
+    state.skillCombo = clampNumber(safe.skillCombo, 1, 10, template.skillCombo);
+    state.skillActive = clampNumber(safe.skillActive, 1, 10, template.skillActive);
+    state.skillUltimate = clampNumber(safe.skillUltimate, 1, 10, template.skillUltimate);
+    state.skillTalent = clampNumber(safe.skillTalent, 1, 10, template.skillTalent);
+    state.showTier = typeof safe.showTier === "boolean" ? safe.showTier : true;
+    state.showRole = typeof safe.showRole === "boolean" ? safe.showRole : true;
+    if (!state.uid) {
+      state.uid = sanitizeUid(creatorProfileId(character, state), template.uid);
+    }
     syncFormFromState();
   };
 
@@ -4060,12 +4272,35 @@ async function initCardCreatorPage(characters) {
     const preset = findPreset();
     if (!character || !preset) return;
 
+    state.uid = sanitizeUid(state.uid, creatorProfileId(character, state));
+    state.region = normalizeRegion(state.region, "SEA");
+    state.alias = cleanText(state.alias, 42, `${character.name || "Operator"} Showcase`);
+    state.tagline = cleanText(state.tagline, 120, "High Priority Deployment");
+    state.weaponName = cleanText(state.weaponName, 72, character.defaultWeaponName || "-");
+    state.gearArmor = cleanText(state.gearArmor, 72, character.defaultGearArmor || "-");
+    state.gearGloves = cleanText(state.gearGloves, 72, character.defaultGearGloves || "-");
+    state.gearKit1 = cleanText(state.gearKit1, 72, character.defaultGearKit1 || "-");
+    state.gearKit2 = cleanText(state.gearKit2, 72, character.defaultGearKit2 || "-");
+    state.level = clampNumber(state.level, 1, 90, character.defaultLevel || 70);
+    state.potential = clampNumber(state.potential, 0, 6, character.defaultPotential || 3);
+    state.breakthrough = clampNumber(state.breakthrough, 0, 6, character.defaultBreakthrough || 2);
+    state.affinity = clampNumber(state.affinity, 0, 10, 10);
+    state.weaponLevel = clampNumber(state.weaponLevel, 1, 90, character.defaultWeaponLevel || state.level);
+    state.weaponBreakthrough = clampNumber(state.weaponBreakthrough, 0, 6, character.defaultWeaponBreakthrough || state.breakthrough);
+    state.weaponPotential = clampNumber(state.weaponPotential, 0, 6, character.defaultWeaponPotential || 1);
+    state.weaponSkillLevel = clampNumber(state.weaponSkillLevel, 1, 10, character.defaultWeaponSkillLevel || 7);
+    state.skillBasic = clampNumber(state.skillBasic, 1, 10, character.defaultSkillBasic || 7);
+    state.skillCombo = clampNumber(state.skillCombo, 1, 10, character.defaultSkillCombo || 7);
+    state.skillActive = clampNumber(state.skillActive, 1, 10, character.defaultSkillActive || 8);
+    state.skillUltimate = clampNumber(state.skillUltimate, 1, 10, character.defaultSkillUltimate || 8);
+    state.skillTalent = clampNumber(state.skillTalent, 1, 10, character.defaultSkillTalent || 9);
+
     refs.preview.style.setProperty("--creator-bg-a", preset.bgA || "#23262b");
     refs.preview.style.setProperty("--creator-bg-b", preset.bgB || "#090b0e");
     refs.preview.style.setProperty("--creator-accent", preset.accent || "#fdfd1f");
     refs.preview.style.setProperty("--creator-ink", preset.ink || "#f6f8fb");
 
-    refs.previewAlias.textContent = state.alias || "Frontier Cadre";
+    refs.previewAlias.textContent = state.alias;
     refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
     refs.previewTier.hidden = !state.showTier;
     refs.previewStars.textContent = creatorStars(character.rarity);
@@ -4074,15 +4309,62 @@ async function initCardCreatorPage(characters) {
     refs.previewName.textContent = character.name;
     refs.previewRole.textContent = state.showRole ? character.role || "-" : "";
     refs.previewRole.hidden = !state.showRole;
-    refs.previewTagline.textContent = state.tagline || "High Priority Deployment";
+    refs.previewTagline.textContent = state.tagline;
+    refs.previewRegion.textContent = state.region;
     refs.previewElement.textContent = `Element: ${character.element || "-"}`;
-    refs.previewWeapon.textContent = `Weapon: ${character.weapon || "-"}`;
-    refs.buildWeapon.value = character.buildWeapon || "-";
+    refs.previewWeapon.textContent = `Weapon Type: ${character.weapon || "-"}`;
     refs.buildSkills.value = character.buildSkills || "-";
     refs.buildTeam.value = character.buildTeam || "-";
-    refs.previewLevel.textContent = String(clampNumber(state.level, 1, 90, 70));
-    refs.previewAffinity.textContent = String(clampNumber(state.affinity, 0, 10, 10));
-    refs.previewUid.textContent = creatorProfileId(character, state);
+    refs.previewLevel.textContent = `Lv ${state.level}`;
+    refs.previewPotential.textContent = `Potential ${state.potential}`;
+    refs.previewBreakthrough.textContent = `Breakthrough ${state.breakthrough}`;
+    refs.previewAffinity.textContent = `Affinity ${state.affinity}`;
+    refs.previewUid.textContent = `UID ${state.uid}`;
+    refs.previewWeaponName.textContent = state.weaponName;
+    refs.previewWeaponLevel.textContent = String(state.weaponLevel);
+    refs.previewWeaponBreakthrough.textContent = String(state.weaponBreakthrough);
+    refs.previewWeaponPotential.textContent = String(state.weaponPotential);
+    refs.previewWeaponSkillLevel.textContent = String(state.weaponSkillLevel);
+    refs.previewGearArmor.textContent = state.gearArmor;
+    refs.previewGearGloves.textContent = state.gearGloves;
+    refs.previewGearKit1.textContent = state.gearKit1;
+    refs.previewGearKit2.textContent = state.gearKit2;
+    refs.previewSkillBasic.textContent = String(state.skillBasic);
+    refs.previewSkillCombo.textContent = String(state.skillCombo);
+    refs.previewSkillActive.textContent = String(state.skillActive);
+    refs.previewSkillUltimate.textContent = String(state.skillUltimate);
+    refs.previewSkillTalent.textContent = String(state.skillTalent);
+    refs.previewBuildSkills.textContent = character.buildSkills || "-";
+    refs.previewBuildTeam.textContent = character.buildTeam || "-";
+    syncFormFromState();
+  };
+
+  const applyCharacterTemplate = (character, preserveAlias = false) => {
+    const template = characterTemplate(character);
+    if (!preserveAlias) {
+      state.alias = template.alias;
+    }
+    state.uid = template.uid || sanitizeUid(creatorProfileId(character, template));
+    state.region = template.region;
+    state.tagline = template.tagline;
+    state.level = template.level;
+    state.potential = template.potential;
+    state.breakthrough = template.breakthrough;
+    state.affinity = template.affinity;
+    state.weaponName = template.weaponName;
+    state.weaponLevel = template.weaponLevel;
+    state.weaponBreakthrough = template.weaponBreakthrough;
+    state.weaponPotential = template.weaponPotential;
+    state.weaponSkillLevel = template.weaponSkillLevel;
+    state.gearArmor = template.gearArmor;
+    state.gearGloves = template.gearGloves;
+    state.gearKit1 = template.gearKit1;
+    state.gearKit2 = template.gearKit2;
+    state.skillBasic = template.skillBasic;
+    state.skillCombo = template.skillCombo;
+    state.skillActive = template.skillActive;
+    state.skillUltimate = template.skillUltimate;
+    state.skillTalent = template.skillTalent;
   };
 
   const randomize = () => {
@@ -4091,20 +4373,29 @@ async function initCardCreatorPage(characters) {
     const randomTagline = randomPick(taglines);
     if (randomCharacter) state.characterId = randomCharacter.id;
     if (randomPreset) state.styleId = randomPreset.id;
+    applyCharacterTemplate(findCharacter());
     if (randomTagline) state.tagline = randomTagline;
     state.level = clampNumber(Math.floor(Math.random() * 41) + 50, 1, 90, 70);
+    state.potential = clampNumber(Math.floor(Math.random() * 7), 0, 6, 3);
+    state.breakthrough = clampNumber(Math.floor(Math.random() * 5), 0, 6, 2);
     state.affinity = clampNumber(Math.floor(Math.random() * 11), 0, 10, 10);
-    refs.character.value = state.characterId;
-    refs.style.value = state.styleId;
-    refs.tagline.value = state.tagline;
-    refs.level.value = String(state.level);
-    refs.affinity.value = String(state.affinity);
+    state.weaponLevel = clampNumber(state.level - Math.floor(Math.random() * 8), 1, 90, state.level);
+    state.weaponBreakthrough = clampNumber(state.breakthrough, 0, 6, 2);
+    state.weaponPotential = clampNumber(Math.max(0, state.potential - 1), 0, 6, 1);
+    state.weaponSkillLevel = clampNumber(Math.floor(Math.random() * 4) + 7, 1, 10, 7);
+    state.skillBasic = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 10, 7);
+    state.skillCombo = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 10, 7);
+    state.skillActive = clampNumber(Math.floor(Math.random() * 3) + 7, 1, 10, 8);
+    state.skillUltimate = clampNumber(Math.floor(Math.random() * 3) + 7, 1, 10, 8);
+    state.skillTalent = clampNumber(Math.floor(Math.random() * 3) + 8, 1, 10, 9);
+    state.uid = sanitizeUid(creatorProfileId(findCharacter(), state), state.uid);
     applyPreview();
     refs.status.textContent = "Preset diacak. Siap di-export.";
   };
 
   refs.character.addEventListener("change", () => {
     state.characterId = refs.character.value;
+    applyCharacterTemplate(findCharacter());
     applyPreview();
   });
   refs.style.addEventListener("change", () => {
@@ -4112,21 +4403,116 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.alias.addEventListener("input", () => {
-    state.alias = refs.alias.value.trim();
+    state.alias = cleanText(refs.alias.value, 42, `${findCharacter()?.name || "Operator"} Showcase`);
+    refs.alias.value = state.alias;
+    applyPreview();
+  });
+  refs.uid.addEventListener("input", () => {
+    state.uid = sanitizeUid(refs.uid.value, sanitizeUid(creatorProfileId(findCharacter(), state)));
+    refs.uid.value = state.uid;
+    applyPreview();
+  });
+  refs.region.addEventListener("change", () => {
+    state.region = normalizeRegion(refs.region.value, "SEA");
     applyPreview();
   });
   refs.tagline.addEventListener("input", () => {
-    state.tagline = refs.tagline.value.trim();
+    state.tagline = cleanText(refs.tagline.value, 120, "High Priority Deployment");
+    refs.tagline.value = state.tagline;
     applyPreview();
   });
   refs.level.addEventListener("input", () => {
-    state.level = clampNumber(refs.level.value, 1, 90, 70);
+    state.level = clampNumber(refs.level.value, 1, 90, findCharacter()?.defaultLevel || 70);
     refs.level.value = String(state.level);
+    if (state.weaponLevel > state.level) {
+      state.weaponLevel = state.level;
+      refs.weaponLevel.value = String(state.weaponLevel);
+    }
+    applyPreview();
+  });
+  refs.potential.addEventListener("input", () => {
+    state.potential = clampNumber(refs.potential.value, 0, 6, findCharacter()?.defaultPotential || 3);
+    refs.potential.value = String(state.potential);
+    applyPreview();
+  });
+  refs.breakthrough.addEventListener("input", () => {
+    state.breakthrough = clampNumber(refs.breakthrough.value, 0, 6, findCharacter()?.defaultBreakthrough || 2);
+    refs.breakthrough.value = String(state.breakthrough);
     applyPreview();
   });
   refs.affinity.addEventListener("input", () => {
     state.affinity = clampNumber(refs.affinity.value, 0, 10, 10);
     refs.affinity.value = String(state.affinity);
+    applyPreview();
+  });
+  refs.weaponName.addEventListener("input", () => {
+    state.weaponName = cleanText(refs.weaponName.value, 72, findCharacter()?.defaultWeaponName || "-");
+    refs.weaponName.value = state.weaponName;
+    applyPreview();
+  });
+  refs.weaponLevel.addEventListener("input", () => {
+    state.weaponLevel = clampNumber(refs.weaponLevel.value, 1, 90, state.level);
+    refs.weaponLevel.value = String(state.weaponLevel);
+    applyPreview();
+  });
+  refs.weaponBreakthrough.addEventListener("input", () => {
+    state.weaponBreakthrough = clampNumber(refs.weaponBreakthrough.value, 0, 6, findCharacter()?.defaultWeaponBreakthrough || 2);
+    refs.weaponBreakthrough.value = String(state.weaponBreakthrough);
+    applyPreview();
+  });
+  refs.weaponPotential.addEventListener("input", () => {
+    state.weaponPotential = clampNumber(refs.weaponPotential.value, 0, 6, findCharacter()?.defaultWeaponPotential || 1);
+    refs.weaponPotential.value = String(state.weaponPotential);
+    applyPreview();
+  });
+  refs.weaponSkillLevel.addEventListener("input", () => {
+    state.weaponSkillLevel = clampNumber(refs.weaponSkillLevel.value, 1, 10, findCharacter()?.defaultWeaponSkillLevel || 7);
+    refs.weaponSkillLevel.value = String(state.weaponSkillLevel);
+    applyPreview();
+  });
+  refs.gearArmor.addEventListener("input", () => {
+    state.gearArmor = cleanText(refs.gearArmor.value, 72, findCharacter()?.defaultGearArmor || "-");
+    refs.gearArmor.value = state.gearArmor;
+    applyPreview();
+  });
+  refs.gearGloves.addEventListener("input", () => {
+    state.gearGloves = cleanText(refs.gearGloves.value, 72, findCharacter()?.defaultGearGloves || "-");
+    refs.gearGloves.value = state.gearGloves;
+    applyPreview();
+  });
+  refs.gearKit1.addEventListener("input", () => {
+    state.gearKit1 = cleanText(refs.gearKit1.value, 72, findCharacter()?.defaultGearKit1 || "-");
+    refs.gearKit1.value = state.gearKit1;
+    applyPreview();
+  });
+  refs.gearKit2.addEventListener("input", () => {
+    state.gearKit2 = cleanText(refs.gearKit2.value, 72, findCharacter()?.defaultGearKit2 || "-");
+    refs.gearKit2.value = state.gearKit2;
+    applyPreview();
+  });
+  refs.skillBasic.addEventListener("input", () => {
+    state.skillBasic = clampNumber(refs.skillBasic.value, 1, 10, findCharacter()?.defaultSkillBasic || 7);
+    refs.skillBasic.value = String(state.skillBasic);
+    applyPreview();
+  });
+  refs.skillCombo.addEventListener("input", () => {
+    state.skillCombo = clampNumber(refs.skillCombo.value, 1, 10, findCharacter()?.defaultSkillCombo || 7);
+    refs.skillCombo.value = String(state.skillCombo);
+    applyPreview();
+  });
+  refs.skillActive.addEventListener("input", () => {
+    state.skillActive = clampNumber(refs.skillActive.value, 1, 10, findCharacter()?.defaultSkillActive || 8);
+    refs.skillActive.value = String(state.skillActive);
+    applyPreview();
+  });
+  refs.skillUltimate.addEventListener("input", () => {
+    state.skillUltimate = clampNumber(refs.skillUltimate.value, 1, 10, findCharacter()?.defaultSkillUltimate || 8);
+    refs.skillUltimate.value = String(state.skillUltimate);
+    applyPreview();
+  });
+  refs.skillTalent.addEventListener("input", () => {
+    state.skillTalent = clampNumber(refs.skillTalent.value, 1, 10, findCharacter()?.defaultSkillTalent || 9);
+    refs.skillTalent.value = String(state.skillTalent);
     applyPreview();
   });
   refs.showTier.addEventListener("change", () => {
@@ -4183,16 +4569,23 @@ async function initCardCreatorPage(characters) {
     }
   });
 
+  syncFormFromState();
+  refs.shareLink.value = "";
+  if (typeof navigator === "undefined" || typeof navigator.share !== "function") {
+    refs.share.textContent = "Share (Fallback)";
+  }
+
   applyDynamicMeta({
     title: "Showcase Build Creator Endfield Indonesia | Endfield Web",
     description:
-      "Buat showcase build operator Endfield: tampilkan profil, ringkas build, simpan link online, lalu export PNG langsung dari browser.",
+      "Buat showcase build operator Endfield lengkap: UID, region, level, weapon, gear, skill, talent, simpan link online, lalu export PNG.",
     canonicalUrl: toAbsoluteSiteUrl("/card-creator/"),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
     keywords: [
       "endfield showcase build",
       "showcase build creator",
-      "endfield card creator",
+      "endfield character showcase",
+      "endfield build simulator",
       "endfield indonesia",
     ],
   });
