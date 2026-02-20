@@ -1,7 +1,7 @@
 {
   "meta": {
     "updatedAt": "2026-02-20",
-    "patchNote": "Added researched per-character practical tips (23 operators) and linked references for each profile page."
+    "patchNote": "Refined advanced per-character strategy with level-based gear progression names and short-labeled sources."
   },
   "tips": [
     {
@@ -889,12 +889,72 @@
         "characterTips": [
           "Bangun 4 stack Melting Flame dulu dengan menyerap Heat Infliction lewat Final Strike sebelum commit SP ke Battle Skill.",
           "Aktifkan Battle Skill saat stack penuh agar mode burst lebih efisien dan Ultimate terisi lebih cepat.",
-          "Pasangkan dengan pengaplikasi Heat konsisten (Wulfgard, Akekuri, atau Antal) supaya siklus stack tidak putus."
+          "Pasangkan dengan pengaplikasi Heat konsisten (Wulfgard, Akekuri, atau Antal) supaya siklus stack tidak putus.",
+          "Masukkan Laevatain saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72539",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Laevatain Guide",
+            "url": "https://gamewith.net/akendfield/72539"
+          },
+          {
+            "label": "Game8: Laevatain Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523665"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/laevatain-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Bangun 4 stack Melting Flame dulu dengan menyerap Heat Infliction lewat Final Strike sebelum commit SP ke Battle Skill.",
+            "Fokuskan Laevatain sebagai dealer damage utama; pelajari jarak aman serangan tipe Sword sejak awal.",
+            "Transisi level 50: pakai Mordvolt Insulation Vest, Mordvolt Insulation Gloves, Mordvolt Insulation Battery dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Aktifkan Battle Skill saat stack penuh agar mode burst lebih efisien dan Ultimate terisi lebih cepat.",
+            "Di mid game, rapikan urutan Battle Skill dan Seethe supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Aburrey Light Armor, Miner Gloves T2, Aburrey Flashlight; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Pasangkan dengan pengaplikasi Heat konsisten (Wulfgard, Akekuri, atau Antal) supaya siklus stack tidak putus.",
+            "Endgame Laevatain bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Tide Fall Light Armor, Hot Work Gauntlets, Hot Work Pyrometer dan senjata Dawn's Last Glimmer / Daybreak Caller / Former Finery; cocokkan dengan komposisi Laevatain, Wulfgard, Akekuri."
+          ],
+          "rotation": [
+            "Kendalikan Laevatain langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Seethe untuk menjaga chain dan buka peluang Scorching Heart.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Flaming Cinders untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Laevatain tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523665"
       }
     },
     {
@@ -1295,12 +1355,71 @@
         "characterTips": [
           "Buka rotasi dengan Battle Skill atau Combo Skill untuk menarik musuh, lalu lempar AoE DPS tim ke area yang sama.",
           "Saat channel Battle Skill, kamu masih bisa bergerak pelan; gunakan untuk reposisi sambil tetap mengontrol grup musuh.",
-          "Simpan Ultimate untuk momen Vulnerable atau Lift agar Slow + Arts Susceptibility memberi value maksimal."
+          "Simpan Ultimate untuk momen Vulnerable atau Lift agar Slow + Arts Susceptibility memberi value maksimal.",
+          "Buka rotasi dengan Gilberta untuk pasang buff/debuff lebih dulu, lalu masukkan DPS utama agar nilai dukungan maksimal.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72540",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Gilberta Guide",
+            "url": "https://gamewith.net/akendfield/72540"
+          },
+          {
+            "label": "Game8: Gilberta Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523668"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/gilberta-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Buka rotasi dengan Battle Skill atau Combo Skill untuk menarik musuh, lalu lempar AoE DPS tim ke area yang sama.",
+            "Buka pertarungan dengan Battle Skill atau Arcane Staff: Matrix Displacement untuk pasang debuff/buff, baru serahkan field ke DPS utama.",
+            "Transisi level 50: pakai Mordvolt Resistant Vest, Mordvolt Resistant Gloves, Mordvolt Resistant Wrench dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Saat channel Battle Skill, kamu masih bisa bergerak pelan; gunakan untuk reposisi sambil tetap mengontrol grup musuh.",
+            "Pada mid game, jaga uptime dukungan Gilberta; jangan simpan skill terlalu lama karena nilai utilitas turun.",
+            "Saat masuk level 60, pindah ke Mordvolt Resistant Vest T1, Catastrophe Gloves, Catastrophe Filter; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Simpan Ultimate untuk momen Vulnerable atau Lift agar Slow + Arts Susceptibility memberi value maksimal.",
+            "Di endgame, peran Gilberta adalah memperlebar burst window tim; timing lebih penting daripada jumlah hit mentah.",
+            "Finalisasi level 70 dengan Eternal Xiranite Armor, Eternal Xiranite Gloves T1, Eternal Xiranite Auxiliary Arm dan senjata Delivery Guaranteed; cocokkan dengan komposisi Gilberta, Laevatain, Wulfgard.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Buka dengan Battle Skill untuk setup debuff/buff area.",
+            "Lanjutkan dengan Arcane Staff: Matrix Displacement untuk menjaga chain dan buka peluang Messenger's Song.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Arcane Staff: Beam Cohesion Arts untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Gilberta tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523668"
       }
     },
     {
@@ -1701,12 +1820,73 @@
         "characterTips": [
           "Ultimate adalah jendela damage utama: setelah aktif, fokuskan buff Basic Attack ke target prioritas.",
           "Setup Solidification dengan Arts Infliction non-Cryo dulu, lalu lanjut Battle Skill dan Combo Skill Yvonne.",
-          "Jangan buang Ultimate di gelombang kecil; simpan untuk elite atau boss ber-HP tebal."
+          "Jangan buang Ultimate di gelombang kecil; simpan untuk elite atau boss ber-HP tebal.",
+          "Masukkan Yvonne saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72538",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Yvonne Guide",
+            "url": "https://gamewith.net/akendfield/72538"
+          },
+          {
+            "label": "Game8: Yvonne Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523664"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/yvonne-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Ultimate adalah jendela damage utama: setelah aktif, fokuskan buff Basic Attack ke target prioritas.",
+            "Fokuskan Yvonne sebagai dealer damage utama; pelajari jarak aman serangan tipe Handcannon sejak awal.",
+            "Transisi level 50: pakai Mordvolt Insulation Vest, Mordvolt Insulation Gloves, Mordvolt Insulation Wrench T1 dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna.",
+            "Perhatikan status Infliction musuh sebelum commit combo agar reaksi elemen tidak terbuang."
+          ],
+          "midGame": [
+            "Setup Solidification dengan Arts Infliction non-Cryo dulu, lalu lanjut Battle Skill dan Combo Skill Yvonne.",
+            "Di mid game, rapikan urutan Battle Skill dan Flashfreezer u37 supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Mordvolt Insulation Vest T2, Miner Gloves T2, Mordvolt Insulation Wrench T2; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Simpan skill impact tinggi untuk momen Stagger/Node pecah supaya damage window lebih tebal."
+          ],
+          "endGame": [
+            "Jangan buang Ultimate di gelombang kecil; simpan untuk elite atau boss ber-HP tebal.",
+            "Endgame Yvonne bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan MI Security Overalls, MI Security Hands PPE, MI Security Toolkit dan senjata Navigator / Wedge; cocokkan dengan komposisi Yvonne, Alesh, Xaihi."
+          ],
+          "rotation": [
+            "Kendalikan Yvonne langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Flashfreezer u37 untuk menjaga chain dan buka peluang Barrage of Technology.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Exuberant Trigger untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Yvonne tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523664"
       }
     },
     {
@@ -2107,12 +2287,72 @@
         "characterTips": [
           "Gunakan Combo Skill lalu Battle Skill untuk mengonversi Corrosion menjadi debuff Physical/Arts susceptibility.",
           "Aktifkan Battle Skill secara proaktif saat tim mulai tertekan karena bayangan Mr. Dolly memberi sustain stabil.",
-          "Ultimate Ardelia paling bernilai saat banyak musuh berkumpul karena sekaligus support tim dan kontrol area."
+          "Ultimate Ardelia paling bernilai saat banyak musuh berkumpul karena sekaligus support tim dan kontrol area.",
+          "Buka rotasi dengan Ardelia untuk pasang buff/debuff lebih dulu, lalu masukkan DPS utama agar nilai dukungan maksimal.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72545",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Ardelia Guide",
+            "url": "https://gamewith.net/akendfield/72545"
+          },
+          {
+            "label": "Game8: Ardelia Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562199"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/ardelia-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Gunakan Combo Skill lalu Battle Skill untuk mengonversi Corrosion menjadi debuff Physical/Arts susceptibility.",
+            "Buka pertarungan dengan Battle Skill atau Eruption Column untuk pasang debuff/buff, baru serahkan field ke DPS utama.",
+            "Transisi level 50: pakai Mordvolt Resistant Vest, Mordvolt Resistant Gloves, Mordvolt Resistant Battery dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Aktifkan Battle Skill secara proaktif saat tim mulai tertekan karena bayangan Mr. Dolly memberi sustain stabil.",
+            "Pada mid game, jaga uptime dukungan Ardelia; jangan simpan skill terlalu lama karena nilai utilitas turun.",
+            "Saat masuk level 60, pindah ke Mordvolt Resistant Vest T1, Miner Fists T1, Mordvolt Resistant Battery T1; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Ultimate Ardelia paling bernilai saat banyak musuh berkumpul karena sekaligus support tim dan kontrol area.",
+            "Di endgame, peran Ardelia adalah memperlebar burst window tim; timing lebih penting daripada jumlah hit mentah.",
+            "Finalisasi level 70 dengan LYNX Cuirass, Eternal Xiranite Gloves T1, Eternal Xiranite Auxiliary Arm dan senjata Dreams of the Starry Beach; cocokkan dengan komposisi Ardelia, Laevatain, Wulfgard.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Kendalikan Ardelia langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Eruption Column untuk menjaga chain dan buka peluang Friendly Presence.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Rocky Whispers untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Ardelia tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562199"
       }
     },
     {
@@ -2513,12 +2753,72 @@
         "characterTips": [
           "Rotasi Last Rite bergantung pada Battle + Combo Skill; prioritaskan uptime dua skill ini untuk isi energi Ultimate.",
           "Mainkan dalam tim Cryo agar stack Cryo Infliction cepat penuh dan trigger Combo Skill lebih konsisten.",
-          "Ultimate bisa dipakai sebagai counter untuk serangan berat berkat fase aman (invulnerability)."
+          "Ultimate bisa dipakai sebagai counter untuk serangan berat berkat fase aman (invulnerability).",
+          "Masukkan Last Rite saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72543",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Last Rite Guide",
+            "url": "https://gamewith.net/akendfield/72543"
+          },
+          {
+            "label": "Game8: Last Rite Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562308"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/last-rite-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Rotasi Last Rite bergantung pada Battle + Combo Skill; prioritaskan uptime dua skill ini untuk isi energi Ultimate.",
+            "Fokuskan Last Rite sebagai dealer damage utama; pelajari jarak aman serangan tipe Great Sword sejak awal.",
+            "Transisi level 50: pakai Armored MSGR Jacket, Armored MSGR Gloves, Armored MSGR Gyro dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna.",
+            "Perhatikan status Infliction musuh sebelum commit combo agar reaksi elemen tidak terbuang."
+          ],
+          "midGame": [
+            "Mainkan dalam tim Cryo agar stack Cryo Infliction cepat penuh dan trigger Combo Skill lebih konsisten.",
+            "Di mid game, rapikan urutan Battle Skill dan Winter's Devourer supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Catastrophe Heavy Armor I, Aburrey Gauntlets, Aburrey Auditory Chip; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Ultimate bisa dipakai sebagai counter untuk serangan berat berkat fase aman (invulnerability).",
+            "Endgame Last Rite bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Ã†thertech Plating, Tide Surge Gauntlets, Hanging River O2 Tube dan senjata Khravengger; cocokkan dengan komposisi Last Rite, Fluorite, Xaihi.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Buka dengan Battle Skill saat target prioritas muncul di jangkauan efektif.",
+            "Lanjutkan dengan Winter's Devourer untuk menjaga chain dan buka peluang Hypothermia.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Dance of Rime untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Last Rite tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562308"
       }
     },
     {
@@ -2915,12 +3215,72 @@
         "characterTips": [
           "Pakai Final Strike untuk memicu Combo Skill Perlica sesering mungkin agar Electrification tetap aktif.",
           "Combo Skill penting karena membantu menurunkan resist Originium Arts musuh untuk DPS tim Arts.",
-          "Ultimate berbiaya rendah, jadi aman dipakai on-cooldown pada wave ramai."
+          "Ultimate berbiaya rendah, jadi aman dipakai on-cooldown pada wave ramai.",
+          "Masukkan Perlica saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72537",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Perlica Guide",
+            "url": "https://gamewith.net/akendfield/72537"
+          },
+          {
+            "label": "Game8: Perlica Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523675"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/perlica-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Pakai Final Strike untuk memicu Combo Skill Perlica sesering mungkin agar Electrification tetap aktif.",
+            "Fokuskan Perlica sebagai dealer damage utama; pelajari jarak aman serangan tipe Arts Unit sejak awal.",
+            "Transisi level 50: pakai Mordvolt Insulation Vest, Mordvolt Insulation Gloves, Mordvolt Insulation Wrench T1 dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Combo Skill penting karena membantu menurunkan resist Originium Arts musuh untuk DPS tim Arts.",
+            "Di mid game, rapikan urutan Battle Skill dan Instant Protocol: Chain supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Mordvolt Insulation Vest T2, Catastrophe Gloves, Mordvolt Insulation Wrench T2; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Simpan skill impact tinggi untuk momen Stagger/Node pecah supaya damage window lebih tebal."
+          ],
+          "endGame": [
+            "Ultimate berbiaya rendah, jadi aman dipakai on-cooldown pada wave ramai.",
+            "Endgame Perlica bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Pulser Labs Disruptor Suit, Eternal Xiranite Gloves T1, Pulser Labs Calibrator dan senjata Wild Wanderer; cocokkan dengan komposisi Avywenna, Arclight, Perlica."
+          ],
+          "rotation": [
+            "Kendalikan Perlica langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Instant Protocol: Chain untuk menjaga chain dan buka peluang Obliteration Protocol.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Protocol a: Breach untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Perlica tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523675"
       }
     },
     {
@@ -3349,12 +3709,72 @@
         "characterTips": [
           "Target utama Pogranichnik adalah ekonomi SP tim: konsumsi Vulnerable dengan Battle Skill untuk proc chain.",
           "Setelah Ultimate aktif, manfaatkan stack Steel Oath lewat efek status/chain agar SP refund maksimal.",
-          "Dia optimal di tim Physical yang rutin menumpuk Vulnerable seperti Lifeng/Chen/Endministrator."
+          "Dia optimal di tim Physical yang rutin menumpuk Vulnerable seperti Lifeng/Chen/Endministrator.",
+          "Masukkan Pogranichnik saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72544",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Pogranichnik Guide",
+            "url": "https://gamewith.net/akendfield/72544"
+          },
+          {
+            "label": "Game8: Pogranichnik Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562205"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/pogranichnik-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Target utama Pogranichnik adalah ekonomi SP tim: konsumsi Vulnerable dengan Battle Skill untuk proc chain.",
+            "Jadikan Pogranichnik pembuka tempo fight: masuk cepat, aktifkan Battle Skill, lalu pindah ke unit finisher.",
+            "Transisi level 50: pakai Mordvolt Resistant Vest, Mordvolt Resistant Gloves, Mordvolt Resistant Wrench dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Setelah Ultimate aktif, manfaatkan stack Steel Oath lewat efek status/chain agar SP refund maksimal.",
+            "Pada mid game, gunakan Full Moon Slash untuk transisi antargelombang agar momentum tim tidak turun.",
+            "Saat masuk level 60, pindah ke Aburrey Light Armor T1, Mordvolt Resistant Gloves T1, Aburrey Sensor Chip; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Dia optimal di tim Physical yang rutin menumpuk Vulnerable seperti Lifeng/Chen/Endministrator.",
+            "Di endgame, peran vanguard adalah membuka celah burst dan menjaga ritme skill tim tetap rapat.",
+            "Finalisasi level 70 dengan Bonekrusha Poncho T1, Type 50 Yinglung Gloves T1, Type 50 Yinglung Knife dan senjata Never Rest; cocokkan dengan komposisi Pogranichnik, Lifeng, Chen Qianyu.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Mulai dengan Battle Skill sebagai pembuka tempo dan kontrol jarak aman.",
+            "Lanjutkan dengan Full Moon Slash untuk menjaga chain dan buka peluang The Living Banner.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan All-Out Offensive untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Pogranichnik tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562205"
       }
     },
     {
@@ -3755,12 +4175,70 @@
         "characterTips": [
           "Combo Skill Ember aktif saat tim kena pukul; gunakan untuk recovery HP sambil tetap menjaga pressure damage.",
           "Skala Shield Ultimate mengikuti HP Ember, jadi build defensif memberi kontribusi tim lebih besar.",
-          "Ember kuat di konten sulit atau map padat musuh karena sustain + proteksi timnya stabil."
+          "Ember kuat di konten sulit atau map padat musuh karena sustain + proteksi timnya stabil.",
+          "Prioritaskan uptime utilitas defensif Ember; amankan HP tim lebih dulu sebelum commit combo panjang.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72542",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Ember Guide",
+            "url": "https://gamewith.net/akendfield/72542"
+          },
+          {
+            "label": "Game8: Ember Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523671"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/ember-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Combo Skill Ember aktif saat tim kena pukul; gunakan untuk recovery HP sambil tetap menjaga pressure damage.",
+            "Prioritaskan kestabilan tim: pakai Battle Skill saat tekanan naik, bukan saat HP sudah kritis.",
+            "Transisi level 50: pakai Armored MSGR Jacket, Armored MSGR Gloves, Armored MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Skala Shield Ultimate mengikuti HP Ember, jadi build defensif memberi kontribusi tim lebih besar.",
+            "Gunakan Frontline Support untuk menjaga kontrol garis depan sambil menunggu DPS utama siap burst.",
+            "Saat masuk level 60, pindah ke Armored MSGR Jacket T1, Armored MSGR Gloves T1, Armored MSGR Gyro T1; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Ember kuat di konten sulit atau map padat musuh karena sustain + proteksi timnya stabil.",
+            "Di endgame, tugas Ember adalah menjaga uptime defensif sambil tetap menyumbang damage utilitas.",
+            "Finalisasi level 70 dengan LYNX Heavy Armor, LYNX Gauntlets, LYNX Connector T1 dan senjata Thunderberge; cocokkan dengan komposisi Ember, Lifeng, Pogranichnik."
+          ],
+          "rotation": [
+            "Mulai rotasi dengan Battle Skill untuk mengamankan posisi frontline.",
+            "Lanjutkan dengan Frontline Support untuk menjaga chain dan buka peluang Inflamed for the Assault.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Sword Art of Assault untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Ember tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523671"
       }
     },
     {
@@ -4161,12 +4639,72 @@
         "characterTips": [
           "Kunci Avywenna adalah pola: pasang Thunderlance lalu recall dengan Battle Skill untuk burst area.",
           "Pastikan posisi saat recall supaya jalur balik lance menembus sebanyak mungkin musuh.",
-          "Thunderlance EX dari Ultimate punya damage balik tinggi, jadi selalu cari sudut recall terbaik."
+          "Thunderlance EX dari Ultimate punya damage balik tinggi, jadi selalu cari sudut recall terbaik.",
+          "Masukkan Avywenna saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72532",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Avywenna Guide",
+            "url": "https://gamewith.net/akendfield/72532"
+          },
+          {
+            "label": "Game8: Avywenna Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523670"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/avywenna-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Kunci Avywenna adalah pola: pasang Thunderlance lalu recall dengan Battle Skill untuk burst area.",
+            "Fokuskan Avywenna sebagai dealer damage utama; pelajari jarak aman serangan tipe Polearm sejak awal.",
+            "Transisi level 50: pakai Mordvolt Resistant Vest, Mordvolt Resistant Gloves, Mordvolt Resistant Wrench dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Pastikan posisi saat recall supaya jalur balik lance menembus sebanyak mungkin musuh.",
+            "Di mid game, rapikan urutan Battle Skill dan Thunderlance: Strike supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Aburrey Light Armor T1, Mordvolt Resistant Gloves T1, Aburrey Sensor Chip; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Thunderlance EX dari Ultimate punya damage balik tinggi, jadi selalu cari sudut recall terbaik.",
+            "Endgame Avywenna bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Bonekrusha Poncho T1, Type 50 Yinglung Gloves T1, Bonekrusha Figurine dan senjata J.E.T; cocokkan dengan komposisi Avywenna, Perlica, Arclight.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Kendalikan Avywenna langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Thunderlance: Strike untuk menjaga chain dan buka peluang Expedited Delivery.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Thunderlance: Blitz untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Avywenna tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523670"
       }
     },
     {
@@ -4567,12 +5105,72 @@
         "characterTips": [
           "Da Pan benar-benar meledak saat 4 stack Vulnerable tercapai; jangan buru-buru spam skill lain.",
           "Koordinasikan tim agar status Crush/Breach tidak menghapus stack sebelum Combo Skill Da Pan dipakai.",
-          "Siklus ideal: build 4 stack -> Combo Skill burst -> ulang dari awal."
+          "Siklus ideal: build 4 stack -> Combo Skill burst -> ulang dari awal.",
+          "Masukkan Da Pan saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72533",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Da Pan Guide",
+            "url": "https://gamewith.net/akendfield/72533"
+          },
+          {
+            "label": "Game8: Da Pan Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523672"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/da-pan-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Da Pan benar-benar meledak saat 4 stack Vulnerable tercapai; jangan buru-buru spam skill lain.",
+            "Fokuskan Da Pan sebagai dealer damage utama; pelajari jarak aman serangan tipe Great Sword sejak awal.",
+            "Transisi level 50: pakai Armored MSGR Jacket, Armored MSGR Gloves, Armored MSGR Gyro dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Koordinasikan tim agar status Crush/Breach tidak menghapus stack sebelum Combo Skill Da Pan dipakai.",
+            "Di mid game, rapikan urutan Battle Skill dan MORE SPICE! supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Miner Armor T1, Aburrey Gauntlets, Aburrey Auditory Chip; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Siklus ideal: build 4 stack -> Combo Skill burst -> ulang dari awal.",
+            "Endgame Da Pan bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Aethertech Plating, Swordmancer TAC Gauntlets, Aethertech Analysis Band dan senjata Ancient Canal; cocokkan dengan komposisi Da Pan, Chen Qianyu, Ember.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Buka dengan Battle Skill saat target prioritas muncul di jangkauan efektif.",
+            "Lanjutkan dengan MORE SPICE! untuk menjaga chain dan buka peluang Reduce and Thicken.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan ROLLING CUT! untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Da Pan tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523672"
       }
     },
     {
@@ -4973,12 +5571,72 @@
         "characterTips": [
           "Aktifkan Battle Skill sebelum serangan masuk untuk dapat Protection + counter yang menambah Vulnerable.",
           "Combo Skill sangat berguna memutus Charge Attack dan menyelamatkan tim saat HP rendah.",
-          "Ultimate Knock Down lalu counter Battle Skill membantu setup 2 stack Vulnerable cepat."
+          "Ultimate Knock Down lalu counter Battle Skill membantu setup 2 stack Vulnerable cepat.",
+          "Prioritaskan uptime utilitas defensif Catcher; amankan HP tim lebih dulu sebelum commit combo panjang.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72527",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Catcher Guide",
+            "url": "https://gamewith.net/akendfield/72527"
+          },
+          {
+            "label": "Game8: Catcher Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562317"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/catcher-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Aktifkan Battle Skill sebelum serangan masuk untuk dapat Protection + counter yang menambah Vulnerable.",
+            "Prioritaskan kestabilan tim: pakai Battle Skill saat tekanan naik, bukan saat HP sudah kritis.",
+            "Transisi level 50: pakai Armored MSGR Jacket, Armored MSGR Gloves, Armored MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Combo Skill sangat berguna memutus Charge Attack dan menyelamatkan tim saat HP rendah.",
+            "Gunakan Timely Suppression untuk menjaga kontrol garis depan sambil menunggu DPS utama siap burst.",
+            "Saat masuk level 60, pindah ke Armored MSGR Jacket T1, Aburrey Gauntlets, Armored MSGR Gyro T1; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Ultimate Knock Down lalu counter Battle Skill membantu setup 2 stack Vulnerable cepat.",
+            "Di endgame, tugas Catcher adalah menjaga uptime defensif sambil tetap menyumbang damage utilitas.",
+            "Finalisasi level 70 dengan Eternal Xiranite Armor, LYNX Gloves, Eternal Xiranite Auxiliary Arm dan senjata Former Finery; cocokkan dengan komposisi Catcher, Endministrator, Chen Qianyu.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Mulai rotasi dengan Battle Skill untuk mengamankan posisi frontline.",
+            "Lanjutkan dengan Timely Suppression untuk menjaga chain dan buka peluang Resilient Defense.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Basic Tactics untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Catcher tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562317"
       }
     },
     {
@@ -5379,12 +6037,72 @@
         "characterTips": [
           "Manfaatkan cooldown Combo Skill 3 detik untuk loop SP recovery dalam tim Electrification.",
           "Jangan terlalu cepat menekan Battle Skill; pastikan timing agar rantai Combo Skill tidak terputus.",
-          "Ultimate dapat dipakai sebagai starter Electrification saat tim belum sempat setup."
+          "Ultimate dapat dipakai sebagai starter Electrification saat tim belum sempat setup.",
+          "Masukkan Arclight saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72530",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Arclight Guide",
+            "url": "https://gamewith.net/akendfield/72530"
+          },
+          {
+            "label": "Game8: Arclight Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523663"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/arclight-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Manfaatkan cooldown Combo Skill 3 detik untuk loop SP recovery dalam tim Electrification.",
+            "Jadikan Arclight pembuka tempo fight: masuk cepat, aktifkan Battle Skill, lalu pindah ke unit finisher.",
+            "Transisi level 50: pakai Roving MSGR Jacket, Roving MSGR Fists, Roving MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Jangan terlalu cepat menekan Battle Skill; pastikan timing agar rantai Combo Skill tidak terputus.",
+            "Pada mid game, gunakan Peal of Thunder untuk transisi antargelombang agar momentum tim tidak turun.",
+            "Saat masuk level 60, pindah ke Roving MSGR Jacket I, Miner Gloves T2, Roving MSGR Gyro T1; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Ultimate dapat dipakai sebagai starter Electrification saat tim belum sempat setup.",
+            "Di endgame, peran vanguard adalah membuka celah burst dan menjaga ritme skill tim tetap rapat.",
+            "Finalisasi level 70 dengan Frontiers Armor II, Frontiers Blight RES Gloves, Frontiers Extra O2 Tube dan senjata OBJ Edge of Lightness; cocokkan dengan komposisi Avywenna, Perlica, Arclight."
+          ],
+          "rotation": [
+            "Mulai dengan Battle Skill sebagai pembuka tempo dan kontrol jarak aman.",
+            "Lanjutkan dengan Peal of Thunder untuk menjaga chain dan buka peluang Wildland Trekker.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Seek and Hunt untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Arclight tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten.",
+            "Spam skill saat cooldown belum sinkron; lebih baik tunggu jendela rotasi berikutnya."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523663"
       }
     },
     {
@@ -5869,12 +6587,72 @@
         "characterTips": [
           "Buka dengan Battle Skill untuk Physical Susceptibility, lalu cari trigger Combo Skill secepat mungkin.",
           "Cek status Link sebelum Ultimate; konsumsi Link memberi hit tambahan dengan multiplier tinggi.",
-          "Lifeng paling stabil jika ada partner penumpuk Vulnerable dan supplier SP."
+          "Lifeng paling stabil jika ada partner penumpuk Vulnerable dan supplier SP.",
+          "Masukkan Lifeng saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72541",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Lifeng Guide",
+            "url": "https://gamewith.net/akendfield/72541"
+          },
+          {
+            "label": "Game8: Lifeng Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523667"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/lifeng-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Buka dengan Battle Skill untuk Physical Susceptibility, lalu cari trigger Combo Skill secepat mungkin.",
+            "Fokuskan Lifeng sebagai dealer damage utama; pelajari jarak aman serangan tipe Polearm sejak awal.",
+            "Transisi level 50: pakai Roving MSGR Jacket, Roving MSGR Fists, Roving MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Cek status Link sebelum Ultimate; konsumsi Link memberi hit tambahan dengan multiplier tinggi.",
+            "Di mid game, rapikan urutan Battle Skill dan Aspect of Wrath supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Aburrey Heavy Armor T1, Roving MSGR Fists T1, Roving MSGR Flashlight T1; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Lifeng paling stabil jika ada partner penumpuk Vulnerable dan supplier SP.",
+            "Endgame Lifeng bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan MI Security Armor, Aethertech Gloves, Aethertech Stabilizer dan senjata Mountain Bearer; cocokkan dengan komposisi Lifeng, Chen Qianyu, Pogranichnik.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Kendalikan Lifeng langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Aspect of Wrath untuk menjaga chain dan buka peluang Illumination.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Ruination untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Lifeng tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523667"
       }
     },
     {
@@ -6275,12 +7053,71 @@
         "characterTips": [
           "Combo Skill Snowshine aktif saat HP karakter aktif di bawah 60%; manfaatkan sebagai tombol darurat sustain tim.",
           "Battle Skill memberi Protection dan counter, bagus untuk menahan pressure sambil menebar Cryo.",
-          "Ultimate solid untuk force Solidification dan membuka combo Cryo/Physical follow-up."
+          "Ultimate solid untuk force Solidification dan membuka combo Cryo/Physical follow-up.",
+          "Prioritaskan uptime utilitas defensif Snowshine; amankan HP tim lebih dulu sebelum commit combo panjang.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72529",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Snowshine Guide",
+            "url": "https://gamewith.net/akendfield/72529"
+          },
+          {
+            "label": "Game8: Snowshine Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523666"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/snowshine-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Combo Skill Snowshine aktif saat HP karakter aktif di bawah 60%; manfaatkan sebagai tombol darurat sustain tim.",
+            "Prioritaskan kestabilan tim: pakai Battle Skill saat tekanan naik, bukan saat HP sudah kritis.",
+            "Transisi level 50: pakai Mordvolt Resistant Vest, Armored MSGR Gloves, Mordvolt Resistant Battery dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Battle Skill memberi Protection dan counter, bagus untuk menahan pressure sambil menebar Cryo.",
+            "Gunakan Polar Rescue untuk menjaga kontrol garis depan sambil menunggu DPS utama siap burst.",
+            "Saat masuk level 60, pindah ke Mordvolt Resistant Vest T1, Miner Fists T1, Mordvolt Resistant Battery T1; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Ultimate solid untuk force Solidification dan membuka combo Cryo/Physical follow-up.",
+            "Di endgame, tugas Snowshine adalah menjaga uptime defensif sambil tetap menyumbang damage utilitas.",
+            "Finalisasi level 70 dengan LYNX Heavy Armor, LYNX Gloves, LYNX Aegis Injector dan senjata Thunderberge; cocokkan dengan komposisi Last Rite, Fluorite, Xaihi."
+          ],
+          "rotation": [
+            "Kendalikan Snowshine langsung saat fase burst; buka dengan Battle Skill di target utama.",
+            "Lanjutkan dengan Polar Rescue untuk menjaga chain dan buka peluang Polar Survival.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Hypothermic Assault untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Snowshine tidak maksimal.",
+            "Terlalu lama menahan Battle Skill saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523666"
       }
     },
     {
@@ -6653,12 +7490,71 @@
         "characterTips": [
           "Alesh adalah baterai SP; rotasikan Battle, Combo, dan Ultimate-nya untuk menjaga ritme skill tim.",
           "Battle Skill bisa memaksa Solidification pada target Cryo, berguna untuk setup burst.",
-          "Ultimate lebih efisien saat dipakai mengeksekusi beberapa musuh sekaligus demi bonus SP."
+          "Ultimate lebih efisien saat dipakai mengeksekusi beberapa musuh sekaligus demi bonus SP.",
+          "Masukkan Alesh saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72531",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Alesh Guide",
+            "url": "https://gamewith.net/akendfield/72531"
+          },
+          {
+            "label": "Game8: Alesh Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562315"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/alesh-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Alesh adalah baterai SP; rotasikan Battle, Combo, dan Ultimate-nya untuk menjaga ritme skill tim.",
+            "Jadikan Alesh pembuka tempo fight: masuk cepat, aktifkan Unconventional Lure, lalu pindah ke unit finisher.",
+            "Transisi level 50: pakai Armored MSGR Jacket, Armored MSGR Gloves, Armored MSGR Gyro dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Battle Skill bisa memaksa Solidification pada target Cryo, berguna untuk setup burst.",
+            "Pada mid game, gunakan Skill Combo untuk transisi antargelombang agar momentum tim tidak turun.",
+            "Saat masuk level 60, pindah ke Catastrophe Heavy Armor, Mordvolt Insulation Gloves I, Catastrophe Gauze Cartridge; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Kelola SP secara disiplin; jangan habiskan semua resource di gelombang kecil."
+          ],
+          "endGame": [
+            "Ultimate lebih efisien saat dipakai mengeksekusi beberapa musuh sekaligus demi bonus SP.",
+            "Di endgame, peran vanguard adalah membuka celah burst dan menjaga ritme skill tim tetap rapat.",
+            "Finalisasi level 70 dengan Frontiers Armor, Eternal Xiranite Gloves, Frontiers Comm I dan senjata Finchaser 3.0; cocokkan dengan komposisi Alesh, Endministrator, Chen Qianyu."
+          ],
+          "rotation": [
+            "Kendalikan Alesh langsung saat fase burst; buka dengan Unconventional Lure di target utama.",
+            "Lanjutkan dengan Skill Combo untuk menjaga chain dan buka peluang Talent.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Basic Rod Casting untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Alesh tidak maksimal.",
+            "Terlalu lama menahan Unconventional Lure saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562315"
       }
     },
     {
@@ -7031,12 +7927,71 @@
         "characterTips": [
           "Selalu buka rotasi dengan Battle Skill untuk summon crystal; tanpa crystal, utilitas Xaihi turun drastis.",
           "Kejar Final Strike saat HP tim penuh agar dapat bonus Arts Amp selain heal.",
-          "Setelah dua kali trigger heal crystal, pakai Combo Skill lalu summon crystal baru."
+          "Setelah dua kali trigger heal crystal, pakai Combo Skill lalu summon crystal baru.",
+          "Buka rotasi dengan Xaihi untuk pasang buff/debuff lebih dulu, lalu masukkan DPS utama agar nilai dukungan maksimal.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72535",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Xaihi Guide",
+            "url": "https://gamewith.net/akendfield/72535"
+          },
+          {
+            "label": "Game8: Xaihi Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523669"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/xaihi-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Selalu buka rotasi dengan Battle Skill untuk summon crystal; tanpa crystal, utilitas Xaihi turun drastis.",
+            "Buka pertarungan dengan Skill Aktif atau Skill Combo untuk pasang debuff/buff, baru serahkan field ke DPS utama.",
+            "Transisi level 50: pakai Mordvolt Resistant Vest, Mordvolt Resistant Gloves, Mordvolt Resistant Battery dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Kejar Final Strike saat HP tim penuh agar dapat bonus Arts Amp selain heal.",
+            "Pada mid game, jaga uptime dukungan Xaihi; jangan simpan skill terlalu lama karena nilai utilitas turun.",
+            "Saat masuk level 60, pindah ke Mordvolt Resistant Vest T1, Catastrophe Gloves, Catastrophe Filter; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Setelah dua kali trigger heal crystal, pakai Combo Skill lalu summon crystal baru.",
+            "Di endgame, peran Xaihi adalah memperlebar burst window tim; timing lebih penting daripada jumlah hit mentah.",
+            "Finalisasi level 70 dengan LYNX Cuirass, Eternal Xiranite Gloves T1, Eternal Xiranite Auxiliary Arm dan senjata Chivalric Virtues; cocokkan dengan komposisi Yvonne, Last Rite, Xaihi."
+          ],
+          "rotation": [
+            "Kendalikan Xaihi langsung saat fase burst; buka dengan Skill Aktif di target utama.",
+            "Lanjutkan dengan Skill Combo untuk menjaga chain dan buka peluang Talent.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Serangan Dasar untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Xaihi tidak maksimal.",
+            "Terlalu lama menahan Skill Aktif saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523669"
       }
     },
     {
@@ -7409,12 +8364,70 @@
         "characterTips": [
           "Rotasi aman Fluorite: Battle Skill -> Battle Skill -> Combo Skill untuk naikkan stack infliction.",
           "Combo Skill bisa aktif dari stack Nature maupun Cryo, jadi fleksibel di dua tipe tim.",
-          "Ultimate paling kuat dipakai sesaat setelah Battle Skill menempel pada target."
+          "Ultimate paling kuat dipakai sesaat setelah Battle Skill menempel pada target.",
+          "Masukkan Fluorite saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72525",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Fluorite Guide",
+            "url": "https://gamewith.net/akendfield/72525"
+          },
+          {
+            "label": "Game8: Fluorite Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562203"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/fluorite-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Rotasi aman Fluorite: Battle Skill -> Battle Skill -> Combo Skill untuk naikkan stack infliction.",
+            "Fokuskan Fluorite sebagai dealer damage utama; pelajari jarak aman serangan tipe Handcannon sejak awal.",
+            "Transisi level 50: pakai Roving MSGR Jacket, Roving MSGR Fists, Roving MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Combo Skill bisa aktif dari stack Nature maupun Cryo, jadi fleksibel di dua tipe tim.",
+            "Di mid game, rapikan urutan Skill Aktif dan Free Giveaway supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Roving MSGR Jacket T1, Miner Gloves T2, Roving MSGR Gyro T1; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Ultimate paling kuat dipakai sesaat setelah Battle Skill menempel pada target.",
+            "Endgame Fluorite bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Frontiers Armor T3, Type 50 Yinglung Gloves, Frontiers Extra O2 Tube dan senjata Clannibal; cocokkan dengan komposisi Last Rite, Fluorite, Xaihi."
+          ],
+          "rotation": [
+            "Kendalikan Fluorite langsung saat fase burst; buka dengan Skill Aktif di target utama.",
+            "Lanjutkan dengan Free Giveaway untuk menjaga chain dan buka peluang Talent.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Signature Gun Kata untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Fluorite tidak maksimal.",
+            "Terlalu lama menahan Skill Aktif saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562203"
       }
     },
     {
@@ -7787,12 +8800,73 @@
         "characterTips": [
           "Gunakan pola Battle Skill -> Combo Skill untuk aplikasi Lift yang lebih konsisten.",
           "Ultimate berbiaya rendah cocok dipakai sering, bukan disimpan terlalu lama.",
-          "Peran utama Chen adalah menumpuk Vulnerable lewat Lift untuk finisher Breach/Crush tim."
+          "Peran utama Chen adalah menumpuk Vulnerable lewat Lift untuk finisher Breach/Crush tim.",
+          "Masukkan Chen Qianyu saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72536",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Chen Qianyu Guide",
+            "url": "https://gamewith.net/akendfield/72536"
+          },
+          {
+            "label": "Game8: Chen Qianyu Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523674"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/chen-qianyu-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Gunakan pola Battle Skill -> Combo Skill untuk aplikasi Lift yang lebih konsisten.",
+            "Fokuskan Chen Qianyu sebagai dealer damage utama; pelajari jarak aman serangan tipe Sword sejak awal.",
+            "Transisi level 50: pakai Roving MSGR Jacket, Roving MSGR Fists, Roving MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Ultimate berbiaya rendah cocok dipakai sering, bukan disimpan terlalu lama.",
+            "Di mid game, rapikan urutan Skill Aktif dan Skill Combo supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Aburrey Heavy Armor T1, Roving MSGR Fists T1, Roving MSGR Flashlight T1; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Simpan skill impact tinggi untuk momen Stagger/Node pecah supaya damage window lebih tebal."
+          ],
+          "endGame": [
+            "Peran utama Chen adalah menumpuk Vulnerable lewat Lift untuk finisher Breach/Crush tim.",
+            "Endgame Chen Qianyu bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Bonekrusha Heavy Armor T1, Swordmancer TAC Fists, Swordmancer Flint dan senjata Rapid Ascent; cocokkan dengan komposisi Chen Qianyu, Lifeng, Pogranichnik.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Kendalikan Chen Qianyu langsung saat fase burst; buka dengan Skill Aktif di target utama.",
+            "Lanjutkan dengan Skill Combo untuk menjaga chain dan buka peluang Talent.",
+            "Gunakan Ultimate saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Soaring Break untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Ultimate tanpa setup tim lebih dulu, sehingga burst Chen Qianyu tidak maksimal.",
+            "Terlalu lama menahan Skill Aktif saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten.",
+            "Spam skill saat cooldown belum sinkron; lebih baik tunggu jendela rotasi berikutnya."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523674"
       }
     },
     {
@@ -8165,12 +9239,71 @@
         "characterTips": [
           "Prioritas rotasi Endministrator: Combo Skill dulu, lalu konsumsi Originium Crystal lewat Battle Skill.",
           "Ultimate lebih efektif dipakai setelah setup Combo agar konsumsi crystal memberi burst lebih tinggi.",
-          "Pasangkan dengan unit Lift/Knock Down agar stack Vulnerable cepat terkumpul."
+          "Pasangkan dengan unit Lift/Knock Down agar stack Vulnerable cepat terkumpul.",
+          "Masukkan Endministrator saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72546",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Endministrator Guide",
+            "url": "https://gamewith.net/akendfield/72546"
+          },
+          {
+            "label": "Game8: Endministrator Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523676"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/endministrator-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "advancedTips": {
+          "earlyGame": [
+            "Prioritas rotasi Endministrator: Combo Skill dulu, lalu konsumsi Originium Crystal lewat Battle Skill.",
+            "Fokuskan Endministrator sebagai dealer damage utama; pelajari jarak aman serangan tipe Sword sejak awal.",
+            "Transisi level 50: pakai Roving MSGR Jacket, Roving MSGR Fists, Roving MSGR Flashlight dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Ultimate lebih efektif dipakai setelah setup Combo agar konsumsi crystal memberi burst lebih tinggi.",
+            "Di mid game, rapikan urutan Skill Aktif dan Skill Combo supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Aburrey Heavy Armor T1, Roving MSGR Fists T1, Roving MSGR Flashlight T1; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Pasangkan dengan unit Lift/Knock Down agar stack Vulnerable cepat terkumpul.",
+            "Endgame Endministrator bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Swordmancer Heavy Armor, Swordmancer TAC Gauntlets, Swordmancer Flint dan senjata Grand Vision; cocokkan dengan komposisi Endministrator, Lifeng, Pogranichnik.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Buka dengan Skill Aktif saat target prioritas muncul di jangkauan efektif.",
+            "Lanjutkan dengan Skill Combo untuk menjaga chain dan buka peluang Talent.",
+            "Gunakan Bombardment Sequence saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Destructive Sequence untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Bombardment Sequence tanpa setup tim lebih dulu, sehingga burst Endministrator tidak maksimal.",
+            "Terlalu lama menahan Skill Aktif saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523676"
       }
     },
     {
@@ -8649,12 +9782,72 @@
         "characterTips": [
           "Nilai terbesar Akekuri ada di SP recovery; cari momen Stagger atau Stagger Node untuk trigger Combo Skill.",
           "Ultimate ideal dipakai saat jendela Stagger agar recovery SP dan kontribusi tim maksimal.",
-          "Di boss multi-phase, Akekuri sering dapat banyak kesempatan proc Combo."
+          "Di boss multi-phase, Akekuri sering dapat banyak kesempatan proc Combo.",
+          "Masukkan Akekuri saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72524",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Akekuri Guide",
+            "url": "https://gamewith.net/akendfield/72524"
+          },
+          {
+            "label": "Game8: Akekuri Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562341"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/akekuri-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "gamewithSource": "https://gamewith.net/akendfield/72524",
+        "advancedTips": {
+          "earlyGame": [
+            "Nilai terbesar Akekuri ada di SP recovery; cari momen Stagger atau Stagger Node untuk trigger Combo Skill.",
+            "Jadikan Akekuri pembuka tempo fight: masuk cepat, aktifkan Burst of Passion, lalu pindah ke unit finisher.",
+            "Transisi level 50: pakai Mordvolt Insulation Vest, Mordvolt Insulation Gloves, Mordvolt Insulation Wrench T1 dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Ultimate ideal dipakai saat jendela Stagger agar recovery SP dan kontribusi tim maksimal.",
+            "Pada mid game, gunakan Flash and Dash untuk transisi antargelombang agar momentum tim tidak turun.",
+            "Saat masuk level 60, pindah ke Mordvolt Insulation Vest T2, Miner Gloves T2, Mordvolt Insulation Wrench T2; upgrade slot armor dan gloves dulu lalu stabilkan kit.",
+            "Simpan skill impact tinggi untuk momen Stagger/Node pecah supaya damage window lebih tebal."
+          ],
+          "endGame": [
+            "Di boss multi-phase, Akekuri sering dapat banyak kesempatan proc Combo.",
+            "Di endgame, peran vanguard adalah membuka celah burst dan menjaga ritme skill tim tetap rapat.",
+            "Finalisasi level 70 dengan Tide Fall Light Armor, Eternal Xiranite Gloves, Eternal Xiranite Power Core dan senjata Thermite Cutter / OBJ Edge of Lightness; cocokkan dengan komposisi Akekuri, Laevatain, Antal."
+          ],
+          "rotation": [
+            "Mulai dengan Burst of Passion sebagai pembuka tempo dan kontrol jarak aman.",
+            "Lanjutkan dengan Flash and Dash untuk menjaga chain dan buka peluang Cheer of Victory.",
+            "Gunakan SQUAD! ON ME! saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Sword of Aspiration untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan SQUAD! ON ME! tanpa setup tim lebih dulu, sehingga burst Akekuri tidak maksimal.",
+            "Terlalu lama menahan Burst of Passion saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562341"
       }
     },
     {
@@ -9133,12 +10326,73 @@
         "characterTips": [
           "Tandai target prioritas dengan Battle Skill untuk debuff Electric/Heat Susceptibility jangka panjang.",
           "Combo Skill meledakkan elemen saat target bertanda terkena status/arts infliction; sinkronkan dengan tim.",
-          "Ultimate Antal dipakai sebelum burst tim untuk memberi Electric/Heat Amp global."
+          "Ultimate Antal dipakai sebelum burst tim untuk memberi Electric/Heat Amp global.",
+          "Buka rotasi dengan Antal untuk pasang buff/debuff lebih dulu, lalu masukkan DPS utama agar nilai dukungan maksimal.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72526",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Antal Guide",
+            "url": "https://gamewith.net/akendfield/72526"
+          },
+          {
+            "label": "Game8: Antal Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562340"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/antal-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "gamewithSource": "https://gamewith.net/akendfield/72526",
+        "advancedTips": {
+          "earlyGame": [
+            "Tandai target prioritas dengan Battle Skill untuk debuff Electric/Heat Susceptibility jangka panjang.",
+            "Buka pertarungan dengan Specified Research Subject atau EMP Test Site untuk pasang debuff/buff, baru serahkan field ke DPS utama.",
+            "Transisi level 50: pakai Mordvolt Insulation Vest, Mordvolt Insulation Gloves, Mordvolt Insulation Wrench T1 dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna.",
+            "Perhatikan status Infliction musuh sebelum commit combo agar reaksi elemen tidak terbuang."
+          ],
+          "midGame": [
+            "Combo Skill meledakkan elemen saat target bertanda terkena status/arts infliction; sinkronkan dengan tim.",
+            "Pada mid game, jaga uptime dukungan Antal; jangan simpan skill terlalu lama karena nilai utilitas turun.",
+            "Saat masuk level 60, pindah ke Mordvolt Insulation Vest T2, Miner Gloves T2, Mordvolt Insulation Wrench T2; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Ultimate Antal dipakai sebelum burst tim untuk memberi Electric/Heat Amp global.",
+            "Di endgame, peran Antal adalah memperlebar burst window tim; timing lebih penting daripada jumlah hit mentah.",
+            "Finalisasi level 70 dengan Tide Fall Light Armor, Eternal Xiranite Gloves, Eternal Xiranite Power Core dan senjata Detonation Unit / Stanza of Memorials; cocokkan dengan komposisi Antal, Laevatain, Wulfgard.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Buka dengan Specified Research Subject untuk setup debuff/buff area.",
+            "Lanjutkan dengan EMP Test Site untuk menjaga chain dan buka peluang Improviser.",
+            "Gunakan Overclocked Moment saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Exchange Current untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Overclocked Moment tanpa setup tim lebih dulu, sehingga burst Antal tidak maksimal.",
+            "Terlalu lama menahan Specified Research Subject saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562340"
       }
     },
     {
@@ -9617,12 +10871,72 @@
         "characterTips": [
           "Estella optimal saat bisa memicu Solidification: aplikasikan Cryo ke target yang sudah terkena arts non-Cryo.",
           "Lanjutkan Battle Skill -> Combo Skill untuk Physical Susceptibility sebelum masuk Ultimate burst.",
-          "Dia juga membantu tim Physical karena Lift/Vulnerable setup dari kit-nya."
+          "Dia juga membantu tim Physical karena Lift/Vulnerable setup dari kit-nya.",
+          "Masukkan Estella saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72528",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Estella Guide",
+            "url": "https://gamewith.net/akendfield/72528"
+          },
+          {
+            "label": "Game8: Estella Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/562210"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/estella-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "gamewithSource": "https://gamewith.net/akendfield/72528",
+        "advancedTips": {
+          "earlyGame": [
+            "Estella optimal saat bisa memicu Solidification: aplikasikan Cryo ke target yang sudah terkena arts non-Cryo.",
+            "Fokuskan Estella sebagai dealer damage utama; pelajari jarak aman serangan tipe Polearm sejak awal.",
+            "Transisi level 50: pakai Mordvolt Insulation Vest, Mordvolt Insulation Gloves, Mordvolt Insulation Wrench T1 dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Lanjutkan Battle Skill -> Combo Skill untuk Physical Susceptibility sebelum masuk Ultimate burst.",
+            "Di mid game, rapikan urutan Onomatopoeia dan Distortion supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Mordvolt Insulation Vest T2, Miner Gloves T2, Mordvolt Insulation Wrench T2; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Dia juga membantu tim Physical karena Lift/Vulnerable setup dari kit-nya.",
+            "Endgame Estella bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Tide Fall Light Armor, Eternal Xiranite Gloves T1, Eternal Xiranite Auxiliary Arm dan senjata JET / OBJ Razorhorn; cocokkan dengan komposisi Estella, Endministrator, Alesh.",
+            "Sinkronkan debuff Vulnerability/Lift dengan burst tim agar scaling damage benar-benar terasa."
+          ],
+          "rotation": [
+            "Buka dengan Onomatopoeia saat target prioritas muncul di jangkauan efektif.",
+            "Lanjutkan dengan Distortion untuk menjaga chain dan buka peluang Commiseration.",
+            "Gunakan Tremolo saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Audio Noise untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Tremolo tanpa setup tim lebih dulu, sehingga burst Estella tidak maksimal.",
+            "Terlalu lama menahan Onomatopoeia saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/562210"
       }
     },
     {
@@ -10173,12 +11487,72 @@
         "characterTips": [
           "Combo Skill Wulfgard sangat mudah dipicu saat Arts Infliction muncul; jadikan ini sumber Heat utama.",
           "Battle Skill bisa konsumsi Combustion/Electrification untuk damage lebih tinggi, jadi baca status target dulu.",
-          "Di tim Laevatain, fokuskan SP ke DPS utama dan manfaatkan Wulfgard sebagai enabler Heat."
+          "Di tim Laevatain, fokuskan SP ke DPS utama dan manfaatkan Wulfgard sebagai enabler Heat.",
+          "Masukkan Wulfgard saat jendela burst terbuka dan musuh sudah kena debuff tim agar output damage lebih stabil.",
+          "Urutan aman rotasi: Skill Aktif -> Final Strike/chain normal -> Combo Skill, lalu simpan Ultimate saat musuh stagger atau buff tim aktif."
         ],
         "tipsSources": [
-          "https://gamewith.net/akendfield/72534",
-          "https://gamewith.net/akendfield/72441"
-        ]
+          {
+            "label": "GameWith: Wulfgard Guide",
+            "url": "https://gamewith.net/akendfield/72534"
+          },
+          {
+            "label": "Game8: Wulfgard Build",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523673"
+          },
+          {
+            "label": "ArknightsEndfield.gg: Build",
+            "url": "https://arknightsendfield.gg/character/wulfgard-build/"
+          },
+          {
+            "label": "GameWith: Combat Basics",
+            "url": "https://gamewith.net/akendfield/72441"
+          },
+          {
+            "label": "GameWith: Team Comps",
+            "url": "https://gamewith.net/akendfield/72598"
+          },
+          {
+            "label": "Game8: Beginner Tips",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/523482"
+          },
+          {
+            "label": "Game8: All Character Builds",
+            "url": "https://game8.co/games/Arknights-Endfield/archives/575720"
+          }
+        ],
+        "gamewithSource": "https://gamewith.net/akendfield/72534",
+        "advancedTips": {
+          "earlyGame": [
+            "Combo Skill Wulfgard sangat mudah dipicu saat Arts Infliction muncul; jadikan ini sumber Heat utama.",
+            "Fokuskan Wulfgard sebagai dealer damage utama; pelajari jarak aman serangan tipe Handcannon sejak awal.",
+            "Transisi level 50: pakai Catastrophe Heavy Armor T1, Catastrophe Gloves, Catastrophe Gauze Cartridge T1 dulu, kejar stat utama sesuai role sebelum mengejar substat sempurna."
+          ],
+          "midGame": [
+            "Battle Skill bisa konsumsi Combustion/Electrification untuk damage lebih tinggi, jadi baca status target dulu.",
+            "Di mid game, rapikan urutan Thermite Tracers dan Frag Grenade B supaya damage tidak pecah di waktu yang salah.",
+            "Saat masuk level 60, pindah ke Mordvolt Insulation Vest T2, Miner Gloves T2, Mordvolt Insulation Wrench T2; upgrade slot armor dan gloves dulu lalu stabilkan kit."
+          ],
+          "endGame": [
+            "Di tim Laevatain, fokuskan SP ke DPS utama dan manfaatkan Wulfgard sebagai enabler Heat.",
+            "Endgame Wulfgard bergantung pada disiplin rotasi burst dan pengaturan posisi saat fase boss.",
+            "Finalisasi level 70 dengan Hot Work Exoskeleton, Swordmancer TAC Gauntlets, Hot Work Power Bank dan senjata Clannibal / Rational Farewell; cocokkan dengan komposisi Wulfgard, Laevatain, Akekuri."
+          ],
+          "rotation": [
+            "Kendalikan Wulfgard langsung saat fase burst; buka dengan Thermite Tracers di target utama.",
+            "Lanjutkan dengan Frag Grenade B untuk menjaga chain dan buka peluang Scorching Fangs.",
+            "Cari momen Final Strike/Finisher sebelum menutup rotasi untuk bonus damage atau efek lanjutan.",
+            "Gunakan Wolven Fury saat buff tim aktif atau saat musuh masuk fase rentan.",
+            "Akhiri siklus dengan Rapid Fire Akimbo untuk isi ulang resource, lalu ulangi saat cooldown utama kembali siap."
+          ],
+          "commonMistakes": [
+            "Mengeluarkan Wolven Fury tanpa setup tim lebih dulu, sehingga burst Wulfgard tidak maksimal.",
+            "Terlalu lama menahan Thermite Tracers saat jendela damage sudah terbuka.",
+            "Memaksakan rotasi penuh saat posisi buruk, padahal reposisi singkat lebih aman dan konsisten."
+          ],
+          "updatedAt": "2026-02-20"
+        },
+        "game8Source": "https://game8.co/games/Arknights-Endfield/archives/523673"
       }
     }
   ],

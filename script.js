@@ -87,6 +87,36 @@ function esc(value) {
     .replace(/'/g, "&#39;");
 }
 
+function sourceLabelFromUrl(url) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./i, "").toLowerCase();
+    if (host.includes("gamewith.net")) return "GameWith";
+    if (host.includes("game8.co")) return "Game8";
+    if (host.includes("arknightsendfield.gg")) return "ArknightsEndfield.gg";
+    if (host.includes("prydwen.gg")) return "Prydwen";
+    return parsed.hostname.replace(/^www\./i, "");
+  } catch {
+    return "Sumber";
+  }
+}
+
+function normalizeSourceEntry(entry) {
+  if (!entry) return null;
+  if (typeof entry === "string") {
+    const url = entry.trim();
+    if (!url) return null;
+    return { url, label: sourceLabelFromUrl(url) };
+  }
+  if (typeof entry === "object") {
+    const url = String(entry.url || entry.href || "").trim();
+    if (!url) return null;
+    const label = String(entry.label || entry.name || sourceLabelFromUrl(url)).trim() || sourceLabelFromUrl(url);
+    return { url, label };
+  }
+  return null;
+}
+
 function toAbsoluteSiteUrl(pathOrUrl = "/") {
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
   const cleaned = String(pathOrUrl).startsWith("/") ? String(pathOrUrl) : `/${pathOrUrl}`;
@@ -2198,6 +2228,7 @@ function renderCharacterDetail(character) {
   const story = profile.storyHighlights || [];
   const characterTips = profile.characterTips || [];
   const tipsSources = profile.tipsSources || [];
+  const advancedTips = profile.advancedTips || {};
   const skills = profile.skills || [];
   const gears = profile.gearRecommendations || [];
   const progression = profile.gearProgression || {};
@@ -2205,14 +2236,72 @@ function renderCharacterDetail(character) {
   const introHtml = intro.length ? intro.map((line) => `<p>${esc(line)}</p>`).join("") : "<p>Profil naratif untuk karakter ini belum lengkap.</p>";
   const storyHtml = story.length ? story.map((line) => `<li>${esc(line)}</li>`).join("") : "<li>Belum ada highlight kisah tambahan.</li>";
   const tipsHtml = characterTips.length ? characterTips.map((tip) => `<li>${esc(tip)}</li>`).join("") : "<li>Tips praktis belum tersedia untuk karakter ini.</li>";
-  const tipsSourcesHtml = tipsSources.length
-    ? `<ul class="source-list tip-source-list">${tipsSources
+  const advancedEarly = advancedTips.earlyGame || [];
+  const advancedMid = advancedTips.midGame || [];
+  const advancedEnd = advancedTips.endGame || [];
+  const advancedRotation = advancedTips.rotation || [];
+  const advancedMistakes = advancedTips.commonMistakes || [];
+  const hasAdvancedTips = advancedEarly.length || advancedMid.length || advancedEnd.length || advancedRotation.length || advancedMistakes.length;
+  const renderStoryFallback = (items, fallback) =>
+    items.length ? items.map((item) => `<li>${esc(item)}</li>`).join("") : `<li>${esc(fallback)}</li>`;
+  const tipSources = tipsSources.map((source) => normalizeSourceEntry(source)).filter(Boolean);
+  const tipsSourcesHtml = tipSources.length
+    ? `<ul class="source-list tip-source-list">${tipSources
         .map(
           (source) =>
-            `<li><a href="${esc(source)}" target="_blank" rel="noreferrer noopener">${esc(source)}</a></li>`
+            `<li><a href="${esc(source.url)}" target="_blank" rel="noreferrer noopener" title="${esc(source.url)}">${esc(source.label)}</a></li>`
         )
         .join("")}</ul>`
     : '<p class="stamp">Referensi tips belum ditautkan.</p>';
+  const tipsToggleHtml = hasAdvancedTips
+    ? `
+      <article class="card tips-toggle-shell">
+        <div class="tips-toggle-header">
+          <h2>Panduan Tips Karakter</h2>
+          <div class="tips-toggle-controls" role="tablist" aria-label="Mode tips karakter">
+            <button type="button" class="tips-toggle-btn active" data-tips-mode="basic" role="tab" aria-selected="true">Basic Tips</button>
+            <button type="button" class="tips-toggle-btn" data-tips-mode="advanced" role="tab" aria-selected="false">Advanced Guide</button>
+          </div>
+        </div>
+        <p class="stamp">Mode basic cocok untuk ringkasan cepat, mode advanced untuk rotasi dan koreksi kesalahan umum.</p>
+      </article>`
+    : "";
+  const basicTipsClass = hasAdvancedTips ? "card tips-panel" : "card";
+  const advancedTipsHtml = hasAdvancedTips
+    ? `
+      <article class="section-block tips-panel tips-panel-hidden" data-tips-panel="advanced" aria-hidden="true">
+        <h2>Advanced Guide (Early / Mid / Endgame)</h2>
+        <div class="grid advanced-grid">
+          <article class="card advanced-card">
+            <h3>Early Game (Lv 1-50)</h3>
+            <ul class="story-list">${renderStoryFallback(advancedEarly, "Belum ada catatan early game.")}</ul>
+          </article>
+          <article class="card advanced-card">
+            <h3>Mid Game (Lv 50-60)</h3>
+            <ul class="story-list">${renderStoryFallback(advancedMid, "Belum ada catatan mid game.")}</ul>
+          </article>
+          <article class="card advanced-card">
+            <h3>Endgame (Lv 70+)</h3>
+            <ul class="story-list">${renderStoryFallback(advancedEnd, "Belum ada catatan endgame.")}</ul>
+          </article>
+        </div>
+        <div class="grid advanced-grid secondary">
+          <article class="card advanced-card">
+            <h3>Rotasi Singkat</h3>
+            <ol class="story-list advanced-list-order">${renderStoryFallback(advancedRotation, "Rotasi belum tersedia.")}</ol>
+          </article>
+          <article class="card advanced-card">
+            <h3>Kesalahan Yang Sering Terjadi</h3>
+            <ul class="story-list">${renderStoryFallback(advancedMistakes, "Belum ada catatan kesalahan umum.")}</ul>
+          </article>
+        </div>
+        ${
+          advancedTips.updatedAt
+            ? `<p class="stamp">Advanced tips update: ${esc(toDateLabel(advancedTips.updatedAt))}</p>`
+            : ""
+        }
+      </article>`
+    : "";
   const skillHtml = skills.length
     ? skills
         .map(
@@ -2292,11 +2381,15 @@ function renderCharacterDetail(character) {
       <article class="card"><h2>Kisah Singkat</h2><ul class="story-list">${storyHtml}</ul></article>
     </div>
 
-    <article class="card">
+    ${tipsToggleHtml}
+
+    <article class="${basicTipsClass}" data-tips-panel="basic" aria-hidden="false">
       <h2>Tips Praktis Karakter</h2>
       <ul class="story-list">${tipsHtml}</ul>
       ${tipsSourcesHtml}
     </article>
+
+    ${advancedTipsHtml}
 
     <article class="section-block">
       <h2>Skill, Fungsi, dan Cara Pakai</h2>
@@ -2324,6 +2417,38 @@ function renderCharacterDetail(character) {
       <div class="grid gear-grid">${gearHtml}</div>
       <p class="stamp">Sumber profil: <a href="${esc(profile.source || "#")}" target="_blank" rel="noreferrer noopener">${esc(profile.source || "tidak tersedia")}</a></p>
     </article>`;
+  initCharacterTipsToggle(target);
+}
+
+function initCharacterTipsToggle(container) {
+  if (!container) return;
+  const buttons = Array.from(container.querySelectorAll("[data-tips-mode]"));
+  const panels = Array.from(container.querySelectorAll("[data-tips-panel]"));
+  if (buttons.length < 2 || panels.length < 2) return;
+
+  const applyMode = (mode) => {
+    const available = panels.some((panel) => panel.dataset.tipsPanel === mode);
+    const nextMode = available ? mode : "basic";
+
+    buttons.forEach((button) => {
+      const isActive = button.dataset.tipsMode === nextMode;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-selected", isActive ? "true" : "false");
+      button.setAttribute("tabindex", isActive ? "0" : "-1");
+    });
+
+    panels.forEach((panel) => {
+      const show = panel.dataset.tipsPanel === nextMode;
+      panel.classList.toggle("tips-panel-hidden", !show);
+      panel.setAttribute("aria-hidden", show ? "false" : "true");
+    });
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => applyMode(button.dataset.tipsMode || "basic"));
+  });
+
+  applyMode("basic");
 }
 
 function initCharacterPage(characters) {
