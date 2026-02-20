@@ -97,8 +97,13 @@
           </div>
           <div class="creator-actions">
             <button class="btn ghost" id="creator-random" type="button">Acak</button>
+            <button class="btn ghost" id="creator-publish" type="button">Save Link</button>
             <button class="btn ghost" id="creator-share" type="button">Share Card</button>
             <button class="btn primary" id="creator-download" type="button">Download PNG</button>
+          </div>
+          <div class="creator-link-row">
+            <input id="creator-share-link" type="text" readonly placeholder="Link showcase akan muncul di sini..." />
+            <button class="btn ghost" id="creator-copy-link" type="button">Copy Link</button>
           </div>
           <p class="stamp" id="creator-status">Siap membuat kartu.</p>
         </article>
@@ -158,6 +163,7 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../script.js"></script>
   </body>
 </html>

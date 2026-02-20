@@ -33,6 +33,9 @@ const GACHA_BGM_SOURCES = [
 const GACHA_STATE_KEY = "endfield_web_gacha_state_v1";
 const gachaTicketMap = { 6: 2000, 5: 200, 4: 20, 3: 0 };
 const SITE_URL = "https://endfield-ind.my.id";
+const CREATOR_SHARE_TABLE = "creator_showcases";
+const SUPABASE_PUBLIC_URL = "https://axuitiqljniyqsbpxatf.supabase.co";
+const SUPABASE_PUBLIC_KEY = "sb_publishable_bF-mkQgNJ68W4yPQiX1TRg_HLj9W-T1";
 const NAV_CONTACT_LINKS = [
   {
     label: "WhatsApp",
@@ -418,6 +421,56 @@ function creatorProfileId(character, state) {
     .slice(0, 4)
     .toUpperCase();
   return `AEND-${String(level).padStart(2, "0")}${String(affinity).padStart(2, "0")}-${token || "UNIT"}`;
+}
+
+let creatorSupabaseClient = null;
+function getCreatorSupabaseClient() {
+  if (creatorSupabaseClient) return creatorSupabaseClient;
+  const sdk = typeof window !== "undefined" ? window.supabase : null;
+  if (!sdk?.createClient) return null;
+  const override = typeof window !== "undefined" ? window.__ENDFIELD_SUPABASE__ : null;
+  const url = String(override?.url || SUPABASE_PUBLIC_URL || "").trim();
+  const key = String(override?.key || SUPABASE_PUBLIC_KEY || "").trim();
+  if (!url || !key) return null;
+  creatorSupabaseClient = sdk.createClient(url, key, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
+  return creatorSupabaseClient;
+}
+
+function createCreatorShareId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID().replace(/-/g, "").slice(0, 20);
+  }
+  return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
+}
+
+function creatorShareUrl(shareId) {
+  try {
+    const current = new URL(window.location.href);
+    current.searchParams.set("sid", shareId);
+    return current.toString();
+  } catch {
+    return `${toAbsoluteSiteUrl("/card-creator/")}?sid=${encodeURIComponent(shareId)}`;
+  }
+}
+
+function readCreatorShareId(inputValue = "") {
+  const fallback = String(inputValue || "").trim();
+  if (!fallback) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return String(params.get("sid") || "").trim();
+    } catch {
+      return "";
+    }
+  }
+  try {
+    const parsed = new URL(fallback);
+    return String(parsed.searchParams.get("sid") || "").trim();
+  } catch {
+    return fallback.replace(/[^a-z0-9_-]/gi, "");
+  }
 }
 
 let revealObserver = null;
@@ -3745,8 +3798,11 @@ async function initCardCreatorPage(characters) {
     showTier: document.getElementById("creator-show-tier"),
     showRole: document.getElementById("creator-show-role"),
     random: document.getElementById("creator-random"),
+    publish: document.getElementById("creator-publish"),
     share: document.getElementById("creator-share"),
     download: document.getElementById("creator-download"),
+    shareLink: document.getElementById("creator-share-link"),
+    copyLink: document.getElementById("creator-copy-link"),
     status: document.getElementById("creator-status"),
     preview: document.getElementById("creator-preview"),
     previewAlias: document.getElementById("creator-preview-alias"),
@@ -3772,8 +3828,11 @@ async function initCardCreatorPage(characters) {
     !refs.showTier ||
     !refs.showRole ||
     !refs.random ||
+    !refs.publish ||
     !refs.share ||
     !refs.download ||
+    !refs.shareLink ||
+    !refs.copyLink ||
     !refs.status ||
     !refs.preview ||
     !refs.previewAlias ||
@@ -3857,12 +3916,115 @@ async function initCardCreatorPage(characters) {
   refs.style.value = state.styleId;
   refs.showTier.checked = state.showTier;
   refs.showRole.checked = state.showRole;
+  refs.shareLink.value = "";
   if (typeof navigator === "undefined" || typeof navigator.share !== "function") {
     refs.share.textContent = "Share (Fallback)";
   }
 
   const findCharacter = () => builtCharacters.find((item) => item.id === state.characterId) || builtCharacters[0];
   const findPreset = () => presets.find((item) => item.id === state.styleId) || presets[0];
+
+  const syncFormFromState = () => {
+    refs.alias.value = state.alias;
+    refs.tagline.value = state.tagline;
+    refs.level.value = String(state.level);
+    refs.affinity.value = String(state.affinity);
+    refs.character.value = state.characterId;
+    refs.style.value = state.styleId;
+    refs.showTier.checked = state.showTier;
+    refs.showRole.checked = state.showRole;
+  };
+
+  const snapshotState = () => ({
+    characterId: state.characterId,
+    styleId: state.styleId,
+    alias: state.alias,
+    tagline: state.tagline,
+    level: clampNumber(state.level, 1, 90, 70),
+    affinity: clampNumber(state.affinity, 0, 10, 10),
+    showTier: Boolean(state.showTier),
+    showRole: Boolean(state.showRole),
+  });
+
+  const applyPayloadState = (payload) => {
+    const safe = payload && typeof payload === "object" ? payload : {};
+    const byId = (list, id) => list.some((item) => item.id === id);
+    const nextCharacterId = byId(builtCharacters, String(safe.characterId || "")) ? String(safe.characterId) : builtCharacters[0]?.id || "";
+    const nextStyleId = byId(presets, String(safe.styleId || "")) ? String(safe.styleId) : presets[0]?.id || "";
+    const nextTagline = String(safe.tagline || taglines[0] || "High Priority Deployment").trim();
+    state.characterId = nextCharacterId;
+    state.styleId = nextStyleId;
+    state.alias = String(safe.alias || "Frontier Cadre").trim().slice(0, 42) || "Frontier Cadre";
+    state.tagline = nextTagline.slice(0, 80);
+    state.level = clampNumber(safe.level, 1, 90, 70);
+    state.affinity = clampNumber(safe.affinity, 0, 10, 10);
+    state.showTier = Boolean(safe.showTier);
+    state.showRole = Boolean(safe.showRole);
+    syncFormFromState();
+  };
+
+  const loadOnlineShowcase = async (shareId) => {
+    const id = readCreatorShareId(shareId);
+    if (!id) return false;
+    const client = getCreatorSupabaseClient();
+    if (!client) {
+      refs.status.textContent = "SDK Supabase belum aktif. Cek script supabase-js.";
+      return false;
+    }
+    refs.status.textContent = "Memuat showcase online...";
+    try {
+      const { data, error } = await client.from(CREATOR_SHARE_TABLE).select("id,payload").eq("id", id).maybeSingle();
+      if (error) throw error;
+      if (!data?.payload) {
+        refs.status.textContent = "Showcase tidak ditemukan di database.";
+        return false;
+      }
+      applyPayloadState(data.payload);
+      refs.shareLink.value = creatorShareUrl(id);
+      applyPreview();
+      refs.status.textContent = "Showcase online berhasil dimuat.";
+      return true;
+    } catch (error) {
+      refs.status.textContent = "Gagal memuat showcase online.";
+      console.error(error);
+      return false;
+    }
+  };
+
+  const publishOnlineShowcase = async () => {
+    const client = getCreatorSupabaseClient();
+    if (!client) {
+      refs.status.textContent = "SDK Supabase belum aktif. Cek script supabase-js.";
+      return;
+    }
+    const character = findCharacter();
+    const shareId = createCreatorShareId();
+    const payload = snapshotState();
+    refs.status.textContent = "Menyimpan showcase online...";
+    try {
+      const { error } = await client.from(CREATOR_SHARE_TABLE).insert({
+        id: shareId,
+        alias: payload.alias || character?.name || "Endfield Showcase",
+        character_id: payload.characterId || "",
+        payload,
+      });
+      if (error) throw error;
+      const link = creatorShareUrl(shareId);
+      refs.shareLink.value = link;
+      try {
+        await navigator.clipboard.writeText(link);
+        refs.status.textContent = "Showcase online tersimpan. Link sudah disalin.";
+      } catch {
+        refs.status.textContent = "Showcase online tersimpan. Salin link dari kolom.";
+      }
+      const url = new URL(window.location.href);
+      url.searchParams.set("sid", shareId);
+      window.history.replaceState({}, "", url.toString());
+    } catch (error) {
+      refs.status.textContent = "Gagal simpan online. Pastikan table/policy Supabase sudah dibuat.";
+      console.error(error);
+    }
+  };
 
   const applyPreview = () => {
     const character = findCharacter();
@@ -3944,6 +4106,22 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.random.addEventListener("click", randomize);
+  refs.publish.addEventListener("click", async () => {
+    await publishOnlineShowcase();
+  });
+  refs.copyLink.addEventListener("click", async () => {
+    const link = String(refs.shareLink.value || "").trim();
+    if (!link) {
+      refs.status.textContent = "Belum ada link. Gunakan tombol Save Link dulu.";
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(link);
+      refs.status.textContent = "Link showcase berhasil disalin.";
+    } catch {
+      refs.status.textContent = "Gagal salin link. Salin manual dari kolom.";
+    }
+  });
   refs.share.addEventListener("click", async () => {
     const character = findCharacter();
     const preset = findPreset();
@@ -3987,7 +4165,13 @@ async function initCardCreatorPage(characters) {
     ],
   });
 
-  applyPreview();
+  const initialShareId = readCreatorShareId();
+  if (initialShareId) {
+    const loaded = await loadOnlineShowcase(initialShareId);
+    if (!loaded) applyPreview();
+  } else {
+    applyPreview();
+  }
 }
 
 async function fetchData() {
