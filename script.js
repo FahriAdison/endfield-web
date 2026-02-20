@@ -2675,7 +2675,8 @@ async function initChestsPage() {
           (hiddenMode === "HIDDEN" && Boolean(entry.isHiddenHint)) ||
           (hiddenMode === "STANDARD" && !entry.isHiddenHint);
 
-        const blob = `${entry.title || ""} ${entry.area || ""} ${entry.markerId || ""} ${entry.howToGet || ""} ${(entry.tags || []).join(" ")}`.toLowerCase();
+        const localizedHowTo = entry.howToGetId || entry.howToGet || "";
+        const blob = `${entry.title || ""} ${entry.area || ""} ${entry.markerId || ""} ${localizedHowTo} ${entry.howToGet || ""} ${(entry.tags || []).join(" ")}`.toLowerCase();
         const bySearch = !search || blob.includes(search);
         return byRegion && byArea && byHidden && bySearch;
       }),
@@ -2699,7 +2700,14 @@ async function initChestsPage() {
             const image = entry.image || fallbackImage;
             const imageFull = entry.imageFull || image;
             const markerLabel = entry.markerId ? `Marker #${entry.markerId}` : "Marker tidak tersedia";
+            const localizedHowTo = entry.howToGetId || entry.howToGet || "-";
             const difficulty = entry.difficulty || "Low";
+            const difficultyLabel =
+              {
+                low: "Rendah",
+                medium: "Menengah",
+                high: "Tinggi",
+              }[(difficulty || "").toLowerCase()] || difficulty;
             const chips = (entry.tags || []).slice(0, 6);
             const source = normalizeSourceEntry((entry.sources || [])[0]) || { label: "Sumber", url: "#" };
             const areaSource = normalizeSourceEntry((entry.sources || [])[1]) || null;
@@ -2708,12 +2716,12 @@ async function initChestsPage() {
               <article class="card chest-card">
                 <img class="chest-thumb" src="${asset(image)}" alt="${esc(`${entry.area} chest ${entry.markerId || ""}`)}" loading="lazy" />
                 <div class="chest-meta-row">
-                  <span class="tip-category ${entry.isHiddenHint ? "chest-tip-hidden" : "chest-tip-standard"}">${entry.isHiddenHint ? "Hidden Hint" : "Standard"}</span>
-                  <span class="tip-category chest-tip-diff">Difficulty ${esc(difficulty)}</span>
+                  <span class="tip-category ${entry.isHiddenHint ? "chest-tip-hidden" : "chest-tip-standard"}">${entry.isHiddenHint ? "Hidden Hint" : "Standar"}</span>
+                  <span class="tip-category chest-tip-diff">Kesulitan ${esc(difficultyLabel)}</span>
                 </div>
                 <h3>${esc(entry.area)} - ${esc(markerLabel)}</h3>
-                <p class="chest-caption"><strong>Region:</strong> ${esc(region?.name || "-")} | <strong>Area:</strong> ${esc(entry.area || "-")}</p>
-                <p class="chest-howto">${esc(entry.howToGet || "-")}</p>
+                <p class="chest-caption"><strong>Wilayah:</strong> ${esc(region?.name || "-")} | <strong>Area:</strong> ${esc(entry.area || "-")}</p>
+                <p class="chest-howto">${esc(localizedHowTo)}</p>
                 ${
                   chips.length
                     ? `<div class="chest-chip-row">${chips
