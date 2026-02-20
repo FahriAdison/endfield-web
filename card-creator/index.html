@@ -104,19 +104,22 @@
             <div class="creator-field creator-grid-four">
               <div>
                 <label for="creator-level">Level Karakter</label>
-                <input id="creator-level" type="number" min="1" max="90" value="70" />
+                <select id="creator-level"></select>
               </div>
               <div>
-                <label for="creator-breakthrough">Terobosan (0-4)</label>
+                <label for="creator-breakthrough">Terobosan Elite (0-4)</label>
                 <input id="creator-breakthrough" type="number" min="0" max="4" value="2" />
+                <div id="creator-breakthrough-selector" class="creator-icon-selector"></div>
               </div>
               <div>
                 <label for="creator-potential">Potensial/Dupe (0-5)</label>
                 <input id="creator-potential" type="number" min="0" max="5" value="3" />
+                <div id="creator-potential-selector" class="creator-icon-selector"></div>
               </div>
               <div>
                 <label for="creator-affinity">Affinity (0-4)</label>
                 <input id="creator-affinity" type="number" min="0" max="4" value="2" />
+                <div id="creator-affinity-selector" class="creator-icon-selector"></div>
               </div>
             </div>
           </div>
@@ -140,15 +143,17 @@
             <div class="creator-field creator-grid-three">
               <div>
                 <label for="creator-weapon-level">Level Weapon</label>
-                <input id="creator-weapon-level" type="number" min="1" max="90" value="70" />
+                <select id="creator-weapon-level"></select>
               </div>
               <div>
                 <label for="creator-weapon-breakthrough">Terobosan Weapon (0-4)</label>
                 <input id="creator-weapon-breakthrough" type="number" min="0" max="4" value="2" />
+                <div id="creator-weapon-breakthrough-selector" class="creator-icon-selector"></div>
               </div>
               <div>
                 <label for="creator-weapon-potential">Potensi Weapon (0-5)</label>
                 <input id="creator-weapon-potential" type="number" min="0" max="5" value="1" />
+                <div id="creator-weapon-potential-selector" class="creator-icon-selector"></div>
               </div>
             </div>
             <div class="creator-field creator-grid-three">
@@ -163,6 +168,21 @@
               <div>
                 <label for="creator-weapon-skill-level-3">Weapon Skill 3 (1-9)</label>
                 <input id="creator-weapon-skill-level-3" type="number" min="1" max="9" value="7" />
+              </div>
+            </div>
+            <div class="creator-essence-box">
+              <h4>Weapon Skill Levels (Essence Bonuses)</h4>
+              <div class="creator-essence-item">
+                <p id="creator-essence-label-1">Agility Boost [L] Lv. 1/9</p>
+                <div id="creator-essence-bars-1" class="creator-essence-bars"></div>
+              </div>
+              <div class="creator-essence-item">
+                <p id="creator-essence-label-2">Attack Boost [L] Lv. 1/9</p>
+                <div id="creator-essence-bars-2" class="creator-essence-bars"></div>
+              </div>
+              <div class="creator-essence-item">
+                <p id="creator-essence-label-3">Infliction Lv. 1/9</p>
+                <div id="creator-essence-bars-3" class="creator-essence-bars"></div>
               </div>
             </div>
           </div>
@@ -289,7 +309,7 @@
               </div>
               <div class="creator-top-right">
                 <span id="creator-preview-tier" class="creator-tier-pill">TIER S</span>
-                <span id="creator-preview-stars" class="creator-stars">★★★★★</span>
+                <span id="creator-preview-stars" class="creator-stars">*****</span>
               </div>
             </div>
 
@@ -331,9 +351,9 @@
                       <li><span>Skill 1</span><strong id="creator-preview-weapon-skill-level">7</strong></li>
                       <li><span>Skill 2</span><strong id="creator-preview-weapon-skill-level-2">7</strong></li>
                       <li><span>Skill 3</span><strong id="creator-preview-weapon-skill-level-3">7</strong></li>
-                      <li><span>Icon Terobosan</span><strong id="creator-preview-weapon-breakthrough-icons">◇ ◇ ◆ ◆</strong></li>
-                      <li><span>Icon Potensial</span><strong id="creator-preview-weapon-potential-icons">✦ ✦ ✧ ✧ ✧ ✧</strong></li>
                     </ul>
+                    <div id="creator-preview-weapon-breakthrough-icons" class="creator-icon-strip"></div>
+                    <div id="creator-preview-weapon-potential-icons" class="creator-icon-strip"></div>
                   </article>
 
                   <article class="creator-showcase-card">
@@ -375,30 +395,48 @@
                   </article>
 
                   <article class="creator-showcase-card">
-                    <h4>Skill & Talent</h4>
+                    <h4>Skill and Talent</h4>
                     <ul>
                       <li><span>Basic</span><strong id="creator-preview-skill-basic">7</strong></li>
                       <li><span>Combo</span><strong id="creator-preview-skill-combo">7</strong></li>
                       <li><span>Active</span><strong id="creator-preview-skill-active">8</strong></li>
                       <li><span>Ultimate</span><strong id="creator-preview-skill-ultimate">8</strong></li>
                       <li><span>Talent</span><strong id="creator-preview-skill-talent">9</strong></li>
-                      <li><span>Terobosan Char</span><strong id="creator-preview-breakthrough-icons">◇ ◇ ◆ ◆</strong></li>
-                      <li><span>Potensial Char</span><strong id="creator-preview-potential-icons">✦ ✦ ✧ ✧ ✧ ✧</strong></li>
-                      <li><span>Affinity</span><strong id="creator-preview-affinity-icons">● ● ○ ○ ○</strong></li>
                     </ul>
+                    <div id="creator-preview-breakthrough-icons" class="creator-icon-strip"></div>
+                    <div id="creator-preview-potential-icons" class="creator-icon-strip"></div>
+                    <div id="creator-preview-affinity-icons" class="creator-icon-strip"></div>
                   </article>
 
                   <article class="creator-showcase-card">
-                    <h4>Ringkasan Build</h4>
-                    <ul>
-                      <li><span>Prioritas</span><strong id="creator-preview-build-skills">Talent > Ultimate > Active</strong></li>
-                      <li><span>Core Team</span><strong id="creator-preview-build-team">Laevatain + Wulfgard + Akekuri + Ardelia</strong></li>
-                    </ul>
+                    <h4>Weapon Essence</h4>
+                    <div class="creator-preview-essence">
+                      <div class="creator-essence-item">
+                        <p id="creator-preview-essence-label-1">Agility Boost [L] Lv. 1/9</p>
+                        <div id="creator-preview-essence-bars-1" class="creator-essence-bars"></div>
+                      </div>
+                      <div class="creator-essence-item">
+                        <p id="creator-preview-essence-label-2">Attack Boost [L] Lv. 1/9</p>
+                        <div id="creator-preview-essence-bars-2" class="creator-essence-bars"></div>
+                      </div>
+                      <div class="creator-essence-item">
+                        <p id="creator-preview-essence-label-3">Infliction Lv. 1/9</p>
+                        <div id="creator-preview-essence-bars-3" class="creator-essence-bars"></div>
+                      </div>
+                    </div>
                   </article>
                 </div>
+
+                <article class="creator-showcase-card creator-showcase-card-full">
+                  <h4>Ringkasan Build</h4>
+                  <ul>
+                    <li><span>Prioritas</span><strong id="creator-preview-build-skills">Talent > Ultimate > Active</strong></li>
+                    <li><span>Core Team</span><strong id="creator-preview-build-team">Laevatain + Wulfgard + Akekuri + Ardelia</strong></li>
+                  </ul>
+                </article>
               </div>
             </div>
-            <p class="creator-brand-sign">endfield-ind.my.id • fanmade showcase</p>
+            <p class="creator-brand-sign">endfield-ind.my.id - fanmade showcase</p>
           </div>
         </article>
       </section>
@@ -411,6 +449,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="../script.js"></script>
   </body>
 </html>

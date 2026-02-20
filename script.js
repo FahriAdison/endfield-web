@@ -36,6 +36,22 @@ const SITE_URL = "https://endfield-ind.my.id";
 const CREATOR_SHARE_TABLE = "creator_showcases";
 const SUPABASE_PUBLIC_URL = "https://axuitiqljniyqsbpxatf.supabase.co";
 const SUPABASE_PUBLIC_KEY = "sb_publishable_bF-mkQgNJ68W4yPQiX1TRg_HLj9W-T1";
+const CREATOR_ELITE_ICON_URLS = [
+  "https://endfield.wiki.gg/images/thumb/Elite_0.png/30px-Elite_0.png?669d20",
+  "https://endfield.wiki.gg/images/thumb/Elite_1.png/25px-Elite_1.png?50ae69",
+  "https://endfield.wiki.gg/images/thumb/Elite_2.png/25px-Elite_2.png?a9e22b",
+  "https://endfield.wiki.gg/images/thumb/Elite_3.png/25px-Elite_3.png?855f89",
+  "https://endfield.wiki.gg/images/thumb/Elite_4.png/25px-Elite_4.png?474541",
+];
+const CREATOR_POTENTIAL_ICON_URLS = [
+  "https://endfield.wiki.gg/images/thumb/Potential_0.png/25px-Potential_0.png",
+  "https://endfield.wiki.gg/images/thumb/Potential_1.png/25px-Potential_1.png?44d538",
+  "https://endfield.wiki.gg/images/thumb/Potential_2.png/25px-Potential_2.png?4f2099",
+  "https://endfield.wiki.gg/images/thumb/Potential_3.png/25px-Potential_3.png?3a7143",
+  "https://endfield.wiki.gg/images/thumb/Potential_4.png/25px-Potential_4.png?efae06",
+  "https://endfield.wiki.gg/images/thumb/Potential_5.png/25px-Potential_5.png?c9250d",
+];
+const CREATOR_AFFINITY_BADGES = ["A0", "A1", "A2", "A3", "A4"];
 const NAV_CONTACT_LINKS = [
   {
     label: "WhatsApp",
@@ -407,6 +423,12 @@ function clampNumber(value, min, max, fallback = min) {
   const num = Number(value);
   if (!Number.isFinite(num)) return fallback;
   return Math.min(max, Math.max(min, Math.round(num)));
+}
+
+function svgBadgeDataUrl(text, bg = "#0f2132", fg = "#d8ecff", stroke = "#6d90ad") {
+  const safe = String(text || "").slice(0, 6);
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'><rect x='1.5' y='1.5' width='33' height='33' rx='6' fill='${bg}' stroke='${stroke}' stroke-width='2'/><text x='18' y='22' text-anchor='middle' font-size='12' font-family='Arial, sans-serif' fill='${fg}'>${safe}</text></svg>`;
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
 function creatorStars(rarity) {
@@ -3551,10 +3573,19 @@ function normalizeCreatorToken(value) {
 
 function normalizeShowcaseCatalog(rawCatalog) {
   const base = rawCatalog && typeof rawCatalog === "object" ? rawCatalog : {};
-  const characterImages =
+  const rawCharacterImages =
     base.characterImages && typeof base.characterImages === "object" && !Array.isArray(base.characterImages)
       ? base.characterImages
       : {};
+  const characterImages = {};
+  Object.entries(rawCharacterImages).forEach(([id, value]) => {
+    const list = Array.isArray(value) ? value : [value];
+    const normalized = list
+      .map((item) => String(item || "").trim())
+      .filter(Boolean);
+    if (!normalized.length) return;
+    characterImages[id] = normalized;
+  });
   const aliases = base.weaponAliases && typeof base.weaponAliases === "object" ? base.weaponAliases : {};
   let weaponList = [];
   if (Array.isArray(base.weapons)) {
@@ -3574,6 +3605,7 @@ function normalizeShowcaseCatalog(rawCatalog) {
       name,
       icon: String(item?.icon || "").trim(),
       source: String(item?.source || "").trim(),
+      rarity: clampNumber(item?.rarity, 3, 6, 5),
       token,
     });
   });
@@ -3589,8 +3621,11 @@ function buildCreatorCharacterData(character, catalog = {}) {
     Wulfgard: "assets/icons/wulfgard.webp",
   };
   const fallbackImage = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
-  const fullImage = String(catalog?.characterImages?.[character?.id] || "").trim();
-  const image = fullImage || fallbackImage;
+  const fullImageCandidates = Array.isArray(catalog?.characterImages?.[character?.id])
+    ? catalog.characterImages[character.id]
+    : [];
+  const imageCandidates = [...new Set([...fullImageCandidates, fallbackImage].map((item) => String(item || "").trim()).filter(Boolean))];
+  const image = imageCandidates[0] || fallbackImage;
   const profile = character?.profile && typeof character.profile === "object" ? character.profile : {};
   const rarityMatch = String(character?.profile?.rarity || "").match(/(\d+)/);
   const rarity = rarityMatch ? Number(rarityMatch[1]) : 5;
@@ -3740,6 +3775,7 @@ function buildCreatorCharacterData(character, catalog = {}) {
       kit2: collectGearBySlot("kit2"),
     },
     image,
+    imageCandidates,
     fallbackImage,
   };
 }
@@ -3754,13 +3790,41 @@ function loadCanvasImage(url) {
   });
 }
 
-async function exportCreatorCardPng(character, preset, state, statusEl) {
-  const canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
+  let canvas =
+    (await captureCreatorPreviewCanvas(previewEl, statusEl)) || (await renderCreatorCardCanvas(character, preset, state, statusEl));
   if (!canvas) return;
+  let dataUrl = "";
+  try {
+    dataUrl = canvas.toDataURL("image/png");
+  } catch (error) {
+    console.error(error);
+    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+    if (!canvas) return;
+    dataUrl = canvas.toDataURL("image/png");
+    if (statusEl) statusEl.textContent = "Capture langsung dibatasi browser. Dipakai render fallback.";
+  }
   const link = document.createElement("a");
-  link.href = canvas.toDataURL("image/png");
+  link.href = dataUrl;
   link.download = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
   link.click();
+}
+
+async function captureCreatorPreviewCanvas(previewEl, statusEl) {
+  if (previewEl && typeof window !== "undefined" && typeof window.html2canvas === "function") {
+    try {
+      return await window.html2canvas(previewEl, {
+        useCORS: true,
+        backgroundColor: null,
+        scale: 2,
+        logging: false,
+      });
+    } catch (error) {
+      if (statusEl) statusEl.textContent = "Capture preview gagal, fallback ke mode render.";
+      console.error(error);
+    }
+  }
+  return null;
 }
 
 async function renderCreatorCardCanvas(character, preset, state, statusEl) {
@@ -3990,11 +4054,23 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   return canvas;
 }
 
-async function shareCreatorCardPng(character, preset, state, statusEl) {
-  const canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
+  let canvas =
+    (await captureCreatorPreviewCanvas(previewEl, statusEl)) || (await renderCreatorCardCanvas(character, preset, state, statusEl));
   if (!canvas) return;
 
-  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+  let blob = null;
+  try {
+    blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+  } catch (error) {
+    console.error(error);
+  }
+  if (!blob) {
+    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+    if (!canvas) return;
+    blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    if (statusEl) statusEl.textContent = "Share memakai render fallback karena capture langsung dibatasi browser.";
+  }
   if (!blob) throw new Error("Gagal membentuk file PNG.");
 
   const fileName = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
@@ -4011,7 +4087,7 @@ async function shareCreatorCardPng(character, preset, state, statusEl) {
     return;
   }
 
-  await exportCreatorCardPng(character, preset, state, statusEl);
+  await exportCreatorCardPng(character, preset, state, statusEl, previewEl);
   if (statusEl) statusEl.textContent = "Share file tidak didukung browser ini. PNG di-download otomatis.";
 }
 
@@ -4030,15 +4106,26 @@ async function initCardCreatorPage(characters) {
     potential: document.getElementById("creator-potential"),
     breakthrough: document.getElementById("creator-breakthrough"),
     affinity: document.getElementById("creator-affinity"),
+    breakthroughSelector: document.getElementById("creator-breakthrough-selector"),
+    potentialSelector: document.getElementById("creator-potential-selector"),
+    affinitySelector: document.getElementById("creator-affinity-selector"),
     weaponSelect: document.getElementById("creator-weapon-select"),
     weaponIcon: document.getElementById("creator-weapon-icon"),
     weaponName: document.getElementById("creator-weapon-name"),
     weaponLevel: document.getElementById("creator-weapon-level"),
     weaponBreakthrough: document.getElementById("creator-weapon-breakthrough"),
     weaponPotential: document.getElementById("creator-weapon-potential"),
+    weaponBreakthroughSelector: document.getElementById("creator-weapon-breakthrough-selector"),
+    weaponPotentialSelector: document.getElementById("creator-weapon-potential-selector"),
     weaponSkillLevel: document.getElementById("creator-weapon-skill-level"),
     weaponSkillLevel2: document.getElementById("creator-weapon-skill-level-2"),
     weaponSkillLevel3: document.getElementById("creator-weapon-skill-level-3"),
+    essenceLabel1: document.getElementById("creator-essence-label-1"),
+    essenceLabel2: document.getElementById("creator-essence-label-2"),
+    essenceLabel3: document.getElementById("creator-essence-label-3"),
+    essenceBars1: document.getElementById("creator-essence-bars-1"),
+    essenceBars2: document.getElementById("creator-essence-bars-2"),
+    essenceBars3: document.getElementById("creator-essence-bars-3"),
     gearArmor: document.getElementById("creator-gear-armor"),
     gearGloves: document.getElementById("creator-gear-gloves"),
     gearKit1: document.getElementById("creator-gear-kit1"),
@@ -4113,6 +4200,12 @@ async function initCardCreatorPage(characters) {
     previewSkillTalent: document.getElementById("creator-preview-skill-talent"),
     previewBuildSkills: document.getElementById("creator-preview-build-skills"),
     previewBuildTeam: document.getElementById("creator-preview-build-team"),
+    previewEssenceLabel1: document.getElementById("creator-preview-essence-label-1"),
+    previewEssenceLabel2: document.getElementById("creator-preview-essence-label-2"),
+    previewEssenceLabel3: document.getElementById("creator-preview-essence-label-3"),
+    previewEssenceBars1: document.getElementById("creator-preview-essence-bars-1"),
+    previewEssenceBars2: document.getElementById("creator-preview-essence-bars-2"),
+    previewEssenceBars3: document.getElementById("creator-preview-essence-bars-3"),
   };
   if (Object.values(refs).some((item) => !item)) return;
 
@@ -4259,13 +4352,96 @@ async function initCardCreatorPage(characters) {
     const boosted = parsed.value * (1 + safeTier * 0.04);
     return `${formatSigned(boosted, parsed.percent)} (Artifice +${safeTier})`;
   };
-  const iconSteps = (value, max, onSymbol, offSymbol) => {
-    const safe = clampNumber(value, 0, max, 0);
-    const cells = [];
-    for (let index = 1; index <= max; index += 1) {
-      cells.push(index <= safe ? onSymbol : offSymbol);
+  const getIconSet = (kind) => {
+    if (kind === "elite") return CREATOR_ELITE_ICON_URLS;
+    if (kind === "potential") {
+      return CREATOR_POTENTIAL_ICON_URLS.map((url, index) =>
+        url || svgBadgeDataUrl(`P${index}`, "#111f2f", "#f3f8ff", "#6f8ba2")
+      );
     }
-    return cells.join(" ");
+    if (kind === "affinity") {
+      return CREATOR_AFFINITY_BADGES.map((label, index) =>
+        svgBadgeDataUrl(label, index % 2 === 0 ? "#162738" : "#1b2d3e", "#d9ecff", "#6f8ba2")
+      );
+    }
+    return [];
+  };
+  const iconStripHtml = (kind, activeValue, max) => {
+    const set = getIconSet(kind);
+    const rows = [];
+    for (let index = 0; index <= max; index += 1) {
+      const src = set[index] || svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
+      const activeClass = index <= activeValue ? " is-active" : "";
+      rows.push(`<span class="creator-icon-pill${activeClass}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></span>`);
+    }
+    return rows.join("");
+  };
+  const iconSelectorHtml = (kind, activeValue, max, target) => {
+    const set = getIconSet(kind);
+    const rows = [];
+    for (let index = 0; index <= max; index += 1) {
+      const src = set[index] || svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
+      const activeClass = index === activeValue ? " is-active" : "";
+      rows.push(
+        `<button type="button" class="creator-icon-choice${activeClass}" data-icon-kind="${esc(kind)}" data-icon-target="${esc(target)}" data-icon-value="${index}" aria-label="${esc(
+          target
+        )} ${index}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></button>`
+      );
+    }
+    return rows.join("");
+  };
+
+  const weaponEssencePreset = (weaponName) => {
+    const token = normalizeCreatorToken(weaponName);
+    if (token === normalizeCreatorToken("Grand Vision")) {
+      return {
+        labels: ["Agility Boost [L]", "Attack Boost [L]", "Infliction: Long Time Wish"],
+        fallbackCaps: [9, 9, 9],
+      };
+    }
+    return {
+      labels: ["Agility Boost [L]", "Attack Boost [L]", "Infliction Bonus"],
+      fallbackCaps: [9, 9, 9],
+    };
+  };
+  const weaponEssenceBoundsDefault = [
+    { passive: { min: 1, max: 3 }, special: { min: 1, max: 3 }, potential: { min: 1, max: 4 } },
+    { passive: { min: 2, max: 5 }, special: { min: 1, max: 4 }, potential: { min: 1, max: 4 } },
+    { passive: { min: 2, max: 6 }, special: { min: 2, max: 6 }, potential: { min: 1, max: 4 } },
+    { passive: { min: 3, max: 8 }, special: { min: 2, max: 7 }, potential: { min: 1, max: 4 } },
+    { passive: { min: 3, max: 9 }, special: { min: 3, max: 9 }, potential: { min: 1, max: 4 } },
+  ];
+  const weaponEssenceBoundsRarity3 = [
+    { passive: { min: 1, max: 3 }, special: { min: 1, max: 4 }, potential: { min: 0, max: 0 } },
+    { passive: { min: 2, max: 5 }, special: { min: 1, max: 4 }, potential: { min: 0, max: 0 } },
+    { passive: { min: 2, max: 6 }, special: { min: 1, max: 4 }, potential: { min: 0, max: 0 } },
+    { passive: { min: 3, max: 8 }, special: { min: 1, max: 4 }, potential: { min: 0, max: 0 } },
+    { passive: { min: 3, max: 9 }, special: { min: 1, max: 4 }, potential: { min: 0, max: 0 } },
+  ];
+  const weaponPotentialEssenceBonus = [
+    { min: 0, max: 0 },
+    { min: 1, max: 1 },
+    { min: 2, max: 2 },
+    { min: 3, max: 3 },
+    { min: 4, max: 4 },
+    { min: 5, max: 5 },
+  ];
+  const getWeaponSkillBounds = (rarity, breakthrough, weaponPotential, slotIndex) => {
+    const bt = clampNumber(breakthrough, 0, 4, 0);
+    const wp = clampNumber(weaponPotential, 0, 5, 0);
+    const table = Number(rarity) === 3 ? weaponEssenceBoundsRarity3 : weaponEssenceBoundsDefault;
+    const row = table[bt] || table[0];
+    if (!row) return { min: 1, max: 9 };
+    if (slotIndex === 0) return { min: row.passive.min, max: row.passive.max };
+    if (slotIndex === 1) return { min: row.special.min, max: row.special.max };
+    if (slotIndex === 2) {
+      const potentialBonus = weaponPotentialEssenceBonus[wp] || weaponPotentialEssenceBonus[0];
+      return {
+        min: clampNumber(row.potential.min + potentialBonus.min, 0, 9, 0),
+        max: clampNumber(row.potential.max + potentialBonus.max, 0, 9, 0),
+      };
+    }
+    return { min: 1, max: 9 };
   };
 
   const weaponByToken = (() => {
@@ -4301,6 +4477,18 @@ async function initCardCreatorPage(characters) {
     const meta = findWeaponMeta(cleaned);
     return meta?.name || cleaned || fallback;
   };
+  const resolveWeaponRarity = () => {
+    const weaponMeta = findWeaponMeta(state.weaponName);
+    if (weaponMeta && Number.isFinite(Number(weaponMeta.rarity))) {
+      return clampNumber(weaponMeta.rarity, 3, 6, 5);
+    }
+    if (/^obj/i.test(String(state.weaponName || "").trim())) {
+      return 3;
+    }
+    return 5;
+  };
+  const resolveWeaponEssenceBounds = (slotIndex) =>
+    getWeaponSkillBounds(resolveWeaponRarity(), state.weaponBreakthrough, state.weaponPotential, slotIndex);
   const weaponChoicesForState = (stateWeaponName) => {
     const list = [...showcaseCatalog.weapons];
     const normalized = normalizeWeaponName(stateWeaponName, "");
@@ -4330,6 +4518,7 @@ async function initCardCreatorPage(characters) {
       weaponSkillLevel: clampNumber(target.defaultWeaponSkillLevel, 1, 9, 7),
       weaponSkillLevel2: clampNumber(target.defaultWeaponSkillLevel, 1, 9, 7),
       weaponSkillLevel3: clampNumber(target.defaultWeaponSkillLevel, 1, 9, 7),
+      weaponEssence: [3, 2, 1],
       gearArmor: cleanText(target.defaultGearArmor || "-", 72, "-"),
       gearGloves: cleanText(target.defaultGearGloves || "-", 72, "-"),
       gearKit1: cleanText(target.defaultGearKit1 || "-", 72, "-"),
@@ -4368,6 +4557,7 @@ async function initCardCreatorPage(characters) {
     weaponSkillLevel: initialTemplate.weaponSkillLevel,
     weaponSkillLevel2: initialTemplate.weaponSkillLevel2,
     weaponSkillLevel3: initialTemplate.weaponSkillLevel3,
+    weaponEssence: [...initialTemplate.weaponEssence],
     gearArmor: initialTemplate.gearArmor,
     gearGloves: initialTemplate.gearGloves,
     gearKit1: initialTemplate.gearKit1,
@@ -4502,6 +4692,100 @@ async function initCardCreatorPage(characters) {
     refs.weaponName.value = normalizedName;
     syncWeaponIcon();
   };
+  const populateLevelSelect = (selectRef, maxLevel, defaultLevel = 70) => {
+    if (!selectRef) return;
+    if (selectRef.dataset.optionsReady === "1") return;
+    const options = [];
+    for (let level = maxLevel; level >= 1; level -= 1) {
+      options.push(`<option value="${level}">Lv. ${level}</option>`);
+    }
+    selectRef.innerHTML = options.join("");
+    selectRef.dataset.optionsReady = "1";
+    selectRef.value = String(clampNumber(defaultLevel, 1, maxLevel, maxLevel));
+  };
+  const setImageWithFallback = (imgEl, candidates, altText) => {
+    if (!imgEl) return;
+    const queue = [...new Set((Array.isArray(candidates) ? candidates : [candidates]).map((item) => toImageSrc(item, "")).filter(Boolean))];
+    if (!queue.length) {
+      imgEl.src = asset("assets/skill-icons/basic.webp");
+      imgEl.alt = altText;
+      return;
+    }
+    let index = 0;
+    const assign = () => {
+      imgEl.src = queue[index];
+      imgEl.alt = altText;
+    };
+    imgEl.onerror = () => {
+      index += 1;
+      if (index < queue.length) {
+        assign();
+        return;
+      }
+      imgEl.onerror = null;
+      imgEl.src = asset("assets/skill-icons/basic.webp");
+    };
+    assign();
+  };
+  const renderIconSelectors = () => {
+    refs.breakthroughSelector.innerHTML = iconSelectorHtml("elite", state.breakthrough, 4, "breakthrough");
+    refs.potentialSelector.innerHTML = iconSelectorHtml("potential", state.potential, 5, "potential");
+    refs.affinitySelector.innerHTML = iconSelectorHtml("affinity", state.affinity, 4, "affinity");
+    refs.weaponBreakthroughSelector.innerHTML = iconSelectorHtml("elite", state.weaponBreakthrough, 4, "weaponBreakthrough");
+    refs.weaponPotentialSelector.innerHTML = iconSelectorHtml("potential", state.weaponPotential, 5, "weaponPotential");
+  };
+  const renderIconStrips = () => {
+    refs.previewBreakthroughIcons.innerHTML = iconStripHtml("elite", state.breakthrough, 4);
+    refs.previewPotentialIcons.innerHTML = iconStripHtml("potential", state.potential, 5);
+    refs.previewAffinityIcons.innerHTML = iconStripHtml("affinity", state.affinity, 4);
+    refs.previewWeaponBreakthroughIcons.innerHTML = iconStripHtml("elite", state.weaponBreakthrough, 4);
+    refs.previewWeaponPotentialIcons.innerHTML = iconStripHtml("potential", state.weaponPotential, 5);
+  };
+  const renderEssenceBars = () => {
+    const preset = weaponEssencePreset(state.weaponName);
+    const labelRefs = [refs.essenceLabel1, refs.essenceLabel2, refs.essenceLabel3];
+    const barRefs = [refs.essenceBars1, refs.essenceBars2, refs.essenceBars3];
+    const previewLabelRefs = [refs.previewEssenceLabel1, refs.previewEssenceLabel2, refs.previewEssenceLabel3];
+    const previewBarRefs = [refs.previewEssenceBars1, refs.previewEssenceBars2, refs.previewEssenceBars3];
+    for (let index = 0; index < 3; index += 1) {
+      const label = preset.labels[index] || `Essence ${index + 1}`;
+      const bounds = resolveWeaponEssenceBounds(index);
+      const rawMax = clampNumber(bounds.max, 0, 9, 0);
+      const baseCap = rawMax;
+      const baseMin = clampNumber(bounds.min, 0, baseCap, 0);
+      const fallbackCap = clampNumber(preset.fallbackCaps[index], 0, 9, 9);
+      const effectiveCap = Math.min(baseCap, fallbackCap);
+      const level = effectiveCap <= 0 ? 0 : clampNumber(state.weaponEssence[index], baseMin, effectiveCap, baseMin);
+      state.weaponEssence[index] = level;
+      const text = `${label} Lv. ${level}/${baseCap}`;
+      if (labelRefs[index]) labelRefs[index].textContent = text;
+      if (previewLabelRefs[index]) previewLabelRefs[index].textContent = text;
+      const segHtml = [];
+      for (let seg = 1; seg <= 9; seg += 1) {
+        const isDisabled = effectiveCap <= 0 || seg > effectiveCap;
+        const isBase = !isDisabled && seg <= baseMin;
+        const isActive = !isDisabled && seg <= level;
+        const classes = [
+          "creator-essence-seg",
+          isActive ? "is-active" : "",
+          isBase ? "is-locked is-base" : "",
+          isDisabled ? "is-disabled" : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+        segHtml.push(
+          `<button type="button" class="${classes}" data-essence-index="${index}" data-essence-level="${seg}" ${
+            isBase || isDisabled ? "disabled" : ""
+          } aria-label="Essence ${index + 1} level ${seg}"></button>`
+        );
+      }
+      if (barRefs[index]) barRefs[index].innerHTML = segHtml.join("");
+      if (previewBarRefs[index]) previewBarRefs[index].innerHTML = segHtml.join("");
+    }
+  };
+
+  populateLevelSelect(refs.level, 90, state.level);
+  populateLevelSelect(refs.weaponLevel, 90, state.weaponLevel);
 
   const syncFormFromState = () => {
     refs.alias.value = state.alias;
@@ -4548,6 +4832,9 @@ async function initCardCreatorPage(characters) {
     weaponSkillLevel: clampNumber(state.weaponSkillLevel, 1, 9, 7),
     weaponSkillLevel2: clampNumber(state.weaponSkillLevel2, 1, 9, 7),
     weaponSkillLevel3: clampNumber(state.weaponSkillLevel3, 1, 9, 7),
+    weaponEssence: Array.isArray(state.weaponEssence)
+      ? state.weaponEssence.slice(0, 3).map((value, index) => clampNumber(value, 0, 9, index === 0 ? 3 : index === 1 ? 2 : 1))
+      : [3, 2, 1],
     gearArmor: cleanText(state.gearArmor, 72, "-"),
     gearGloves: cleanText(state.gearGloves, 72, "-"),
     gearKit1: cleanText(state.gearKit1, 72, "-"),
@@ -4620,6 +4907,10 @@ async function initCardCreatorPage(characters) {
       9,
       template.weaponSkillLevel3
     );
+    const payloadEssence = Array.isArray(safe.weaponEssence) ? safe.weaponEssence : null;
+    state.weaponEssence = payloadEssence
+      ? payloadEssence.slice(0, 3).map((value, index) => clampNumber(value, 0, 9, index === 0 ? 3 : index === 1 ? 2 : 1))
+      : [...template.weaponEssence];
     state.gearArmor = cleanText(safe.gearArmor, 72, template.gearArmor);
     state.gearGloves = cleanText(safe.gearGloves, 72, template.gearGloves);
     state.gearKit1 = cleanText(safe.gearKit1, 72, template.gearKit1);
@@ -4731,6 +5022,12 @@ async function initCardCreatorPage(characters) {
     state.weaponSkillLevel = clampNumber(state.weaponSkillLevel, 1, 9, character.defaultWeaponSkillLevel || 7);
     state.weaponSkillLevel2 = clampNumber(state.weaponSkillLevel2, 1, 9, character.defaultWeaponSkillLevel || 7);
     state.weaponSkillLevel3 = clampNumber(state.weaponSkillLevel3, 1, 9, character.defaultWeaponSkillLevel || 7);
+    if (!Array.isArray(state.weaponEssence)) {
+      state.weaponEssence = [3, 2, 1];
+    }
+    state.weaponEssence = [0, 1, 2].map((index) =>
+      clampNumber(state.weaponEssence[index], 0, 9, index === 0 ? 3 : index === 1 ? 2 : 1)
+    );
     state.skillBasic = clampNumber(state.skillBasic, 1, 10, character.defaultSkillBasic || 7);
     state.skillCombo = clampNumber(state.skillCombo, 1, 10, character.defaultSkillCombo || 7);
     state.skillActive = clampNumber(state.skillActive, 1, 10, character.defaultSkillActive || 8);
@@ -4746,8 +5043,11 @@ async function initCardCreatorPage(characters) {
     refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
     refs.previewTier.hidden = !state.showTier;
     refs.previewStars.textContent = creatorStars(character.rarity);
-    refs.previewImage.src = toImageSrc(character.image, character.fallbackImage || "assets/skill-icons/basic.webp");
-    refs.previewImage.alt = `${character.name} image`;
+    setImageWithFallback(
+      refs.previewImage,
+      Array.isArray(character.imageCandidates) ? character.imageCandidates : [character.image, character.fallbackImage],
+      `${character.name} image`
+    );
     refs.previewName.textContent = character.name;
     refs.previewRole.textContent = state.showRole ? character.role || "-" : "";
     refs.previewRole.hidden = !state.showRole;
@@ -4761,9 +5061,6 @@ async function initCardCreatorPage(characters) {
     refs.previewPotential.textContent = `Potential ${state.potential}`;
     refs.previewBreakthrough.textContent = `Breakthrough ${state.breakthrough}`;
     refs.previewAffinity.textContent = `Affinity ${state.affinity}`;
-    refs.previewBreakthroughIcons.textContent = iconSteps(state.breakthrough, 4, "◆", "◇");
-    refs.previewPotentialIcons.textContent = iconSteps(state.potential, 5, "✦", "✧");
-    refs.previewAffinityIcons.textContent = iconSteps(state.affinity, 4, "●", "○");
     refs.previewUid.textContent = `UID ${state.uid}`;
     refs.previewWeaponName.textContent = state.weaponName;
     refs.previewWeaponLevel.textContent = String(state.weaponLevel);
@@ -4772,8 +5069,6 @@ async function initCardCreatorPage(characters) {
     refs.previewWeaponSkillLevel.textContent = String(state.weaponSkillLevel);
     refs.previewWeaponSkillLevel2.textContent = String(state.weaponSkillLevel2);
     refs.previewWeaponSkillLevel3.textContent = String(state.weaponSkillLevel3);
-    refs.previewWeaponBreakthroughIcons.textContent = iconSteps(state.weaponBreakthrough, 4, "◆", "◇");
-    refs.previewWeaponPotentialIcons.textContent = iconSteps(state.weaponPotential, 5, "✦", "✧");
     refs.previewSkillBasic.textContent = String(state.skillBasic);
     refs.previewSkillCombo.textContent = String(state.skillCombo);
     refs.previewSkillActive.textContent = String(state.skillActive);
@@ -4782,6 +5077,9 @@ async function initCardCreatorPage(characters) {
     refs.previewBuildSkills.textContent = character.buildSkills || "-";
     refs.previewBuildTeam.textContent = character.buildTeam || "-";
     syncWeaponSelect();
+    renderIconSelectors();
+    renderIconStrips();
+    renderEssenceBars();
     syncGearSelectors(character);
     ["armor", "gloves", "kit1", "kit2"].forEach((slotKey) => {
       const nameRef = refs[slotPreviewNameRefKeys[slotKey]];
@@ -4812,6 +5110,7 @@ async function initCardCreatorPage(characters) {
     state.weaponSkillLevel = template.weaponSkillLevel;
     state.weaponSkillLevel2 = template.weaponSkillLevel2;
     state.weaponSkillLevel3 = template.weaponSkillLevel3;
+    state.weaponEssence = [...template.weaponEssence];
     state.gearArmor = template.gearArmor;
     state.gearGloves = template.gearGloves;
     state.gearKit1 = template.gearKit1;
@@ -4847,6 +5146,11 @@ async function initCardCreatorPage(characters) {
     state.weaponSkillLevel = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 9, 7);
     state.weaponSkillLevel2 = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 9, 7);
     state.weaponSkillLevel3 = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 9, 7);
+    state.weaponEssence = [
+      clampNumber(Math.floor(Math.random() * 7) + 1, 1, 9, 3),
+      clampNumber(Math.floor(Math.random() * 6) + 1, 1, 9, 2),
+      clampNumber(Math.floor(Math.random() * 4) + 1, 1, 9, 1),
+    ];
     state.skillBasic = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 10, 7);
     state.skillCombo = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 10, 7);
     state.skillActive = clampNumber(Math.floor(Math.random() * 3) + 7, 1, 10, 8);
@@ -4885,7 +5189,7 @@ async function initCardCreatorPage(characters) {
     refs.tagline.value = state.tagline;
     applyPreview();
   });
-  refs.level.addEventListener("input", () => {
+  const onLevelChange = () => {
     state.level = clampNumber(refs.level.value, 1, 90, findCharacter()?.defaultLevel || 70);
     refs.level.value = String(state.level);
     if (state.weaponLevel > state.level) {
@@ -4893,7 +5197,9 @@ async function initCardCreatorPage(characters) {
       refs.weaponLevel.value = String(state.weaponLevel);
     }
     applyPreview();
-  });
+  };
+  refs.level.addEventListener("input", onLevelChange);
+  refs.level.addEventListener("change", onLevelChange);
   refs.potential.addEventListener("input", () => {
     state.potential = clampNumber(refs.potential.value, 0, 5, findCharacter()?.defaultPotential || 3);
     refs.potential.value = String(state.potential);
@@ -4918,11 +5224,13 @@ async function initCardCreatorPage(characters) {
     refs.weaponName.value = state.weaponName;
     applyPreview();
   });
-  refs.weaponLevel.addEventListener("input", () => {
+  const onWeaponLevelChange = () => {
     state.weaponLevel = clampNumber(refs.weaponLevel.value, 1, 90, state.level);
     refs.weaponLevel.value = String(state.weaponLevel);
     applyPreview();
-  });
+  };
+  refs.weaponLevel.addEventListener("input", onWeaponLevelChange);
+  refs.weaponLevel.addEventListener("change", onWeaponLevelChange);
   refs.weaponBreakthrough.addEventListener("input", () => {
     state.weaponBreakthrough = clampNumber(refs.weaponBreakthrough.value, 0, 4, findCharacter()?.defaultWeaponBreakthrough || 2);
     refs.weaponBreakthrough.value = String(state.weaponBreakthrough);
@@ -5006,6 +5314,42 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.controls.addEventListener("click", (event) => {
+    const iconButton = event.target.closest("[data-icon-target][data-icon-value]");
+    if (iconButton) {
+      const target = String(iconButton.dataset.iconTarget || "");
+      const value = clampNumber(iconButton.dataset.iconValue, 0, 9, 0);
+      if (target === "breakthrough") {
+        state.breakthrough = clampNumber(value, 0, 4, state.breakthrough);
+        refs.breakthrough.value = String(state.breakthrough);
+      } else if (target === "potential") {
+        state.potential = clampNumber(value, 0, 5, state.potential);
+        refs.potential.value = String(state.potential);
+      } else if (target === "affinity") {
+        state.affinity = clampNumber(value, 0, 4, state.affinity);
+        refs.affinity.value = String(state.affinity);
+      } else if (target === "weaponBreakthrough") {
+        state.weaponBreakthrough = clampNumber(value, 0, 4, state.weaponBreakthrough);
+        refs.weaponBreakthrough.value = String(state.weaponBreakthrough);
+      } else if (target === "weaponPotential") {
+        state.weaponPotential = clampNumber(value, 0, 5, state.weaponPotential);
+        refs.weaponPotential.value = String(state.weaponPotential);
+      }
+      applyPreview();
+      return;
+    }
+    const essenceButton = event.target.closest("[data-essence-index][data-essence-level]");
+    if (essenceButton) {
+      const index = clampNumber(essenceButton.dataset.essenceIndex, 0, 2, 0);
+      const bounds = resolveWeaponEssenceBounds(index);
+      const minLevel = clampNumber(bounds.min, 0, 9, 0);
+      const maxLevel = clampNumber(bounds.max, 0, 9, 0);
+      if (maxLevel <= 0) return;
+      const level = clampNumber(essenceButton.dataset.essenceLevel, minLevel, maxLevel, minLevel);
+      if (!Array.isArray(state.weaponEssence)) state.weaponEssence = [3, 2, 1];
+      state.weaponEssence[index] = level;
+      applyPreview();
+      return;
+    }
     const button = event.target.closest("[data-artifice-slot][data-artifice-stat][data-artifice-tier]");
     if (!button) return;
     const slotKey = String(button.dataset.artificeSlot || "");
@@ -5041,7 +5385,7 @@ async function initCardCreatorPage(characters) {
     if (!character || !preset) return;
     refs.status.textContent = "Menyiapkan card untuk dibagikan...";
     try {
-      await shareCreatorCardPng(character, preset, state, refs.status);
+      await shareCreatorCardPng(character, preset, state, refs.status, refs.preview);
       if (!refs.status.textContent.includes("di-download")) {
         refs.status.textContent = "Berhasil membuka menu share.";
       }
@@ -5056,7 +5400,7 @@ async function initCardCreatorPage(characters) {
     if (!character || !preset) return;
     refs.status.textContent = "Merender PNG...";
     try {
-      await exportCreatorCardPng(character, preset, state, refs.status);
+      await exportCreatorCardPng(character, preset, state, refs.status, refs.preview);
       refs.status.textContent = "Selesai. PNG berhasil di-download.";
     } catch (error) {
       refs.status.textContent = "Gagal export PNG. Coba lagi.";
