@@ -2196,12 +2196,23 @@ function renderCharacterDetail(character) {
   const profile = character.profile || {};
   const intro = profile.intro || [];
   const story = profile.storyHighlights || [];
+  const characterTips = profile.characterTips || [];
+  const tipsSources = profile.tipsSources || [];
   const skills = profile.skills || [];
   const gears = profile.gearRecommendations || [];
   const progression = profile.gearProgression || {};
 
   const introHtml = intro.length ? intro.map((line) => `<p>${esc(line)}</p>`).join("") : "<p>Profil naratif untuk karakter ini belum lengkap.</p>";
   const storyHtml = story.length ? story.map((line) => `<li>${esc(line)}</li>`).join("") : "<li>Belum ada highlight kisah tambahan.</li>";
+  const tipsHtml = characterTips.length ? characterTips.map((tip) => `<li>${esc(tip)}</li>`).join("") : "<li>Tips praktis belum tersedia untuk karakter ini.</li>";
+  const tipsSourcesHtml = tipsSources.length
+    ? `<ul class="source-list tip-source-list">${tipsSources
+        .map(
+          (source) =>
+            `<li><a href="${esc(source)}" target="_blank" rel="noreferrer noopener">${esc(source)}</a></li>`
+        )
+        .join("")}</ul>`
+    : '<p class="stamp">Referensi tips belum ditautkan.</p>';
   const skillHtml = skills.length
     ? skills
         .map(
@@ -2280,6 +2291,12 @@ function renderCharacterDetail(character) {
       <article class="card"><h2>Profil</h2>${introHtml}</article>
       <article class="card"><h2>Kisah Singkat</h2><ul class="story-list">${storyHtml}</ul></article>
     </div>
+
+    <article class="card">
+      <h2>Tips Praktis Karakter</h2>
+      <ul class="story-list">${tipsHtml}</ul>
+      ${tipsSourcesHtml}
+    </article>
 
     <article class="section-block">
       <h2>Skill, Fungsi, dan Cara Pakai</h2>

@@ -1,7 +1,7 @@
 {
   "meta": {
     "updatedAt": "2026-02-20",
-    "patchNote": "Expanded Tips section with researched combat, progression, AIC, mining, delivery, and gacha-planning guidance from latest community references."
+    "patchNote": "Added researched per-character practical tips (23 operators) and linked references for each profile page."
   },
   "tips": [
     {
@@ -885,7 +885,16 @@
           ],
           "summary": "Endgame Laevatain konsisten memakai Tide Fall Light Armor + Hot Work Gauntlets + Hot Work Pyrometer x2.",
           "gamewithUpdatedAt": "February 18, 2026 9:59 PM"
-        }
+        },
+        "characterTips": [
+          "Bangun 4 stack Melting Flame dulu dengan menyerap Heat Infliction lewat Final Strike sebelum commit SP ke Battle Skill.",
+          "Aktifkan Battle Skill saat stack penuh agar mode burst lebih efisien dan Ultimate terisi lebih cepat.",
+          "Pasangkan dengan pengaplikasi Heat konsisten (Wulfgard, Akekuri, atau Antal) supaya siklus stack tidak putus."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72539",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -1282,7 +1291,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 7:09 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Buka rotasi dengan Battle Skill atau Combo Skill untuk menarik musuh, lalu lempar AoE DPS tim ke area yang sama.",
+          "Saat channel Battle Skill, kamu masih bisa bergerak pelan; gunakan untuk reposisi sambil tetap mengontrol grup musuh.",
+          "Simpan Ultimate untuk momen Vulnerable atau Lift agar Slow + Arts Susceptibility memberi value maksimal."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72540",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -1679,7 +1697,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 9:03 PM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Ultimate adalah jendela damage utama: setelah aktif, fokuskan buff Basic Attack ke target prioritas.",
+          "Setup Solidification dengan Arts Infliction non-Cryo dulu, lalu lanjut Battle Skill dan Combo Skill Yvonne.",
+          "Jangan buang Ultimate di gelombang kecil; simpan untuk elite atau boss ber-HP tebal."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72538",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -2076,7 +2103,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 2:54 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Gunakan Combo Skill lalu Battle Skill untuk mengonversi Corrosion menjadi debuff Physical/Arts susceptibility.",
+          "Aktifkan Battle Skill secara proaktif saat tim mulai tertekan karena bayangan Mr. Dolly memberi sustain stabil.",
+          "Ultimate Ardelia paling bernilai saat banyak musuh berkumpul karena sekaligus support tim dan kontrol area."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72545",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -2473,7 +2509,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 3:28 PM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Rotasi Last Rite bergantung pada Battle + Combo Skill; prioritaskan uptime dua skill ini untuk isi energi Ultimate.",
+          "Mainkan dalam tim Cryo agar stack Cryo Infliction cepat penuh dan trigger Combo Skill lebih konsisten.",
+          "Ultimate bisa dipakai sebagai counter untuk serangan berat berkat fase aman (invulnerability)."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72543",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -2866,7 +2911,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 2:54 PM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Pakai Final Strike untuk memicu Combo Skill Perlica sesering mungkin agar Electrification tetap aktif.",
+          "Combo Skill penting karena membantu menurunkan resist Originium Arts musuh untuk DPS tim Arts.",
+          "Ultimate berbiaya rendah, jadi aman dipakai on-cooldown pada wave ramai."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72537",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -3291,7 +3345,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 10:45 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Target utama Pogranichnik adalah ekonomi SP tim: konsumsi Vulnerable dengan Battle Skill untuk proc chain.",
+          "Setelah Ultimate aktif, manfaatkan stack Steel Oath lewat efek status/chain agar SP refund maksimal.",
+          "Dia optimal di tim Physical yang rutin menumpuk Vulnerable seperti Lifeng/Chen/Endministrator."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72544",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -3688,7 +3751,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 2:28 PM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Combo Skill Ember aktif saat tim kena pukul; gunakan untuk recovery HP sambil tetap menjaga pressure damage.",
+          "Skala Shield Ultimate mengikuti HP Ember, jadi build defensif memberi kontribusi tim lebih besar.",
+          "Ember kuat di konten sulit atau map padat musuh karena sustain + proteksi timnya stabil."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72542",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -4085,7 +4157,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 17, 2026 8:20 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Kunci Avywenna adalah pola: pasang Thunderlance lalu recall dengan Battle Skill untuk burst area.",
+          "Pastikan posisi saat recall supaya jalur balik lance menembus sebanyak mungkin musuh.",
+          "Thunderlance EX dari Ultimate punya damage balik tinggi, jadi selalu cari sudut recall terbaik."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72532",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -4482,7 +4563,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 9:03 PM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Da Pan benar-benar meledak saat 4 stack Vulnerable tercapai; jangan buru-buru spam skill lain.",
+          "Koordinasikan tim agar status Crush/Breach tidak menghapus stack sebelum Combo Skill Da Pan dipakai.",
+          "Siklus ideal: build 4 stack -> Combo Skill burst -> ulang dari awal."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72533",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -4879,7 +4969,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 2:54 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Aktifkan Battle Skill sebelum serangan masuk untuk dapat Protection + counter yang menambah Vulnerable.",
+          "Combo Skill sangat berguna memutus Charge Attack dan menyelamatkan tim saat HP rendah.",
+          "Ultimate Knock Down lalu counter Battle Skill membantu setup 2 stack Vulnerable cepat."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72527",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -5276,7 +5375,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 6:39 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Manfaatkan cooldown Combo Skill 3 detik untuk loop SP recovery dalam tim Electrification.",
+          "Jangan terlalu cepat menekan Battle Skill; pastikan timing agar rantai Combo Skill tidak terputus.",
+          "Ultimate dapat dipakai sebagai starter Electrification saat tim belum sempat setup."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72530",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -5757,7 +5865,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 6:04 AM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Buka dengan Battle Skill untuk Physical Susceptibility, lalu cari trigger Combo Skill secepat mungkin.",
+          "Cek status Link sebelum Ultimate; konsumsi Link memberi hit tambahan dengan multiplier tinggi.",
+          "Lifeng paling stabil jika ada partner penumpuk Vulnerable dan supplier SP."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72541",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -6154,7 +6271,16 @@
           "checkedAt": "2026-02-19",
           "gamewithUpdatedAt": "February 18, 2026 10:12 PM",
           "summary": "Data build diverifikasi dari kombinasi sumber komunitas (ArknightsEndfield + GameWith)."
-        }
+        },
+        "characterTips": [
+          "Combo Skill Snowshine aktif saat HP karakter aktif di bawah 60%; manfaatkan sebagai tombol darurat sustain tim.",
+          "Battle Skill memberi Protection dan counter, bagus untuk menahan pressure sambil menebar Cryo.",
+          "Ultimate solid untuk force Solidification dan membuka combo Cryo/Physical follow-up."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72529",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -6523,7 +6649,16 @@
             "https://gamewith.net/akendfield/72531"
           ],
           "summary": "Build Alesh diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
-        }
+        },
+        "characterTips": [
+          "Alesh adalah baterai SP; rotasikan Battle, Combo, dan Ultimate-nya untuk menjaga ritme skill tim.",
+          "Battle Skill bisa memaksa Solidification pada target Cryo, berguna untuk setup burst.",
+          "Ultimate lebih efisien saat dipakai mengeksekusi beberapa musuh sekaligus demi bonus SP."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72531",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -6892,7 +7027,16 @@
             "https://gamewith.net/akendfield/72535"
           ],
           "summary": "Build Xaihi diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
-        }
+        },
+        "characterTips": [
+          "Selalu buka rotasi dengan Battle Skill untuk summon crystal; tanpa crystal, utilitas Xaihi turun drastis.",
+          "Kejar Final Strike saat HP tim penuh agar dapat bonus Arts Amp selain heal.",
+          "Setelah dua kali trigger heal crystal, pakai Combo Skill lalu summon crystal baru."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72535",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -7261,7 +7405,16 @@
             "https://gamewith.net/akendfield/72525"
           ],
           "summary": "Build Fluorite diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
-        }
+        },
+        "characterTips": [
+          "Rotasi aman Fluorite: Battle Skill -> Battle Skill -> Combo Skill untuk naikkan stack infliction.",
+          "Combo Skill bisa aktif dari stack Nature maupun Cryo, jadi fleksibel di dua tipe tim.",
+          "Ultimate paling kuat dipakai sesaat setelah Battle Skill menempel pada target."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72525",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -7630,7 +7783,16 @@
             "https://gamewith.net/akendfield/72536"
           ],
           "summary": "Build Chen Qianyu diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
-        }
+        },
+        "characterTips": [
+          "Gunakan pola Battle Skill -> Combo Skill untuk aplikasi Lift yang lebih konsisten.",
+          "Ultimate berbiaya rendah cocok dipakai sering, bukan disimpan terlalu lama.",
+          "Peran utama Chen adalah menumpuk Vulnerable lewat Lift untuk finisher Breach/Crush tim."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72536",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -7999,7 +8161,16 @@
             "https://gamewith.net/akendfield/72546"
           ],
           "summary": "Build Endministrator diverifikasi dari kombinasi sumber ArknightsEndfield + GameWith."
-        }
+        },
+        "characterTips": [
+          "Prioritas rotasi Endministrator: Combo Skill dulu, lalu konsumsi Originium Crystal lewat Battle Skill.",
+          "Ultimate lebih efektif dipakai setelah setup Combo agar konsumsi crystal memberi burst lebih tinggi.",
+          "Pasangkan dengan unit Lift/Knock Down agar stack Vulnerable cepat terkumpul."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72546",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -8474,7 +8645,16 @@
           ],
           "checkedAt": "2026-02-19",
           "summary": "Data build Akekuri diambil dari pembaruan terbaru halaman build."
-        }
+        },
+        "characterTips": [
+          "Nilai terbesar Akekuri ada di SP recovery; cari momen Stagger atau Stagger Node untuk trigger Combo Skill.",
+          "Ultimate ideal dipakai saat jendela Stagger agar recovery SP dan kontribusi tim maksimal.",
+          "Di boss multi-phase, Akekuri sering dapat banyak kesempatan proc Combo."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72524",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -8949,7 +9129,16 @@
           ],
           "checkedAt": "2026-02-19",
           "summary": "Data build Antal diselaraskan dari sumber build terbaru."
-        }
+        },
+        "characterTips": [
+          "Tandai target prioritas dengan Battle Skill untuk debuff Electric/Heat Susceptibility jangka panjang.",
+          "Combo Skill meledakkan elemen saat target bertanda terkena status/arts infliction; sinkronkan dengan tim.",
+          "Ultimate Antal dipakai sebelum burst tim untuk memberi Electric/Heat Amp global."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72526",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -9424,7 +9613,16 @@
           ],
           "checkedAt": "2026-02-19",
           "summary": "Data Estella mengikuti pembaruan build terbaru dari sumber."
-        }
+        },
+        "characterTips": [
+          "Estella optimal saat bisa memicu Solidification: aplikasikan Cryo ke target yang sudah terkena arts non-Cryo.",
+          "Lanjutkan Battle Skill -> Combo Skill untuk Physical Susceptibility sebelum masuk Ultimate burst.",
+          "Dia juga membantu tim Physical karena Lift/Vulnerable setup dari kit-nya."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72528",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     },
     {
@@ -9971,7 +10169,16 @@
           ],
           "checkedAt": "2026-02-19",
           "summary": "Wulfgard divalidasi sebagai utility Heat enabler dari sumber build terbaru."
-        }
+        },
+        "characterTips": [
+          "Combo Skill Wulfgard sangat mudah dipicu saat Arts Infliction muncul; jadikan ini sumber Heat utama.",
+          "Battle Skill bisa konsumsi Combustion/Electrification untuk damage lebih tinggi, jadi baca status target dulu.",
+          "Di tim Laevatain, fokuskan SP ke DPS utama dan manfaatkan Wulfgard sebagai enabler Heat."
+        ],
+        "tipsSources": [
+          "https://gamewith.net/akendfield/72534",
+          "https://gamewith.net/akendfield/72441"
+        ]
       }
     }
   ],
