@@ -1495,6 +1495,63 @@ select:focus-visible {
   font-size: 0.82rem;
 }
 
+.chip-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin: 0.52rem 0 0.12rem;
+}
+
+.chip-filter-btn {
+  border: 1px solid rgba(83, 131, 167, 0.62);
+  background: rgba(13, 30, 45, 0.84);
+  color: #c6e2f5;
+  border-radius: 999px;
+  padding: 0.25rem 0.58rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.chip-filter-btn:hover {
+  border-color: rgba(120, 203, 244, 0.84);
+  transform: translateY(-1px);
+}
+
+.chip-filter-btn.active {
+  border-color: rgba(128, 223, 255, 0.92);
+  background: rgba(20, 64, 91, 0.82);
+  color: #ecf9ff;
+}
+
+.chip-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(68, 106, 136, 0.68);
+  margin: 0.1rem 0.12rem;
+}
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(12px) scale(0.985);
+  transition:
+    opacity 0.45s ease var(--reveal-delay, 0ms),
+    transform 0.45s ease var(--reveal-delay, 0ms);
+}
+
+.reveal-item.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .event-grid.compact .event-card-body,
 .code-grid.compact .code-card {
   min-height: 0;
@@ -2626,6 +2683,15 @@ select:focus-visible {
 
   .event-card-body {
     padding: 0.78rem 0.78rem 0.85rem;
+  }
+
+  .chip-filter-row {
+    gap: 0.35rem;
+  }
+
+  .chip-filter-btn {
+    font-size: 0.74rem;
+    padding: 0.23rem 0.5rem;
   }
 
   .creator-preview {

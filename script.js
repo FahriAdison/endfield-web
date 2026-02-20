@@ -87,10 +87,16 @@ const rawRoot = document.body?.dataset.basePath || ".";
 const root = rawRoot.endsWith("/") && rawRoot !== "/" ? rawRoot.slice(0, -1) : rawRoot;
 
 function withRoot(path) {
+  if (path === "") {
+    if (root === "." || root === "") return "./";
+    if (root === "/") return "/";
+    return `${root}/`;
+  }
   if (!path) return path;
   if (/^https?:\/\//i.test(path) || path.startsWith("data:")) return path;
   const cleaned = path.replace(/^\.\//, "").replace(/^\//, "");
   if (root === "." || root === "") return `./${cleaned}`;
+  if (root === "/") return `/${cleaned}`;
   return `${root}/${cleaned}`;
 }
 
@@ -392,6 +398,37 @@ function wait(ms) {
 function randomPick(list) {
   if (!Array.isArray(list) || list.length === 0) return null;
   return list[Math.floor(Math.random() * list.length)] || null;
+}
+
+let revealObserver = null;
+function ensureRevealObserver() {
+  if (revealObserver) return revealObserver;
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const target = entry.target;
+        target.classList.add("reveal-visible");
+        revealObserver?.unobserve(target);
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+  );
+  return revealObserver;
+}
+
+function applyRevealAnimation(scope, selector) {
+  const rootNode = typeof scope === "string" ? document.querySelector(scope) : scope;
+  if (!rootNode) return;
+  const observer = ensureRevealObserver();
+  const nodes = Array.from(rootNode.querySelectorAll(selector));
+  nodes.forEach((node, index) => {
+    if (node.dataset.revealReady === "1") return;
+    node.dataset.revealReady = "1";
+    node.classList.add("reveal-item");
+    node.style.setProperty("--reveal-delay", `${Math.min(index * 48, 420)}ms`);
+    observer.observe(node);
+  });
 }
 
 function rarityFromCharacter(character) {
@@ -803,6 +840,7 @@ async function renderHome(data) {
               })
               .join("")
           : emptyState("Belum ada data event.");
+        applyRevealAnimation(homeEventsGrid, ".event-card");
       }
 
       if (homeCodesGrid) {
@@ -830,6 +868,7 @@ async function renderHome(data) {
               )
               .join("")
           : emptyState("Belum ada data redeem code.");
+        applyRevealAnimation(homeCodesGrid, ".code-card");
       }
     } catch {
       if (homeEventsGrid) homeEventsGrid.innerHTML = emptyState("Preview event belum bisa dimuat.");
@@ -2975,6 +3014,7 @@ async function initEventsPage() {
     stamp: document.getElementById("events-stamp"),
     search: document.getElementById("events-search"),
     filter: document.getElementById("events-filter"),
+    chipRow: document.getElementById("events-chip-filter"),
     sort: document.getElementById("events-sort"),
     count: document.getElementById("events-count"),
     grid: document.getElementById("events-grid"),
@@ -2987,6 +3027,7 @@ async function initEventsPage() {
     !refs.stamp ||
     !refs.search ||
     !refs.filter ||
+    !refs.chipRow ||
     !refs.sort ||
     !refs.count ||
     !refs.grid ||
@@ -3037,6 +3078,33 @@ async function initEventsPage() {
   refs.statActive.textContent = String(withStatus.filter((item) => item._status === "active").length);
   refs.statUpcoming.textContent = String(withStatus.filter((item) => item._status === "upcoming").length);
   refs.statCompleted.textContent = String(withStatus.filter((item) => item._status === "completed").length);
+  const chipState = {
+    type: "ALL",
+  };
+  const typeOptions = Array.from(new Set(withStatus.map((item) => String(item.type || "").trim()).filter(Boolean))).sort((a, b) =>
+    collator.compare(a, b)
+  );
+
+  const renderChips = () => {
+    const statusValue = refs.filter.value || "ALL";
+    refs.chipRow.innerHTML = [
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="ALL">Semua</button>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="active">Aktif</button>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="upcoming">Akan Datang</button>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="completed">Arsip</button>',
+      '<span class="chip-divider" aria-hidden="true"></span>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="type" data-chip-value="ALL">Semua Tipe</button>',
+      ...typeOptions.map(
+        (type) => `<button type="button" class="chip-filter-btn" data-chip-mode="type" data-chip-value="${esc(type)}">${esc(type)}</button>`
+      ),
+    ].join("");
+    refs.chipRow.querySelectorAll("[data-chip-mode='status']").forEach((button) => {
+      if (button.dataset.chipValue === statusValue) button.classList.add("active");
+    });
+    refs.chipRow.querySelectorAll("[data-chip-mode='type']").forEach((button) => {
+      if (button.dataset.chipValue === chipState.type) button.classList.add("active");
+    });
+  };
 
   const sortEvents = (list, mode) => {
     const cloned = [...list];
@@ -3098,9 +3166,10 @@ async function initEventsPage() {
     const filtered = sortEvents(
       withStatus.filter((item) => {
         const byStatus = filter === "ALL" || item._status === filter;
+        const byType = chipState.type === "ALL" || String(item.type || "") === chipState.type;
         const blob = `${item.title || ""} ${item.highlight || ""} ${item.summary || ""} ${(item.rewards || []).join(" ")}`.toLowerCase();
         const bySearch = !keyword || blob.includes(keyword);
-        return byStatus && bySearch;
+        return byStatus && byType && bySearch;
       }),
       sortMode
     );
@@ -3146,11 +3215,29 @@ async function initEventsPage() {
       : emptyState("Event tidak ditemukan. Coba ubah filter atau keyword.");
 
     refreshCountdowns();
+    applyRevealAnimation(refs.grid, ".event-card");
   };
 
+  refs.chipRow.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-chip-mode][data-chip-value]");
+    if (!chip) return;
+    const mode = chip.dataset.chipMode;
+    const value = chip.dataset.chipValue || "ALL";
+    if (mode === "status") {
+      refs.filter.value = value;
+    } else if (mode === "type") {
+      chipState.type = value;
+    }
+    renderChips();
+    redraw();
+  });
   refs.search.addEventListener("input", redraw);
-  refs.filter.addEventListener("change", redraw);
+  refs.filter.addEventListener("change", () => {
+    renderChips();
+    redraw();
+  });
   refs.sort.addEventListener("change", redraw);
+  renderChips();
   redraw();
 
   const ticker = setInterval(refreshCountdowns, 1000);
@@ -3162,6 +3249,7 @@ async function initCodesPage() {
     stamp: document.getElementById("codes-stamp"),
     search: document.getElementById("codes-search"),
     filter: document.getElementById("codes-filter"),
+    chipRow: document.getElementById("codes-chip-filter"),
     sort: document.getElementById("codes-sort"),
     count: document.getElementById("codes-count"),
     grid: document.getElementById("codes-grid"),
@@ -3174,6 +3262,7 @@ async function initCodesPage() {
     !refs.stamp ||
     !refs.search ||
     !refs.filter ||
+    !refs.chipRow ||
     !refs.sort ||
     !refs.count ||
     !refs.grid ||
@@ -3208,6 +3297,34 @@ async function initCodesPage() {
   refs.statTotal.textContent = String(codes.length);
   refs.statActive.textContent = String(codes.filter((item) => ["active", "likely-active"].includes(String(item.status))).length);
   refs.statExpired.textContent = String(codes.filter((item) => String(item.status) === "expired").length);
+  const chipState = {
+    platform: "ALL",
+  };
+  const platformOptions = Array.from(new Set(codes.map((item) => String(item.platform || "").trim()).filter(Boolean))).sort((a, b) =>
+    collator.compare(a, b)
+  );
+
+  const renderChips = () => {
+    const statusValue = refs.filter.value || "ALL";
+    refs.chipRow.innerHTML = [
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="ALL">Semua</button>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="active">Aktif</button>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="likely-active">Kemungkinan Aktif</button>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="status" data-chip-value="expired">Kadaluarsa</button>',
+      '<span class="chip-divider" aria-hidden="true"></span>',
+      '<button type="button" class="chip-filter-btn" data-chip-mode="platform" data-chip-value="ALL">Semua Platform</button>',
+      ...platformOptions.map(
+        (platform) =>
+          `<button type="button" class="chip-filter-btn" data-chip-mode="platform" data-chip-value="${esc(platform)}">${esc(platform)}</button>`
+      ),
+    ].join("");
+    refs.chipRow.querySelectorAll("[data-chip-mode='status']").forEach((button) => {
+      if (button.dataset.chipValue === statusValue) button.classList.add("active");
+    });
+    refs.chipRow.querySelectorAll("[data-chip-mode='platform']").forEach((button) => {
+      if (button.dataset.chipValue === chipState.platform) button.classList.add("active");
+    });
+  };
 
   applyDynamicMeta({
     title: "Redeem Code Endfield Indonesia | Kode Penukaran | Endfield Web",
@@ -3266,9 +3383,10 @@ async function initCodesPage() {
       codes.filter((item) => {
         const status = String(item.status || "").toLowerCase();
         const byStatus = filter === "ALL" || status === filter;
+        const byPlatform = chipState.platform === "ALL" || String(item.platform || "") === chipState.platform;
         const blob = `${item.code || ""} ${item.reward || ""} ${item.platform || ""} ${item.note || ""}`.toLowerCase();
         const bySearch = !keyword || blob.includes(keyword);
-        return byStatus && bySearch;
+        return byStatus && byPlatform && bySearch;
       }),
       sortMode
     );
@@ -3302,8 +3420,22 @@ async function initCodesPage() {
           )
           .join("")
       : emptyState("Code tidak ditemukan. Coba ubah filter atau keyword.");
+    applyRevealAnimation(refs.grid, ".code-card");
   };
 
+  refs.chipRow.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-chip-mode][data-chip-value]");
+    if (!chip) return;
+    const mode = chip.dataset.chipMode;
+    const value = chip.dataset.chipValue || "ALL";
+    if (mode === "status") {
+      refs.filter.value = value;
+    } else if (mode === "platform") {
+      chipState.platform = value;
+    }
+    renderChips();
+    redraw();
+  });
   refs.grid.addEventListener("click", async (event) => {
     const button = event.target.closest("[data-copy-code]");
     if (!button) return;
@@ -3322,8 +3454,12 @@ async function initCodesPage() {
   });
 
   refs.search.addEventListener("input", redraw);
-  refs.filter.addEventListener("change", redraw);
+  refs.filter.addEventListener("change", () => {
+    renderChips();
+    redraw();
+  });
   refs.sort.addEventListener("change", redraw);
+  renderChips();
   redraw();
 }
 
@@ -3354,13 +3490,22 @@ function loadCanvasImage(url) {
 }
 
 async function exportCreatorCardPng(character, preset, state, statusEl) {
+  const canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+  if (!canvas) return;
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL("image/png");
+  link.download = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
+  link.click();
+}
+
+async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   const canvas = document.createElement("canvas");
   canvas.width = 1600;
   canvas.height = 900;
   const ctx = canvas.getContext("2d");
   if (!ctx) {
     if (statusEl) statusEl.textContent = "Canvas tidak didukung browser.";
-    return;
+    return null;
   }
 
   const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -3447,11 +3592,32 @@ async function exportCreatorCardPng(character, preset, state, statusEl) {
   ctx.font = "500 24px Space Grotesk, sans-serif";
   ctx.fillText("endfield-ind.my.id · Fanmade Card Creator", 620, 790);
   ctx.globalAlpha = 1;
+  return canvas;
+}
 
-  const link = document.createElement("a");
-  link.href = canvas.toDataURL("image/png");
-  link.download = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
-  link.click();
+async function shareCreatorCardPng(character, preset, state, statusEl) {
+  const canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+  if (!canvas) return;
+
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+  if (!blob) throw new Error("Gagal membentuk file PNG.");
+
+  const fileName = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
+  const file = new File([blob], fileName, { type: "image/png" });
+  const title = `${character.name} - Endfield Fan Card`;
+  const text = "Fanmade card dari endfield-ind.my.id";
+
+  const canShareFile =
+    typeof navigator !== "undefined" &&
+    typeof navigator.share === "function" &&
+    (!navigator.canShare || navigator.canShare({ files: [file] }));
+  if (canShareFile) {
+    await navigator.share({ title, text, files: [file] });
+    return;
+  }
+
+  await exportCreatorCardPng(character, preset, state, statusEl);
+  if (statusEl) statusEl.textContent = "Share file tidak didukung browser ini. PNG di-download otomatis.";
 }
 
 async function initCardCreatorPage(characters) {
@@ -3463,6 +3629,7 @@ async function initCardCreatorPage(characters) {
     showTier: document.getElementById("creator-show-tier"),
     showRole: document.getElementById("creator-show-role"),
     random: document.getElementById("creator-random"),
+    share: document.getElementById("creator-share"),
     download: document.getElementById("creator-download"),
     status: document.getElementById("creator-status"),
     preview: document.getElementById("creator-preview"),
@@ -3481,6 +3648,7 @@ async function initCardCreatorPage(characters) {
     !refs.showTier ||
     !refs.showRole ||
     !refs.random ||
+    !refs.share ||
     !refs.download ||
     !refs.status ||
     !refs.preview ||
@@ -3532,6 +3700,9 @@ async function initCardCreatorPage(characters) {
   refs.style.value = state.styleId;
   refs.showTier.checked = state.showTier;
   refs.showRole.checked = state.showRole;
+  if (typeof navigator === "undefined" || typeof navigator.share !== "function") {
+    refs.share.textContent = "Share (Fallback)";
+  }
 
   const findCharacter = () => builtCharacters.find((item) => item.id === state.characterId) || builtCharacters[0];
   const findPreset = () => presets.find((item) => item.id === state.styleId) || presets[0];
@@ -3596,6 +3767,21 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.random.addEventListener("click", randomize);
+  refs.share.addEventListener("click", async () => {
+    const character = findCharacter();
+    const preset = findPreset();
+    if (!character || !preset) return;
+    refs.status.textContent = "Menyiapkan card untuk dibagikan...";
+    try {
+      await shareCreatorCardPng(character, preset, state, refs.status);
+      if (!refs.status.textContent.includes("di-download")) {
+        refs.status.textContent = "Berhasil membuka menu share.";
+      }
+    } catch (error) {
+      refs.status.textContent = "Gagal share card. Coba lagi.";
+      console.error(error);
+    }
+  });
   refs.download.addEventListener("click", async () => {
     const character = findCharacter();
     const preset = findPreset();
