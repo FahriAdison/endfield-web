@@ -1,30 +1,30 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Showcase Build Creator Endfield Indonesia</title>
+    <title>Build Showcase Creator Endfield Indonesia</title>
     <meta
       name="description"
-      content="Buat showcase build operator Endfield: profil, ringkas build, save link online, lalu export PNG langsung dari browser."
+      content="Buat showcase build operator Endfield: profil, weapon, gear + artifice, skill level, simpan link online, lalu export PNG."
     />
-    <meta name="keywords" content="endfield showcase build, showcase build creator, endfield card creator" />
+    <meta name="keywords" content="endfield showcase build, build showcase creator, endfield card creator" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="theme-color" content="#071019" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Showcase Build Creator Endfield Indonesia" />
+    <meta property="og:title" content="Build Showcase Creator Endfield Indonesia" />
     <meta
       property="og:description"
       content="Tool fanmade untuk membuat showcase build Endfield dan export PNG secara instan."
     />
     <meta property="og:url" content="https://endfield-ind.my.id/card-creator/" />
     <meta property="og:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
-    <meta property="og:image:alt" content="Card creator Endfield Indonesia" />
+    <meta property="og:image:alt" content="Build showcase creator Endfield Indonesia" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Showcase Build Creator Endfield Indonesia" />
+    <meta name="twitter:title" content="Build Showcase Creator Endfield Indonesia" />
     <meta
       name="twitter:description"
-      content="Pilih karakter, cek ringkas build, lalu generate showcase Endfield versi kamu."
+      content="Pilih karakter, atur weapon dan gear, lalu generate showcase Endfield versi kamu."
     />
     <meta name="twitter:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
     <link rel="canonical" href="https://endfield-ind.my.id/card-creator/" />
@@ -53,9 +53,9 @@
       </nav>
       <div class="container page-hero-copy">
         <p class="kicker">SHOWCASE BUILDER</p>
-        <h1>Showcase Build Creator</h1>
+        <h1>Build Showcase Creator</h1>
         <p>
-          Buat showcase build operator Endfield: tampilkan profil, ringkas build,
+          Buat showcase build operator Endfield: tampilkan profil, setup weapon, gear + artifice,
           lalu export PNG atau simpan link online.
         </p>
       </div>
@@ -64,7 +64,8 @@
     <main>
       <section class="section container creator-layout">
         <article class="card creator-controls">
-          <h2>Pengaturan Showcase Build</h2>
+          <h2>Pengaturan Build Showcase</h2>
+
           <div class="creator-field creator-grid-two">
             <div>
               <label for="creator-character">Karakter</label>
@@ -75,10 +76,12 @@
               <select id="creator-style"></select>
             </div>
           </div>
+
           <div class="creator-field">
             <label for="creator-alias">Nama Showcase</label>
-            <input id="creator-alias" type="text" placeholder="Contoh: Hypercarry Heat Core" />
+            <input id="creator-alias" type="text" placeholder="Contoh: Endministrator Main DPS Build" />
           </div>
+
           <div class="creator-field creator-grid-two">
             <div>
               <label for="creator-uid">UID</label>
@@ -95,90 +98,148 @@
               </select>
             </div>
           </div>
-          <div class="creator-field creator-grid-four">
-            <div>
-              <label for="creator-level">Level Karakter</label>
-              <input id="creator-level" type="number" min="1" max="90" value="70" />
-            </div>
-            <div>
-              <label for="creator-potential">Potensial</label>
-              <input id="creator-potential" type="number" min="0" max="6" value="3" />
-            </div>
-            <div>
-              <label for="creator-breakthrough">Terobosan</label>
-              <input id="creator-breakthrough" type="number" min="0" max="6" value="2" />
-            </div>
-            <div>
-              <label for="creator-affinity">Affinity</label>
-              <input id="creator-affinity" type="number" min="0" max="10" value="10" />
+
+          <div class="creator-panel">
+            <h3>Karakter</h3>
+            <div class="creator-field creator-grid-four">
+              <div>
+                <label for="creator-level">Level Karakter</label>
+                <input id="creator-level" type="number" min="1" max="90" value="70" />
+              </div>
+              <div>
+                <label for="creator-breakthrough">Terobosan (0-4)</label>
+                <input id="creator-breakthrough" type="number" min="0" max="4" value="2" />
+              </div>
+              <div>
+                <label for="creator-potential">Potensial/Dupe (0-5)</label>
+                <input id="creator-potential" type="number" min="0" max="5" value="3" />
+              </div>
+              <div>
+                <label for="creator-affinity">Affinity (0-4)</label>
+                <input id="creator-affinity" type="number" min="0" max="4" value="2" />
+              </div>
             </div>
           </div>
-          <div class="creator-field creator-grid-two">
-            <div>
-              <label for="creator-weapon-name">Weapon (Nama)</label>
+
+          <div class="creator-panel">
+            <h3>Weapon</h3>
+            <div class="creator-field creator-grid-two">
+              <div>
+                <label for="creator-weapon-select">Pilih Weapon</label>
+                <select id="creator-weapon-select"></select>
+              </div>
+              <div class="creator-icon-field">
+                <label>Icon Weapon</label>
+                <img id="creator-weapon-icon" src="../assets/skill-icons/basic.webp" alt="Weapon icon" />
+              </div>
+            </div>
+            <div class="creator-field">
+              <label for="creator-weapon-name">Nama Weapon (Custom)</label>
               <input id="creator-weapon-name" type="text" placeholder="Nama weapon" />
             </div>
-            <div>
-              <label for="creator-weapon-level">Level Weapon</label>
-              <input id="creator-weapon-level" type="number" min="1" max="90" value="70" />
+            <div class="creator-field creator-grid-three">
+              <div>
+                <label for="creator-weapon-level">Level Weapon</label>
+                <input id="creator-weapon-level" type="number" min="1" max="90" value="70" />
+              </div>
+              <div>
+                <label for="creator-weapon-breakthrough">Terobosan Weapon (0-4)</label>
+                <input id="creator-weapon-breakthrough" type="number" min="0" max="4" value="2" />
+              </div>
+              <div>
+                <label for="creator-weapon-potential">Potensi Weapon (0-5)</label>
+                <input id="creator-weapon-potential" type="number" min="0" max="5" value="1" />
+              </div>
+            </div>
+            <div class="creator-field creator-grid-three">
+              <div>
+                <label for="creator-weapon-skill-level">Weapon Skill 1 (1-9)</label>
+                <input id="creator-weapon-skill-level" type="number" min="1" max="9" value="7" />
+              </div>
+              <div>
+                <label for="creator-weapon-skill-level-2">Weapon Skill 2 (1-9)</label>
+                <input id="creator-weapon-skill-level-2" type="number" min="1" max="9" value="7" />
+              </div>
+              <div>
+                <label for="creator-weapon-skill-level-3">Weapon Skill 3 (1-9)</label>
+                <input id="creator-weapon-skill-level-3" type="number" min="1" max="9" value="7" />
+              </div>
             </div>
           </div>
-          <div class="creator-field creator-grid-three">
-            <div>
-              <label for="creator-weapon-breakthrough">Terobosan Weapon</label>
-              <input id="creator-weapon-breakthrough" type="number" min="0" max="6" value="2" />
-            </div>
-            <div>
-              <label for="creator-weapon-potential">Potensial Weapon</label>
-              <input id="creator-weapon-potential" type="number" min="0" max="6" value="1" />
-            </div>
-            <div>
-              <label for="creator-weapon-skill-level">Level Skill Weapon</label>
-              <input id="creator-weapon-skill-level" type="number" min="1" max="10" value="7" />
-            </div>
-          </div>
-          <div class="creator-field creator-grid-two">
-            <div>
-              <label for="creator-gear-armor">Gear Armor</label>
-              <input id="creator-gear-armor" type="text" placeholder="Nama armor" />
-            </div>
-            <div>
-              <label for="creator-gear-gloves">Gear Gloves</label>
-              <input id="creator-gear-gloves" type="text" placeholder="Nama gloves" />
-            </div>
-          </div>
-          <div class="creator-field creator-grid-two">
-            <div>
-              <label for="creator-gear-kit1">Kit Slot 1</label>
-              <input id="creator-gear-kit1" type="text" placeholder="Nama kit 1" />
-            </div>
-            <div>
-              <label for="creator-gear-kit2">Kit Slot 2</label>
-              <input id="creator-gear-kit2" type="text" placeholder="Nama kit 2" />
-            </div>
-          </div>
-          <div class="creator-field creator-grid-five">
-            <div>
-              <label for="creator-skill-basic">Basic</label>
-              <input id="creator-skill-basic" type="number" min="1" max="10" value="7" />
-            </div>
-            <div>
-              <label for="creator-skill-combo">Combo</label>
-              <input id="creator-skill-combo" type="number" min="1" max="10" value="7" />
-            </div>
-            <div>
-              <label for="creator-skill-active">Active</label>
-              <input id="creator-skill-active" type="number" min="1" max="10" value="8" />
-            </div>
-            <div>
-              <label for="creator-skill-ultimate">Ultimate</label>
-              <input id="creator-skill-ultimate" type="number" min="1" max="10" value="8" />
-            </div>
-            <div>
-              <label for="creator-skill-talent">Talent</label>
-              <input id="creator-skill-talent" type="number" min="1" max="10" value="9" />
+
+          <div class="creator-panel">
+            <h3>Equipment + Artifice</h3>
+            <p class="creator-help-text">Setiap stat gear bisa diatur tier artifice dari <strong>+0</strong> sampai <strong>+3</strong>.</p>
+
+            <div class="creator-gear-grid">
+              <div class="creator-gear-slot">
+                <div class="creator-gear-slot-head">
+                  <h4>Armor</h4>
+                  <img id="creator-gear-armor-icon" src="../assets/skill-icons/basic.webp" alt="Armor icon" />
+                </div>
+                <label for="creator-gear-armor">Pilih Armor</label>
+                <select id="creator-gear-armor"></select>
+                <div id="creator-artifice-armor" class="creator-artifice-box"></div>
+              </div>
+
+              <div class="creator-gear-slot">
+                <div class="creator-gear-slot-head">
+                  <h4>Gloves</h4>
+                  <img id="creator-gear-gloves-icon" src="../assets/skill-icons/basic.webp" alt="Gloves icon" />
+                </div>
+                <label for="creator-gear-gloves">Pilih Gloves</label>
+                <select id="creator-gear-gloves"></select>
+                <div id="creator-artifice-gloves" class="creator-artifice-box"></div>
+              </div>
+
+              <div class="creator-gear-slot">
+                <div class="creator-gear-slot-head">
+                  <h4>Kit Slot 1</h4>
+                  <img id="creator-gear-kit1-icon" src="../assets/skill-icons/basic.webp" alt="Kit 1 icon" />
+                </div>
+                <label for="creator-gear-kit1">Pilih Kit 1</label>
+                <select id="creator-gear-kit1"></select>
+                <div id="creator-artifice-kit1" class="creator-artifice-box"></div>
+              </div>
+
+              <div class="creator-gear-slot">
+                <div class="creator-gear-slot-head">
+                  <h4>Kit Slot 2</h4>
+                  <img id="creator-gear-kit2-icon" src="../assets/skill-icons/basic.webp" alt="Kit 2 icon" />
+                </div>
+                <label for="creator-gear-kit2">Pilih Kit 2</label>
+                <select id="creator-gear-kit2"></select>
+                <div id="creator-artifice-kit2" class="creator-artifice-box"></div>
+              </div>
             </div>
           </div>
+
+          <div class="creator-panel">
+            <h3>Level Skill Karakter</h3>
+            <div class="creator-field creator-grid-five">
+              <div>
+                <label for="creator-skill-basic">Basic</label>
+                <input id="creator-skill-basic" type="number" min="1" max="10" value="7" />
+              </div>
+              <div>
+                <label for="creator-skill-combo">Combo</label>
+                <input id="creator-skill-combo" type="number" min="1" max="10" value="7" />
+              </div>
+              <div>
+                <label for="creator-skill-active">Active</label>
+                <input id="creator-skill-active" type="number" min="1" max="10" value="8" />
+              </div>
+              <div>
+                <label for="creator-skill-ultimate">Ultimate</label>
+                <input id="creator-skill-ultimate" type="number" min="1" max="10" value="8" />
+              </div>
+              <div>
+                <label for="creator-skill-talent">Talent</label>
+                <input id="creator-skill-talent" type="number" min="1" max="10" value="9" />
+              </div>
+            </div>
+          </div>
+
           <div class="creator-field creator-grid-two">
             <div>
               <label for="creator-build-skills">Prioritas Skill (Referensi)</label>
@@ -189,25 +250,29 @@
               <input id="creator-build-team" type="text" readonly />
             </div>
           </div>
+
           <div class="creator-field">
             <label for="creator-tagline">Catatan Rotasi</label>
-            <input id="creator-tagline" type="text" placeholder="Contoh: Stack -> Burst -> Reset" />
+            <input id="creator-tagline" type="text" placeholder="Contoh: Setup -> Burst -> Reset" />
           </div>
+
           <div class="creator-field creator-checks">
             <label><input id="creator-show-tier" type="checkbox" checked /> Tampilkan Tier</label>
             <label><input id="creator-show-role" type="checkbox" checked /> Tampilkan Role</label>
           </div>
+
           <div class="creator-actions">
             <button class="btn ghost" id="creator-random" type="button">Acak</button>
             <button class="btn ghost" id="creator-publish" type="button">Save Link</button>
             <button class="btn ghost" id="creator-share" type="button">Share Card</button>
             <button class="btn primary" id="creator-download" type="button">Download PNG</button>
           </div>
+
           <div class="creator-link-row">
             <input id="creator-share-link" type="text" readonly placeholder="Link showcase akan muncul di sini..." />
             <button class="btn ghost" id="creator-copy-link" type="button">Copy Link</button>
           </div>
-          <p class="stamp" id="creator-status">Siap membuat kartu.</p>
+          <p class="stamp" id="creator-status">Siap membuat showcase build.</p>
         </article>
 
         <article class="card creator-preview-shell">
@@ -227,6 +292,7 @@
                 <span id="creator-preview-stars" class="creator-stars">★★★★★</span>
               </div>
             </div>
+
             <div class="creator-showcase-main">
               <div class="creator-showcase-portrait">
                 <div class="creator-image-frame">
@@ -244,7 +310,7 @@
                   <span class="creator-meta-chip" id="creator-preview-element">Element: Thermal</span>
                   <span class="creator-meta-chip" id="creator-preview-weapon">Weapon: Greatsword</span>
                   <span class="creator-meta-chip" id="creator-preview-level">Lv 70</span>
-                  <span class="creator-meta-chip" id="creator-preview-affinity">Affinity 10</span>
+                  <span class="creator-meta-chip" id="creator-preview-affinity">Affinity 2</span>
                   <span class="creator-meta-chip" id="creator-preview-potential">Potential 3</span>
                   <span class="creator-meta-chip" id="creator-preview-breakthrough">Breakthrough 2</span>
                 </div>
@@ -252,23 +318,60 @@
                 <div class="creator-showcase-grid">
                   <article class="creator-showcase-card">
                     <h4>Weapon</h4>
+                    <div class="creator-preview-weapon-block">
+                      <img id="creator-preview-weapon-icon" src="../assets/skill-icons/basic.webp" alt="Weapon icon preview" />
+                      <div>
+                        <strong id="creator-preview-weapon-name">Dawn's Last Glimmer</strong>
+                        <small>Level <span id="creator-preview-weapon-level">70</span></small>
+                      </div>
+                    </div>
                     <ul>
-                      <li><span>Nama</span><strong id="creator-preview-weapon-name">Dawn's Last Glimmer</strong></li>
-                      <li><span>Level</span><strong id="creator-preview-weapon-level">70</strong></li>
                       <li><span>Terobosan</span><strong id="creator-preview-weapon-breakthrough">2</strong></li>
                       <li><span>Potensial</span><strong id="creator-preview-weapon-potential">1</strong></li>
-                      <li><span>Skill Lv</span><strong id="creator-preview-weapon-skill-level">7</strong></li>
+                      <li><span>Skill 1</span><strong id="creator-preview-weapon-skill-level">7</strong></li>
+                      <li><span>Skill 2</span><strong id="creator-preview-weapon-skill-level-2">7</strong></li>
+                      <li><span>Skill 3</span><strong id="creator-preview-weapon-skill-level-3">7</strong></li>
+                      <li><span>Icon Terobosan</span><strong id="creator-preview-weapon-breakthrough-icons">◇ ◇ ◆ ◆</strong></li>
+                      <li><span>Icon Potensial</span><strong id="creator-preview-weapon-potential-icons">✦ ✦ ✧ ✧ ✧ ✧</strong></li>
                     </ul>
                   </article>
 
                   <article class="creator-showcase-card">
                     <h4>Equipment</h4>
-                    <ul>
-                      <li><span>Armor</span><strong id="creator-preview-gear-armor">Tide Fall Light Armor</strong></li>
-                      <li><span>Gloves</span><strong id="creator-preview-gear-gloves">Hot Work Gauntlets</strong></li>
-                      <li><span>Kit 1</span><strong id="creator-preview-gear-kit1">Hot Work Pyrometer</strong></li>
-                      <li><span>Kit 2</span><strong id="creator-preview-gear-kit2">Hot Work Pyrolysis</strong></li>
-                    </ul>
+                    <div class="creator-preview-gear-grid">
+                      <div class="creator-preview-gear-item">
+                        <img id="creator-preview-gear-armor-icon" src="../assets/skill-icons/basic.webp" alt="Armor preview icon" />
+                        <div>
+                          <span>Armor</span>
+                          <strong id="creator-preview-gear-armor">Tide Fall Light Armor</strong>
+                          <small id="creator-preview-gear-armor-artifice">Artifice: +0 / +0 / +0</small>
+                        </div>
+                      </div>
+                      <div class="creator-preview-gear-item">
+                        <img id="creator-preview-gear-gloves-icon" src="../assets/skill-icons/basic.webp" alt="Gloves preview icon" />
+                        <div>
+                          <span>Gloves</span>
+                          <strong id="creator-preview-gear-gloves">Hot Work Gauntlets</strong>
+                          <small id="creator-preview-gear-gloves-artifice">Artifice: +0 / +0 / +0</small>
+                        </div>
+                      </div>
+                      <div class="creator-preview-gear-item">
+                        <img id="creator-preview-gear-kit1-icon" src="../assets/skill-icons/basic.webp" alt="Kit 1 preview icon" />
+                        <div>
+                          <span>Kit 1</span>
+                          <strong id="creator-preview-gear-kit1">Hot Work Pyrometer</strong>
+                          <small id="creator-preview-gear-kit1-artifice">Artifice: +0 / +0 / +0</small>
+                        </div>
+                      </div>
+                      <div class="creator-preview-gear-item">
+                        <img id="creator-preview-gear-kit2-icon" src="../assets/skill-icons/basic.webp" alt="Kit 2 preview icon" />
+                        <div>
+                          <span>Kit 2</span>
+                          <strong id="creator-preview-gear-kit2">Hot Work Pyrometer</strong>
+                          <small id="creator-preview-gear-kit2-artifice">Artifice: +0 / +0 / +0</small>
+                        </div>
+                      </div>
+                    </div>
                   </article>
 
                   <article class="creator-showcase-card">
@@ -279,6 +382,9 @@
                       <li><span>Active</span><strong id="creator-preview-skill-active">8</strong></li>
                       <li><span>Ultimate</span><strong id="creator-preview-skill-ultimate">8</strong></li>
                       <li><span>Talent</span><strong id="creator-preview-skill-talent">9</strong></li>
+                      <li><span>Terobosan Char</span><strong id="creator-preview-breakthrough-icons">◇ ◇ ◆ ◆</strong></li>
+                      <li><span>Potensial Char</span><strong id="creator-preview-potential-icons">✦ ✦ ✧ ✧ ✧ ✧</strong></li>
+                      <li><span>Affinity</span><strong id="creator-preview-affinity-icons">● ● ○ ○ ○</strong></li>
                     </ul>
                   </article>
 
@@ -300,7 +406,7 @@
 
     <footer class="footer">
       <div class="container">
-        <p>Endfield Web - Card Creator</p>
+        <p>Endfield Web - Build Showcase Creator</p>
       </div>
     </footer>
 

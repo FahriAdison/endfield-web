@@ -1,0 +1,312 @@
+﻿{
+    "characterImages":  {
+                            "laevatain":  "https://img.game8.co/4182923/168c68d19c1ea0391e7aad8cec8627f7.png/show",
+                            "gilberta":  "https://img.game8.co/4181217/0b8754ce1452b436a640867115ed5321.png/show",
+                            "yvonne":  "https://img.game8.co/4181212/617e02e816a962afcdc637d7c640e49e.png/show",
+                            "ardelia":  "https://img.game8.co/4395430/952398ff7bad28c2c5dec0d37bd5c2bb.png/show",
+                            "last-rite":  "https://img.game8.co/4321969/d703c3f82d638112ffc8c60d3476bfb5.png/show",
+                            "perlica":  "https://img.game8.co/4175822/3181de3358152c3b5fff7ef5001152a0.png/show",
+                            "pogranichnik":  "https://img.game8.co/4395440/146dc16633f07ebb7be0fcdd9834b973.png/show",
+                            "ember":  "https://img.game8.co/4181214/4aa5afd40eb2ab7d0129d4a1738ea930.png/show",
+                            "avywenna":  "https://img.game8.co/4181215/e18630778a7c0c57ff03f19e21f833cb.png/show",
+                            "da-pan":  "https://img.game8.co/4181209/967c357f9ea7bccb1640ee31a45a252f.png/show",
+                            "catcher":  "https://img.game8.co/4321981/047cbf0ab9925a7b0653e65214d85ac1.png/show",
+                            "arclight":  "https://img.game8.co/4181208/e91fa2796196f06a5d37bea8ef23f6a9.png/show",
+                            "lifeng":  "https://img.game8.co/4181213/d63509bf1980c3fd93f8090ac7b540fd.png/show",
+                            "snowshine":  "https://img.game8.co/4181207/f15fdf170ed3f40aa761dfcb8de971f8.png/show",
+                            "alesh":  "https://img.game8.co/4321994/56c65f3d11aee6232b450967d3b9e97e.png/show",
+                            "xaihi":  "https://img.game8.co/4181218/99fa5e13cdab6782076963284e8ee830.png/show",
+                            "fluorite":  "https://img.game8.co/4321944/aaa9c149e38643d143813a871991457c.png/show",
+                            "chen-qianyu":  "https://img.game8.co/4181211/0e3a8760c0188e1e94940778b9ddccd8.png/show",
+                            "endministrator":  "https://img.game8.co/4181210/655cb8b814b5b1a3be7df856e5cfee10.png/show",
+                            "akekuri":  "https://img.game8.co/4321984/0a9b8b9ba4dfc323535371d24c99e599.png/show",
+                            "antal":  "https://img.game8.co/4321995/c1d96f3defe241f071bb28af39e35237.png/show",
+                            "estella":  "https://img.game8.co/4321956/2d8d0eee6b586ed8bcf411ba8a456e6e.png/show",
+                            "wulfgard":  "https://img.game8.co/4181206/08ccc8a16bc6e723793ee23f22c1f739.png/show"
+                        },
+    "weapons":  {
+                    "value":  [
+                                  {
+                                      "name":  "Aggeloslayer",
+                                      "icon":  "https://img.game8.co/4390824/43764ee105c9adafe149053c415c0673.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523670"
+                                  },
+                                  {
+                                      "name":  "Ancient Canal",
+                                      "icon":  "https://img.game8.co/4390806/9c8f10872ff64bc818cc7dc26046e459.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523672"
+                                  },
+                                  {
+                                      "name":  "Artzy Tyrannical",
+                                      "icon":  "https://img.game8.co/4390773/f5fad5952c9300da9bc4c9b873eb560d.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523664"
+                                  },
+                                  {
+                                      "name":  "Aspirant",
+                                      "icon":  "https://img.game8.co/4390807/4dd9c0d5f0278ec82d5709de6d44fdc0.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523674"
+                                  },
+                                  {
+                                      "name":  "Chimeric Justice",
+                                      "icon":  "https://img.game8.co/4390796/f0c792abb7b65a8f3aedb2a21165a4d8.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523667"
+                                  },
+                                  {
+                                      "name":  "Chivalric Virtues",
+                                      "icon":  "https://img.game8.co/4390758/11125074333326cc4e858d8478388503.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523669"
+                                  },
+                                  {
+                                      "name":  "Clannibal",
+                                      "icon":  "https://img.game8.co/4390774/bc15e35d63b5bd716c041890529b0a73.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523673"
+                                  },
+                                  {
+                                      "name":  "Cohesive Traction",
+                                      "icon":  "https://img.game8.co/4390791/49d76e3f8231f3e8effb37dd0101f6e6.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523670"
+                                  },
+                                  {
+                                      "name":  "Contingent Measure",
+                                      "icon":  "https://img.game8.co/4390816/62b02e47e08d23bffe5f38db5a777927.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523663"
+                                  },
+                                  {
+                                      "name":  "Delivery Guaranteed",
+                                      "icon":  "https://img.game8.co/4390745/757b2cb45d2a2b33fd9aa082f235b727.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523668"
+                                  },
+                                  {
+                                      "name":  "Detonation Unit",
+                                      "icon":  "https://img.game8.co/4390760/bf7370b773175391011c676183baedf4.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523669"
+                                  },
+                                  {
+                                      "name":  "Dreams of the Starry Beach",
+                                      "icon":  "https://img.game8.co/4390763/4648479b3fe2f333ca565773b98ae16a.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562199"
+                                  },
+                                  {
+                                      "name":  "Eminent Repute",
+                                      "icon":  "https://img.game8.co/4390786/56ed8181657221eddd347cee26ccf511.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523676"
+                                  },
+                                  {
+                                      "name":  "Exemplar",
+                                      "icon":  "https://img.game8.co/4390782/2953a12871c364b1d169600567133f77.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523672"
+                                  },
+                                  {
+                                      "name":  "Finchaser 3.0",
+                                      "icon":  "https://img.game8.co/4390805/7336f9c6ce8c7f4c272a853965bd7140.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562315"
+                                  },
+                                  {
+                                      "name":  "Finishing Call",
+                                      "icon":  "https://img.game8.co/4390809/7f9531097b8ac53c4a041008a92dc9ea.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523666"
+                                  },
+                                  {
+                                      "name":  "Fluorescent Roc",
+                                      "icon":  "https://img.game8.co/4390823/968f67c5665db408b10ec0c6df39bac9.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523668"
+                                  },
+                                  {
+                                      "name":  "Forgeborn Scathe",
+                                      "icon":  "https://img.game8.co/4390769/18e59da28b95b30567b440570e306b96.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523665"
+                                  },
+                                  {
+                                      "name":  "Former Finery",
+                                      "icon":  "https://img.game8.co/4390781/02685a1ff520dfc7a1938bfbde6a8b92.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523666"
+                                  },
+                                  {
+                                      "name":  "Fortmaker",
+                                      "icon":  "https://img.game8.co/4390800/6ab12cdb4bead3e8741023f049425f58.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523665"
+                                  },
+                                  {
+                                      "name":  "Freedom to Proselytize",
+                                      "icon":  "https://img.game8.co/4390790/48235714f706f4e8ade8372e1fe781fc.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523669"
+                                  },
+                                  {
+                                      "name":  "Grand Vision",
+                                      "icon":  "https://img.game8.co/4390819/10c376d900a6330c12aa0cbb0a064910.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523676"
+                                  },
+                                  {
+                                      "name":  "Howling Guard",
+                                      "icon":  "https://img.game8.co/4390814/926436a4cfa2fca68e759d13aa16dc65.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523664"
+                                  },
+                                  {
+                                      "name":  "Hypernova Auto",
+                                      "icon":  "https://img.game8.co/4390822/13c32369b979ae673bd5a81262aec11f.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523675"
+                                  },
+                                  {
+                                      "name":  "Industry 0.1",
+                                      "icon":  "https://img.game8.co/4390826/4ff596862c66c233ba05ec96bc5babfb.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523672"
+                                  },
+                                  {
+                                      "name":  "JET",
+                                      "icon":  "https://img.game8.co/4390777/9c1b00881dfab841e4f15193dc5440b3.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523670"
+                                  },
+                                  {
+                                      "name":  "Jiminy 12",
+                                      "icon":  "https://img.game8.co/4390833/6f8701195f65248d8b8b4c309177ee6c.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562340"
+                                  },
+                                  {
+                                      "name":  "Khravengger",
+                                      "icon":  "https://img.game8.co/4390783/7ba14c3b77958f73b4511458fd3f48e0.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562308"
+                                  },
+                                  {
+                                      "name":  "Long Road",
+                                      "icon":  "https://img.game8.co/4390813/cb601149b13a0e01a528de3a2be06b2e.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523673"
+                                  },
+                                  {
+                                      "name":  "Monaihe",
+                                      "icon":  "https://img.game8.co/4390794/8d1c0a54227b4306785a21430513ea9a.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523669"
+                                  },
+                                  {
+                                      "name":  "Mountain Bearer",
+                                      "icon":  "https://img.game8.co/4390779/eeef67a5bd7cb6ec520bb62bc4498662.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523667"
+                                  },
+                                  {
+                                      "name":  "Navigator",
+                                      "icon":  "https://img.game8.co/4390776/bfc195be86626f13e3402402aa019ade.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523664"
+                                  },
+                                  {
+                                      "name":  "Never Rest",
+                                      "icon":  "https://img.game8.co/4390789/3b4598163e7d367d903ad08c9fcc25bd.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562205"
+                                  },
+                                  {
+                                      "name":  "OBJ Arts Identifier",
+                                      "icon":  "https://img.game8.co/4390792/aa90fbf543a7b36703c9e618e57be9c3.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562340"
+                                  },
+                                  {
+                                      "name":  "OBJ Edge of Lightness",
+                                      "icon":  "https://img.game8.co/4390808/bc1c673713c9bf93bbecfcf90f889784.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523663"
+                                  },
+                                  {
+                                      "name":  "OBJ Heavy Burden",
+                                      "icon":  "https://img.game8.co/4390804/cfce4a84141fe61a7e51dd8e80237476.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562317"
+                                  },
+                                  {
+                                      "name":  "OBJ Razorhorn",
+                                      "icon":  "https://img.game8.co/4390820/0997eaf5e9a01ab1de03f1b25b83384f.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562210"
+                                  },
+                                  {
+                                      "name":  "OBJ Velocitous",
+                                      "icon":  "https://img.game8.co/4390803/ed22e7effe619ae04e6bf04fa99e9d95.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562203"
+                                  },
+                                  {
+                                      "name":  "Opus: Etch Figure",
+                                      "icon":  "https://img.game8.co/4390761/991606ad1573a7e861a05be1f8a1dae8.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523668"
+                                  },
+                                  {
+                                      "name":  "Pathfinder",
+                                      "icon":  "https://img.game8.co/4390815/79f81340f24eaeeca9081f79857e023d.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523667"
+                                  },
+                                  {
+                                      "name":  "Quencher",
+                                      "icon":  "https://img.game8.co/4390825/0a7e6371dbb45c9228ba89e8d57cd030.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523666"
+                                  },
+                                  {
+                                      "name":  "Rapid Ascent",
+                                      "icon":  "https://img.game8.co/4390787/839383224cafae3fd998d0cf96eb75b3.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523674"
+                                  },
+                                  {
+                                      "name":  "Rational Farewell",
+                                      "icon":  "https://img.game8.co/4390799/d7d39fff48a80b6a9dc1a5e257a3bfab.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523673"
+                                  },
+                                  {
+                                      "name":  "Seeker of Dark Lung",
+                                      "icon":  "https://img.game8.co/4390810/9da7bd1a6afa7b02c5a5299d69ddb788.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/562308"
+                                  },
+                                  {
+                                      "name":  "Stanza of Memorials",
+                                      "icon":  "https://img.game8.co/4390795/ded0858fa0c08cce7cf739082763c8f1.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523668"
+                                  },
+                                  {
+                                      "name":  "Sundered Prince",
+                                      "icon":  "https://img.game8.co/4390780/3c0399f0f3fc4b41f33a472132328621.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523672"
+                                  },
+                                  {
+                                      "name":  "Sundering Steel",
+                                      "icon":  "https://img.game8.co/4390757/3dd737f22beb196a344c293e0d8143df.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523674"
+                                  },
+                                  {
+                                      "name":  "Thermite Cutter",
+                                      "icon":  "https://img.game8.co/4390817/1135fd5bbd15a4b90960151659f34ba6.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523663"
+                                  },
+                                  {
+                                      "name":  "Thunderberge",
+                                      "icon":  "https://img.game8.co/4390784/863d31863d6da6d5336cb9fbd763c531.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523666"
+                                  },
+                                  {
+                                      "name":  "Twelve Questions",
+                                      "icon":  "https://img.game8.co/4390797/1e6245630ea8ce3456e7ac94ac57953f.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523663"
+                                  },
+                                  {
+                                      "name":  "Umbral Torch",
+                                      "icon":  "https://img.game8.co/4390788/4bacb42e3e6c2d7281a72a666839e1c5.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523665"
+                                  },
+                                  {
+                                      "name":  "Valiant",
+                                      "icon":  "https://img.game8.co/4390778/d2cc5fe11ef4539f77d33ce4cc10f986.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523667"
+                                  },
+                                  {
+                                      "name":  "Wave Tide",
+                                      "icon":  "https://img.game8.co/4390812/b9d88ff4fad9729e7c8e506ee3a4fada.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523665"
+                                  },
+                                  {
+                                      "name":  "Wedge",
+                                      "icon":  "https://img.game8.co/4390775/40525cb33b0ba74bf3948fbebcd05a67.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523664"
+                                  },
+                                  {
+                                      "name":  "Wild Wanderer",
+                                      "icon":  "https://img.game8.co/4390798/00ab65818d024e643a4add71d7389a14.png/show",
+                                      "source":  "https://game8.co/games/Arknights-Endfield/archives/523675"
+                                  }
+                              ],
+                    "Count":  55
+                },
+    "weaponAliases":  {
+                          "Dawn\u0027s Last Glimmer":  "Forgeborn Scathe",
+                          "Daybreak Caller":  "Forgeborn Scathe",
+                          "J.E.T":  "JET"
+                      }
+}

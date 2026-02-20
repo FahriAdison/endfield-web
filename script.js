@@ -66,7 +66,7 @@ const NAV_ITEMS = [
   { id: "chests", label: "Chest Map", path: "chests/" },
   { id: "events", label: "Events", path: "events/" },
   { id: "codes", label: "Redeem Codes", path: "codes/" },
-  { id: "card-creator", label: "Card Creator", path: "card-creator/" },
+  { id: "card-creator", label: "Build Showcase", path: "card-creator/" },
   { id: "gacha", label: "Gacha Sim", path: "gacha/" },
   { id: "helps", label: "Tips", path: "helps/" },
 ];
@@ -3543,16 +3543,60 @@ async function initCodesPage() {
   redraw();
 }
 
-function buildCreatorCharacterData(character) {
+function normalizeCreatorToken(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function normalizeShowcaseCatalog(rawCatalog) {
+  const base = rawCatalog && typeof rawCatalog === "object" ? rawCatalog : {};
+  const characterImages =
+    base.characterImages && typeof base.characterImages === "object" && !Array.isArray(base.characterImages)
+      ? base.characterImages
+      : {};
+  const aliases = base.weaponAliases && typeof base.weaponAliases === "object" ? base.weaponAliases : {};
+  let weaponList = [];
+  if (Array.isArray(base.weapons)) {
+    weaponList = base.weapons;
+  } else if (Array.isArray(base.weapons?.value)) {
+    weaponList = base.weapons.value;
+  }
+  const dedupe = new Set();
+  const weapons = [];
+  weaponList.forEach((item) => {
+    const name = String(item?.name || "").trim();
+    if (!name) return;
+    const token = normalizeCreatorToken(name);
+    if (!token || dedupe.has(token)) return;
+    dedupe.add(token);
+    weapons.push({
+      name,
+      icon: String(item?.icon || "").trim(),
+      source: String(item?.source || "").trim(),
+      token,
+    });
+  });
+  return {
+    characterImages,
+    weaponAliases: aliases,
+    weapons: weapons.sort((a, b) => collator.compare(a.name, b.name)),
+  };
+}
+
+function buildCreatorCharacterData(character, catalog = {}) {
   const iconOverrides = {
     Wulfgard: "assets/icons/wulfgard.webp",
   };
-  const image = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
+  const fallbackImage = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
+  const fullImage = String(catalog?.characterImages?.[character?.id] || "").trim();
+  const image = fullImage || fallbackImage;
   const profile = character?.profile && typeof character.profile === "object" ? character.profile : {};
   const rarityMatch = String(character?.profile?.rarity || "").match(/(\d+)/);
   const rarity = rarityMatch ? Number(rarityMatch[1]) : 5;
   const build = character?.build && typeof character.build === "object" ? character.build : {};
-  const progression70 = profile?.gearProgression?.["70"]?.slots || {};
+  const progression = profile?.gearProgression && typeof profile.gearProgression === "object" ? profile.gearProgression : {};
+  const progression70 = progression?.["70"]?.slots || {};
   const recommendations = Array.isArray(profile?.gearRecommendations) ? profile.gearRecommendations : [];
   const usage70 = (item) => String(item?.usageLevel || "70").trim() === "70";
   const byType = (typeValue) =>
@@ -3600,6 +3644,65 @@ function buildCreatorCharacterData(character) {
   const raritySafe = Number.isFinite(rarity) ? rarity : 5;
   const potentialDefault = raritySafe >= 6 ? 3 : raritySafe >= 5 ? 2 : 1;
   const breakthroughDefault = raritySafe >= 6 ? 2 : 1;
+
+  const recommendationByName = (() => {
+    const map = new Map();
+    recommendations.forEach((item) => {
+      const name = String(item?.name || "").trim();
+      const token = normalizeCreatorToken(name);
+      if (!token) return;
+      map.set(token, item);
+    });
+    return map;
+  })();
+
+  const mergeGearMeta = (item, slotType, usageLevel = "70") => {
+    const token = normalizeCreatorToken(item?.name);
+    const rec = recommendationByName.get(token);
+    const stats = Array.isArray(item?.stats) && item.stats.length ? item.stats : Array.isArray(rec?.stats) ? rec.stats : [];
+    const normalizedStats = stats
+      .slice(0, 3)
+      .map((stat, index) => ({
+        name: String(stat?.name || `Stat ${index + 1}`).trim() || `Stat ${index + 1}`,
+        value: String(stat?.value || "0").trim() || "0",
+      }))
+      .filter((stat) => stat.name);
+    return {
+      name: String(item?.name || rec?.name || "-").trim() || "-",
+      icon: String(item?.icon || rec?.icon || "assets/skill-icons/basic.webp").trim() || "assets/skill-icons/basic.webp",
+      source: String(item?.source || rec?.source || "").trim(),
+      type: String(item?.type || rec?.type || slotType || "").trim(),
+      usageLevel: String(item?.usageLevel || rec?.usageLevel || usageLevel || "70").trim(),
+      effectName: String(item?.effectName || rec?.effectName || "-").trim(),
+      effectDescription: String(item?.effectDescription || rec?.effectDescription || "-").trim(),
+      stats: normalizedStats.length ? normalizedStats : [{ name: "Stat Utama", value: "0" }],
+      token,
+    };
+  };
+
+  const collectGearBySlot = (slotKey) => {
+    const list = [];
+    const dedupe = new Set();
+    const slotType = slotKey === "kit1" || slotKey === "kit2" ? "kit" : slotKey;
+    progressionLevels.forEach((levelKey) => {
+      const slotItem = progression?.[levelKey]?.slots?.[slotKey];
+      if (!slotItem?.name) return;
+      const merged = mergeGearMeta(slotItem, slotType, levelKey);
+      if (!merged.token || dedupe.has(merged.token)) return;
+      dedupe.add(merged.token);
+      list.push(merged);
+    });
+    recommendations
+      .filter((item) => String(item?.type || "").toLowerCase().startsWith(slotType))
+      .forEach((item) => {
+        const merged = mergeGearMeta(item, slotType, item?.usageLevel || "70");
+        if (!merged.token || dedupe.has(merged.token)) return;
+        dedupe.add(merged.token);
+        list.push(merged);
+      });
+    return sortByName(list, "name", "AZ");
+  };
+
   return {
     id: character?.id || "",
     name: character?.name || "Unknown",
@@ -3630,7 +3733,14 @@ function buildCreatorCharacterData(character) {
     defaultSkillActive: skillLevelDefaults.active,
     defaultSkillUltimate: skillLevelDefaults.ultimate,
     defaultSkillTalent: skillLevelDefaults.talent,
+    gearOptions: {
+      armor: collectGearBySlot("armor"),
+      gloves: collectGearBySlot("gloves"),
+      kit1: collectGearBySlot("kit1"),
+      kit2: collectGearBySlot("kit2"),
+    },
     image,
+    fallbackImage,
   };
 }
 
@@ -3666,13 +3776,13 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   const accent = preset.accent || "#fdfd1f";
   const ink = preset.ink || "#f6f8fb";
   const level = clampNumber(state?.level, 1, 90, 70);
-  const potential = clampNumber(state?.potential, 0, 6, 3);
-  const breakthrough = clampNumber(state?.breakthrough, 0, 6, 2);
-  const affinity = clampNumber(state?.affinity, 0, 10, 10);
+  const potential = clampNumber(state?.potential, 0, 5, 3);
+  const breakthrough = clampNumber(state?.breakthrough, 0, 4, 2);
+  const affinity = clampNumber(state?.affinity, 0, 4, 2);
   const region = String(state?.region || "SEA").slice(0, 8);
   const weaponName = String(state?.weaponName || character?.buildWeapon || "-");
   const weaponLevel = clampNumber(state?.weaponLevel, 1, 90, level);
-  const weaponSkillLevel = clampNumber(state?.weaponSkillLevel, 1, 10, 7);
+  const weaponSkillLevel = clampNumber(state?.weaponSkillLevel, 1, 9, 7);
   const gearArmor = String(state?.gearArmor || "-");
   const gearGloves = String(state?.gearGloves || "-");
   const profileId = creatorProfileId(character, state);
@@ -3763,11 +3873,30 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
     const drawY = artBounds.y + (artBounds.h - drawH) / 2;
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
   } catch {
-    ctx.fillStyle = "rgba(255,255,255,0.12)";
-    ctx.fillRect(artBounds.x, artBounds.y, artBounds.w, artBounds.h);
-    ctx.fillStyle = "#dcefff";
-    ctx.font = "700 40px Rajdhani, sans-serif";
-    ctx.fillText("NO IMAGE", artBounds.x + 186, artBounds.y + 320);
+    const fallback = character?.fallbackImage ? asset(character.fallbackImage) : "";
+    if (fallback && fallback !== imageUrl) {
+      try {
+        const img = await loadCanvasImage(fallback);
+        const scale = Math.max(artBounds.w / img.width, artBounds.h / img.height);
+        const drawW = img.width * scale;
+        const drawH = img.height * scale;
+        const drawX = artBounds.x + (artBounds.w - drawW) / 2;
+        const drawY = artBounds.y + (artBounds.h - drawH) / 2;
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+      } catch {
+        ctx.fillStyle = "rgba(255,255,255,0.12)";
+        ctx.fillRect(artBounds.x, artBounds.y, artBounds.w, artBounds.h);
+        ctx.fillStyle = "#dcefff";
+        ctx.font = "700 40px Rajdhani, sans-serif";
+        ctx.fillText("NO IMAGE", artBounds.x + 186, artBounds.y + 320);
+      }
+    } else {
+      ctx.fillStyle = "rgba(255,255,255,0.12)";
+      ctx.fillRect(artBounds.x, artBounds.y, artBounds.w, artBounds.h);
+      ctx.fillStyle = "#dcefff";
+      ctx.font = "700 40px Rajdhani, sans-serif";
+      ctx.fillText("NO IMAGE", artBounds.x + 186, artBounds.y + 320);
+    }
   }
   ctx.restore();
   ctx.globalAlpha = 0.92;
@@ -3888,6 +4017,7 @@ async function shareCreatorCardPng(character, preset, state, statusEl) {
 
 async function initCardCreatorPage(characters) {
   const refs = {
+    controls: document.querySelector(".creator-controls"),
     character: document.getElementById("creator-character"),
     style: document.getElementById("creator-style"),
     alias: document.getElementById("creator-alias"),
@@ -3900,15 +4030,27 @@ async function initCardCreatorPage(characters) {
     potential: document.getElementById("creator-potential"),
     breakthrough: document.getElementById("creator-breakthrough"),
     affinity: document.getElementById("creator-affinity"),
+    weaponSelect: document.getElementById("creator-weapon-select"),
+    weaponIcon: document.getElementById("creator-weapon-icon"),
     weaponName: document.getElementById("creator-weapon-name"),
     weaponLevel: document.getElementById("creator-weapon-level"),
     weaponBreakthrough: document.getElementById("creator-weapon-breakthrough"),
     weaponPotential: document.getElementById("creator-weapon-potential"),
     weaponSkillLevel: document.getElementById("creator-weapon-skill-level"),
+    weaponSkillLevel2: document.getElementById("creator-weapon-skill-level-2"),
+    weaponSkillLevel3: document.getElementById("creator-weapon-skill-level-3"),
     gearArmor: document.getElementById("creator-gear-armor"),
     gearGloves: document.getElementById("creator-gear-gloves"),
     gearKit1: document.getElementById("creator-gear-kit1"),
     gearKit2: document.getElementById("creator-gear-kit2"),
+    gearArmorIcon: document.getElementById("creator-gear-armor-icon"),
+    gearGlovesIcon: document.getElementById("creator-gear-gloves-icon"),
+    gearKit1Icon: document.getElementById("creator-gear-kit1-icon"),
+    gearKit2Icon: document.getElementById("creator-gear-kit2-icon"),
+    artificeArmor: document.getElementById("creator-artifice-armor"),
+    artificeGloves: document.getElementById("creator-artifice-gloves"),
+    artificeKit1: document.getElementById("creator-artifice-kit1"),
+    artificeKit2: document.getElementById("creator-artifice-kit2"),
     skillBasic: document.getElementById("creator-skill-basic"),
     skillCombo: document.getElementById("creator-skill-combo"),
     skillActive: document.getElementById("creator-skill-active"),
@@ -3938,16 +4080,32 @@ async function initCardCreatorPage(characters) {
     previewPotential: document.getElementById("creator-preview-potential"),
     previewBreakthrough: document.getElementById("creator-preview-breakthrough"),
     previewAffinity: document.getElementById("creator-preview-affinity"),
+    previewBreakthroughIcons: document.getElementById("creator-preview-breakthrough-icons"),
+    previewPotentialIcons: document.getElementById("creator-preview-potential-icons"),
+    previewAffinityIcons: document.getElementById("creator-preview-affinity-icons"),
     previewUid: document.getElementById("creator-preview-uid"),
+    previewWeaponIcon: document.getElementById("creator-preview-weapon-icon"),
     previewWeaponName: document.getElementById("creator-preview-weapon-name"),
     previewWeaponLevel: document.getElementById("creator-preview-weapon-level"),
     previewWeaponBreakthrough: document.getElementById("creator-preview-weapon-breakthrough"),
     previewWeaponPotential: document.getElementById("creator-preview-weapon-potential"),
     previewWeaponSkillLevel: document.getElementById("creator-preview-weapon-skill-level"),
+    previewWeaponSkillLevel2: document.getElementById("creator-preview-weapon-skill-level-2"),
+    previewWeaponSkillLevel3: document.getElementById("creator-preview-weapon-skill-level-3"),
+    previewWeaponBreakthroughIcons: document.getElementById("creator-preview-weapon-breakthrough-icons"),
+    previewWeaponPotentialIcons: document.getElementById("creator-preview-weapon-potential-icons"),
+    previewGearArmorIcon: document.getElementById("creator-preview-gear-armor-icon"),
+    previewGearGlovesIcon: document.getElementById("creator-preview-gear-gloves-icon"),
+    previewGearKit1Icon: document.getElementById("creator-preview-gear-kit1-icon"),
+    previewGearKit2Icon: document.getElementById("creator-preview-gear-kit2-icon"),
     previewGearArmor: document.getElementById("creator-preview-gear-armor"),
     previewGearGloves: document.getElementById("creator-preview-gear-gloves"),
     previewGearKit1: document.getElementById("creator-preview-gear-kit1"),
     previewGearKit2: document.getElementById("creator-preview-gear-kit2"),
+    previewGearArmorArtifice: document.getElementById("creator-preview-gear-armor-artifice"),
+    previewGearGlovesArtifice: document.getElementById("creator-preview-gear-gloves-artifice"),
+    previewGearKit1Artifice: document.getElementById("creator-preview-gear-kit1-artifice"),
+    previewGearKit2Artifice: document.getElementById("creator-preview-gear-kit2-artifice"),
     previewSkillBasic: document.getElementById("creator-preview-skill-basic"),
     previewSkillCombo: document.getElementById("creator-preview-skill-combo"),
     previewSkillActive: document.getElementById("creator-preview-skill-active"),
@@ -3958,14 +4116,17 @@ async function initCardCreatorPage(characters) {
   };
   if (Object.values(refs).some((item) => !item)) return;
 
-  let liveHub;
-  try {
-    liveHub = await fetchLiveHubData();
-  } catch {
-    liveHub = null;
-  }
+  const [liveHub, showcaseCatalogRaw] = await Promise.all([
+    fetchLiveHubData().catch(() => null),
+    fetchShowcaseCatalog().catch(() => null),
+  ]);
+  const showcaseCatalog = normalizeShowcaseCatalog(showcaseCatalogRaw);
 
-  const builtCharacters = sortByName((characters || []).map(buildCreatorCharacterData), "name", "AZ");
+  const builtCharacters = sortByName(
+    (characters || []).map((character) => buildCreatorCharacterData(character, showcaseCatalog)),
+    "name",
+    "AZ"
+  );
   if (!builtCharacters.length) {
     refs.status.textContent = "Belum ada data karakter untuk showcase.";
     return;
@@ -4024,28 +4185,161 @@ async function initCardCreatorPage(characters) {
     const options = [...refs.region.options].map((opt) => String(opt.value || "").trim());
     return options.includes(current) ? current : fallback;
   };
+  const toImageSrc = (value, fallback = "assets/skill-icons/basic.webp") => {
+    const candidate = String(value || "").trim();
+    if (!candidate) return asset(fallback);
+    return asset(candidate);
+  };
+  const slotStateKeys = {
+    armor: "gearArmor",
+    gloves: "gearGloves",
+    kit1: "gearKit1",
+    kit2: "gearKit2",
+  };
+  const slotRefKeys = {
+    armor: "gearArmor",
+    gloves: "gearGloves",
+    kit1: "gearKit1",
+    kit2: "gearKit2",
+  };
+  const slotIconRefKeys = {
+    armor: "gearArmorIcon",
+    gloves: "gearGlovesIcon",
+    kit1: "gearKit1Icon",
+    kit2: "gearKit2Icon",
+  };
+  const slotArtificeRefKeys = {
+    armor: "artificeArmor",
+    gloves: "artificeGloves",
+    kit1: "artificeKit1",
+    kit2: "artificeKit2",
+  };
+  const slotPreviewIconRefKeys = {
+    armor: "previewGearArmorIcon",
+    gloves: "previewGearGlovesIcon",
+    kit1: "previewGearKit1Icon",
+    kit2: "previewGearKit2Icon",
+  };
+  const slotPreviewNameRefKeys = {
+    armor: "previewGearArmor",
+    gloves: "previewGearGloves",
+    kit1: "previewGearKit1",
+    kit2: "previewGearKit2",
+  };
+  const slotPreviewArtificeRefKeys = {
+    armor: "previewGearArmorArtifice",
+    gloves: "previewGearGlovesArtifice",
+    kit1: "previewGearKit1Artifice",
+    kit2: "previewGearKit2Artifice",
+  };
+
+  const parseStatNumber = (rawValue) => {
+    const text = String(rawValue || "").trim().replace(/,/g, ".");
+    if (!text) return null;
+    const match = text.match(/([+-]?\d+(?:\.\d+)?)/);
+    if (!match) return null;
+    let numberValue = Number(match[1]);
+    if (!Number.isFinite(numberValue)) return null;
+    let isPercent = /%/.test(text);
+    if (!isPercent && Math.abs(numberValue) < 1 && /(dmg|eff|rate|chance|bonus|up|gain|intensity|arts|heat|nature|crit)/i.test(text)) {
+      numberValue *= 100;
+      isPercent = true;
+    }
+    return { value: numberValue, percent: isPercent };
+  };
+  const formatSigned = (value, asPercent) => {
+    const fixed = asPercent ? value.toFixed(1) : value.toFixed(value % 1 === 0 ? 0 : 1);
+    const cleaned = fixed.replace(/\.0$/, "");
+    return `${value >= 0 ? "+" : ""}${cleaned}${asPercent ? "%" : ""}`;
+  };
+  const artificeAdjustedStatText = (rawValue, tier) => {
+    const parsed = parseStatNumber(rawValue);
+    const safeTier = clampNumber(tier, 0, 3, 0);
+    if (!parsed) return `${String(rawValue || "-")} (Artifice +${safeTier})`;
+    const boosted = parsed.value * (1 + safeTier * 0.04);
+    return `${formatSigned(boosted, parsed.percent)} (Artifice +${safeTier})`;
+  };
+  const iconSteps = (value, max, onSymbol, offSymbol) => {
+    const safe = clampNumber(value, 0, max, 0);
+    const cells = [];
+    for (let index = 1; index <= max; index += 1) {
+      cells.push(index <= safe ? onSymbol : offSymbol);
+    }
+    return cells.join(" ");
+  };
+
+  const weaponByToken = (() => {
+    const map = new Map();
+    showcaseCatalog.weapons.forEach((weapon) => {
+      map.set(weapon.token, weapon);
+    });
+    return map;
+  })();
+  const weaponAliasByToken = (() => {
+    const map = new Map();
+    Object.entries(showcaseCatalog.weaponAliases || {}).forEach(([fromName, targetName]) => {
+      const fromToken = normalizeCreatorToken(fromName);
+      if (!fromToken) return;
+      map.set(fromToken, String(targetName || "").trim());
+    });
+    return map;
+  })();
+  const findWeaponMeta = (weaponName) => {
+    const raw = String(weaponName || "").trim();
+    if (!raw) return null;
+    const token = normalizeCreatorToken(raw);
+    if (weaponByToken.has(token)) return weaponByToken.get(token);
+    const aliasedName = weaponAliasByToken.get(token);
+    if (aliasedName) {
+      const aliasToken = normalizeCreatorToken(aliasedName);
+      if (weaponByToken.has(aliasToken)) return weaponByToken.get(aliasToken);
+    }
+    return showcaseCatalog.weapons.find((weapon) => weapon.token.includes(token) || token.includes(weapon.token)) || null;
+  };
+  const normalizeWeaponName = (weaponName, fallback = "-") => {
+    const cleaned = cleanText(weaponName, 72, fallback);
+    const meta = findWeaponMeta(cleaned);
+    return meta?.name || cleaned || fallback;
+  };
+  const weaponChoicesForState = (stateWeaponName) => {
+    const list = [...showcaseCatalog.weapons];
+    const normalized = normalizeWeaponName(stateWeaponName, "");
+    const token = normalizeCreatorToken(normalized);
+    if (normalized && !list.some((item) => item.token === token)) {
+      list.unshift({ name: normalized, icon: "", source: "", token });
+    }
+    return list;
+  };
 
   const characterTemplate = (character) => {
     const target = character || builtCharacters[0] || {};
-    const fallbackUid = creatorProfileId(target, { level: target.defaultLevel || 70, affinity: 10 });
+    const fallbackUid = creatorProfileId(target, { level: target.defaultLevel || 70, affinity: 2 });
     return {
       alias: cleanText(`${target.name || "Operator"} Showcase`, 42, "Operator Showcase"),
       uid: sanitizeUid(target.defaultUid || fallbackUid, fallbackUid),
       region: normalizeRegion(target.defaultRegion || "SEA", "SEA"),
       tagline: cleanText(taglines[0] || "High Priority Deployment", 120, "High Priority Deployment"),
       level: clampNumber(target.defaultLevel, 1, 90, 70),
-      potential: clampNumber(target.defaultPotential, 0, 6, 3),
-      breakthrough: clampNumber(target.defaultBreakthrough, 0, 6, 2),
-      affinity: 10,
-      weaponName: cleanText(target.defaultWeaponName || target.buildWeapon || "-", 72, "-"),
+      potential: clampNumber(target.defaultPotential, 0, 5, 3),
+      breakthrough: clampNumber(target.defaultBreakthrough, 0, 4, 2),
+      affinity: 2,
+      weaponName: normalizeWeaponName(target.defaultWeaponName || target.buildWeapon || "-", "-"),
       weaponLevel: clampNumber(target.defaultWeaponLevel, 1, 90, 70),
-      weaponBreakthrough: clampNumber(target.defaultWeaponBreakthrough, 0, 6, 2),
-      weaponPotential: clampNumber(target.defaultWeaponPotential, 0, 6, 1),
-      weaponSkillLevel: clampNumber(target.defaultWeaponSkillLevel, 1, 10, 7),
+      weaponBreakthrough: clampNumber(target.defaultWeaponBreakthrough, 0, 4, 2),
+      weaponPotential: clampNumber(target.defaultWeaponPotential, 0, 5, 1),
+      weaponSkillLevel: clampNumber(target.defaultWeaponSkillLevel, 1, 9, 7),
+      weaponSkillLevel2: clampNumber(target.defaultWeaponSkillLevel, 1, 9, 7),
+      weaponSkillLevel3: clampNumber(target.defaultWeaponSkillLevel, 1, 9, 7),
       gearArmor: cleanText(target.defaultGearArmor || "-", 72, "-"),
       gearGloves: cleanText(target.defaultGearGloves || "-", 72, "-"),
       gearKit1: cleanText(target.defaultGearKit1 || "-", 72, "-"),
       gearKit2: cleanText(target.defaultGearKit2 || "-", 72, "-"),
+      gearArtifice: {
+        armor: [0, 0, 0],
+        gloves: [0, 0, 0],
+        kit1: [0, 0, 0],
+        kit2: [0, 0, 0],
+      },
       skillBasic: clampNumber(target.defaultSkillBasic, 1, 10, 7),
       skillCombo: clampNumber(target.defaultSkillCombo, 1, 10, 7),
       skillActive: clampNumber(target.defaultSkillActive, 1, 10, 8),
@@ -4072,10 +4366,18 @@ async function initCardCreatorPage(characters) {
     weaponBreakthrough: initialTemplate.weaponBreakthrough,
     weaponPotential: initialTemplate.weaponPotential,
     weaponSkillLevel: initialTemplate.weaponSkillLevel,
+    weaponSkillLevel2: initialTemplate.weaponSkillLevel2,
+    weaponSkillLevel3: initialTemplate.weaponSkillLevel3,
     gearArmor: initialTemplate.gearArmor,
     gearGloves: initialTemplate.gearGloves,
     gearKit1: initialTemplate.gearKit1,
     gearKit2: initialTemplate.gearKit2,
+    gearArtifice: {
+      armor: [...initialTemplate.gearArtifice.armor],
+      gloves: [...initialTemplate.gearArtifice.gloves],
+      kit1: [...initialTemplate.gearArtifice.kit1],
+      kit2: [...initialTemplate.gearArtifice.kit2],
+    },
     skillBasic: initialTemplate.skillBasic,
     skillCombo: initialTemplate.skillCombo,
     skillActive: initialTemplate.skillActive,
@@ -4087,6 +4389,119 @@ async function initCardCreatorPage(characters) {
 
   const findCharacter = () => builtCharacters.find((item) => item.id === state.characterId) || builtCharacters[0];
   const findPreset = () => presets.find((item) => item.id === state.styleId) || presets[0];
+  const gearOptionsFor = (character, slotKey) =>
+    Array.isArray(character?.gearOptions?.[slotKey]) ? character.gearOptions[slotKey] : [];
+  const findGearEntry = (character, slotKey, gearName) => {
+    const token = normalizeCreatorToken(gearName);
+    if (!token) return null;
+    return gearOptionsFor(character, slotKey).find((item) => normalizeCreatorToken(item.name) === token) || null;
+  };
+  const sanitizeGearArtifice = (slotKey, statCount = 3, fallback = [0, 0, 0]) => {
+    if (!state.gearArtifice || typeof state.gearArtifice !== "object") {
+      state.gearArtifice = { armor: [0, 0, 0], gloves: [0, 0, 0], kit1: [0, 0, 0], kit2: [0, 0, 0] };
+    }
+    const list = Array.isArray(state.gearArtifice[slotKey]) ? state.gearArtifice[slotKey] : fallback;
+    const sanitized = [];
+    for (let index = 0; index < Math.max(1, statCount); index += 1) {
+      sanitized.push(clampNumber(list[index], 0, 3, 0));
+    }
+    state.gearArtifice[slotKey] = sanitized;
+    return sanitized;
+  };
+  const activeGearStats = (character, slotKey) => {
+    const selectedName = String(state[slotStateKeys[slotKey]] || "-").trim();
+    const selected = findGearEntry(character, slotKey, selectedName);
+    const stats = Array.isArray(selected?.stats) ? selected.stats : [];
+    const normalized = stats
+      .slice(0, 3)
+      .map((stat, index) => ({
+        name: String(stat?.name || `Stat ${index + 1}`).trim() || `Stat ${index + 1}`,
+        value: String(stat?.value || "0").trim() || "0",
+      }))
+      .filter((item) => item.name);
+    return normalized.length ? normalized : [{ name: "Stat Utama", value: "0" }];
+  };
+  const artificeSummaryText = (slotKey, statCount = 3) => {
+    const artifice = sanitizeGearArtifice(slotKey, statCount);
+    return `Artifice: ${artifice.map((value) => `+${value}`).join(" / ")}`;
+  };
+  const syncWeaponIcon = () => {
+    const weaponMeta = findWeaponMeta(state.weaponName);
+    const icon = toImageSrc(weaponMeta?.icon || "", "assets/skill-icons/basic.webp");
+    refs.weaponIcon.src = icon;
+    refs.weaponIcon.alt = `${state.weaponName} icon`;
+    refs.previewWeaponIcon.src = icon;
+    refs.previewWeaponIcon.alt = `${state.weaponName} icon`;
+  };
+  const syncGearSelectors = (character) => {
+    ["armor", "gloves", "kit1", "kit2"].forEach((slotKey) => {
+      const select = refs[slotRefKeys[slotKey]];
+      if (!select) return;
+      const options = [...gearOptionsFor(character, slotKey)];
+      const selectedName = String(state[slotStateKeys[slotKey]] || "-").trim();
+      if (selectedName && !options.some((item) => normalizeCreatorToken(item.name) === normalizeCreatorToken(selectedName))) {
+        options.unshift({ name: selectedName, icon: "assets/skill-icons/basic.webp", stats: [{ name: "Stat Utama", value: "0" }] });
+      }
+      select.innerHTML = options
+        .map((item) => {
+          const label = `${item.name}${item.usageLevel ? ` [${item.usageLevel}]` : ""}`;
+          return `<option value="${esc(item.name)}">${esc(label)}</option>`;
+        })
+        .join("");
+      select.value = selectedName;
+
+      const selected = findGearEntry(character, slotKey, selectedName) || options[0] || null;
+      const iconRef = refs[slotIconRefKeys[slotKey]];
+      if (iconRef) {
+        iconRef.src = toImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
+        iconRef.alt = `${selectedName || slotKey} icon`;
+      }
+      const previewIconRef = refs[slotPreviewIconRefKeys[slotKey]];
+      if (previewIconRef) {
+        previewIconRef.src = toImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
+        previewIconRef.alt = `${selectedName || slotKey} icon`;
+      }
+    });
+  };
+  const renderArtificeEditor = (character, slotKey) => {
+    const stats = activeGearStats(character, slotKey);
+    const artifice = sanitizeGearArtifice(slotKey, stats.length);
+    const container = refs[slotArtificeRefKeys[slotKey]];
+    if (!container) return;
+    container.innerHTML = stats
+      .map((stat, statIndex) => {
+        const tier = artifice[statIndex] || 0;
+        return `
+          <div class="creator-artifice-row">
+            <p class="creator-artifice-row-title">${esc(stat.name)}: <strong>${esc(artificeAdjustedStatText(stat.value, tier))}</strong></p>
+            <div class="creator-artifice-buttons">
+              ${[0, 1, 2, 3]
+                .map(
+                  (value) =>
+                    `<button type="button" data-artifice-slot="${esc(slotKey)}" data-artifice-stat="${statIndex}" data-artifice-tier="${value}" aria-pressed="${
+                      value === tier
+                    }">+${value}</button>`
+                )
+                .join("")}
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+    const previewArtificeRef = refs[slotPreviewArtificeRefKeys[slotKey]];
+    if (previewArtificeRef) {
+      previewArtificeRef.textContent = artificeSummaryText(slotKey, stats.length);
+    }
+  };
+  const syncWeaponSelect = () => {
+    const choices = weaponChoicesForState(state.weaponName);
+    refs.weaponSelect.innerHTML = choices.map((item) => `<option value="${esc(item.name)}">${esc(item.name)}</option>`).join("");
+    const normalizedName = normalizeWeaponName(state.weaponName, choices[0]?.name || "-");
+    state.weaponName = normalizedName;
+    refs.weaponSelect.value = normalizedName;
+    refs.weaponName.value = normalizedName;
+    syncWeaponIcon();
+  };
 
   const syncFormFromState = () => {
     refs.alias.value = state.alias;
@@ -4102,10 +4517,8 @@ async function initCardCreatorPage(characters) {
     refs.weaponBreakthrough.value = String(state.weaponBreakthrough);
     refs.weaponPotential.value = String(state.weaponPotential);
     refs.weaponSkillLevel.value = String(state.weaponSkillLevel);
-    refs.gearArmor.value = state.gearArmor;
-    refs.gearGloves.value = state.gearGloves;
-    refs.gearKit1.value = state.gearKit1;
-    refs.gearKit2.value = state.gearKit2;
+    refs.weaponSkillLevel2.value = String(state.weaponSkillLevel2);
+    refs.weaponSkillLevel3.value = String(state.weaponSkillLevel3);
     refs.skillBasic.value = String(state.skillBasic);
     refs.skillCombo.value = String(state.skillCombo);
     refs.skillActive.value = String(state.skillActive);
@@ -4125,18 +4538,26 @@ async function initCardCreatorPage(characters) {
     region: normalizeRegion(state.region, "SEA"),
     tagline: cleanText(state.tagline, 120, "High Priority Deployment"),
     level: clampNumber(state.level, 1, 90, 70),
-    potential: clampNumber(state.potential, 0, 6, 3),
-    breakthrough: clampNumber(state.breakthrough, 0, 6, 2),
-    affinity: clampNumber(state.affinity, 0, 10, 10),
-    weaponName: cleanText(state.weaponName, 72, "-"),
+    potential: clampNumber(state.potential, 0, 5, 3),
+    breakthrough: clampNumber(state.breakthrough, 0, 4, 2),
+    affinity: clampNumber(state.affinity, 0, 4, 2),
+    weaponName: normalizeWeaponName(state.weaponName, "-"),
     weaponLevel: clampNumber(state.weaponLevel, 1, 90, 70),
-    weaponBreakthrough: clampNumber(state.weaponBreakthrough, 0, 6, 2),
-    weaponPotential: clampNumber(state.weaponPotential, 0, 6, 1),
-    weaponSkillLevel: clampNumber(state.weaponSkillLevel, 1, 10, 7),
+    weaponBreakthrough: clampNumber(state.weaponBreakthrough, 0, 4, 2),
+    weaponPotential: clampNumber(state.weaponPotential, 0, 5, 1),
+    weaponSkillLevel: clampNumber(state.weaponSkillLevel, 1, 9, 7),
+    weaponSkillLevel2: clampNumber(state.weaponSkillLevel2, 1, 9, 7),
+    weaponSkillLevel3: clampNumber(state.weaponSkillLevel3, 1, 9, 7),
     gearArmor: cleanText(state.gearArmor, 72, "-"),
     gearGloves: cleanText(state.gearGloves, 72, "-"),
     gearKit1: cleanText(state.gearKit1, 72, "-"),
     gearKit2: cleanText(state.gearKit2, 72, "-"),
+    gearArtifice: {
+      armor: sanitizeGearArtifice("armor"),
+      gloves: sanitizeGearArtifice("gloves"),
+      kit1: sanitizeGearArtifice("kit1"),
+      kit2: sanitizeGearArtifice("kit2"),
+    },
     skillBasic: clampNumber(state.skillBasic, 1, 10, 7),
     skillCombo: clampNumber(state.skillCombo, 1, 10, 7),
     skillActive: clampNumber(state.skillActive, 1, 10, 8),
@@ -4179,18 +4600,37 @@ async function initCardCreatorPage(characters) {
     state.region = normalizeRegion(safe.region, template.region);
     state.tagline = cleanText(safe.tagline, 120, template.tagline);
     state.level = clampNumber(safe.level, 1, 90, template.level);
-    state.potential = clampNumber(safe.potential, 0, 6, template.potential);
-    state.breakthrough = clampNumber(safe.breakthrough, 0, 6, template.breakthrough);
-    state.affinity = clampNumber(safe.affinity, 0, 10, template.affinity);
-    state.weaponName = cleanText(safe.weaponName, 72, template.weaponName);
+    state.potential = clampNumber(safe.potential, 0, 5, template.potential);
+    state.breakthrough = clampNumber(safe.breakthrough, 0, 4, template.breakthrough);
+    state.affinity = clampNumber(safe.affinity, 0, 4, template.affinity);
+    state.weaponName = normalizeWeaponName(safe.weaponName, template.weaponName);
     state.weaponLevel = clampNumber(safe.weaponLevel, 1, 90, template.weaponLevel);
-    state.weaponBreakthrough = clampNumber(safe.weaponBreakthrough, 0, 6, template.weaponBreakthrough);
-    state.weaponPotential = clampNumber(safe.weaponPotential, 0, 6, template.weaponPotential);
-    state.weaponSkillLevel = clampNumber(safe.weaponSkillLevel, 1, 10, template.weaponSkillLevel);
+    state.weaponBreakthrough = clampNumber(safe.weaponBreakthrough, 0, 4, template.weaponBreakthrough);
+    state.weaponPotential = clampNumber(safe.weaponPotential, 0, 5, template.weaponPotential);
+    state.weaponSkillLevel = clampNumber(safe.weaponSkillLevel, 1, 9, template.weaponSkillLevel);
+    state.weaponSkillLevel2 = clampNumber(
+      safe.weaponSkillLevel2 ?? safe.weaponSkillLevel,
+      1,
+      9,
+      template.weaponSkillLevel2
+    );
+    state.weaponSkillLevel3 = clampNumber(
+      safe.weaponSkillLevel3 ?? safe.weaponSkillLevel,
+      1,
+      9,
+      template.weaponSkillLevel3
+    );
     state.gearArmor = cleanText(safe.gearArmor, 72, template.gearArmor);
     state.gearGloves = cleanText(safe.gearGloves, 72, template.gearGloves);
     state.gearKit1 = cleanText(safe.gearKit1, 72, template.gearKit1);
     state.gearKit2 = cleanText(safe.gearKit2, 72, template.gearKit2);
+    const rawArtifice = safe?.gearArtifice && typeof safe.gearArtifice === "object" ? safe.gearArtifice : {};
+    state.gearArtifice = {
+      armor: Array.isArray(rawArtifice.armor) ? rawArtifice.armor.slice(0, 3) : [...template.gearArtifice.armor],
+      gloves: Array.isArray(rawArtifice.gloves) ? rawArtifice.gloves.slice(0, 3) : [...template.gearArtifice.gloves],
+      kit1: Array.isArray(rawArtifice.kit1) ? rawArtifice.kit1.slice(0, 3) : [...template.gearArtifice.kit1],
+      kit2: Array.isArray(rawArtifice.kit2) ? rawArtifice.kit2.slice(0, 3) : [...template.gearArtifice.kit2],
+    };
     state.skillBasic = clampNumber(safe.skillBasic, 1, 10, template.skillBasic);
     state.skillCombo = clampNumber(safe.skillCombo, 1, 10, template.skillCombo);
     state.skillActive = clampNumber(safe.skillActive, 1, 10, template.skillActive);
@@ -4272,23 +4712,25 @@ async function initCardCreatorPage(characters) {
     const preset = findPreset();
     if (!character || !preset) return;
 
+    state.weaponName = normalizeWeaponName(state.weaponName, character.defaultWeaponName || "-");
     state.uid = sanitizeUid(state.uid, creatorProfileId(character, state));
     state.region = normalizeRegion(state.region, "SEA");
     state.alias = cleanText(state.alias, 42, `${character.name || "Operator"} Showcase`);
     state.tagline = cleanText(state.tagline, 120, "High Priority Deployment");
-    state.weaponName = cleanText(state.weaponName, 72, character.defaultWeaponName || "-");
     state.gearArmor = cleanText(state.gearArmor, 72, character.defaultGearArmor || "-");
     state.gearGloves = cleanText(state.gearGloves, 72, character.defaultGearGloves || "-");
     state.gearKit1 = cleanText(state.gearKit1, 72, character.defaultGearKit1 || "-");
     state.gearKit2 = cleanText(state.gearKit2, 72, character.defaultGearKit2 || "-");
     state.level = clampNumber(state.level, 1, 90, character.defaultLevel || 70);
-    state.potential = clampNumber(state.potential, 0, 6, character.defaultPotential || 3);
-    state.breakthrough = clampNumber(state.breakthrough, 0, 6, character.defaultBreakthrough || 2);
-    state.affinity = clampNumber(state.affinity, 0, 10, 10);
+    state.potential = clampNumber(state.potential, 0, 5, character.defaultPotential || 3);
+    state.breakthrough = clampNumber(state.breakthrough, 0, 4, character.defaultBreakthrough || 2);
+    state.affinity = clampNumber(state.affinity, 0, 4, 2);
     state.weaponLevel = clampNumber(state.weaponLevel, 1, 90, character.defaultWeaponLevel || state.level);
-    state.weaponBreakthrough = clampNumber(state.weaponBreakthrough, 0, 6, character.defaultWeaponBreakthrough || state.breakthrough);
-    state.weaponPotential = clampNumber(state.weaponPotential, 0, 6, character.defaultWeaponPotential || 1);
-    state.weaponSkillLevel = clampNumber(state.weaponSkillLevel, 1, 10, character.defaultWeaponSkillLevel || 7);
+    state.weaponBreakthrough = clampNumber(state.weaponBreakthrough, 0, 4, character.defaultWeaponBreakthrough || state.breakthrough);
+    state.weaponPotential = clampNumber(state.weaponPotential, 0, 5, character.defaultWeaponPotential || 1);
+    state.weaponSkillLevel = clampNumber(state.weaponSkillLevel, 1, 9, character.defaultWeaponSkillLevel || 7);
+    state.weaponSkillLevel2 = clampNumber(state.weaponSkillLevel2, 1, 9, character.defaultWeaponSkillLevel || 7);
+    state.weaponSkillLevel3 = clampNumber(state.weaponSkillLevel3, 1, 9, character.defaultWeaponSkillLevel || 7);
     state.skillBasic = clampNumber(state.skillBasic, 1, 10, character.defaultSkillBasic || 7);
     state.skillCombo = clampNumber(state.skillCombo, 1, 10, character.defaultSkillCombo || 7);
     state.skillActive = clampNumber(state.skillActive, 1, 10, character.defaultSkillActive || 8);
@@ -4304,8 +4746,8 @@ async function initCardCreatorPage(characters) {
     refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
     refs.previewTier.hidden = !state.showTier;
     refs.previewStars.textContent = creatorStars(character.rarity);
-    refs.previewImage.src = asset(character.image);
-    refs.previewImage.alt = `${character.name} icon`;
+    refs.previewImage.src = toImageSrc(character.image, character.fallbackImage || "assets/skill-icons/basic.webp");
+    refs.previewImage.alt = `${character.name} image`;
     refs.previewName.textContent = character.name;
     refs.previewRole.textContent = state.showRole ? character.role || "-" : "";
     refs.previewRole.hidden = !state.showRole;
@@ -4319,16 +4761,19 @@ async function initCardCreatorPage(characters) {
     refs.previewPotential.textContent = `Potential ${state.potential}`;
     refs.previewBreakthrough.textContent = `Breakthrough ${state.breakthrough}`;
     refs.previewAffinity.textContent = `Affinity ${state.affinity}`;
+    refs.previewBreakthroughIcons.textContent = iconSteps(state.breakthrough, 4, "◆", "◇");
+    refs.previewPotentialIcons.textContent = iconSteps(state.potential, 5, "✦", "✧");
+    refs.previewAffinityIcons.textContent = iconSteps(state.affinity, 4, "●", "○");
     refs.previewUid.textContent = `UID ${state.uid}`;
     refs.previewWeaponName.textContent = state.weaponName;
     refs.previewWeaponLevel.textContent = String(state.weaponLevel);
     refs.previewWeaponBreakthrough.textContent = String(state.weaponBreakthrough);
     refs.previewWeaponPotential.textContent = String(state.weaponPotential);
     refs.previewWeaponSkillLevel.textContent = String(state.weaponSkillLevel);
-    refs.previewGearArmor.textContent = state.gearArmor;
-    refs.previewGearGloves.textContent = state.gearGloves;
-    refs.previewGearKit1.textContent = state.gearKit1;
-    refs.previewGearKit2.textContent = state.gearKit2;
+    refs.previewWeaponSkillLevel2.textContent = String(state.weaponSkillLevel2);
+    refs.previewWeaponSkillLevel3.textContent = String(state.weaponSkillLevel3);
+    refs.previewWeaponBreakthroughIcons.textContent = iconSteps(state.weaponBreakthrough, 4, "◆", "◇");
+    refs.previewWeaponPotentialIcons.textContent = iconSteps(state.weaponPotential, 5, "✦", "✧");
     refs.previewSkillBasic.textContent = String(state.skillBasic);
     refs.previewSkillCombo.textContent = String(state.skillCombo);
     refs.previewSkillActive.textContent = String(state.skillActive);
@@ -4336,6 +4781,15 @@ async function initCardCreatorPage(characters) {
     refs.previewSkillTalent.textContent = String(state.skillTalent);
     refs.previewBuildSkills.textContent = character.buildSkills || "-";
     refs.previewBuildTeam.textContent = character.buildTeam || "-";
+    syncWeaponSelect();
+    syncGearSelectors(character);
+    ["armor", "gloves", "kit1", "kit2"].forEach((slotKey) => {
+      const nameRef = refs[slotPreviewNameRefKeys[slotKey]];
+      if (nameRef) {
+        nameRef.textContent = String(state[slotStateKeys[slotKey]] || "-");
+      }
+      renderArtificeEditor(character, slotKey);
+    });
     syncFormFromState();
   };
 
@@ -4356,10 +4810,18 @@ async function initCardCreatorPage(characters) {
     state.weaponBreakthrough = template.weaponBreakthrough;
     state.weaponPotential = template.weaponPotential;
     state.weaponSkillLevel = template.weaponSkillLevel;
+    state.weaponSkillLevel2 = template.weaponSkillLevel2;
+    state.weaponSkillLevel3 = template.weaponSkillLevel3;
     state.gearArmor = template.gearArmor;
     state.gearGloves = template.gearGloves;
     state.gearKit1 = template.gearKit1;
     state.gearKit2 = template.gearKit2;
+    state.gearArtifice = {
+      armor: [...template.gearArtifice.armor],
+      gloves: [...template.gearArtifice.gloves],
+      kit1: [...template.gearArtifice.kit1],
+      kit2: [...template.gearArtifice.kit2],
+    };
     state.skillBasic = template.skillBasic;
     state.skillCombo = template.skillCombo;
     state.skillActive = template.skillActive;
@@ -4376,13 +4838,15 @@ async function initCardCreatorPage(characters) {
     applyCharacterTemplate(findCharacter());
     if (randomTagline) state.tagline = randomTagline;
     state.level = clampNumber(Math.floor(Math.random() * 41) + 50, 1, 90, 70);
-    state.potential = clampNumber(Math.floor(Math.random() * 7), 0, 6, 3);
-    state.breakthrough = clampNumber(Math.floor(Math.random() * 5), 0, 6, 2);
-    state.affinity = clampNumber(Math.floor(Math.random() * 11), 0, 10, 10);
+    state.potential = clampNumber(Math.floor(Math.random() * 6), 0, 5, 3);
+    state.breakthrough = clampNumber(Math.floor(Math.random() * 5), 0, 4, 2);
+    state.affinity = clampNumber(Math.floor(Math.random() * 5), 0, 4, 2);
     state.weaponLevel = clampNumber(state.level - Math.floor(Math.random() * 8), 1, 90, state.level);
-    state.weaponBreakthrough = clampNumber(state.breakthrough, 0, 6, 2);
-    state.weaponPotential = clampNumber(Math.max(0, state.potential - 1), 0, 6, 1);
-    state.weaponSkillLevel = clampNumber(Math.floor(Math.random() * 4) + 7, 1, 10, 7);
+    state.weaponBreakthrough = clampNumber(state.breakthrough, 0, 4, 2);
+    state.weaponPotential = clampNumber(Math.max(0, state.potential - 1), 0, 5, 1);
+    state.weaponSkillLevel = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 9, 7);
+    state.weaponSkillLevel2 = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 9, 7);
+    state.weaponSkillLevel3 = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 9, 7);
     state.skillBasic = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 10, 7);
     state.skillCombo = clampNumber(Math.floor(Math.random() * 4) + 6, 1, 10, 7);
     state.skillActive = clampNumber(Math.floor(Math.random() * 3) + 7, 1, 10, 8);
@@ -4431,22 +4895,26 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.potential.addEventListener("input", () => {
-    state.potential = clampNumber(refs.potential.value, 0, 6, findCharacter()?.defaultPotential || 3);
+    state.potential = clampNumber(refs.potential.value, 0, 5, findCharacter()?.defaultPotential || 3);
     refs.potential.value = String(state.potential);
     applyPreview();
   });
   refs.breakthrough.addEventListener("input", () => {
-    state.breakthrough = clampNumber(refs.breakthrough.value, 0, 6, findCharacter()?.defaultBreakthrough || 2);
+    state.breakthrough = clampNumber(refs.breakthrough.value, 0, 4, findCharacter()?.defaultBreakthrough || 2);
     refs.breakthrough.value = String(state.breakthrough);
     applyPreview();
   });
   refs.affinity.addEventListener("input", () => {
-    state.affinity = clampNumber(refs.affinity.value, 0, 10, 10);
+    state.affinity = clampNumber(refs.affinity.value, 0, 4, 2);
     refs.affinity.value = String(state.affinity);
     applyPreview();
   });
+  refs.weaponSelect.addEventListener("change", () => {
+    state.weaponName = normalizeWeaponName(refs.weaponSelect.value, findCharacter()?.defaultWeaponName || "-");
+    applyPreview();
+  });
   refs.weaponName.addEventListener("input", () => {
-    state.weaponName = cleanText(refs.weaponName.value, 72, findCharacter()?.defaultWeaponName || "-");
+    state.weaponName = normalizeWeaponName(refs.weaponName.value, findCharacter()?.defaultWeaponName || "-");
     refs.weaponName.value = state.weaponName;
     applyPreview();
   });
@@ -4456,38 +4924,52 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.weaponBreakthrough.addEventListener("input", () => {
-    state.weaponBreakthrough = clampNumber(refs.weaponBreakthrough.value, 0, 6, findCharacter()?.defaultWeaponBreakthrough || 2);
+    state.weaponBreakthrough = clampNumber(refs.weaponBreakthrough.value, 0, 4, findCharacter()?.defaultWeaponBreakthrough || 2);
     refs.weaponBreakthrough.value = String(state.weaponBreakthrough);
     applyPreview();
   });
   refs.weaponPotential.addEventListener("input", () => {
-    state.weaponPotential = clampNumber(refs.weaponPotential.value, 0, 6, findCharacter()?.defaultWeaponPotential || 1);
+    state.weaponPotential = clampNumber(refs.weaponPotential.value, 0, 5, findCharacter()?.defaultWeaponPotential || 1);
     refs.weaponPotential.value = String(state.weaponPotential);
     applyPreview();
   });
   refs.weaponSkillLevel.addEventListener("input", () => {
-    state.weaponSkillLevel = clampNumber(refs.weaponSkillLevel.value, 1, 10, findCharacter()?.defaultWeaponSkillLevel || 7);
+    state.weaponSkillLevel = clampNumber(refs.weaponSkillLevel.value, 1, 9, findCharacter()?.defaultWeaponSkillLevel || 7);
     refs.weaponSkillLevel.value = String(state.weaponSkillLevel);
     applyPreview();
   });
-  refs.gearArmor.addEventListener("input", () => {
+  refs.weaponSkillLevel2.addEventListener("input", () => {
+    state.weaponSkillLevel2 = clampNumber(refs.weaponSkillLevel2.value, 1, 9, findCharacter()?.defaultWeaponSkillLevel || 7);
+    refs.weaponSkillLevel2.value = String(state.weaponSkillLevel2);
+    applyPreview();
+  });
+  refs.weaponSkillLevel3.addEventListener("input", () => {
+    state.weaponSkillLevel3 = clampNumber(refs.weaponSkillLevel3.value, 1, 9, findCharacter()?.defaultWeaponSkillLevel || 7);
+    refs.weaponSkillLevel3.value = String(state.weaponSkillLevel3);
+    applyPreview();
+  });
+  refs.gearArmor.addEventListener("change", () => {
     state.gearArmor = cleanText(refs.gearArmor.value, 72, findCharacter()?.defaultGearArmor || "-");
     refs.gearArmor.value = state.gearArmor;
+    state.gearArtifice.armor = [0, 0, 0];
     applyPreview();
   });
-  refs.gearGloves.addEventListener("input", () => {
+  refs.gearGloves.addEventListener("change", () => {
     state.gearGloves = cleanText(refs.gearGloves.value, 72, findCharacter()?.defaultGearGloves || "-");
     refs.gearGloves.value = state.gearGloves;
+    state.gearArtifice.gloves = [0, 0, 0];
     applyPreview();
   });
-  refs.gearKit1.addEventListener("input", () => {
+  refs.gearKit1.addEventListener("change", () => {
     state.gearKit1 = cleanText(refs.gearKit1.value, 72, findCharacter()?.defaultGearKit1 || "-");
     refs.gearKit1.value = state.gearKit1;
+    state.gearArtifice.kit1 = [0, 0, 0];
     applyPreview();
   });
-  refs.gearKit2.addEventListener("input", () => {
+  refs.gearKit2.addEventListener("change", () => {
     state.gearKit2 = cleanText(refs.gearKit2.value, 72, findCharacter()?.defaultGearKit2 || "-");
     refs.gearKit2.value = state.gearKit2;
+    state.gearArtifice.kit2 = [0, 0, 0];
     applyPreview();
   });
   refs.skillBasic.addEventListener("input", () => {
@@ -4521,6 +5003,19 @@ async function initCardCreatorPage(characters) {
   });
   refs.showRole.addEventListener("change", () => {
     state.showRole = refs.showRole.checked;
+    applyPreview();
+  });
+  refs.controls.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-artifice-slot][data-artifice-stat][data-artifice-tier]");
+    if (!button) return;
+    const slotKey = String(button.dataset.artificeSlot || "");
+    if (!slotStateKeys[slotKey]) return;
+    const statIndex = clampNumber(button.dataset.artificeStat, 0, 2, 0);
+    const tier = clampNumber(button.dataset.artificeTier, 0, 3, 0);
+    const character = findCharacter();
+    const stats = activeGearStats(character, slotKey);
+    sanitizeGearArtifice(slotKey, stats.length);
+    state.gearArtifice[slotKey][statIndex] = tier;
     applyPreview();
   });
   refs.random.addEventListener("click", randomize);
@@ -4578,7 +5073,7 @@ async function initCardCreatorPage(characters) {
   applyDynamicMeta({
     title: "Showcase Build Creator Endfield Indonesia | Endfield Web",
     description:
-      "Buat showcase build operator Endfield lengkap: UID, region, level, weapon, gear, skill, talent, simpan link online, lalu export PNG.",
+      "Buat showcase build operator Endfield lengkap: UID, region, level, weapon, gear artifice, skill, talent, simpan link online, lalu export PNG.",
     canonicalUrl: toAbsoluteSiteUrl("/card-creator/"),
     imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
     keywords: [
@@ -4617,6 +5112,12 @@ async function fetchLiveHubData() {
   return response.json();
 }
 
+async function fetchShowcaseCatalog() {
+  const response = await fetch(withRoot("data/showcase-catalog.json"));
+  if (!response.ok) throw new Error("Gagal memuat data showcase catalog JSON");
+  return response.json();
+}
+
 const bootLoader = initPageLoader();
 
 async function bootstrap() {
@@ -4624,7 +5125,7 @@ async function bootstrap() {
     home: "Menyiapkan dashboard Endfield...",
     events: "Sinkronisasi timeline event...",
     codes: "Memuat tracker redeem code...",
-    "card-creator": "Menyiapkan card creator...",
+    "card-creator": "Menyiapkan build showcase...",
     chests: "Memuat atlas chest...",
     gacha: "Menyiapkan simulator gacha...",
   };
