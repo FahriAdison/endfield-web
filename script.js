@@ -53,6 +53,34 @@ const NAV_CONTACT_LINKS = [
     icon: "assets/icons/social-github.svg",
   },
 ];
+const NAV_ITEMS = [
+  { id: "home", label: "Home", path: "" },
+  { id: "characters", label: "Characters", path: "characters/" },
+  { id: "tierlist", label: "Tierlist", path: "tierlist/" },
+  { id: "builds", label: "Builds", path: "builds/" },
+  { id: "team-comps", label: "Team Comps", path: "team-comps/" },
+  { id: "gears", label: "Gears", path: "gears/" },
+  { id: "chests", label: "Chest Map", path: "chests/" },
+  { id: "events", label: "Events", path: "events/" },
+  { id: "codes", label: "Redeem Codes", path: "codes/" },
+  { id: "card-creator", label: "Card Creator", path: "card-creator/" },
+  { id: "gacha", label: "Gacha Sim", path: "gacha/" },
+  { id: "helps", label: "Tips", path: "helps/" },
+];
+const NAV_ACTIVE_GROUPS = {
+  home: ["home"],
+  characters: ["characters", "character"],
+  tierlist: ["tierlist"],
+  builds: ["builds"],
+  "team-comps": ["team-comps"],
+  gears: ["gears", "gear"],
+  chests: ["chests"],
+  events: ["events"],
+  codes: ["codes"],
+  "card-creator": ["card-creator"],
+  gacha: ["gacha"],
+  helps: ["helps"],
+};
 
 const page = document.body?.dataset.page || "home";
 const rawRoot = document.body?.dataset.basePath || ".";
@@ -76,6 +104,66 @@ function characterUrl(id) {
 
 function gearUrl(id) {
   return withRoot(`gear/?id=${encodeURIComponent(id)}`);
+}
+
+function activeNavGroupsForPage(currentPage) {
+  return new Set(
+    Object.entries(NAV_ACTIVE_GROUPS)
+      .filter(([, pages]) => Array.isArray(pages) && pages.includes(currentPage))
+      .map(([id]) => id)
+  );
+}
+
+function syncPrimaryNavigation() {
+  const nav = document.querySelector(".nav");
+  const links = nav?.querySelector(".nav-links");
+  if (!nav || !links) return;
+  const activeGroups = activeNavGroupsForPage(page);
+  links.innerHTML = NAV_ITEMS.map((item) => {
+    const isActive = activeGroups.has(item.id);
+    const cls = isActive ? ' class="active"' : "";
+    const href = item.path ? withRoot(item.path) : withRoot("");
+    return `<a${cls} href="${esc(href)}">${esc(item.label)}</a>`;
+  }).join("");
+}
+
+function initPageLoader() {
+  if (!document.body) return null;
+  let loader = document.getElementById("page-loader");
+  if (!loader) {
+    loader = document.createElement("div");
+    loader.id = "page-loader";
+    loader.className = "page-loader";
+    loader.innerHTML = `
+      <div class="page-loader-shell">
+        <div class="page-loader-mark"></div>
+        <div class="page-loader-bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <p class="page-loader-title">ENDMINSYNC</p>
+        <p class="page-loader-text" id="page-loader-text">Menyiapkan data Endfield...</p>
+      </div>
+    `;
+    document.body.appendChild(loader);
+    requestAnimationFrame(() => loader.classList.add("show"));
+  }
+
+  const text = loader.querySelector("#page-loader-text");
+  const setText = (value) => {
+    if (text && value) text.textContent = value;
+  };
+  const fail = (value) => {
+    if (value) setText(value);
+    loader.classList.add("is-error");
+  };
+  const hide = (delay = 180) => {
+    window.setTimeout(() => {
+      loader.classList.remove("show");
+      window.setTimeout(() => loader.remove(), 320);
+    }, Math.max(0, delay));
+  };
+
+  return { setText, fail, hide };
 }
 
 function esc(value) {
@@ -199,6 +287,60 @@ function toDateTimeLabel(isoDateTime) {
     hour: "2-digit",
     minute: "2-digit",
   });
+}
+
+function toShortDateLabel(isoDateTime) {
+  if (!isoDateTime) return "-";
+  const date = new Date(isoDateTime);
+  if (Number.isNaN(date.getTime())) return isoDateTime;
+  return date.toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function statusLabel(status) {
+  const map = {
+    active: "Aktif",
+    upcoming: "Akan Datang",
+    completed: "Selesai",
+    expired: "Kadaluarsa",
+    "likely-active": "Kemungkinan Aktif",
+  };
+  return map[String(status || "").toLowerCase()] || "Unknown";
+}
+
+function statusClass(status) {
+  const key = String(status || "").toLowerCase();
+  if (key === "active" || key === "likely-active") return "is-active";
+  if (key === "upcoming") return "is-upcoming";
+  if (key === "completed" || key === "expired") return "is-expired";
+  return "is-default";
+}
+
+function eventStatusFromDates(event) {
+  const manual = String(event?.status || "").toLowerCase();
+  if (manual === "active" || manual === "upcoming" || manual === "completed") return manual;
+  const now = Date.now();
+  const start = event?.startAt ? new Date(event.startAt).getTime() : NaN;
+  const end = event?.endAt ? new Date(event.endAt).getTime() : NaN;
+  if (Number.isFinite(start) && now < start) return "upcoming";
+  if (Number.isFinite(end) && now > end) return "completed";
+  return "active";
+}
+
+function eventCountdownLabel(event) {
+  const now = Date.now();
+  const start = event?.startAt ? new Date(event.startAt).getTime() : NaN;
+  const end = event?.endAt ? new Date(event.endAt).getTime() : NaN;
+  const status = eventStatusFromDates(event);
+  if (status === "upcoming" && Number.isFinite(start)) return `Mulai dalam ${toCountdownLabel(start - now)}`;
+  if (status === "active" && Number.isFinite(end)) return `Selesai dalam ${toCountdownLabel(end - now)}`;
+  return "Arsip event";
+}
+
+function eventSortRank(status) {
+  if (status === "active") return 0;
+  if (status === "upcoming") return 1;
+  if (status === "completed") return 2;
+  return 3;
 }
 
 function toCountdownLabel(ms) {
@@ -599,7 +741,7 @@ function initNavDrawer() {
   window.addEventListener("resize", () => setOpen(false));
 }
 
-function renderHome(data) {
+async function renderHome(data) {
   const stamp = document.getElementById("data-stamp");
   if (stamp) stamp.textContent = `Data disusun: ${toDateLabel(data.meta.updatedAt)}`;
 
@@ -619,6 +761,80 @@ function renderHome(data) {
           )
           .join("")
       : emptyState("Belum ada tips.");
+  }
+
+  const homeEventsGrid = document.getElementById("home-events-grid");
+  const homeCodesGrid = document.getElementById("home-codes-grid");
+  if (homeEventsGrid || homeCodesGrid) {
+    try {
+      const liveHub = await fetchLiveHubData();
+      const events = Array.isArray(liveHub?.events) ? liveHub.events : [];
+      const codes = Array.isArray(liveHub?.codes) ? liveHub.codes : [];
+
+      if (homeEventsGrid) {
+        const eventPreview = [...events]
+          .map((item) => ({ ...item, _status: eventStatusFromDates(item) }))
+          .sort((a, b) => {
+            const rs = eventSortRank(a._status) - eventSortRank(b._status);
+            if (rs !== 0) return rs;
+            const at = new Date(a.startAt || 0).getTime();
+            const bt = new Date(b.startAt || 0).getTime();
+            return bt - at;
+          })
+          .slice(0, 3);
+
+        homeEventsGrid.innerHTML = eventPreview.length
+          ? eventPreview
+              .map((event) => {
+                const status = event._status;
+                return `
+                  <article class="card event-card compact">
+                    <img class="event-cover" src="${asset(event.image || "assets/images/hero-share.jpg")}" alt="${esc(event.title)}" loading="lazy" />
+                    <div class="event-card-body">
+                      <div class="event-row">
+                        <span class="event-chip ${statusClass(status)}">${esc(statusLabel(status))}</span>
+                        <span class="event-time">${esc(toShortDateLabel(event.startAt))}</span>
+                      </div>
+                      <h3>${esc(event.title)}</h3>
+                      <p>${esc(event.highlight || event.summary || "-")}</p>
+                      <a class="detail-link inline-link" href="${withRoot("events/")}">Buka detail event</a>
+                    </div>
+                  </article>`;
+              })
+              .join("")
+          : emptyState("Belum ada data event.");
+      }
+
+      if (homeCodesGrid) {
+        const codePreview = [...codes]
+          .sort((a, b) => {
+            const ar = eventSortRank(String(a.status).replace("likely-active", "active"));
+            const br = eventSortRank(String(b.status).replace("likely-active", "active"));
+            return ar - br;
+          })
+          .slice(0, 3);
+
+        homeCodesGrid.innerHTML = codePreview.length
+          ? codePreview
+              .map(
+                (item) => `
+              <article class="card code-card compact">
+                <div class="code-top">
+                  <span class="event-chip ${statusClass(item.status)}">${esc(statusLabel(item.status))}</span>
+                  <span class="code-platform">${esc(item.platform || "-")}</span>
+                </div>
+                <h3>${esc(item.code || "-")}</h3>
+                <p>${esc(item.reward || "-")}</p>
+                <a class="detail-link inline-link" href="${withRoot("codes/")}">Lihat semua code</a>
+              </article>`
+              )
+              .join("")
+          : emptyState("Belum ada data redeem code.");
+      }
+    } catch {
+      if (homeEventsGrid) homeEventsGrid.innerHTML = emptyState("Preview event belum bisa dimuat.");
+      if (homeCodesGrid) homeCodesGrid.innerHTML = emptyState("Preview code belum bisa dimuat.");
+    }
   }
 
   initGalleryLightbox();
@@ -2754,6 +2970,663 @@ async function initChestsPage() {
   redraw();
 }
 
+async function initEventsPage() {
+  const refs = {
+    stamp: document.getElementById("events-stamp"),
+    search: document.getElementById("events-search"),
+    filter: document.getElementById("events-filter"),
+    sort: document.getElementById("events-sort"),
+    count: document.getElementById("events-count"),
+    grid: document.getElementById("events-grid"),
+    sourceList: document.getElementById("events-source-list"),
+    statActive: document.getElementById("events-active-count"),
+    statUpcoming: document.getElementById("events-upcoming-count"),
+    statCompleted: document.getElementById("events-completed-count"),
+  };
+  if (
+    !refs.stamp ||
+    !refs.search ||
+    !refs.filter ||
+    !refs.sort ||
+    !refs.count ||
+    !refs.grid ||
+    !refs.sourceList ||
+    !refs.statActive ||
+    !refs.statUpcoming ||
+    !refs.statCompleted
+  ) {
+    return;
+  }
+
+  let liveHub;
+  try {
+    liveHub = await fetchLiveHubData();
+  } catch (error) {
+    refs.stamp.textContent = "Gagal memuat data event.";
+    refs.grid.innerHTML = emptyState("Data event belum bisa dimuat.");
+    console.error(error);
+    return;
+  }
+
+  const events = Array.isArray(liveHub?.events) ? liveHub.events : [];
+  const sources = Array.isArray(liveHub?.sources) ? liveHub.sources : [];
+  refs.stamp.textContent = `Update data: ${toDateLabel(liveHub?.meta?.updatedAt)}`;
+
+  applyDynamicMeta({
+    title: "Event Endfield Indonesia | Banner, DEV Comm, Timeline | Endfield Web",
+    description:
+      "Pantau event Arknights: Endfield: banner aktif, event mendatang, DEV Comm, countdown, dan ringkasan reward dalam bahasa Indonesia.",
+    canonicalUrl: toAbsoluteSiteUrl("/events/"),
+    imageUrl: toAbsoluteSiteUrl("/assets/images/banner-gilberta.jpg"),
+    keywords: [
+      "event endfield",
+      "jadwal banner endfield",
+      "banner gilberta yvonne",
+      "dev comm endfield",
+      "endfield indonesia",
+    ],
+  });
+
+  refs.sourceList.innerHTML = sources
+    .map((source) => normalizeSourceEntry(source))
+    .filter(Boolean)
+    .map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noreferrer noopener">${esc(source.label)}</a></li>`)
+    .join("");
+
+  const withStatus = events.map((item) => ({ ...item, _status: eventStatusFromDates(item) }));
+  refs.statActive.textContent = String(withStatus.filter((item) => item._status === "active").length);
+  refs.statUpcoming.textContent = String(withStatus.filter((item) => item._status === "upcoming").length);
+  refs.statCompleted.textContent = String(withStatus.filter((item) => item._status === "completed").length);
+
+  const sortEvents = (list, mode) => {
+    const cloned = [...list];
+    if (mode === "AZ") {
+      cloned.sort((a, b) => collator.compare(a.title || "", b.title || ""));
+      return cloned;
+    }
+    if (mode === "DATE_ASC") {
+      cloned.sort((a, b) => {
+        const at = new Date(a.startAt || 0).getTime();
+        const bt = new Date(b.startAt || 0).getTime();
+        return at - bt;
+      });
+      return cloned;
+    }
+    if (mode === "DATE_DESC") {
+      cloned.sort((a, b) => {
+        const at = new Date(a.startAt || 0).getTime();
+        const bt = new Date(b.startAt || 0).getTime();
+        return bt - at;
+      });
+      return cloned;
+    }
+    cloned.sort((a, b) => {
+      const sr = eventSortRank(a._status) - eventSortRank(b._status);
+      if (sr !== 0) return sr;
+      const at = new Date(a.startAt || 0).getTime();
+      const bt = new Date(b.startAt || 0).getTime();
+      return bt - at;
+    });
+    return cloned;
+  };
+
+  const refreshCountdowns = () => {
+    refs.grid.querySelectorAll(".event-countdown").forEach((node) => {
+      const status = String(node.dataset.status || "");
+      const start = node.dataset.start || "";
+      const end = node.dataset.end || "";
+      const startMs = start ? new Date(start).getTime() : NaN;
+      const endMs = end ? new Date(end).getTime() : NaN;
+      const now = Date.now();
+      if (status === "upcoming" && Number.isFinite(startMs)) {
+        node.textContent = `Mulai dalam ${toCountdownLabel(startMs - now)}`;
+        return;
+      }
+      if (status === "active" && Number.isFinite(endMs)) {
+        node.textContent = `Berakhir dalam ${toCountdownLabel(endMs - now)}`;
+        return;
+      }
+      node.textContent = "Arsip event";
+    });
+  };
+
+  const redraw = () => {
+    const keyword = refs.search.value.trim().toLowerCase();
+    const filter = refs.filter.value;
+    const sortMode = refs.sort.value;
+
+    const filtered = sortEvents(
+      withStatus.filter((item) => {
+        const byStatus = filter === "ALL" || item._status === filter;
+        const blob = `${item.title || ""} ${item.highlight || ""} ${item.summary || ""} ${(item.rewards || []).join(" ")}`.toLowerCase();
+        const bySearch = !keyword || blob.includes(keyword);
+        return byStatus && bySearch;
+      }),
+      sortMode
+    );
+
+    refs.count.textContent = `${filtered.length} event cocok`;
+    refs.grid.innerHTML = filtered.length
+      ? filtered
+          .map((event) => {
+            const status = event._status;
+            return `
+              <article class="card event-card">
+                <img class="event-cover" src="${asset(event.image || "assets/images/hero-share.jpg")}" alt="${esc(event.title || "Event Endfield")}" loading="lazy" />
+                <div class="event-card-body">
+                  <div class="event-row">
+                    <span class="event-chip ${statusClass(status)}">${esc(statusLabel(status))}</span>
+                    <span class="event-chip type">${esc(event.type || "-")}</span>
+                  </div>
+                  <h3>${esc(event.title || "-")}</h3>
+                  <p class="event-highlight">${esc(event.highlight || "-")}</p>
+                  <p>${esc(event.summary || "-")}</p>
+                  <p class="event-time">Mulai: ${esc(toDateTimeLabel(event.startAt))}</p>
+                  <p class="event-time">Selesai: ${esc(event.endAt ? toDateTimeLabel(event.endAt) : "-")}</p>
+                  <p class="event-countdown" data-status="${esc(status)}" data-start="${esc(event.startAt || "")}" data-end="${esc(event.endAt || "")}">
+                    ${esc(eventCountdownLabel(event))}
+                  </p>
+                  ${
+                    Array.isArray(event.rewards) && event.rewards.length
+                      ? `<div class="event-reward-row">${event.rewards
+                          .slice(0, 5)
+                          .map((reward) => `<span class="event-reward-chip">${esc(reward)}</span>`)
+                          .join("")}</div>`
+                      : ""
+                  }
+                  ${
+                    event.source
+                      ? `<a class="detail-link inline-link" href="${esc(event.source)}" target="_blank" rel="noreferrer noopener">Lihat sumber</a>`
+                      : ""
+                  }
+                </div>
+              </article>`;
+          })
+          .join("")
+      : emptyState("Event tidak ditemukan. Coba ubah filter atau keyword.");
+
+    refreshCountdowns();
+  };
+
+  refs.search.addEventListener("input", redraw);
+  refs.filter.addEventListener("change", redraw);
+  refs.sort.addEventListener("change", redraw);
+  redraw();
+
+  const ticker = setInterval(refreshCountdowns, 1000);
+  window.addEventListener("pagehide", () => clearInterval(ticker), { once: true });
+}
+
+async function initCodesPage() {
+  const refs = {
+    stamp: document.getElementById("codes-stamp"),
+    search: document.getElementById("codes-search"),
+    filter: document.getElementById("codes-filter"),
+    sort: document.getElementById("codes-sort"),
+    count: document.getElementById("codes-count"),
+    grid: document.getElementById("codes-grid"),
+    sourceList: document.getElementById("codes-source-list"),
+    statActive: document.getElementById("codes-active-count"),
+    statExpired: document.getElementById("codes-expired-count"),
+    statTotal: document.getElementById("codes-total-count"),
+  };
+  if (
+    !refs.stamp ||
+    !refs.search ||
+    !refs.filter ||
+    !refs.sort ||
+    !refs.count ||
+    !refs.grid ||
+    !refs.sourceList ||
+    !refs.statActive ||
+    !refs.statExpired ||
+    !refs.statTotal
+  ) {
+    return;
+  }
+
+  let liveHub;
+  try {
+    liveHub = await fetchLiveHubData();
+  } catch (error) {
+    refs.stamp.textContent = "Gagal memuat data code.";
+    refs.grid.innerHTML = emptyState("Data redeem code belum bisa dimuat.");
+    console.error(error);
+    return;
+  }
+
+  const codes = Array.isArray(liveHub?.codes) ? liveHub.codes : [];
+  const sourceSet = new Map();
+  codes.forEach((item) => {
+    (item.sources || []).forEach((source) => {
+      const normalized = normalizeSourceEntry(source);
+      if (normalized) sourceSet.set(normalized.url, normalized);
+    });
+  });
+
+  refs.stamp.textContent = `Update data: ${toDateLabel(liveHub?.meta?.updatedAt)} | Cek code cepat berubah.`;
+  refs.statTotal.textContent = String(codes.length);
+  refs.statActive.textContent = String(codes.filter((item) => ["active", "likely-active"].includes(String(item.status))).length);
+  refs.statExpired.textContent = String(codes.filter((item) => String(item.status) === "expired").length);
+
+  applyDynamicMeta({
+    title: "Redeem Code Endfield Indonesia | Kode Penukaran | Endfield Web",
+    description:
+      "Daftar redeem code Arknights: Endfield dengan status aktif, estimasi aktif, atau kadaluarsa, plus tombol copy cepat.",
+    canonicalUrl: toAbsoluteSiteUrl("/codes/"),
+    imageUrl: toAbsoluteSiteUrl("/assets/images/event-spring.jpg"),
+    keywords: [
+      "redeem code endfield",
+      "kode endfield terbaru",
+      "hadiah code endfield",
+      "endfield indonesia",
+    ],
+  });
+
+  refs.sourceList.innerHTML = Array.from(sourceSet.values())
+    .map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noreferrer noopener">${esc(source.label)}</a></li>`)
+    .join("");
+
+  const statusRank = (status) => {
+    const key = String(status || "").toLowerCase();
+    if (key === "active") return 0;
+    if (key === "likely-active") return 1;
+    if (key === "expired") return 2;
+    return 3;
+  };
+
+  const sortCodes = (list, mode) => {
+    const cloned = [...list];
+    if (mode === "AZ") {
+      cloned.sort((a, b) => collator.compare(a.code || "", b.code || ""));
+      return cloned;
+    }
+    if (mode === "DATE_DESC") {
+      cloned.sort((a, b) => {
+        const at = new Date(a.checkedAt || 0).getTime();
+        const bt = new Date(b.checkedAt || 0).getTime();
+        return bt - at;
+      });
+      return cloned;
+    }
+    cloned.sort((a, b) => {
+      const sr = statusRank(a.status) - statusRank(b.status);
+      if (sr !== 0) return sr;
+      return collator.compare(a.code || "", b.code || "");
+    });
+    return cloned;
+  };
+
+  const redraw = () => {
+    const keyword = refs.search.value.trim().toLowerCase();
+    const filter = refs.filter.value;
+    const sortMode = refs.sort.value;
+
+    const filtered = sortCodes(
+      codes.filter((item) => {
+        const status = String(item.status || "").toLowerCase();
+        const byStatus = filter === "ALL" || status === filter;
+        const blob = `${item.code || ""} ${item.reward || ""} ${item.platform || ""} ${item.note || ""}`.toLowerCase();
+        const bySearch = !keyword || blob.includes(keyword);
+        return byStatus && bySearch;
+      }),
+      sortMode
+    );
+
+    refs.count.textContent = `${filtered.length} code cocok`;
+    refs.grid.innerHTML = filtered.length
+      ? filtered
+          .map(
+            (item) => `
+          <article class="card code-card">
+            <div class="code-top">
+              <span class="event-chip ${statusClass(item.status)}">${esc(statusLabel(item.status))}</span>
+              <span class="code-platform">${esc(item.platform || "-")}</span>
+            </div>
+            <h3>${esc(item.code || "-")}</h3>
+            <p>${esc(item.reward || "-")}</p>
+            <p class="event-time">Terakhir dicek: ${esc(toDateLabel(item.checkedAt))}</p>
+            <p class="event-time">Kadaluarsa: ${esc(item.expiresAt ? toDateLabel(item.expiresAt) : "-")}</p>
+            <p>${esc(item.note || "-")}</p>
+            <div class="code-actions">
+              <button class="btn ghost code-copy-btn" type="button" data-copy-code="${esc(item.code || "")}">
+                Copy Code
+              </button>
+              ${
+                item.sources && item.sources[0]
+                  ? `<a class="detail-link inline-link" href="${esc(item.sources[0])}" target="_blank" rel="noreferrer noopener">Lihat sumber</a>`
+                  : ""
+              }
+            </div>
+          </article>`
+          )
+          .join("")
+      : emptyState("Code tidak ditemukan. Coba ubah filter atau keyword.");
+  };
+
+  refs.grid.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-copy-code]");
+    if (!button) return;
+    const code = String(button.dataset.copyCode || "").trim();
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      const original = button.textContent;
+      button.textContent = "Tersalin";
+      setTimeout(() => {
+        button.textContent = original;
+      }, 900);
+    } catch {
+      refs.stamp.textContent = "Clipboard diblok browser. Salin manual dari kartu.";
+    }
+  });
+
+  refs.search.addEventListener("input", redraw);
+  refs.filter.addEventListener("change", redraw);
+  refs.sort.addEventListener("change", redraw);
+  redraw();
+}
+
+function buildCreatorCharacterData(character) {
+  const iconOverrides = {
+    Wulfgard: "assets/icons/wulfgard.webp",
+  };
+  const image = iconOverrides[String(character?.name || "")] || character?.image || "assets/skill-icons/basic.webp";
+  return {
+    id: character?.id || "",
+    name: character?.name || "Unknown",
+    role: character?.role || "-",
+    tier: character?.tier || "-",
+    element: character?.profile?.element || "-",
+    weapon: character?.profile?.weapon || "-",
+    image,
+  };
+}
+
+function loadCanvasImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error(`Gagal memuat image: ${url}`));
+    img.src = url;
+  });
+}
+
+async function exportCreatorCardPng(character, preset, state, statusEl) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1600;
+  canvas.height = 900;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    if (statusEl) statusEl.textContent = "Canvas tidak didukung browser.";
+    return;
+  }
+
+  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, preset.bgA || "#123349");
+  gradient.addColorStop(1, preset.bgB || "#09131d");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.globalAlpha = 0.2;
+  ctx.fillStyle = preset.accent || "#70d9ff";
+  ctx.fillRect(72, 72, 560, 14);
+  ctx.fillRect(72, 820, 1456, 8);
+  ctx.fillRect(980, 120, 520, 10);
+  ctx.globalAlpha = 1;
+
+  ctx.fillStyle = "rgba(0,0,0,0.24)";
+  ctx.fillRect(70, 90, 1460, 730);
+  ctx.strokeStyle = preset.accent || "#70d9ff";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(70, 90, 1460, 730);
+
+  const imageUrl = asset(character.image);
+  try {
+    const img = await loadCanvasImage(imageUrl);
+    const cx = 330;
+    const cy = 455;
+    const radius = 220;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+    const size = Math.max(img.width, img.height);
+    const sx = (img.width - size) / 2;
+    const sy = (img.height - size) / 2;
+    ctx.drawImage(img, sx, sy, size, size, cx - radius, cy - radius, radius * 2, radius * 2);
+    ctx.restore();
+    ctx.strokeStyle = preset.accent || "#70d9ff";
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius + 4, 0, Math.PI * 2);
+    ctx.stroke();
+  } catch {
+    ctx.fillStyle = "rgba(255,255,255,0.12)";
+    ctx.fillRect(130, 250, 400, 400);
+    ctx.fillStyle = "#dcefff";
+    ctx.font = "700 36px Rajdhani, sans-serif";
+    ctx.fillText("NO IMAGE", 235, 470);
+  }
+
+  const ink = preset.ink || "#e9f8ff";
+  ctx.fillStyle = ink;
+  ctx.font = "700 38px Rajdhani, sans-serif";
+  ctx.fillText((state.alias || "Frontier Cadre").slice(0, 34), 620, 186);
+
+  ctx.font = "700 94px Rajdhani, sans-serif";
+  ctx.fillText((character.name || "Unknown").slice(0, 18), 620, 320);
+
+  ctx.font = "500 40px Space Grotesk, sans-serif";
+  ctx.fillText((state.tagline || "High Priority Deployment").slice(0, 48), 620, 390);
+
+  const chips = [];
+  if (state.showRole) chips.push(`Role: ${character.role}`);
+  chips.push(`Element: ${character.element}`);
+  chips.push(`Weapon: ${character.weapon}`);
+  if (state.showTier) chips.push(`Tier ${character.tier}`);
+
+  let chipY = 470;
+  ctx.font = "600 33px Rajdhani, sans-serif";
+  chips.slice(0, 4).forEach((chip) => {
+    const w = Math.ceil(ctx.measureText(chip).width) + 36;
+    ctx.fillStyle = "rgba(255,255,255,0.12)";
+    ctx.fillRect(620, chipY - 34, w, 46);
+    ctx.strokeStyle = preset.accent || "#70d9ff";
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(620, chipY - 34, w, 46);
+    ctx.fillStyle = ink;
+    ctx.fillText(chip, 638, chipY - 3);
+    chipY += 64;
+  });
+
+  ctx.globalAlpha = 0.92;
+  ctx.fillStyle = ink;
+  ctx.font = "500 24px Space Grotesk, sans-serif";
+  ctx.fillText("endfield-ind.my.id · Fanmade Card Creator", 620, 790);
+  ctx.globalAlpha = 1;
+
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL("image/png");
+  link.download = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
+  link.click();
+}
+
+async function initCardCreatorPage(characters) {
+  const refs = {
+    character: document.getElementById("creator-character"),
+    style: document.getElementById("creator-style"),
+    alias: document.getElementById("creator-alias"),
+    tagline: document.getElementById("creator-tagline"),
+    showTier: document.getElementById("creator-show-tier"),
+    showRole: document.getElementById("creator-show-role"),
+    random: document.getElementById("creator-random"),
+    download: document.getElementById("creator-download"),
+    status: document.getElementById("creator-status"),
+    preview: document.getElementById("creator-preview"),
+    previewAlias: document.getElementById("creator-preview-alias"),
+    previewTier: document.getElementById("creator-preview-tier"),
+    previewImage: document.getElementById("creator-preview-image"),
+    previewName: document.getElementById("creator-preview-name"),
+    previewRole: document.getElementById("creator-preview-role"),
+    previewTagline: document.getElementById("creator-preview-tagline"),
+  };
+  if (
+    !refs.character ||
+    !refs.style ||
+    !refs.alias ||
+    !refs.tagline ||
+    !refs.showTier ||
+    !refs.showRole ||
+    !refs.random ||
+    !refs.download ||
+    !refs.status ||
+    !refs.preview ||
+    !refs.previewAlias ||
+    !refs.previewTier ||
+    !refs.previewImage ||
+    !refs.previewName ||
+    !refs.previewRole ||
+    !refs.previewTagline
+  ) {
+    return;
+  }
+
+  let liveHub;
+  try {
+    liveHub = await fetchLiveHubData();
+  } catch {
+    liveHub = null;
+  }
+
+  const builtCharacters = sortByName((characters || []).map(buildCreatorCharacterData), "name", "AZ");
+  const presets = Array.isArray(liveHub?.cardCreator?.presets) && liveHub.cardCreator.presets.length
+    ? liveHub.cardCreator.presets
+    : [
+        { id: "frontier", name: "Frontier Amber", bgA: "#1d2c3d", bgB: "#0d1622", accent: "#f7cb6b", ink: "#fef5dd" },
+        { id: "talos", name: "Talos Steel", bgA: "#123349", bgB: "#09131d", accent: "#70d9ff", ink: "#e9f8ff" },
+      ];
+  const taglines = Array.isArray(liveHub?.cardCreator?.taglines) && liveHub.cardCreator.taglines.length
+    ? liveHub.cardCreator.taglines
+    : ["High Priority Deployment", "AIC Tactical Unit", "Wuling Response Team"];
+
+  refs.character.innerHTML = builtCharacters
+    .map((item) => `<option value="${esc(item.id)}">${esc(item.name)}</option>`)
+    .join("");
+  refs.style.innerHTML = presets.map((item) => `<option value="${esc(item.id)}">${esc(item.name)}</option>`).join("");
+
+  const state = {
+    characterId: builtCharacters[0]?.id || "",
+    styleId: presets[0]?.id || "",
+    alias: "Frontier Cadre",
+    tagline: taglines[0] || "High Priority Deployment",
+    showTier: true,
+    showRole: true,
+  };
+
+  refs.alias.value = state.alias;
+  refs.tagline.value = state.tagline;
+  refs.character.value = state.characterId;
+  refs.style.value = state.styleId;
+  refs.showTier.checked = state.showTier;
+  refs.showRole.checked = state.showRole;
+
+  const findCharacter = () => builtCharacters.find((item) => item.id === state.characterId) || builtCharacters[0];
+  const findPreset = () => presets.find((item) => item.id === state.styleId) || presets[0];
+
+  const applyPreview = () => {
+    const character = findCharacter();
+    const preset = findPreset();
+    if (!character || !preset) return;
+
+    refs.preview.style.setProperty("--creator-bg-a", preset.bgA || "#123349");
+    refs.preview.style.setProperty("--creator-bg-b", preset.bgB || "#09131d");
+    refs.preview.style.setProperty("--creator-accent", preset.accent || "#70d9ff");
+    refs.preview.style.setProperty("--creator-ink", preset.ink || "#e9f8ff");
+
+    refs.previewAlias.textContent = state.alias || "Frontier Cadre";
+    refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
+    refs.previewTier.hidden = !state.showTier;
+    refs.previewImage.src = asset(character.image);
+    refs.previewImage.alt = `${character.name} icon`;
+    refs.previewName.textContent = character.name;
+    refs.previewRole.textContent = state.showRole ? character.role || "-" : "";
+    refs.previewRole.hidden = !state.showRole;
+    refs.previewTagline.textContent = state.tagline || "High Priority Deployment";
+  };
+
+  const randomize = () => {
+    const randomCharacter = randomPick(builtCharacters);
+    const randomPreset = randomPick(presets);
+    const randomTagline = randomPick(taglines);
+    if (randomCharacter) state.characterId = randomCharacter.id;
+    if (randomPreset) state.styleId = randomPreset.id;
+    if (randomTagline) state.tagline = randomTagline;
+    refs.character.value = state.characterId;
+    refs.style.value = state.styleId;
+    refs.tagline.value = state.tagline;
+    applyPreview();
+    refs.status.textContent = "Preset diacak. Siap di-export.";
+  };
+
+  refs.character.addEventListener("change", () => {
+    state.characterId = refs.character.value;
+    applyPreview();
+  });
+  refs.style.addEventListener("change", () => {
+    state.styleId = refs.style.value;
+    applyPreview();
+  });
+  refs.alias.addEventListener("input", () => {
+    state.alias = refs.alias.value.trim();
+    applyPreview();
+  });
+  refs.tagline.addEventListener("input", () => {
+    state.tagline = refs.tagline.value.trim();
+    applyPreview();
+  });
+  refs.showTier.addEventListener("change", () => {
+    state.showTier = refs.showTier.checked;
+    applyPreview();
+  });
+  refs.showRole.addEventListener("change", () => {
+    state.showRole = refs.showRole.checked;
+    applyPreview();
+  });
+  refs.random.addEventListener("click", randomize);
+  refs.download.addEventListener("click", async () => {
+    const character = findCharacter();
+    const preset = findPreset();
+    if (!character || !preset) return;
+    refs.status.textContent = "Merender PNG...";
+    try {
+      await exportCreatorCardPng(character, preset, state, refs.status);
+      refs.status.textContent = "Selesai. PNG berhasil di-download.";
+    } catch (error) {
+      refs.status.textContent = "Gagal export PNG. Coba lagi.";
+      console.error(error);
+    }
+  });
+
+  applyDynamicMeta({
+    title: "Card Creator Endfield Indonesia | Buat Kartu Karakter | Endfield Web",
+    description:
+      "Buat kartu karakter Endfield versi kamu sendiri: pilih operator, style kartu, tagline, lalu export PNG langsung dari browser.",
+    canonicalUrl: toAbsoluteSiteUrl("/card-creator/"),
+    imageUrl: toAbsoluteSiteUrl("/assets/images/hero-share.jpg"),
+    keywords: [
+      "endfield card creator",
+      "kartu karakter endfield",
+      "endfield fan card",
+      "endfield indonesia",
+    ],
+  });
+
+  applyPreview();
+}
+
 async function fetchData() {
   const response = await fetch(withRoot("data/content.json"));
   if (!response.ok) throw new Error("Gagal memuat data JSON");
@@ -2766,12 +3639,34 @@ async function fetchChestsData() {
   return response.json();
 }
 
+async function fetchLiveHubData() {
+  const response = await fetch(withRoot("data/live-hub.json"));
+  if (!response.ok) throw new Error("Gagal memuat data live hub JSON");
+  return response.json();
+}
+
+const bootLoader = initPageLoader();
+
 async function bootstrap() {
+  const loaderMessageByPage = {
+    home: "Menyiapkan dashboard Endfield...",
+    events: "Sinkronisasi timeline event...",
+    codes: "Memuat tracker redeem code...",
+    "card-creator": "Menyiapkan card creator...",
+    chests: "Memuat atlas chest...",
+    gacha: "Menyiapkan simulator gacha...",
+  };
+  bootLoader?.setText(loaderMessageByPage[page] || "Memuat data Endfield...");
+
   if (page !== "gacha") initGlobalBgm();
+  syncPrimaryNavigation();
   initNavDrawer();
   const data = await fetchData();
 
   if (page === "home") return renderHome(data);
+  if (page === "events") return initEventsPage();
+  if (page === "codes") return initCodesPage();
+  if (page === "card-creator") return initCardCreatorPage(data.characters || []);
   if (page === "gacha") return initGachaPage(data);
   if (page === "helps") return initTipsPage(data.tips);
   if (page === "team-comps") return initTeamCompsPage(data.teamComps || [], data.characters || []);
@@ -2784,12 +3679,21 @@ async function bootstrap() {
   if (page === "character") return initCharacterPage(data.characters);
 }
 
-bootstrap().catch((error) => {
-  console.error(error);
-  const stamp =
-    document.getElementById("data-stamp") ||
-    document.getElementById("profile-status") ||
-    document.getElementById("gear-detail-status") ||
-    document.getElementById("chests-stamp");
-  if (stamp) stamp.textContent = "Data gagal dimuat";
-});
+bootstrap()
+  .then(() => {
+    bootLoader?.hide();
+  })
+  .catch((error) => {
+    console.error(error);
+    const stamp =
+      document.getElementById("data-stamp") ||
+      document.getElementById("profile-status") ||
+      document.getElementById("gear-detail-status") ||
+      document.getElementById("chests-stamp") ||
+      document.getElementById("events-stamp") ||
+      document.getElementById("codes-stamp") ||
+      document.getElementById("creator-status");
+    if (stamp) stamp.textContent = "Data gagal dimuat";
+    bootLoader?.fail("Gagal memuat data. Coba refresh halaman.");
+    bootLoader?.hide(900);
+  });

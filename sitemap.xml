@@ -36,6 +36,21 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://endfield-ind.my.id/events/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.86</priority>
+  </url>
+  <url>
+    <loc>https://endfield-ind.my.id/codes/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://endfield-ind.my.id/card-creator/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
     <loc>https://endfield-ind.my.id/gacha/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

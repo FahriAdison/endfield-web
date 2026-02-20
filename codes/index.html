@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redeem Code Endfield Indonesia | Kode Penukaran</title>
+    <meta
+      name="description"
+      content="Daftar redeem code Arknights: Endfield dengan status aktif, estimasi aktif, atau kadaluarsa, plus tombol copy cepat."
+    />
+    <meta name="keywords" content="redeem code endfield, kode penukaran endfield, hadiah code endfield" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#071019" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Redeem Code Endfield Indonesia | Kode Penukaran" />
+    <meta
+      property="og:description"
+      content="Tracker redeem code Endfield dengan info reward, platform, status, dan sumber referensi."
+    />
+    <meta property="og:url" content="https://endfield-ind.my.id/codes/" />
+    <meta property="og:image" content="https://endfield-ind.my.id/assets/images/event-spring.jpg" />
+    <meta property="og:image:alt" content="Redeem code Endfield Indonesia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Redeem Code Endfield Indonesia | Kode Penukaran" />
+    <meta
+      name="twitter:description"
+      content="Daftar kode penukaran Endfield + status klaim dan reward yang didapat."
+    />
+    <meta name="twitter:image" content="https://endfield-ind.my.id/assets/images/event-spring.jpg" />
+    <link rel="canonical" href="https://endfield-ind.my.id/codes/" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/assets/images/hero-share.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-page="codes" data-base-path="..">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="page-hero">
+      <nav class="nav container">
+        <a class="brand" href="../">Endfield Web</a>
+        <div class="nav-links">
+          <a href="../">Home</a>
+        </div>
+      </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">REDEEM CODE TRACKER</p>
+        <h1>Kode Penukaran Endfield</h1>
+        <p>
+          Daftar code yang masih mungkin aktif, sudah kadaluarsa, dan detail
+          reward agar kamu bisa klaim lebih cepat.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container">
+        <div class="event-dashboard">
+          <article class="card event-stat-card">
+            <p class="event-stat-label">Aktif / Kemungkinan Aktif</p>
+            <h3 id="codes-active-count">0</h3>
+          </article>
+          <article class="card event-stat-card">
+            <p class="event-stat-label">Kadaluarsa</p>
+            <h3 id="codes-expired-count">0</h3>
+          </article>
+          <article class="card event-stat-card">
+            <p class="event-stat-label">Total Kode</p>
+            <h3 id="codes-total-count">0</h3>
+          </article>
+        </div>
+        <p class="stamp" id="codes-stamp">Memuat data redeem code...</p>
+      </section>
+
+      <section class="section container">
+        <div class="section-controls">
+          <input id="codes-search" type="search" placeholder="Cari kode, hadiah, atau platform..." />
+          <select id="codes-filter">
+            <option value="ALL">Semua Status</option>
+            <option value="likely-active">Kemungkinan Aktif</option>
+            <option value="active">Aktif</option>
+            <option value="expired">Kadaluarsa</option>
+          </select>
+          <select id="codes-sort">
+            <option value="STATUS">Urut: Status</option>
+            <option value="AZ">Urut: Kode A-Z</option>
+            <option value="DATE_DESC">Urut: Cek Terbaru</option>
+          </select>
+        </div>
+        <p class="result-count" id="codes-count"></p>
+        <div class="grid code-grid" id="codes-grid"></div>
+      </section>
+
+      <section class="section container">
+        <h2>Sumber Kode</h2>
+        <ul class="source-list" id="codes-source-list"></ul>
+        <p class="disclaimer">
+          Catatan: status code bisa berubah tanpa pemberitahuan. Selalu cek ulang
+          lewat menu redeem di dalam game.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Endfield Web - Redeem Codes</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

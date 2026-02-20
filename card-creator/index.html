@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Creator Endfield Indonesia | Buat Kartu Karakter</title>
+    <meta
+      name="description"
+      content="Buat kartu karakter Endfield versi kamu sendiri: pilih operator, style kartu, tagline, lalu export PNG langsung dari browser."
+    />
+    <meta name="keywords" content="endfield card creator, kartu karakter endfield, endfield fan card" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#071019" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Card Creator Endfield Indonesia | Buat Kartu Karakter" />
+    <meta
+      property="og:description"
+      content="Tool fanmade untuk membuat kartu karakter Endfield dan export PNG secara instan."
+    />
+    <meta property="og:url" content="https://endfield-ind.my.id/card-creator/" />
+    <meta property="og:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
+    <meta property="og:image:alt" content="Card creator Endfield Indonesia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Card Creator Endfield Indonesia | Buat Kartu Karakter" />
+    <meta
+      name="twitter:description"
+      content="Pilih karakter, style, tagline, lalu generate kartu Endfield versi kamu."
+    />
+    <meta name="twitter:image" content="https://endfield-ind.my.id/assets/images/hero-share.jpg" />
+    <link rel="canonical" href="https://endfield-ind.my.id/card-creator/" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/assets/images/hero-share.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-page="card-creator" data-base-path="..">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="page-hero">
+      <nav class="nav container">
+        <a class="brand" href="../">Endfield Web</a>
+        <div class="nav-links">
+          <a href="../">Home</a>
+        </div>
+      </nav>
+      <div class="container page-hero-copy">
+        <p class="kicker">FAN TOOL</p>
+        <h1>Character Card Creator</h1>
+        <p>
+          Bikin kartu karakter Endfield dengan style pilihanmu, lalu export PNG
+          untuk dibagikan.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container creator-layout">
+        <article class="card creator-controls">
+          <h2>Pengaturan Kartu</h2>
+          <div class="creator-field">
+            <label for="creator-character">Karakter</label>
+            <select id="creator-character"></select>
+          </div>
+          <div class="creator-field">
+            <label for="creator-style">Style</label>
+            <select id="creator-style"></select>
+          </div>
+          <div class="creator-field">
+            <label for="creator-alias">Label Atas</label>
+            <input id="creator-alias" type="text" placeholder="Contoh: Frontier Cadre" />
+          </div>
+          <div class="creator-field">
+            <label for="creator-tagline">Tagline</label>
+            <input id="creator-tagline" type="text" placeholder="Contoh: High Priority Deployment" />
+          </div>
+          <div class="creator-field creator-checks">
+            <label><input id="creator-show-tier" type="checkbox" checked /> Tampilkan Tier</label>
+            <label><input id="creator-show-role" type="checkbox" checked /> Tampilkan Role</label>
+          </div>
+          <div class="creator-actions">
+            <button class="btn ghost" id="creator-random" type="button">Acak</button>
+            <button class="btn primary" id="creator-download" type="button">Download PNG</button>
+          </div>
+          <p class="stamp" id="creator-status">Siap membuat kartu.</p>
+        </article>
+
+        <article class="card creator-preview-shell">
+          <div class="creator-preview" id="creator-preview">
+            <div class="creator-preview-top">
+              <span id="creator-preview-alias">Frontier Cadre</span>
+              <span id="creator-preview-tier">TIER S</span>
+            </div>
+            <div class="creator-preview-mid">
+              <img id="creator-preview-image" src="../assets/icons/laevatain.webp" alt="Operator preview" />
+            </div>
+            <div class="creator-preview-bottom">
+              <p id="creator-preview-name">Laevatain</p>
+              <p id="creator-preview-role">Main DPS</p>
+              <p id="creator-preview-tagline">High Priority Deployment</p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Endfield Web - Card Creator</p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

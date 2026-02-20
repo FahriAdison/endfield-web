@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "updatedAt": "2026-02-20",
+    "timezoneNote": "Waktu event mengacu ke jadwal server yang dicantumkan sumber.",
+    "notes": [
+      "Data event diambil dari kanal resmi GRYPHLINE dan ringkasan komunitas.",
+      "Redeem code cepat berubah; selalu verifikasi ulang di menu redeem in-game."
+    ]
+  },
+  "events": [
+    {
+      "id": "floaty-messenger",
+      "title": "The Floaty Messenger Chartered Headhunting",
+      "type": "Banner",
+      "status": "active",
+      "highlight": "Rate-Up 6★ Gilberta",
+      "startAt": "2026-02-07T12:00:00-05:00",
+      "endAt": "2026-02-24T11:59:00-05:00",
+      "summary": "Banner chartered resmi dengan giliran rate-up Gilberta, plus event sign-in Messenger Express dan Combat Drills.",
+      "rewards": [
+        "Messenger Express HH Permit x5",
+        "Operator Trial: Gilberta",
+        "AIC Quota Exchange khusus banner"
+      ],
+      "image": "assets/images/banner-gilberta.jpg",
+      "source": "https://endfield.gryphline.com/en-us/news/7028"
+    },
+    {
+      "id": "hues-of-passion",
+      "title": "Hues of Passion Chartered Headhunting",
+      "type": "Banner",
+      "status": "upcoming",
+      "highlight": "Estimasi komunitas: Rate-Up 6★ Yvonne",
+      "startAt": "2026-02-24T12:00:00-05:00",
+      "endAt": "2026-03-13T11:59:00-05:00",
+      "summary": "Jadwal dan roster ini masih mengikuti tracking komunitas dan bisa berubah saat pengumuman resmi dipublikasikan.",
+      "rewards": [
+        "Estimasi reset pity banner chartered",
+        "Estimasi trial operator baru"
+      ],
+      "image": "assets/images/banner-yvonne.png",
+      "source": "https://game8.co/games/Arknights-Endfield/archives/548162"
+    },
+    {
+      "id": "release-preview-devcomm",
+      "title": "Official Release Preview DEV Comm",
+      "type": "DEV Comm",
+      "status": "completed",
+      "highlight": "Ringkasan optimasi versi rilis",
+      "startAt": "2026-01-17T12:00:00+08:00",
+      "endAt": null,
+      "summary": "Berisi perubahan besar untuk progression, AIC, combat, social feature, dan performa menjelang rilis resmi.",
+      "rewards": [
+        "Informasi patch dan kualitas hidup",
+        "Detail optimasi sistem dan balancing"
+      ],
+      "image": "assets/images/gallery-dev-comm.png",
+      "source": "https://endfield.gryphline.com/en-us/news/4499"
+    },
+    {
+      "id": "scars-of-the-forge",
+      "title": "Scars of the Forge Chartered Headhunting",
+      "type": "Banner",
+      "status": "completed",
+      "highlight": "Rate-Up 6★ Laevatain (banner sebelumnya)",
+      "startAt": "2026-01-20T12:00:00-05:00",
+      "endAt": "2026-02-07T11:59:00-05:00",
+      "summary": "Banner chartered periode awal rilis dengan event sign-in Firewalker's Trail.",
+      "rewards": [
+        "Firewalker's Trail HH Permit x5",
+        "Operator Trial: Laevatain"
+      ],
+      "image": "assets/images/banner-laevatain.jpg",
+      "source": "https://endfield.gryphline.com/en-us/news/3847"
+    }
+  ],
+  "codes": [
+    {
+      "id": "endfieldgift",
+      "code": "ENDFIELDGIFT",
+      "status": "likely-active",
+      "platform": "All Platforms",
+      "reward": "150 Oroberyl, 20k T-Cred, 10 Tactical Battle Record",
+      "expiresAt": null,
+      "checkedAt": "2026-02-20",
+      "note": "Dilaporkan masih aktif oleh beberapa guide komunitas, tetapi belum ada konfirmasi resmi satu sumber tunggal.",
+      "sources": [
+        "https://www.gamesradar.com/games/action-rpg/arknights-endfield-codes/",
+        "https://www.dexerto.com/gaming/arknights-endfield-codes-3212666/"
+      ]
+    },
+    {
+      "id": "endfield4pc",
+      "code": "ENDFIELD4PC",
+      "status": "likely-active",
+      "platform": "PC",
+      "reward": "13k T-Cred, 100 Orange T2 Mats, 3 Material Boxes",
+      "expiresAt": null,
+      "checkedAt": "2026-02-20",
+      "note": "Kode ini sering dilaporkan khusus client PC. Jika gagal klaim, kemungkinan sudah ditutup server.",
+      "sources": [
+        "https://www.gamesradar.com/games/action-rpg/arknights-endfield-codes/",
+        "https://www.dexerto.com/gaming/arknights-endfield-codes-3212666/"
+      ]
+    },
+    {
+      "id": "allfield",
+      "code": "ALLFIELD",
+      "status": "expired",
+      "platform": "All Platforms",
+      "reward": "10k T-Cred, 100 Orange T2 Mats, 3 Material Boxes",
+      "expiresAt": "2026-01-31",
+      "checkedAt": "2026-02-20",
+      "note": "Sudah tercatat kadaluarsa di banyak tracker komunitas.",
+      "sources": [
+        "https://www.pockettactics.com/arknights-endfield/codes"
+      ]
+    },
+    {
+      "id": "returnofall",
+      "code": "RETURNOFALL",
+      "status": "expired",
+      "platform": "All Platforms",
+      "reward": "3 Material Boxes, 100 Orange T2 Mats",
+      "expiresAt": "2026-01-31",
+      "checkedAt": "2026-02-20",
+      "note": "Kode fase awal rilis, umumnya sudah tidak bisa dipakai.",
+      "sources": [
+        "https://www.pockettactics.com/arknights-endfield/codes"
+      ]
+    }
+  ],
+  "cardCreator": {
+    "taglines": [
+      "Core Operator - Talos-II Frontline",
+      "AIC Tactical Unit",
+      "Wuling Response Team",
+      "High Priority Deployment",
+      "Protocol Breach Specialist",
+      "Industrial Combat Cadre"
+    ],
+    "presets": [
+      {
+        "id": "frontier",
+        "name": "Frontier Amber",
+        "bgA": "#1d2c3d",
+        "bgB": "#0d1622",
+        "accent": "#f7cb6b",
+        "ink": "#fef5dd"
+      },
+      {
+        "id": "talos",
+        "name": "Talos Steel",
+        "bgA": "#123349",
+        "bgB": "#09131d",
+        "accent": "#70d9ff",
+        "ink": "#e9f8ff"
+      },
+      {
+        "id": "ember",
+        "name": "Ember Signal",
+        "bgA": "#3b1c24",
+        "bgB": "#12070c",
+        "accent": "#ff8c63",
+        "ink": "#ffe9df"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "Official News 7028 - The Floaty Messenger",
+      "url": "https://endfield.gryphline.com/en-us/news/7028"
+    },
+    {
+      "label": "Official News 4499 - DEV Comm",
+      "url": "https://endfield.gryphline.com/en-us/news/4499"
+    },
+    {
+      "label": "Official News 3847 - Scars of the Forge",
+      "url": "https://endfield.gryphline.com/en-us/news/3847"
+    },
+    {
+      "label": "Game8 - Hues of Passion (komunitas)",
+      "url": "https://game8.co/games/Arknights-Endfield/archives/548162"
+    },
+    {
+      "label": "GamesRadar - Code Tracker",
+      "url": "https://www.gamesradar.com/games/action-rpg/arknights-endfield-codes/"
+    },
+    {
+      "label": "Dexerto - Code Tracker",
+      "url": "https://www.dexerto.com/gaming/arknights-endfield-codes-3212666/"
+    },
+    {
+      "label": "PocketTactics - Code Tracker",
+      "url": "https://www.pockettactics.com/arknights-endfield/codes"
+    }
+  ]
+}
