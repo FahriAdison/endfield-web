@@ -3846,7 +3846,13 @@ async function waitPreviewAssets(previewEl) {
 }
 
 async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas) {
+    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+    if (statusEl) {
+      statusEl.textContent = "Capture preview gagal, memakai fallback renderer.";
+    }
+  }
   if (!canvas) throw new Error("Capture preview gagal");
   const dataUrl = canvas.toDataURL("image/png");
   const link = document.createElement("a");
@@ -3865,6 +3871,8 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
       return await window.html2canvas(previewEl, {
         useCORS: true,
         allowTaint: false,
+        foreignObjectRendering: true,
+        imageTimeout: 15000,
         backgroundColor: null,
         scale: scaleBase,
         logging: false,
@@ -4139,7 +4147,13 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 }
 
 async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas) {
+    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+    if (statusEl) {
+      statusEl.textContent = "Capture preview gagal, memakai fallback renderer.";
+    }
+  }
   if (!canvas) throw new Error("Capture preview gagal");
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Gagal membentuk file PNG.");
@@ -4684,7 +4698,7 @@ async function initCardCreatorPage(characters) {
   };
   const artificeSummaryText = (slotKey, statCount = 3) => {
     const artifice = sanitizeGearArtifice(slotKey, statCount);
-    return `Artifice: ${artifice.map((value) => `+${value}`).join(" / ")}`;
+    return `Artifice +${artifice.join("/+")}`;
   };
   const creatorSafeImageSrc = (value, fallback = "assets/skill-icons/basic.webp") => {
     const cleaned = String(value || "").trim();
@@ -5145,7 +5159,7 @@ async function initCardCreatorPage(characters) {
     refs.previewBreakthrough.textContent = `Breakthrough ${state.breakthrough}`;
     refs.previewAffinity.textContent = `Affinity ${state.affinity}`;
     refs.previewUid.textContent = `UID ${state.uid}`;
-    refs.previewWeaponName.textContent = state.weaponName;
+    refs.previewWeaponName.textContent = String(state.weaponName || "-").slice(0, 34);
     refs.previewWeaponLevel.textContent = String(state.weaponLevel);
     refs.previewWeaponBreakthrough.textContent = String(state.weaponBreakthrough);
     refs.previewWeaponPotential.textContent = String(state.weaponPotential);
@@ -5157,8 +5171,8 @@ async function initCardCreatorPage(characters) {
     refs.previewSkillActive.textContent = String(state.skillActive);
     refs.previewSkillUltimate.textContent = String(state.skillUltimate);
     refs.previewSkillTalent.textContent = String(state.skillTalent);
-    refs.previewBuildSkills.textContent = character.buildSkills || "-";
-    refs.previewBuildTeam.textContent = character.buildTeam || "-";
+    refs.previewBuildSkills.textContent = String(character.buildSkills || "-").slice(0, 88);
+    refs.previewBuildTeam.textContent = String(character.buildTeam || "-").slice(0, 88);
     syncWeaponSelect();
     renderIconSelectors();
     renderIconStrips();
@@ -5167,7 +5181,7 @@ async function initCardCreatorPage(characters) {
     ["armor", "gloves", "kit1", "kit2"].forEach((slotKey) => {
       const nameRef = refs[slotPreviewNameRefKeys[slotKey]];
       if (nameRef) {
-        nameRef.textContent = String(state[slotStateKeys[slotKey]] || "-");
+        nameRef.textContent = String(state[slotStateKeys[slotKey]] || "-").slice(0, 28);
       }
       renderArtificeEditor(character, slotKey);
     });
