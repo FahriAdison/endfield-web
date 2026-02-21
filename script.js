@@ -857,6 +857,7 @@ function initNavDrawer() {
     document.body.classList.toggle("nav-open", open);
     button.setAttribute("aria-expanded", String(open));
   };
+  setOpen(false);
 
   button.addEventListener("click", () => {
     setOpen(!nav.classList.contains("menu-open"));
@@ -877,6 +878,7 @@ function initNavDrawer() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setOpen(false);
   });
+  window.addEventListener("pageshow", () => setOpen(false));
   window.addEventListener("resize", () => setOpen(false));
 }
 
@@ -3800,19 +3802,53 @@ function loadCanvasImage(url) {
   });
 }
 
-async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  let canvas =
-    (await captureCreatorPreviewCanvas(previewEl, statusEl)) || (await renderCreatorCardCanvas(character, preset, state, statusEl));
-  if (!canvas) return;
-  let dataUrl = "";
-  try {
-    dataUrl = canvas.toDataURL("image/png");
-  } catch (error) {
-    console.error(error);
-    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
-    if (!canvas) return;
-    dataUrl = canvas.toDataURL("image/png");
+function waitForImageElement(imgEl, timeoutMs = 2400) {
+  return new Promise((resolve) => {
+    if (!imgEl) {
+      resolve();
+      return;
+    }
+    if (imgEl.complete && imgEl.naturalWidth > 0) {
+      resolve();
+      return;
+    }
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      resolve();
+    };
+    const timer = window.setTimeout(finish, timeoutMs);
+    imgEl.addEventListener("load", () => {
+      window.clearTimeout(timer);
+      finish();
+    }, { once: true });
+    imgEl.addEventListener("error", () => {
+      window.clearTimeout(timer);
+      finish();
+    }, { once: true });
+  });
+}
+
+async function waitPreviewAssets(previewEl) {
+  if (!previewEl || typeof window === "undefined") return;
+  const imageNodes = Array.from(previewEl.querySelectorAll("img"));
+  const tasks = imageNodes.map((img) => waitForImageElement(img));
+  if (typeof document !== "undefined" && document.fonts?.ready) {
+    tasks.push(
+      Promise.race([
+        document.fonts.ready.catch(() => undefined),
+        new Promise((resolve) => window.setTimeout(resolve, 1200)),
+      ])
+    );
   }
+  await Promise.all(tasks);
+}
+
+async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
+  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas) throw new Error("Capture preview gagal");
+  const dataUrl = canvas.toDataURL("image/png");
   const link = document.createElement("a");
   link.href = dataUrl;
   link.download = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
@@ -3822,14 +3858,22 @@ async function exportCreatorCardPng(character, preset, state, statusEl, previewE
 async function captureCreatorPreviewCanvas(previewEl, statusEl) {
   if (previewEl && typeof window !== "undefined" && typeof window.html2canvas === "function") {
     try {
+      await waitPreviewAssets(previewEl);
+      const scaleBase = Number.isFinite(window.devicePixelRatio)
+        ? Math.min(2.5, Math.max(1.6, window.devicePixelRatio))
+        : 2;
       return await window.html2canvas(previewEl, {
         useCORS: true,
+        allowTaint: false,
         backgroundColor: null,
-        scale: 2,
+        scale: scaleBase,
         logging: false,
       });
     } catch (error) {
       console.error(error);
+      if (statusEl) {
+        statusEl.textContent = "Capture preview gagal. Coba refresh lalu export lagi.";
+      }
     }
   }
   return null;
@@ -4095,21 +4139,9 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 }
 
 async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  let canvas =
-    (await captureCreatorPreviewCanvas(previewEl, statusEl)) || (await renderCreatorCardCanvas(character, preset, state, statusEl));
-  if (!canvas) return;
-
-  let blob = null;
-  try {
-    blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-  } catch (error) {
-    console.error(error);
-  }
-  if (!blob) {
-    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
-    if (!canvas) return;
-    blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-  }
+  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas) throw new Error("Capture preview gagal");
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Gagal membentuk file PNG.");
 
   const fileName = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
