@@ -1596,6 +1596,42 @@ select:focus-visible {
   order: 2;
 }
 
+.creator-beta-alert {
+  order: 0;
+  border: 1px solid rgba(248, 225, 88, 0.5);
+  background:
+    linear-gradient(140deg, rgba(47, 33, 4, 0.6), rgba(26, 20, 8, 0.52)),
+    rgba(17, 12, 5, 0.74);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+}
+
+.creator-beta-alert p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #f9f3d4;
+}
+
+.creator-beta-alert strong {
+  color: #fff7a7;
+}
+
+.creator-beta-alert a {
+  color: #ffe95a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.creator-beta-alert-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  margin-right: 0.35rem;
+  color: #ffe95a;
+  font-weight: 700;
+}
+
 .creator-preview-shell {
   order: 1;
 }
@@ -2022,12 +2058,18 @@ select:focus-visible {
 }
 
 .creator-tier-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--creator-accent) 74%, #ffffff 12%);
   background: color-mix(in srgb, var(--creator-accent) 24%, transparent);
-  padding: 0.16rem 0.62rem;
+  padding: 0.16rem 0.72rem;
+  min-width: 5.4rem;
+  white-space: nowrap;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
+  line-height: 1;
 }
 
 .creator-stars {
@@ -2354,12 +2396,12 @@ select:focus-visible {
 }
 
 .creator-showcase-card span {
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   color: color-mix(in srgb, var(--creator-ink) 65%, #93a2b0);
 }
 
 .creator-showcase-card strong {
-  font-size: 0.62rem;
+  font-size: 0.66rem;
   font-weight: 600;
   color: color-mix(in srgb, var(--creator-ink) 92%, #ffffff);
   text-align: left;
@@ -2406,8 +2448,8 @@ select:focus-visible {
 }
 
 .creator-preview-weapon-block img {
-  width: 1.95rem;
-  height: 1.95rem;
+  width: 2.24rem;
+  height: 2.24rem;
   border-radius: 0.44rem;
   border: 1px solid rgba(137, 168, 192, 0.42);
   background: rgba(8, 16, 24, 0.82);
@@ -2424,7 +2466,7 @@ select:focus-visible {
 .creator-preview-weapon-block small {
   display: block;
   margin-top: 0.04rem;
-  font-size: 0.58rem;
+  font-size: 0.61rem;
   color: color-mix(in srgb, var(--creator-ink) 66%, #9cafbe);
 }
 
@@ -2435,8 +2477,8 @@ select:focus-visible {
 
 .creator-showcase-card-equipment .creator-preview-gear-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 0.34rem;
-  row-gap: 0.18rem;
+  column-gap: 0.4rem;
+  row-gap: 0.22rem;
 }
 
 .creator-preview-gear-item {
@@ -2447,8 +2489,8 @@ select:focus-visible {
 }
 
 .creator-preview-gear-item img {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.82rem;
+  height: 1.82rem;
   border-radius: 0.4rem;
   border: 1px solid rgba(137, 168, 192, 0.42);
   background: rgba(8, 16, 24, 0.82);
@@ -2458,14 +2500,14 @@ select:focus-visible {
 
 .creator-preview-gear-item span {
   display: block;
-  font-size: 0.56rem;
+  font-size: 0.6rem;
   color: color-mix(in srgb, var(--creator-ink) 66%, #9cafbe);
 }
 
 .creator-preview-gear-item strong {
   display: block;
   margin-top: 0.02rem;
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   text-align: left;
   line-height: 1.1;
 }
@@ -2473,7 +2515,7 @@ select:focus-visible {
 .creator-preview-gear-item small {
   display: block;
   margin-top: 0.04rem;
-  font-size: 0.54rem;
+  font-size: 0.6rem;
   line-height: 1.05;
   color: color-mix(in srgb, var(--creator-ink) 70%, #99b1c2);
 }
@@ -2508,7 +2550,7 @@ select:focus-visible {
 }
 
 .creator-preview-essence .creator-essence-item p {
-  font-size: 0.56rem;
+  font-size: 0.6rem;
   margin-bottom: 0.08rem;
 }
 
@@ -2517,7 +2559,7 @@ select:focus-visible {
 }
 
 .creator-preview-essence .creator-essence-seg {
-  min-height: 0.62rem;
+  min-height: 0.68rem;
 }
 
 .creator-showcase-card-essence .creator-preview-essence {
@@ -2603,7 +2645,7 @@ select:focus-visible {
   .creator-showcase-preview {
     width: 1060px;
     min-width: 1060px;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
     min-height: 0;
   }
 
@@ -3627,6 +3669,17 @@ select:focus-visible {
 }
 
 @media (max-width: 560px) {
+  .creator-beta-alert p {
+    font-size: 0.82rem;
+    line-height: 1.42;
+  }
+
+  .creator-showcase-preview {
+    width: 1100px;
+    min-width: 1100px;
+    aspect-ratio: 16 / 11.4;
+  }
+
   .creator-grid-two {
     grid-template-columns: 1fr;
     gap: 0.46rem;
@@ -3651,19 +3704,49 @@ select:focus-visible {
   }
 
   .creator-showcase-main {
-    grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 34%) minmax(0, 1fr);
     gap: 0.34rem;
   }
 
   .creator-showcase-card-weapon ul,
   .creator-showcase-card-skills ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 0.24rem;
+    column-gap: 0.22rem;
   }
 
   .creator-showcase-card-equipment .creator-preview-gear-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 0.24rem;
+    column-gap: 0.22rem;
+  }
+
+  .creator-showcase-card h4 {
+    font-size: 0.56rem;
+  }
+
+  .creator-showcase-card strong {
+    font-size: 0.6rem;
+  }
+
+  .creator-preview-gear-item strong {
+    font-size: 0.6rem;
+  }
+
+  .creator-preview-gear-item small,
+  .creator-preview-gear-item span {
+    font-size: 0.54rem;
+  }
+
+  .creator-preview-essence .creator-essence-item p {
+    font-size: 0.54rem;
+  }
+
+  .creator-preview-essence .creator-essence-seg {
+    min-height: 0.58rem;
+  }
+
+  .creator-tier-pill {
+    min-width: 5rem;
+    font-size: 0.66rem;
   }
 
   .creator-showcase-portrait .creator-image-frame {

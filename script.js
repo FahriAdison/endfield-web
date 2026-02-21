@@ -3971,16 +3971,20 @@ async function captureCreatorPreviewBlob(previewEl, statusEl) {
   const rect = previewEl.getBoundingClientRect();
   const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || rect.width || 1));
   const targetHeight = Math.max(1, Math.round(previewEl.scrollHeight || rect.height || 1));
+  const exportScale = 2;
+  const exportWidth = Math.max(1, Math.round(targetWidth * exportScale));
+  const exportHeight = Math.max(1, Math.round(targetHeight * exportScale));
 
   if (typeof window.domtoimage?.toBlob === "function") {
     try {
       const blob = await window.domtoimage.toBlob(previewEl, {
         cacheBust: true,
         bgcolor: "rgba(0,0,0,0)",
-        width: targetWidth,
-        height: targetHeight,
+        width: exportWidth,
+        height: exportHeight,
         style: {
-          transform: "none",
+          transform: `scale(${exportScale})`,
+          transformOrigin: "top left",
           margin: "0",
           width: `${targetWidth}px`,
           height: `${targetHeight}px`,
@@ -5390,7 +5394,8 @@ async function initCardCreatorPage(characters) {
     if (!character || !preset) return;
 
     state.weaponName = normalizeWeaponName(state.weaponName, character.defaultWeaponName || "-");
-    state.uid = sanitizeUid(state.uid, creatorProfileId(character, state));
+    const fallbackUid = sanitizeUid(creatorProfileId(character, state), "AEND-UNKNOWN");
+    state.uid = sanitizeUid(state.uid, "");
     state.region = normalizeRegion(state.region, "Asia");
     state.alias = cleanText(state.alias, 42, "");
     state.tagline = cleanText(state.tagline, 120, "High Priority Deployment");
@@ -5447,7 +5452,7 @@ async function initCardCreatorPage(characters) {
     refs.previewPotential.textContent = `Potential ${state.potential}`;
     refs.previewBreakthrough.textContent = `Breakthrough ${state.breakthrough}`;
     refs.previewAffinity.textContent = `Affinity ${state.affinity}`;
-    refs.previewUid.textContent = `UID ${state.uid}`;
+    refs.previewUid.textContent = `UID ${state.uid || fallbackUid}`;
     refs.previewWeaponName.textContent = String(state.weaponName || "-").slice(0, 34);
     refs.previewWeaponLevel.textContent = String(state.weaponLevel);
     refs.previewWeaponBreakthrough.textContent = String(state.weaponBreakthrough);
@@ -5564,8 +5569,10 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.uid.addEventListener("input", () => {
-    state.uid = sanitizeUid(refs.uid.value, sanitizeUid(creatorProfileId(findCharacter(), state)));
-    refs.uid.value = state.uid;
+    state.uid = sanitizeUid(refs.uid.value, "");
+    if (refs.uid.value !== state.uid) {
+      refs.uid.value = state.uid;
+    }
     applyPreview();
   });
   refs.region.addEventListener("change", () => {
