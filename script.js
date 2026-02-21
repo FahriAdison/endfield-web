@@ -3881,6 +3881,9 @@ function isCanvasLikelyBlank(canvas) {
 
 async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
   let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (canvas && isCanvasLikelyBlank(canvas)) {
+    canvas = null;
+  }
   if (!canvas) {
     canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
     if (statusEl) {
@@ -3948,13 +3951,55 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
       document.body.appendChild(stage);
       await waitPreviewAssets(clone);
 
-      const attempts = [
+      const directAttempts = [
         {
           useCORS: true,
           allowTaint: false,
           foreignObjectRendering: false,
           imageTimeout: 15000,
-          backgroundColor: "#0a1117",
+          backgroundColor: null,
+          scale: scaleBase,
+          logging: false,
+          width: targetWidth + 2,
+          height: targetHeight + 2,
+          windowWidth: Math.max(targetWidth, Math.round(window.innerWidth || targetWidth)),
+          windowHeight: Math.max(targetHeight, Math.round(window.innerHeight || targetHeight)),
+          scrollX: 0,
+          scrollY: 0,
+        },
+        {
+          useCORS: true,
+          allowTaint: false,
+          foreignObjectRendering: true,
+          imageTimeout: 15000,
+          backgroundColor: null,
+          scale: scaleBase,
+          logging: false,
+          width: targetWidth + 2,
+          height: targetHeight + 2,
+          windowWidth: Math.max(targetWidth, Math.round(window.innerWidth || targetWidth)),
+          windowHeight: Math.max(targetHeight, Math.round(window.innerHeight || targetHeight)),
+          scrollX: 0,
+          scrollY: 0,
+        },
+      ];
+
+      for (const options of directAttempts) {
+        try {
+          const canvas = await window.html2canvas(previewEl, options);
+          if (!isCanvasLikelyBlank(canvas)) {
+            return canvas;
+          }
+        } catch {}
+      }
+
+      const cloneAttempts = [
+        {
+          useCORS: true,
+          allowTaint: false,
+          foreignObjectRendering: false,
+          imageTimeout: 15000,
+          backgroundColor: null,
           scale: scaleBase,
           logging: false,
           width: targetWidth + 2,
@@ -3969,7 +4014,7 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
           allowTaint: false,
           foreignObjectRendering: true,
           imageTimeout: 15000,
-          backgroundColor: "#0a1117",
+          backgroundColor: null,
           scale: scaleBase,
           logging: false,
           width: targetWidth + 2,
@@ -3980,33 +4025,15 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
           scrollY: 0,
         },
       ];
-      let firstCanvas = null;
-      for (const options of attempts) {
+      for (const options of cloneAttempts) {
         try {
           const canvas = await window.html2canvas(clone, options);
-          if (!firstCanvas && canvas) firstCanvas = canvas;
           if (!isCanvasLikelyBlank(canvas)) {
             return canvas;
           }
         } catch {}
       }
-      const directAttempts = attempts.map((item) => ({
-        ...item,
-        width: targetWidth + 2,
-        height: targetHeight + 2,
-        windowWidth: Math.max(targetWidth, Math.round(window.innerWidth || targetWidth)),
-        windowHeight: Math.max(targetHeight, Math.round(window.innerHeight || targetHeight)),
-      }));
-      for (const options of directAttempts) {
-        try {
-          const canvas = await window.html2canvas(previewEl, options);
-          if (!firstCanvas && canvas) firstCanvas = canvas;
-          if (!isCanvasLikelyBlank(canvas)) {
-            return canvas;
-          }
-        } catch {}
-      }
-      return firstCanvas;
+      return null;
     } catch (error) {
       console.error(error);
       if (statusEl) {
@@ -4283,6 +4310,9 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 
 async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
   let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (canvas && isCanvasLikelyBlank(canvas)) {
+    canvas = null;
+  }
   if (!canvas) {
     canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
     if (statusEl) {
