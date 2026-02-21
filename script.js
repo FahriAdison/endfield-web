@@ -3845,6 +3845,41 @@ async function waitPreviewAssets(previewEl) {
   await Promise.all(tasks);
 }
 
+function isCanvasLikelyBlank(canvas) {
+  if (!canvas) return true;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  if (!ctx) return true;
+  const width = canvas.width || 0;
+  const height = canvas.height || 0;
+  if (width < 2 || height < 2) return true;
+  const step = Math.max(4, Math.floor(Math.min(width, height) / 80));
+  let total = 0;
+  let opaque = 0;
+  let minLum = 255;
+  let maxLum = 0;
+  try {
+    for (let y = 0; y < height; y += step) {
+      for (let x = 0; x < width; x += step) {
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
+        const a = pixel[3];
+        total += 1;
+        if (a > 8) {
+          opaque += 1;
+          const lum = Math.round(pixel[0] * 0.2126 + pixel[1] * 0.7152 + pixel[2] * 0.0722);
+          if (lum < minLum) minLum = lum;
+          if (lum > maxLum) maxLum = lum;
+        }
+      }
+    }
+  } catch {
+    return false;
+  }
+  if (!total || opaque / total < 0.04) return true;
+  if (maxLum < 80) return true;
+  if (maxLum - minLum < 6) return true;
+  return false;
+}
+
 async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
   let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
   if (!canvas) {
@@ -3868,15 +3903,48 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
       const scaleBase = Number.isFinite(window.devicePixelRatio)
         ? Math.min(2.5, Math.max(1.6, window.devicePixelRatio))
         : 2;
-      return await window.html2canvas(previewEl, {
-        useCORS: true,
-        allowTaint: false,
-        foreignObjectRendering: true,
-        imageTimeout: 15000,
-        backgroundColor: null,
-        scale: scaleBase,
-        logging: false,
-      });
+      const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || previewEl.clientWidth || 1));
+      const targetHeight = Math.max(1, Math.round(previewEl.scrollHeight || previewEl.clientHeight || 1));
+      const attempts = [
+        {
+          useCORS: true,
+          allowTaint: false,
+          foreignObjectRendering: false,
+          imageTimeout: 15000,
+          backgroundColor: "#0a1117",
+          scale: scaleBase,
+          logging: false,
+          width: targetWidth,
+          height: targetHeight,
+          windowWidth: targetWidth,
+          windowHeight: targetHeight,
+          scrollX: 0,
+          scrollY: 0,
+        },
+        {
+          useCORS: true,
+          allowTaint: false,
+          foreignObjectRendering: true,
+          imageTimeout: 15000,
+          backgroundColor: "#0a1117",
+          scale: scaleBase,
+          logging: false,
+          width: targetWidth,
+          height: targetHeight,
+          windowWidth: targetWidth,
+          windowHeight: targetHeight,
+          scrollX: 0,
+          scrollY: 0,
+        },
+      ];
+      for (const options of attempts) {
+        try {
+          const canvas = await window.html2canvas(previewEl, options);
+          if (!isCanvasLikelyBlank(canvas)) {
+            return canvas;
+          }
+        } catch {}
+      }
     } catch (error) {
       console.error(error);
       if (statusEl) {
@@ -3989,7 +4057,13 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 
   ctx.fillStyle = "rgba(0,0,0,0.22)";
   ctx.fillRect(artBounds.x, artBounds.y, artBounds.w, artBounds.h);
-  const imageUrl = asset(character.image);
+  const getPreviewImgSrc = (id) => {
+    if (typeof document === "undefined") return "";
+    const node = document.getElementById(id);
+    return String(node?.getAttribute("src") || node?.src || "").trim();
+  };
+  const previewMainImage = getPreviewImgSrc("creator-preview-image");
+  const imageUrl = previewMainImage || asset(character.image);
   try {
     const img = await loadCanvasImage(imageUrl);
     const scale = Math.max(artBounds.w / img.width, artBounds.h / img.height);
@@ -4080,11 +4154,6 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
     chipX += w + 16;
   });
 
-  const getPreviewImgSrc = (id) => {
-    if (typeof document === "undefined") return "";
-    const node = document.getElementById(id);
-    return String(node?.getAttribute("src") || node?.src || "").trim();
-  };
   const drawMiniIcon = async (src, x, y, size = 30) => {
     if (!src) return;
     try {
@@ -4854,7 +4923,9 @@ async function initCardCreatorPage(characters) {
       const effectiveCap = Math.min(baseCap, fallbackCap);
       const level = effectiveCap <= 0 ? 0 : clampNumber(state.weaponEssence[index], baseMin, effectiveCap, baseMin);
       state.weaponEssence[index] = level;
-      const text = `${label} Lv. ${level}/${baseCap}`;
+      const bonus = Math.max(0, level - baseMin);
+      const levelText = bonus > 0 ? `${baseMin}+${bonus}` : `${level}`;
+      const text = `${label} Lv. ${levelText}/${baseCap}`;
       if (labelRefs[index]) labelRefs[index].textContent = text;
       if (previewLabelRefs[index]) previewLabelRefs[index].textContent = text;
       const segHtml = [];

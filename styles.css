@@ -2252,7 +2252,8 @@ select:focus-visible {
 }
 
 .creator-showcase-portrait .creator-image-frame {
-  clip-path: polygon(9% 0, 100% 0, 100% 87%, 91% 100%, 0 100%, 0 13%);
+  clip-path: none;
+  border-radius: 0.72rem;
   min-height: 0;
   height: 100%;
 }
@@ -2328,7 +2329,7 @@ select:focus-visible {
 
 .creator-showcase-card h4 {
   margin: 0 0 0.26rem;
-  font-size: 0.66rem;
+  font-size: 0.62rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--creator-accent) 75%, #f4f7ff);
@@ -2494,7 +2495,7 @@ select:focus-visible {
 
 .creator-showcase-portrait .creator-image-frame img {
   object-fit: contain;
-  object-position: center bottom;
+  object-position: center center;
   background:
     radial-gradient(circle at 40% 8%, rgba(253, 253, 31, 0.18), transparent 46%),
     linear-gradient(180deg, rgba(3, 7, 12, 0.5), rgba(3, 7, 12, 0.86));
@@ -2554,14 +2555,14 @@ select:focus-visible {
   }
 
   .creator-showcase-preview {
-    width: 980px;
-    min-width: 980px;
+    width: 1060px;
+    min-width: 1060px;
     aspect-ratio: 16 / 9;
     min-height: 0;
   }
 
   .creator-showcase-main {
-    grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
   }
 
   .creator-showcase-portrait {
