@@ -5593,7 +5593,7 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
   };
   const artificeSummaryText = (slotKey, statCount = 3) => {
     const artifice = sanitizeGearArtifice(slotKey, statCount);
-    return `Artifice +${artifice.join("/+")}`;
+    return `Artifice: +${artifice.join("/+")}`;
   };
   const creatorSafeImageSrc = (value, fallback = "assets/skill-icons/basic.webp") => {
     const cleaned = String(value || "").trim();
@@ -6064,7 +6064,14 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
       Array.isArray(character.imageCandidates) ? character.imageCandidates : [character.image, character.fallbackImage],
       `${character.name} image`
     );
-    refs.previewName.textContent = character.name;
+    const previewNameText = String(character.name || "-");
+    refs.previewName.textContent = previewNameText;
+    refs.previewName.classList.remove("is-long", "is-very-long");
+    if (previewNameText.length >= 20) {
+      refs.previewName.classList.add("is-very-long");
+    } else if (previewNameText.length >= 15) {
+      refs.previewName.classList.add("is-long");
+    }
     refs.previewRole.textContent = state.showRole ? character.role || "-" : "";
     refs.previewRole.hidden = !state.showRole;
     refs.previewTagline.textContent = state.tagline;
