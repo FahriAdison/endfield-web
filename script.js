@@ -3874,20 +3874,13 @@ function isCanvasLikelyBlank(canvas) {
   } catch {
     return false;
   }
-  if (!total || opaque / total < 0.04) return true;
-  if (maxLum < 80) return true;
-  if (maxLum - minLum < 6) return true;
+  if (!total || opaque / total < 0.02) return true;
+  if (maxLum < 26 && maxLum - minLum < 4) return true;
   return false;
 }
 
 async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
-  if (!canvas) {
-    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
-    if (statusEl) {
-      statusEl.textContent = "Capture preview gagal, memakai fallback renderer.";
-    }
-  }
+  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
   if (!canvas) throw new Error("Capture preview gagal");
   const dataUrl = canvas.toDataURL("image/png");
   const link = document.createElement("a");
@@ -3898,13 +3891,53 @@ async function exportCreatorCardPng(character, preset, state, statusEl, previewE
 
 async function captureCreatorPreviewCanvas(previewEl, statusEl) {
   if (previewEl && typeof window !== "undefined" && typeof window.html2canvas === "function") {
+    let stage = null;
     try {
       await waitPreviewAssets(previewEl);
       const scaleBase = Number.isFinite(window.devicePixelRatio)
         ? Math.min(2.5, Math.max(1.6, window.devicePixelRatio))
         : 2;
-      const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || previewEl.clientWidth || 1));
-      const targetHeight = Math.max(1, Math.round(previewEl.scrollHeight || previewEl.clientHeight || 1));
+      const rect = previewEl.getBoundingClientRect();
+      const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || rect.width || 1));
+      const targetHeight = Math.max(1, Math.round(previewEl.scrollHeight || rect.height || 1));
+
+      const clone = previewEl.cloneNode(true);
+      if (!(clone instanceof HTMLElement)) return null;
+      clone.style.width = `${targetWidth}px`;
+      clone.style.minWidth = `${targetWidth}px`;
+      clone.style.maxWidth = `${targetWidth}px`;
+      clone.style.height = `${targetHeight}px`;
+      clone.style.minHeight = `${targetHeight}px`;
+      clone.style.maxHeight = `${targetHeight}px`;
+      clone.style.margin = "0";
+      clone.style.transform = "none";
+      clone.style.contain = "layout paint";
+
+      const sourceImgs = Array.from(previewEl.querySelectorAll("img"));
+      const cloneImgs = Array.from(clone.querySelectorAll("img"));
+      cloneImgs.forEach((img, index) => {
+        const source = sourceImgs[index];
+        const src = String(source?.currentSrc || source?.src || img.getAttribute("src") || "").trim();
+        if (src) img.src = src;
+        img.removeAttribute("srcset");
+        img.loading = "eager";
+        img.decoding = "sync";
+      });
+
+      stage = document.createElement("div");
+      stage.style.position = "fixed";
+      stage.style.left = "-100000px";
+      stage.style.top = "0";
+      stage.style.width = `${targetWidth}px`;
+      stage.style.height = `${targetHeight}px`;
+      stage.style.pointerEvents = "none";
+      stage.style.opacity = "1";
+      stage.style.zIndex = "-1";
+      stage.style.overflow = "hidden";
+      stage.appendChild(clone);
+      document.body.appendChild(stage);
+      await waitPreviewAssets(clone);
+
       const attempts = [
         {
           useCORS: true,
@@ -3914,8 +3947,8 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
           backgroundColor: "#0a1117",
           scale: scaleBase,
           logging: false,
-          width: targetWidth,
-          height: targetHeight,
+          width: targetWidth + 2,
+          height: targetHeight + 2,
           windowWidth: targetWidth,
           windowHeight: targetHeight,
           scrollX: 0,
@@ -3929,26 +3962,49 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
           backgroundColor: "#0a1117",
           scale: scaleBase,
           logging: false,
-          width: targetWidth,
-          height: targetHeight,
+          width: targetWidth + 2,
+          height: targetHeight + 2,
           windowWidth: targetWidth,
           windowHeight: targetHeight,
           scrollX: 0,
           scrollY: 0,
         },
       ];
+      let firstCanvas = null;
       for (const options of attempts) {
         try {
-          const canvas = await window.html2canvas(previewEl, options);
+          const canvas = await window.html2canvas(clone, options);
+          if (!firstCanvas && canvas) firstCanvas = canvas;
           if (!isCanvasLikelyBlank(canvas)) {
             return canvas;
           }
         } catch {}
       }
+      const directAttempts = attempts.map((item) => ({
+        ...item,
+        width: targetWidth + 2,
+        height: targetHeight + 2,
+        windowWidth: Math.max(targetWidth, Math.round(window.innerWidth || targetWidth)),
+        windowHeight: Math.max(targetHeight, Math.round(window.innerHeight || targetHeight)),
+      }));
+      for (const options of directAttempts) {
+        try {
+          const canvas = await window.html2canvas(previewEl, options);
+          if (!firstCanvas && canvas) firstCanvas = canvas;
+          if (!isCanvasLikelyBlank(canvas)) {
+            return canvas;
+          }
+        } catch {}
+      }
+      return null;
     } catch (error) {
       console.error(error);
       if (statusEl) {
         statusEl.textContent = "Capture preview gagal. Coba refresh lalu export lagi.";
+      }
+    } finally {
+      if (stage && stage.parentNode) {
+        stage.parentNode.removeChild(stage);
       }
     }
   }
@@ -4216,13 +4272,7 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 }
 
 async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
-  if (!canvas) {
-    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
-    if (statusEl) {
-      statusEl.textContent = "Capture preview gagal, memakai fallback renderer.";
-    }
-  }
+  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
   if (!canvas) throw new Error("Capture preview gagal");
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Gagal membentuk file PNG.");
