@@ -3677,7 +3677,7 @@ select:focus-visible {
   .creator-showcase-preview {
     width: 1100px;
     min-width: 1100px;
-    aspect-ratio: 16 / 11.4;
+    aspect-ratio: 16 / 12;
   }
 
   .creator-grid-two {
@@ -3724,16 +3724,21 @@ select:focus-visible {
   }
 
   .creator-showcase-card strong {
-    font-size: 0.6rem;
+    font-size: 0.66rem;
+  }
+
+  .creator-preview-gear-item img {
+    width: 1.82rem;
+    height: 1.82rem;
   }
 
   .creator-preview-gear-item strong {
-    font-size: 0.6rem;
+    font-size: 0.68rem;
   }
 
   .creator-preview-gear-item small,
   .creator-preview-gear-item span {
-    font-size: 0.54rem;
+    font-size: 0.6rem;
   }
 
   .creator-preview-essence .creator-essence-item p {

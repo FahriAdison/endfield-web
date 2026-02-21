@@ -52,6 +52,22 @@ const CREATOR_POTENTIAL_ICON_URLS = [
   "assets/icons/showcase/potential-5.png",
 ];
 const CREATOR_AFFINITY_BADGES = ["A0", "A1", "A2", "A3", "A4"];
+const CREATOR_SET_EFFECTS = {
+  aethertech:
+    "3pc: User ATK +8%. Setelah memicu Vulnerability, user mendapat Physical DMG +8% selama 15 detik (stack sampai 4). Pada 4 stack, tambahan Physical DMG +16% selama 10 detik (tidak stack).",
+  bonekrusha:
+    "3pc: User ATK +15%. Saat memakai Combo Skill, user mendapat 1 stack Bonekrushing Smash, memberi DMG +30% untuk Combat Skill berikutnya (maks 2 stack).",
+  eternalxiranite:
+    "3pc: User HP +1000. Setelah user terkena status Amped/Protected/Susceptible/Weakened, rekan tim mendapat DMG Dealt +16% selama 15 detik (tidak stack).",
+  frontiers:
+    "3pc: Combo Skill Cooldown Reduction +15%. Setelah skill user memulihkan SP, tim mendapat DMG +16% selama 15 detik (tidak stack).",
+  hotwork:
+    "3pc: Arts Intensity +30. Setelah memicu Combustion, user menerima Heat DMG +50% selama 10 detik; setelah memicu Corrosion, menerima Nature DMG +50% selama 10 detik (tidak stack).",
+  lynx:
+    "3pc: HP Treatment Efficiency +20%. Setelah user memberi HP treatment ke ally, target menerima DMG Reduction 15% selama 10 detik; jika overheal, DMG Reduction jadi 30% (tidak stack).",
+  swordmancer:
+    "3pc: Fokus burst Physical/Combat Skill. Umumnya dipakai untuk pattern DPS agresif dengan scaling DMG fisik dan combo.",
+};
 const NAV_CONTACT_LINKS = [
   {
     label: "WhatsApp",
@@ -3609,6 +3625,71 @@ function sanitizeGearStatValue(rawValue, gearName = "", fallbackValue = "Boost")
   return cleaned;
 }
 
+function isLikelyPercentStat(statName = "") {
+  const name = String(statName || "").toLowerCase();
+  return /(dmg|damage|bonus|rate|chance|gain|output|reduction|cooldown|seconds|sp)/i.test(name);
+}
+
+function inferCreatorSetFromName(effectName = "", gearName = "") {
+  const token = normalizeCreatorToken(effectName || gearName);
+  if (!token) return "";
+  if (token.includes("aethertech") || token.includes("thertech")) return "aethertech";
+  if (token.includes("bonekrusha")) return "bonekrusha";
+  if (token.includes("eternalxiranite") || token.includes("xiranite")) return "eternalxiranite";
+  if (token.includes("frontiers") || token.includes("minearmor")) return "frontiers";
+  if (token.includes("hotwork")) return "hotwork";
+  if (token.includes("lynx")) return "lynx";
+  if (token.includes("swordmancer")) return "swordmancer";
+  return "";
+}
+
+function inferCreatorBoostStatValue(statName, slotType, usageLevel, statIndex = 0) {
+  const name = String(statName || "").toLowerCase();
+  const level = clampNumber(usageLevel, 1, 90, 70);
+  const slot = String(slotType || "armor").toLowerCase();
+
+  const slotKey = slot.startsWith("kit") ? "kit" : slot;
+  const flatDefaults = level >= 70
+    ? { armor: [87, 58, 56], gloves: [65, 43, 32], kit: [32, 21, 16] }
+    : level >= 60
+    ? { armor: [64, 42, 28], gloves: [48, 32, 21], kit: [24, 16, 12] }
+    : { armor: [48, 32, 21], gloves: [36, 24, 16], kit: [18, 12, 8] };
+
+  const percentDefaults = level >= 70
+    ? { armor: "+20.7%", gloves: "+34.5%", kit: "+23.0%" }
+    : level >= 60
+    ? { armor: "+14.7%", gloves: "+13.0%", kit: "+14.7%" }
+    : { armor: "+10.4%", gloves: "+9.7%", kit: "+21.0%" };
+
+  if (/(^def$|pertahanan|defense)/i.test(name)) {
+    if (level >= 70) return "+56";
+    if (level >= 60) return "+42";
+    return "+32";
+  }
+
+  if (/(arts ?intensity|originium arts intensity|artsinten)/i.test(name)) {
+    if (level >= 70) {
+      if (slotKey === "gloves") return "+35";
+      if (slotKey === "kit") return "+21";
+      return "+21";
+    }
+    if (level >= 60) return "+14";
+    return "+10";
+  }
+
+  if (isLikelyPercentStat(name)) {
+    if (/(treat|heal output|treatment)/i.test(name)) return "+10.3%";
+    if (/(ultimate sp|sp gain|seconds)/i.test(name)) return "+12.3%";
+    if (/(fire|nature)/i.test(name)) return "+11.5%";
+    if (slotKey === "kit" && /combo/.test(name) && level <= 60) return "+29.4%";
+    return percentDefaults[slotKey] || "+20.7%";
+  }
+
+  const flatList = flatDefaults[slotKey] || flatDefaults.armor;
+  const safeIndex = Math.max(0, Math.min(flatList.length - 1, Number(statIndex) || 0));
+  return `+${flatList[safeIndex]}`;
+}
+
 function normalizeShowcaseCatalog(rawCatalog) {
   const base = rawCatalog && typeof rawCatalog === "object" ? rawCatalog : {};
   const rawCharacterImages =
@@ -3654,7 +3735,7 @@ function normalizeShowcaseCatalog(rawCatalog) {
   };
 }
 
-function buildCreatorCharacterData(character, catalog = {}) {
+function buildCreatorCharacterData(character, catalog = {}, globalGearCatalog = []) {
   const iconOverrides = {
     Wulfgard: "assets/icons/wulfgard.webp",
   };
@@ -3742,11 +3823,28 @@ function buildCreatorCharacterData(character, catalog = {}) {
     const stats = Array.isArray(item?.stats) && item.stats.length ? item.stats : Array.isArray(rec?.stats) ? rec.stats : [];
     const normalizedStats = stats
       .slice(0, 3)
-      .map((stat, index) => ({
-        name: sanitizeGearStatName(stat?.name, `Stat ${index + 1}`),
-        value: sanitizeGearStatValue(stat?.value, mergedName, "Boost"),
-      }))
+      .map((stat, index) => {
+        const statName = sanitizeGearStatName(stat?.name, `Stat ${index + 1}`);
+        const rawValue = sanitizeGearStatValue(stat?.value, mergedName, "Boost");
+        const statValue =
+          /^(boost|-|n\/a)$/i.test(String(rawValue || "").trim()) || !/[0-9]/.test(String(rawValue || ""))
+            ? inferCreatorBoostStatValue(statName, slotType, usageLevel, index)
+            : rawValue;
+        return {
+          name: statName,
+          value: statValue,
+        };
+      })
       .filter((stat) => stat.name);
+    const resolvedEffectNameRaw = String(item?.effectName || rec?.effectName || "-").trim();
+    const inferredSet = inferCreatorSetFromName(resolvedEffectNameRaw, mergedName);
+    const resolvedEffectName = resolvedEffectNameRaw && resolvedEffectNameRaw !== "-" ? resolvedEffectNameRaw : inferredSet || "-";
+    const resolvedEffectDescRaw = String(item?.effectDescription || rec?.effectDescription || "-").trim();
+    const genericSetDescription = /^(sinergi set|set effect|gear rarity)/i.test(resolvedEffectDescRaw);
+    const resolvedEffectDescription =
+      resolvedEffectDescRaw && resolvedEffectDescRaw !== "-" && !genericSetDescription
+        ? resolvedEffectDescRaw
+        : CREATOR_SET_EFFECTS[inferredSet] || "-";
     return {
       name: mergedName,
       icon: (() => {
@@ -3757,9 +3855,11 @@ function buildCreatorCharacterData(character, catalog = {}) {
       source: String(item?.source || rec?.source || "").trim(),
       type: String(item?.type || rec?.type || slotType || "").trim(),
       usageLevel: String(item?.usageLevel || rec?.usageLevel || usageLevel || "70").trim(),
-      effectName: String(item?.effectName || rec?.effectName || "-").trim(),
-      effectDescription: String(item?.effectDescription || rec?.effectDescription || "-").trim(),
-      stats: normalizedStats.length ? normalizedStats : [{ name: "Stat Utama", value: "0" }],
+      effectName: resolvedEffectName,
+      effectDescription: resolvedEffectDescription,
+      stats: normalizedStats.length
+        ? normalizedStats
+        : [{ name: "Stat Utama", value: inferCreatorBoostStatValue("Stat Utama", slotType, usageLevel, 0) }],
       token,
     };
   };
@@ -3778,6 +3878,20 @@ function buildCreatorCharacterData(character, catalog = {}) {
     });
     recommendations
       .filter((item) => String(item?.type || "").toLowerCase().startsWith(slotType))
+      .forEach((item) => {
+        const merged = mergeGearMeta(item, slotType, item?.usageLevel || "70");
+        if (!merged.token || dedupe.has(merged.token)) return;
+        dedupe.add(merged.token);
+        list.push(merged);
+      });
+    globalGearCatalog
+      .filter((item) => {
+        if (!item || typeof item !== "object") return false;
+        const type = String(item.type || "").toLowerCase();
+        const level = String(item.usageLevel || "").trim();
+        if (!(level === "70" || level === "60" || level === "50")) return false;
+        return type.startsWith(slotType);
+      })
       .forEach((item) => {
         const merged = mergeGearMeta(item, slotType, item?.usageLevel || "70");
         if (!merged.token || dedupe.has(merged.token)) return;
@@ -4452,7 +4566,7 @@ async function shareCreatorCardPng(character, preset, state, statusEl, previewEl
   if (statusEl) statusEl.textContent = "Share file tidak didukung browser ini. PNG di-download otomatis.";
 }
 
-async function initCardCreatorPage(characters) {
+async function initCardCreatorPage(characters, gearCatalog = []) {
   const refs = {
     controls: document.querySelector(".creator-controls"),
     character: document.getElementById("creator-character"),
@@ -4576,8 +4690,44 @@ async function initCardCreatorPage(characters) {
   ]);
   const showcaseCatalog = normalizeShowcaseCatalog(showcaseCatalogRaw);
 
+  const expandCreatorCharacterVariants = (list) => {
+    const expanded = [];
+    (Array.isArray(list) ? list : []).forEach((item) => {
+      if (String(item?.id || "") !== "endministrator") {
+        expanded.push(item);
+        return;
+      }
+      const base = item && typeof item === "object" ? item : {};
+      const baseCandidates = Array.isArray(base.imageCandidates) ? base.imageCandidates : [base.image, base.fallbackImage];
+      const uniqueBase = [...new Set(baseCandidates.map((value) => String(value || "").trim()).filter(Boolean))];
+      const femaleImage = "assets/images/showcase-splash/endministrator-female.png";
+      const maleImage = "assets/images/showcase-splash/endministrator-male.png";
+      expanded.push({
+        ...base,
+        id: "endministrator-female",
+        name: "Endministrator (Female)",
+        image: femaleImage,
+        fallbackImage: femaleImage,
+        imageCandidates: [femaleImage, ...uniqueBase.filter((value) => value !== femaleImage)],
+        defaultUid: "AEND-ENDFEM-0601",
+      });
+      expanded.push({
+        ...base,
+        id: "endministrator-male",
+        name: "Endministrator (Male)",
+        image: maleImage,
+        fallbackImage: maleImage,
+        imageCandidates: [maleImage, ...uniqueBase.filter((value) => value !== maleImage)],
+        defaultUid: "AEND-ENDMAL-0601",
+      });
+    });
+    return expanded;
+  };
+
   const builtCharacters = sortByName(
-    (characters || []).map((character) => buildCreatorCharacterData(character, showcaseCatalog)),
+    expandCreatorCharacterVariants(
+      (characters || []).map((character) => buildCreatorCharacterData(character, showcaseCatalog, gearCatalog || []))
+    ),
     "name",
     "AZ"
   );
@@ -4717,7 +4867,7 @@ async function initCardCreatorPage(characters) {
     return { value: numberValue, percent: isPercent };
   };
   const formatSigned = (value, asPercent) => {
-    const fixed = asPercent ? value.toFixed(1) : value.toFixed(value % 1 === 0 ? 0 : 1);
+    const fixed = asPercent ? value.toFixed(1) : String(Math.round(value));
     const cleaned = fixed.replace(/\.0$/, "");
     return `${value >= 0 ? "+" : ""}${cleaned}${asPercent ? "%" : ""}`;
   };
@@ -4725,7 +4875,7 @@ async function initCardCreatorPage(characters) {
     const parsed = parseStatNumber(rawValue);
     const safeTier = clampNumber(tier, 0, 3, 0);
     if (!parsed) return `${String(rawValue || "-")} (Artifice +${safeTier})`;
-    const boosted = parsed.value * (1 + safeTier * 0.04);
+    const boosted = parsed.value * (1 + safeTier * 0.1);
     return `${formatSigned(boosted, parsed.percent)} (Artifice +${safeTier})`;
   };
   const getIconSet = (kind) => {
@@ -4978,14 +5128,24 @@ async function initCardCreatorPage(characters) {
     const selectedName = String(state[slotStateKeys[slotKey]] || "-").trim();
     const selected = findGearEntry(character, slotKey, selectedName);
     const stats = Array.isArray(selected?.stats) ? selected.stats : [];
+    const slotType = slotKey === "kit1" || slotKey === "kit2" ? "kit" : slotKey;
+    const usageLevel = String(selected?.usageLevel || state.level || "70");
     const normalized = stats
       .slice(0, 3)
-      .map((stat, index) => ({
-        name: sanitizeGearStatName(stat?.name, `Stat ${index + 1}`),
-        value: sanitizeGearStatValue(stat?.value, selectedName, "Boost"),
-      }))
+      .map((stat, index) => {
+        const statName = sanitizeGearStatName(stat?.name, `Stat ${index + 1}`);
+        const rawValue = sanitizeGearStatValue(stat?.value, selectedName, "Boost");
+        const statValue =
+          /^(boost|-|n\/a)$/i.test(String(rawValue || "").trim()) || !/[0-9]/.test(String(rawValue || ""))
+            ? inferCreatorBoostStatValue(statName, slotType, usageLevel, index)
+            : rawValue;
+        return {
+          name: statName,
+          value: statValue,
+        };
+      })
       .filter((item) => item.name);
-    return normalized.length ? normalized : [{ name: "Stat Utama", value: "Boost" }];
+    return normalized.length ? normalized : [{ name: "Stat Utama", value: inferCreatorBoostStatValue("Stat Utama", slotType, usageLevel, 0) }];
   };
   const artificeSummaryText = (slotKey, statCount = 3) => {
     const artifice = sanitizeGearArtifice(slotKey, statCount);
@@ -5878,7 +6038,7 @@ async function bootstrap() {
   if (page === "home") return renderHome(data);
   if (page === "events") return initEventsPage();
   if (page === "codes") return initCodesPage();
-  if (page === "card-creator") return initCardCreatorPage(data.characters || []);
+  if (page === "card-creator") return initCardCreatorPage(data.characters || [], data.gearCatalog || []);
   if (page === "gacha") return initGachaPage(data);
   if (page === "helps") return initTipsPage(data.tips);
   if (page === "team-comps") return initTeamCompsPage(data.teamComps || [], data.characters || []);
