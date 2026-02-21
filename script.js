@@ -3846,17 +3846,25 @@ async function waitPreviewAssets(previewEl) {
 }
 
 function isCanvasLikelyBlank(canvas) {
-  if (!canvas) return true;
+  const metrics = canvasContentMetrics(canvas);
+  if (!metrics) return true;
+  if (metrics.opaqueRatio < 0.02) return true;
+  return metrics.score < 0.46;
+}
+
+function canvasContentMetrics(canvas) {
+  if (!canvas) return null;
   const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return true;
+  if (!ctx) return null;
   const width = canvas.width || 0;
   const height = canvas.height || 0;
-  if (width < 2 || height < 2) return true;
+  if (width < 2 || height < 2) return null;
   const step = Math.max(4, Math.floor(Math.min(width, height) / 80));
   let total = 0;
   let opaque = 0;
   let minLum = 255;
   let maxLum = 0;
+  let chromaTotal = 0;
   try {
     for (let y = 0; y < height; y += step) {
       for (let x = 0; x < width; x += step) {
@@ -3868,15 +3876,37 @@ function isCanvasLikelyBlank(canvas) {
           const lum = Math.round(pixel[0] * 0.2126 + pixel[1] * 0.7152 + pixel[2] * 0.0722);
           if (lum < minLum) minLum = lum;
           if (lum > maxLum) maxLum = lum;
+          const maxRgb = Math.max(pixel[0], pixel[1], pixel[2]);
+          const minRgb = Math.min(pixel[0], pixel[1], pixel[2]);
+          chromaTotal += maxRgb - minRgb;
         }
       }
     }
   } catch {
-    return false;
+    return null;
   }
-  if (!total || opaque / total < 0.02) return true;
-  if (maxLum < 26 && maxLum - minLum < 4) return true;
-  return false;
+  if (!total) return null;
+  const opaqueRatio = opaque / total;
+  const lumSpread = (maxLum - minLum) / 255;
+  const chromaAvg = opaque > 0 ? chromaTotal / opaque / 255 : 0;
+  const score = opaqueRatio * 0.42 + lumSpread * 0.4 + chromaAvg * 0.18;
+  return { opaqueRatio, lumSpread, chromaAvg, score };
+}
+
+function pickBestCanvas(candidates) {
+  const valid = (Array.isArray(candidates) ? candidates : []).filter(Boolean);
+  if (!valid.length) return null;
+  let best = null;
+  let bestScore = -1;
+  valid.forEach((canvas) => {
+    const m = canvasContentMetrics(canvas);
+    if (!m) return;
+    if (m.score > bestScore) {
+      best = canvas;
+      bestScore = m.score;
+    }
+  });
+  return best;
 }
 
 async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
@@ -3984,14 +4014,15 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
         },
       ];
 
+      const directResults = [];
       for (const options of directAttempts) {
         try {
           const canvas = await window.html2canvas(previewEl, options);
-          if (!isCanvasLikelyBlank(canvas)) {
-            return canvas;
-          }
+          directResults.push(canvas);
         } catch {}
       }
+      const bestDirect = pickBestCanvas(directResults);
+      if (bestDirect && !isCanvasLikelyBlank(bestDirect)) return bestDirect;
 
       const cloneAttempts = [
         {
@@ -4025,14 +4056,18 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
           scrollY: 0,
         },
       ];
+      const cloneResults = [];
       for (const options of cloneAttempts) {
         try {
           const canvas = await window.html2canvas(clone, options);
-          if (!isCanvasLikelyBlank(canvas)) {
-            return canvas;
-          }
+          cloneResults.push(canvas);
         } catch {}
       }
+      const bestClone = pickBestCanvas(cloneResults);
+      if (bestClone && !isCanvasLikelyBlank(bestClone)) return bestClone;
+
+      const anyBest = pickBestCanvas([...directResults, ...cloneResults]);
+      if (anyBest && !isCanvasLikelyBlank(anyBest)) return anyBest;
       return null;
     } catch (error) {
       console.error(error);
