@@ -3880,7 +3880,13 @@ function isCanvasLikelyBlank(canvas) {
 }
 
 async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas) {
+    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+    if (statusEl) {
+      statusEl.textContent = "Capture live preview gagal, memakai fallback export.";
+    }
+  }
   if (!canvas) throw new Error("Capture preview gagal");
   const dataUrl = canvas.toDataURL("image/png");
   const link = document.createElement("a");
@@ -3894,8 +3900,12 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
     let stage = null;
     try {
       await waitPreviewAssets(previewEl);
+      const isCompactScreen =
+        typeof window.matchMedia === "function" ? window.matchMedia("(max-width: 900px)").matches : false;
       const scaleBase = Number.isFinite(window.devicePixelRatio)
-        ? Math.min(2.5, Math.max(1.6, window.devicePixelRatio))
+        ? Math.min(isCompactScreen ? 2 : 2.25, Math.max(1.25, window.devicePixelRatio))
+        : isCompactScreen
+        ? 1.5
         : 2;
       const rect = previewEl.getBoundingClientRect();
       const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || rect.width || 1));
@@ -3996,7 +4006,7 @@ async function captureCreatorPreviewCanvas(previewEl, statusEl) {
           }
         } catch {}
       }
-      return null;
+      return firstCanvas;
     } catch (error) {
       console.error(error);
       if (statusEl) {
@@ -4272,7 +4282,13 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 }
 
 async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas) {
+    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
+    if (statusEl) {
+      statusEl.textContent = "Capture live preview gagal, memakai fallback export.";
+    }
+  }
   if (!canvas) throw new Error("Capture preview gagal");
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Gagal membentuk file PNG.");
