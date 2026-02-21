@@ -1876,6 +1876,12 @@ select:focus-visible {
   gap: 0.34rem;
 }
 
+.creator-gear-base-def {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  color: #9fc9e5;
+}
+
 .creator-artifice-row {
   display: grid;
   gap: 0.26rem;
@@ -2593,6 +2599,11 @@ select:focus-visible {
   font-size: 0.6rem;
   line-height: 1.05;
   color: color-mix(in srgb, var(--creator-ink) 70%, #99b1c2);
+}
+
+.creator-preview-gear-item .creator-preview-gear-def {
+  color: color-mix(in srgb, #f6fa7a 72%, var(--creator-ink) 28%);
+  font-size: 0.58rem;
 }
 
 .creator-icon-strip {

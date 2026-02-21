@@ -2340,6 +2340,7 @@ function buildGearDatabase(characters, gearCatalog = []) {
         name: gear.name,
         icon: gear.icon || "assets/skill-icons/basic.webp",
         source: gear.source || "#",
+        baseDef: gear.baseDef || "",
         effectName: gear.effectName || "-",
         effectDescription: gear.effectDescription || gear.description || "-",
         description: gear.description || "-",
@@ -2381,6 +2382,9 @@ function buildGearDatabase(characters, gearCatalog = []) {
     }
     if ((!entry.description || entry.description === "-") && gear.description) {
       entry.description = gear.description;
+    }
+    if ((!entry.baseDef || entry.baseDef === "-") && gear.baseDef) {
+      entry.baseDef = gear.baseDef;
     }
     if ((!entry.stats || entry.stats.length === 0) && Array.isArray(gear.stats) && gear.stats.length > 0) {
       entry.stats = gear.stats;
@@ -2459,6 +2463,7 @@ function buildGearDatabase(characters, gearCatalog = []) {
         effectName: item.effectName || "-",
         effectDescription: item.effectDescription || "-",
         description: item.description || "-",
+        baseDef: item.baseDef || "",
         stats: item.stats || [],
         types,
         usageLevels,
@@ -2586,7 +2591,7 @@ function initGearsPage(characters, gearCatalog = []) {
                 <img class="gear-icon" src="${asset(item.icon)}" alt="${esc(item.name)} icon" loading="lazy" />
                 <div>
                   <h3><a class="gear-title-link" href="${gearUrl(item.id)}">${esc(item.name)}</a></h3>
-                  <p class="gear-meta">Tipe: ${esc(item.types.map((typeValue) => gearType(typeValue)).join(" / ") || "-")} | Usage Lv: ${esc(item.usageLevels.join(", ") || "-")}</p>
+                  <p class="gear-meta">Tipe: ${esc(item.types.map((typeValue) => gearType(typeValue)).join(" / ") || "-")} | Usage Lv: ${esc(item.usageLevels.join(", ") || "-")} | Base DEF: ${esc(normalizeBaseDef(item.baseDef) || "-")}</p>
                 </div>
               </div>
               <p><strong>Set:</strong> ${esc(item.effectName || "-")}</p>
@@ -2595,7 +2600,7 @@ function initGearsPage(characters, gearCatalog = []) {
                 ${renderBestForChips(item.bestFor)}
               </div>
               <p>${esc(item.effectDescription || item.description || "-")}</p>
-              <ul class="gear-stats">${renderStats(item.stats)}</ul>
+              <ul class="gear-stats">${renderStats(item.stats, item.baseDef)}</ul>
               <p class="gear-slot"><strong>Slot umum:</strong> ${esc(item.slots.join(", ") || "-")}</p>
               <div class="owner-list">
                 ${renderOwners(item.owners)}
@@ -2687,6 +2692,7 @@ function initGearDetailPage(characters, gearCatalog = []) {
           <h1>${esc(item.name)}</h1>
           <p class="gear-meta">Tipe: ${esc(item.types.map((typeValue) => gearType(typeValue)).join(" / ") || "-")}</p>
           <p class="gear-meta">Usage Level: ${esc(item.usageLevels.join(", ") || "-")}</p>
+          <p class="gear-meta">Base DEF: ${esc(normalizeBaseDef(item.baseDef) || "-")}</p>
           <p class="gear-meta">Slot Umum: ${esc(item.slots.join(", ") || "-")}</p>
           <div class="bestfor-row">
             <span class="bestfor-label">Best for:</span>
@@ -2696,7 +2702,7 @@ function initGearDetailPage(characters, gearCatalog = []) {
       </div>
       <p><strong>Nama Set:</strong> ${esc(item.effectName || "-")}</p>
       <p>${esc(item.effectDescription || item.description || "-")}</p>
-      <ul class="gear-stats">${renderStats(item.stats)}</ul>
+      <ul class="gear-stats">${renderStats(item.stats, item.baseDef)}</ul>
       <a class="detail-link inline-link" href="${esc(item.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber gear</a>
     </article>
 
@@ -2755,9 +2761,28 @@ function initCharactersPage(characters) {
   redraw();
 }
 
-function renderStats(stats) {
-  if (!Array.isArray(stats) || stats.length === 0) return "<li><strong>Stat:</strong> -</li>";
-  return stats.map((s) => `<li><strong>${esc(s.name)}:</strong> ${esc(s.value)}</li>`).join("");
+function normalizeBaseDef(baseDef) {
+  const text = String(baseDef || "").trim();
+  if (!text || text === "-" || /^n\/a$/i.test(text)) return "";
+  if (/^[+-]?\d+(?:\.\d+)?%?$/.test(text)) {
+    if (text.startsWith("+") || text.startsWith("-")) return text;
+    return `+${text}`;
+  }
+  return text;
+}
+
+function renderStats(stats, baseDef = "") {
+  const lines = [];
+  const safeBaseDef = normalizeBaseDef(baseDef);
+  if (safeBaseDef) {
+    lines.push(`<li><strong>Base DEF:</strong> ${esc(safeBaseDef)}</li>`);
+  }
+  if (!Array.isArray(stats) || stats.length === 0) {
+    if (!lines.length) return "<li><strong>Stat:</strong> -</li>";
+    return lines.join("");
+  }
+  lines.push(...stats.map((s) => `<li><strong>${esc(s.name)}:</strong> ${esc(s.value)}</li>`));
+  return lines.join("");
 }
 
 function renderProgression(levelKey, level) {
@@ -2774,10 +2799,10 @@ function renderProgression(levelKey, level) {
             <div>
               <p class="slot-label">${esc(slot.slot || slotTypeMap[slotKey])}</p>
               <h4>${esc(slot.name || "-")}</h4>
-              <p class="slot-meta">Tipe: ${esc(gearType(slot.type))} | Usage Lv: ${esc(slot.usageLevel || levelKey)}</p>
+              <p class="slot-meta">Tipe: ${esc(gearType(slot.type))} | Usage Lv: ${esc(slot.usageLevel || levelKey)} | Base DEF: ${esc(normalizeBaseDef(slot.baseDef) || "-")}</p>
             </div>
           </div>
-          <ul class="gear-stats compact-stats">${renderStats(slot.stats)}</ul>
+          <ul class="gear-stats compact-stats">${renderStats(slot.stats, slot.baseDef)}</ul>
           <p><strong>Efek:</strong> ${esc(slot.effectName || "-")}</p>
           <p>${esc(slot.effectDescription || slot.description || "-")}</p>
           <p><strong>Rekomendasi:</strong> ${esc(slot.recommendation || "Sesuaikan dengan kebutuhan tim.")}</p>
@@ -2908,10 +2933,10 @@ function renderCharacterDetail(character) {
             <img class="gear-icon" src="${asset(gear.icon)}" alt="${esc(gear.name)} icon" loading="lazy" />
             <div>
               <h3>${esc(gear.name)}</h3>
-              <p class="gear-meta">Tipe: ${esc(gearType(gear.type))} | Usage Lv: ${esc(gear.usageLevel || "-")}</p>
+              <p class="gear-meta">Tipe: ${esc(gearType(gear.type))} | Usage Lv: ${esc(gear.usageLevel || "-")} | Base DEF: ${esc(normalizeBaseDef(gear.baseDef) || "-")}</p>
             </div>
           </div>
-          <ul class="gear-stats">${renderStats(gear.stats)}</ul>
+          <ul class="gear-stats">${renderStats(gear.stats, gear.baseDef)}</ul>
           <p><strong>Efek Set:</strong> ${esc(gear.effectName || "-")}</p>
           <p>${esc(gear.effectDescription || gear.description || "-")}</p>
           <a class="detail-link inline-link" href="${esc(gear.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber gear</a>
@@ -4011,18 +4036,37 @@ function buildCreatorCharacterData(character, catalog = {}, globalGearCatalog = 
     });
     return map;
   })();
+  const catalogByName = (() => {
+    const map = new Map();
+    (Array.isArray(globalGearCatalog) ? globalGearCatalog : []).forEach((item) => {
+      const name = String(item?.name || "").trim();
+      const token = normalizeCreatorToken(name);
+      if (!token) return;
+      if (!map.has(token)) {
+        map.set(token, item);
+      }
+    });
+    return map;
+  })();
 
   const mergeGearMeta = (item, slotType, usageLevel = "70") => {
     const token = normalizeCreatorToken(item?.name);
     const rec = recommendationByName.get(token);
-    const mergedName = String(item?.name || rec?.name || "-").trim() || "-";
+    const canonical = catalogByName.get(token);
+    const mergedName = String(item?.name || rec?.name || canonical?.name || "-").trim() || "-";
     const slotIconFallback =
       slotType === "armor"
         ? "assets/skill-icons/talent.webp"
         : slotType === "gloves"
         ? "assets/skill-icons/combo.webp"
         : "assets/skill-icons/ultimate.webp";
-    const stats = Array.isArray(item?.stats) && item.stats.length ? item.stats : Array.isArray(rec?.stats) ? rec.stats : [];
+    const stats = Array.isArray(canonical?.stats) && canonical.stats.length
+      ? canonical.stats
+      : Array.isArray(item?.stats) && item.stats.length
+      ? item.stats
+      : Array.isArray(rec?.stats)
+      ? rec.stats
+      : [];
     const normalizedStats = stats
       .slice(0, 3)
       .map((stat, index) => {
@@ -4038,25 +4082,29 @@ function buildCreatorCharacterData(character, catalog = {}, globalGearCatalog = 
         };
       })
       .filter((stat) => stat.name);
-    const resolvedEffectNameRaw = String(item?.effectName || rec?.effectName || "-").trim();
+    const resolvedEffectNameRaw = String(canonical?.effectName || item?.effectName || rec?.effectName || "-").trim();
     const inferredSet = inferCreatorSetFromName(resolvedEffectNameRaw, mergedName);
     const resolvedEffectName = resolvedEffectNameRaw && resolvedEffectNameRaw !== "-" ? resolvedEffectNameRaw : inferredSet || "-";
-    const resolvedEffectDescRaw = String(item?.effectDescription || rec?.effectDescription || "-").trim();
+    const resolvedEffectDescRaw = String(
+      canonical?.effectDescription || item?.effectDescription || rec?.effectDescription || "-"
+    ).trim();
     const genericSetDescription = /^(sinergi set|set effect|gear rarity)/i.test(resolvedEffectDescRaw);
     const resolvedEffectDescription =
       resolvedEffectDescRaw && resolvedEffectDescRaw !== "-" && !genericSetDescription
         ? resolvedEffectDescRaw
         : CREATOR_SET_EFFECTS[inferredSet] || "-";
+    const resolvedBaseDef = normalizeBaseDef(canonical?.baseDef || item?.baseDef || rec?.baseDef || "");
     return {
       name: mergedName,
       icon: (() => {
-        const candidate = String(item?.icon || rec?.icon || slotIconFallback).trim();
+        const candidate = String(canonical?.icon || item?.icon || rec?.icon || slotIconFallback).trim();
         if (!candidate) return slotIconFallback;
         return /^https?:\/\//i.test(candidate) ? slotIconFallback : candidate;
       })(),
-      source: String(item?.source || rec?.source || "").trim(),
-      type: String(item?.type || rec?.type || slotType || "").trim(),
-      usageLevel: String(item?.usageLevel || rec?.usageLevel || usageLevel || "70").trim(),
+      source: String(canonical?.source || item?.source || rec?.source || "").trim(),
+      type: String(canonical?.type || item?.type || rec?.type || slotType || "").trim(),
+      usageLevel: String(item?.usageLevel || rec?.usageLevel || canonical?.usageLevel || usageLevel || "70").trim(),
+      baseDef: resolvedBaseDef,
       effectName: resolvedEffectName,
       effectDescription: resolvedEffectDescription,
       stats: normalizedStats.length
@@ -4811,6 +4859,10 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     gearGlovesIcon: document.getElementById("creator-gear-gloves-icon"),
     gearKit1Icon: document.getElementById("creator-gear-kit1-icon"),
     gearKit2Icon: document.getElementById("creator-gear-kit2-icon"),
+    gearArmorDef: document.getElementById("creator-gear-armor-def"),
+    gearGlovesDef: document.getElementById("creator-gear-gloves-def"),
+    gearKit1Def: document.getElementById("creator-gear-kit1-def"),
+    gearKit2Def: document.getElementById("creator-gear-kit2-def"),
     artificeArmor: document.getElementById("creator-artifice-armor"),
     artificeGloves: document.getElementById("creator-artifice-gloves"),
     artificeKit1: document.getElementById("creator-artifice-kit1"),
@@ -4870,6 +4922,10 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     previewGearGlovesArtifice: document.getElementById("creator-preview-gear-gloves-artifice"),
     previewGearKit1Artifice: document.getElementById("creator-preview-gear-kit1-artifice"),
     previewGearKit2Artifice: document.getElementById("creator-preview-gear-kit2-artifice"),
+    previewGearArmorDef: document.getElementById("creator-preview-gear-armor-def"),
+    previewGearGlovesDef: document.getElementById("creator-preview-gear-gloves-def"),
+    previewGearKit1Def: document.getElementById("creator-preview-gear-kit1-def"),
+    previewGearKit2Def: document.getElementById("creator-preview-gear-kit2-def"),
     previewSkillBasic: document.getElementById("creator-preview-skill-basic"),
     previewSkillCombo: document.getElementById("creator-preview-skill-combo"),
     previewSkillActive: document.getElementById("creator-preview-skill-active"),
@@ -5029,6 +5085,12 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     kit1: "gearKit1Icon",
     kit2: "gearKit2Icon",
   };
+  const slotDefRefKeys = {
+    armor: "gearArmorDef",
+    gloves: "gearGlovesDef",
+    kit1: "gearKit1Def",
+    kit2: "gearKit2Def",
+  };
   const slotArtificeRefKeys = {
     armor: "artificeArmor",
     gloves: "artificeGloves",
@@ -5052,6 +5114,12 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     gloves: "previewGearGlovesArtifice",
     kit1: "previewGearKit1Artifice",
     kit2: "previewGearKit2Artifice",
+  };
+  const slotPreviewDefRefKeys = {
+    armor: "previewGearArmorDef",
+    gloves: "previewGearGlovesDef",
+    kit1: "previewGearKit1Def",
+    kit2: "previewGearKit2Def",
   };
 
   const parseStatNumber = (rawValue) => {
@@ -5349,6 +5417,11 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
       .filter((item) => item.name);
     return normalized.length ? normalized : [{ name: "Stat Utama", value: inferCreatorBoostStatValue("Stat Utama", slotType, usageLevel, 0) }];
   };
+  const activeGearBaseDef = (character, slotKey) => {
+    const selectedName = String(state[slotStateKeys[slotKey]] || "-").trim();
+    const selected = findGearEntry(character, slotKey, selectedName);
+    return normalizeBaseDef(selected?.baseDef || "");
+  };
   const artificeSummaryText = (slotKey, statCount = 3) => {
     const artifice = sanitizeGearArtifice(slotKey, statCount);
     return `Artifice +${artifice.join("/+")}`;
@@ -5390,6 +5463,11 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
         iconRef.src = creatorSafeImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
         iconRef.alt = `${selectedName || slotKey} icon`;
       }
+      const baseDefRef = refs[slotDefRefKeys[slotKey]];
+      if (baseDefRef) {
+        const safeBaseDef = normalizeBaseDef(selected?.baseDef || "");
+        baseDefRef.textContent = `Base DEF: ${safeBaseDef || "-"}`;
+      }
       const previewIconRef = refs[slotPreviewIconRefKeys[slotKey]];
       if (previewIconRef) {
         previewIconRef.src = creatorSafeImageSrc(selected?.icon || "", "assets/skill-icons/basic.webp");
@@ -5399,10 +5477,11 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
   };
   const renderArtificeEditor = (character, slotKey) => {
     const stats = activeGearStats(character, slotKey);
+    const baseDef = activeGearBaseDef(character, slotKey);
     const artifice = sanitizeGearArtifice(slotKey, stats.length);
     const container = refs[slotArtificeRefKeys[slotKey]];
     if (!container) return;
-    container.innerHTML = stats
+    const rowsHtml = stats
       .map((stat, statIndex) => {
         const tier = artifice[statIndex] || 0;
         return `
@@ -5422,9 +5501,15 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
         `;
       })
       .join("");
+    const baseDefHtml = `<p class="creator-gear-base-def">Base DEF: <strong>${esc(baseDef || "-")}</strong></p>`;
+    container.innerHTML = `${baseDefHtml}${rowsHtml}`;
     const previewArtificeRef = refs[slotPreviewArtificeRefKeys[slotKey]];
     if (previewArtificeRef) {
       previewArtificeRef.textContent = artificeSummaryText(slotKey, stats.length);
+    }
+    const previewDefRef = refs[slotPreviewDefRefKeys[slotKey]];
+    if (previewDefRef) {
+      previewDefRef.textContent = `Base DEF: ${baseDef || "-"}`;
     }
   };
   const syncWeaponSelect = () => {
