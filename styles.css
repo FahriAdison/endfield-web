@@ -2559,7 +2559,7 @@ select:focus-visible {
 .creator-showcase-card-equipment .creator-preview-gear-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 0.4rem;
-  row-gap: 0.22rem;
+  row-gap: 0.28rem;
 }
 
 .creator-preview-gear-item {
@@ -2569,9 +2569,13 @@ select:focus-visible {
   align-items: start;
 }
 
+.creator-preview-gear-item > div {
+  min-width: 0;
+}
+
 .creator-preview-gear-item img {
-  width: 1.82rem;
-  height: 1.82rem;
+  width: 1.94rem;
+  height: 1.94rem;
   border-radius: 0.4rem;
   border: 1px solid rgba(137, 168, 192, 0.42);
   background: rgba(8, 16, 24, 0.82);
@@ -2597,13 +2601,27 @@ select:focus-visible {
   display: block;
   margin-top: 0.04rem;
   font-size: 0.6rem;
-  line-height: 1.05;
+  line-height: 1.08;
   color: color-mix(in srgb, var(--creator-ink) 70%, #99b1c2);
 }
 
 .creator-preview-gear-item .creator-preview-gear-def {
   color: color-mix(in srgb, #f6fa7a 72%, var(--creator-ink) 28%);
   font-size: 0.58rem;
+}
+
+.creator-preview-gear-item .creator-preview-gear-stats {
+  margin-top: 0.02rem;
+  font-size: 0.54rem;
+  line-height: 1.14;
+  color: color-mix(in srgb, var(--creator-ink) 84%, #9dc4de);
+  overflow-wrap: anywhere;
+}
+
+.creator-preview-gear-item .creator-preview-gear-stats span {
+  display: block;
+  font-size: inherit;
+  color: inherit;
 }
 
 .creator-icon-strip {
@@ -3816,6 +3834,7 @@ select:focus-visible {
   .creator-showcase-card-equipment .creator-preview-gear-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 0.22rem;
+    row-gap: 0.24rem;
   }
 
   .creator-showcase-card h4 {
@@ -3827,8 +3846,8 @@ select:focus-visible {
   }
 
   .creator-preview-gear-item img {
-    width: 1.82rem;
-    height: 1.82rem;
+    width: 1.94rem;
+    height: 1.94rem;
   }
 
   .creator-preview-gear-item strong {
@@ -3838,6 +3857,10 @@ select:focus-visible {
   .creator-preview-gear-item small,
   .creator-preview-gear-item span {
     font-size: 0.6rem;
+  }
+
+  .creator-preview-gear-item .creator-preview-gear-stats {
+    font-size: 0.54rem;
   }
 
   .creator-preview-essence .creator-essence-item p {

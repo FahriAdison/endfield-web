@@ -58,20 +58,124 @@ const CREATOR_POTENTIAL_ICON_URLS = [
 const CREATOR_AFFINITY_BADGES = ["A0", "A1", "A2", "A3", "A4"];
 const CREATOR_SET_EFFECTS = {
   aethertech:
-    "3pc: User ATK +8%. Setelah memicu Vulnerability, user mendapat Physical DMG +8% selama 15 detik (stack sampai 4). Pada 4 stack, tambahan Physical DMG +16% selama 10 detik (tidak stack).",
+    "Efek 3-piece: ATK user +8%. Setelah user memberi Vulnerability, user mendapat Physical DMG +8% selama 15 detik (maks 4 stack). Saat target sudah 4 stack Vulnerability, user mendapat tambahan Physical DMG +16% selama 10 detik. Efek ini tidak bisa stack ganda.",
   bonekrusha:
-    "3pc: User ATK +15%. Saat memakai Combo Skill, user mendapat 1 stack Bonekrushing Smash, memberi DMG +30% untuk Combat Skill berikutnya (maks 2 stack).",
+    "Efek 3-piece: ATK user +15%. Saat user memakai Combo Skill, user mendapat 1 stack Bonekrushing Smash yang memberi DMG +30% untuk Combat Skill berikutnya (maks 2 stack).",
   eternalxiranite:
-    "3pc: User HP +1000. Setelah user terkena status Amped/Protected/Susceptible/Weakened, rekan tim mendapat DMG Dealt +16% selama 15 detik (tidak stack).",
+    "Efek 3-piece: HP user +1000. Setelah user terkena status Amped/Protected/Susceptible/Weakened, rekan tim mendapat DMG Dealt +16% selama 15 detik. Efek ini tidak bisa stack ganda.",
   frontiers:
-    "3pc: Combo Skill Cooldown Reduction +15%. Setelah skill user memulihkan SP, tim mendapat DMG +16% selama 15 detik (tidak stack).",
+    "Efek 3-piece: Combo Skill Cooldown Reduction +15%. Setelah skill user memulihkan SP, tim mendapat DMG +16% selama 15 detik. Efek ini tidak bisa stack ganda.",
   hotwork:
-    "3pc: Arts Intensity +30. Setelah memicu Combustion, user menerima Heat DMG +50% selama 10 detik; setelah memicu Corrosion, menerima Nature DMG +50% selama 10 detik (tidak stack).",
+    "Efek 3-piece: Arts Intensity +30. Setelah user memberi Combustion, user mendapat Heat DMG +50% selama 10 detik. Setelah user memberi Corrosion, user mendapat Nature DMG +50% selama 10 detik. Efek ini tidak bisa stack ganda.",
   lynx:
-    "3pc: HP Treatment Efficiency +20%. Setelah user memberi HP treatment ke ally, target menerima DMG Reduction 15% selama 10 detik; jika overheal, DMG Reduction jadi 30% (tidak stack).",
+    "Efek 3-piece: HP Treatment Efficiency +20%. Setelah user memberi HP treatment ke ally, target mendapat DMG Reduction 15% selama 10 detik. Jika terjadi overheal, DMG Reduction target menjadi 30%. Efek ini tidak bisa stack ganda.",
   swordmancer:
-    "3pc: Fokus burst Physical/Combat Skill. Umumnya dipakai untuk pattern DPS agresif dengan scaling DMG fisik dan combo.",
+    "Efek 3-piece: Stagger Efficiency Bonus +20%. Saat user memberi Physical Status, user juga melakukan 1 hit tambahan sebesar 250% ATK Physical DMG dan [10 Stagger]. Cooldown efek: 15 detik.",
+  tidesurge:
+    "Efek 3-piece: Agility user +50. Saat HP user di atas 80%, Physical DMG +20%.",
+  misecurity:
+    "Efek 3-piece: CRIT Rate user +5%. Setiap CRIT Hit memberi ATK +5% selama 5 detik (maks 5 stack). Saat stack penuh, user mendapat tambahan CRIT Rate +5%. Efek ini tidak bisa stack ganda.",
+  aburreyslegacy:
+    "Efek 3-piece: Skill DMG user +24%. Saat user memakai Active Skill, Combo Skill, atau Ultimate, user mendapat ATK +5% selama 15 detik. Buff dari tiap jenis skill dihitung terpisah dan tidak menumpuk dengan jenis yang sama.",
+  mordvoltinsulation:
+    "Efek 3-piece: INT user +50. Saat HP user di atas 80%, Arts DMG +20%.",
+  mordvoltresistant:
+    "Efek 3-piece: Strength user +50. Saat HP user di bawah 50%, user mendapat DMG Reduction 30% untuk semua tipe DMG.",
+  rovingmsgr:
+    "Efek 3-piece: HP user +500. Saat user mengalahkan musuh, memulihkan 100 HP. Cooldown efek: 5 detik.",
+  armoredmsgr:
+    "Efek 3-piece: HP user +500. Saat user mengalahkan musuh, user mendapat ATK +20 selama 5 detik.",
+  type50yinglung:
+    "Efek 3-piece: ATK user +15%. Saat operator mana pun di tim memakai Battle Skill, user mendapat 1 stack Yinglung's Edge yang memberi DMG +20% untuk Combo Skill berikutnya (maks 3 stack).",
+  pulserlabs:
+    "Efek 3-piece: Ultimate Gain Efficiency +20%. Saat user memakai Battle Skill, user memulihkan 50 SP. Efek ini hanya aktif 1 kali per battle.",
+  catastrophe:
+    "Efek 3-piece: Skill DMG Dealt user +20%. Setelah user memberi 2 stack atau lebih Arts Infliction ke musuh, user mendapat Arts DMG Dealt +35% selama 15 detik. Efek ini tidak bisa stack ganda.",
+  aicheavy:
+    "Efek 3-piece: Arts Intensity +30. Setelah user memberi Electrification, user mendapat Electric DMG +50% selama 10 detik. Setelah user memberi Solidification, user mendapat Cryo DMG +50% selama 10 detik. Efek ini tidak bisa stack ganda.",
+  aiclight:
+    "Efek 3-piece: Arts Intensity +30. Setelah user memberi Electrification, user mendapat Electric DMG +50% selama 10 detik. Setelah user memberi Solidification, user mendapat Cryo DMG +50% selama 10 detik. Efek ini tidak bisa stack ganda.",
 };
+const GEAR_EFFECT_TRANSLATION_EXACT = new Map([
+  [
+    "3-piece set effect: Wearer's H P +500. When the wearer defeats an enemy, . ATK +20 for 5s",
+    "Efek 3-piece: HP user +500. Saat user mengalahkan musuh, user mendapat ATK +20 selama 5 detik.",
+  ],
+]);
+const GEAR_EFFECT_TRANSLATION_PATTERNS = [
+  [
+    /Wearer's Critical Rate \+5%\. After the wearer scores a critical hit/i,
+    CREATOR_SET_EFFECTS.misecurity,
+  ],
+  [
+    /Wearer's Skill DMG \+24%\. -?When the wearer casts a battle skill, combo skill, or ultimate/i,
+    CREATOR_SET_EFFECTS.aburreyslegacy,
+  ],
+  [
+    /Wearer's Intellect \+50\. When the wearer's HP is above 80%, Arts DMG \+20%/i,
+    CREATOR_SET_EFFECTS.mordvoltinsulation,
+  ],
+  [
+    /Wearer's Agility \+50\. When the wearer's HP is above 80%, Physical DMG \+20%/i,
+    CREATOR_SET_EFFECTS.tidesurge,
+  ],
+  [
+    /Wearer's Strength \+50\. When the wearer's HP is below 50%, the wearer gains 30% DMG Reduction against all types of DMG/i,
+    CREATOR_SET_EFFECTS.mordvoltresistant,
+  ],
+  [
+    /Wearer's Will \+50 When the wearer's HP is below 50%, Treatment Effect \+30%/i,
+    "Efek 3-piece: Will user +50. Saat HP user di bawah 50%, Treatment Effect +30%.",
+  ],
+  [
+    /Wearer's Combo Skill Cooldown Reduction \+15%\. After the wearer's skill recovers SP, the team gains DMG \+16% for 15s/i,
+    CREATOR_SET_EFFECTS.frontiers,
+  ],
+  [
+    /Wearer's ATK \+15%\. When the wearer casts a combo skill, the wearer gains 1 stack of Bonekrushing Smash/i,
+    CREATOR_SET_EFFECTS.bonekrusha,
+  ],
+  [
+    /Wearer's HP Treatment Efficiency \+20%\. After the wearer gives HP treatment to an allied target/i,
+    CREATOR_SET_EFFECTS.lynx,
+  ],
+  [
+    /Wearer's ATK \+15%\. When any operator in the team casts a battle skill, the wearer gains 1 stack of Yinglung's Edge/i,
+    CREATOR_SET_EFFECTS.type50yinglung,
+  ],
+  [
+    /Wearer's Ultimate Gain Efficiency \+20%\. The wearer casts a battle skill, the action returns 50 SP/i,
+    CREATOR_SET_EFFECTS.pulserlabs,
+  ],
+  [
+    /Wearer's Arts Intensity \+30\. After the wearer applies Combustion, the wearer gains Heat DMG \+50%/i,
+    CREATOR_SET_EFFECTS.hotwork,
+  ],
+  [
+    /Wearer's HP \+1000\. After the wearer applies Amp, Protected, Susceptibility, or Weakened/i,
+    CREATOR_SET_EFFECTS.eternalxiranite,
+  ],
+  [
+    /Wearer's HP \+500\. When the wearer defeats an enemy, restore 100 HP/i,
+    CREATOR_SET_EFFECTS.rovingmsgr,
+  ],
+  [
+    /Wearer's ATK \+8%\. After the wearer applies Vulnerability, the wearer gains Physical DMG \+8%/i,
+    CREATOR_SET_EFFECTS.aethertech,
+  ],
+  [
+    /Wearer's Stagger Efficiency Bonus \+20%\. When the wearer applies a Physical Status/i,
+    CREATOR_SET_EFFECTS.swordmancer,
+  ],
+  [
+    /Wearer's Skill DMG Dealt \+20%\. After the wearer applies 2 or more stacks of Arts Infliction/i,
+    CREATOR_SET_EFFECTS.catastrophe,
+  ],
+  [
+    /Wearer's Arts Intensity \+30\. After the wearer applies Electrification, the wearer gains Electric DMG \+50%/i,
+    CREATOR_SET_EFFECTS.aicheavy,
+  ],
+];
 const NAV_CONTACT_LINKS = [
   {
     label: "WhatsApp",
@@ -2331,6 +2435,11 @@ function buildGearDatabase(characters, gearCatalog = []) {
     if (!key) return;
 
     const level = String(gear.usageLevel || fallbackLevel || "").trim();
+    const localizedEffectDescription = localizeGearSetEffect(
+      gear.effectName || "-",
+      gear.effectDescription || gear.description || "-",
+      gear.name || "-"
+    );
     let entry = map.get(key);
 
     if (!entry) {
@@ -2342,7 +2451,7 @@ function buildGearDatabase(characters, gearCatalog = []) {
         source: gear.source || "#",
         baseDef: gear.baseDef || "",
         effectName: gear.effectName || "-",
-        effectDescription: gear.effectDescription || gear.description || "-",
+        effectDescription: localizedEffectDescription,
         description: gear.description || "-",
         stats: Array.isArray(gear.stats) ? gear.stats : [],
         types: new Set(),
@@ -2377,8 +2486,8 @@ function buildGearDatabase(characters, gearCatalog = []) {
     if ((!entry.effectName || entry.effectName === "-") && gear.effectName) {
       entry.effectName = gear.effectName;
     }
-    if ((!entry.effectDescription || entry.effectDescription === "-") && gear.effectDescription) {
-      entry.effectDescription = gear.effectDescription;
+    if ((!entry.effectDescription || entry.effectDescription === "-") && (gear.effectDescription || gear.description)) {
+      entry.effectDescription = localizedEffectDescription;
     }
     if ((!entry.description || entry.description === "-") && gear.description) {
       entry.description = gear.description;
@@ -2389,6 +2498,11 @@ function buildGearDatabase(characters, gearCatalog = []) {
     if ((!entry.stats || entry.stats.length === 0) && Array.isArray(gear.stats) && gear.stats.length > 0) {
       entry.stats = gear.stats;
     }
+    entry.effectDescription = localizeGearSetEffect(
+      entry.effectName || "-",
+      entry.effectDescription || entry.description || "-",
+      entry.name || "-"
+    );
   }
 
   gearCatalog.forEach((gear) => {
@@ -2599,7 +2713,7 @@ function initGearsPage(characters, gearCatalog = []) {
                 <span class="bestfor-label">Best for:</span>
                 ${renderBestForChips(item.bestFor)}
               </div>
-              <p>${esc(item.effectDescription || item.description || "-")}</p>
+              <p>${esc(localizeGearSetEffect(item.effectName || "-", item.effectDescription || item.description || "-", item.name || "-"))}</p>
               <ul class="gear-stats">${renderStats(item.stats, item.baseDef)}</ul>
               <p class="gear-slot"><strong>Slot umum:</strong> ${esc(item.slots.join(", ") || "-")}</p>
               <div class="owner-list">
@@ -2701,7 +2815,7 @@ function initGearDetailPage(characters, gearCatalog = []) {
         </div>
       </div>
       <p><strong>Nama Set:</strong> ${esc(item.effectName || "-")}</p>
-      <p>${esc(item.effectDescription || item.description || "-")}</p>
+      <p>${esc(localizeGearSetEffect(item.effectName || "-", item.effectDescription || item.description || "-", item.name || "-"))}</p>
       <ul class="gear-stats">${renderStats(item.stats, item.baseDef)}</ul>
       <a class="detail-link inline-link" href="${esc(item.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber gear</a>
     </article>
@@ -2771,6 +2885,35 @@ function normalizeBaseDef(baseDef) {
   return text;
 }
 
+function localizeGearSetEffect(effectName = "-", effectDescription = "-", gearName = "") {
+  const rawName = String(effectName || "").trim();
+  const rawDescription = String(effectDescription || "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const setKey = inferCreatorSetFromName(rawName, gearName);
+  const setFallback = setKey ? CREATOR_SET_EFFECTS[setKey] || "" : "";
+
+  if (!rawDescription || rawDescription === "-") {
+    return setFallback || "Gear leveling/non-set ini tidak memiliki bonus efek 3-piece.";
+  }
+  if (/^(sinergi set|set effect|gear rarity)/i.test(rawDescription)) {
+    return setFallback || "Gear leveling/non-set ini tidak memiliki bonus efek 3-piece.";
+  }
+
+  const directTranslation = GEAR_EFFECT_TRANSLATION_EXACT.get(rawDescription);
+  if (directTranslation) return directTranslation;
+
+  const fromPattern = GEAR_EFFECT_TRANSLATION_PATTERNS.find(([pattern]) => pattern.test(rawDescription));
+  if (fromPattern) return fromPattern[1];
+
+  const appearsIndonesian =
+    /\b(setelah|selama|detik|tim|tidak bisa stack|tidak stack|efek 3-piece|bonus)\b/i.test(rawDescription) &&
+    !/\b(wearer|3-piece set effect)\b/i.test(rawDescription);
+  if (appearsIndonesian) return rawDescription;
+
+  return setFallback || rawDescription;
+}
+
 function renderStats(stats, baseDef = "") {
   const lines = [];
   const safeBaseDef = normalizeBaseDef(baseDef);
@@ -2804,7 +2947,7 @@ function renderProgression(levelKey, level) {
           </div>
           <ul class="gear-stats compact-stats">${renderStats(slot.stats, slot.baseDef)}</ul>
           <p><strong>Efek:</strong> ${esc(slot.effectName || "-")}</p>
-          <p>${esc(slot.effectDescription || slot.description || "-")}</p>
+          <p>${esc(localizeGearSetEffect(slot.effectName || "-", slot.effectDescription || slot.description || "-", slot.name || "-"))}</p>
           <p><strong>Rekomendasi:</strong> ${esc(slot.recommendation || "Sesuaikan dengan kebutuhan tim.")}</p>
           <a class="detail-link inline-link" href="${esc(slot.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber gear</a>
         </article>`;
@@ -2938,7 +3081,7 @@ function renderCharacterDetail(character) {
           </div>
           <ul class="gear-stats">${renderStats(gear.stats, gear.baseDef)}</ul>
           <p><strong>Efek Set:</strong> ${esc(gear.effectName || "-")}</p>
-          <p>${esc(gear.effectDescription || gear.description || "-")}</p>
+          <p>${esc(localizeGearSetEffect(gear.effectName || "-", gear.effectDescription || gear.description || "-", gear.name || "-"))}</p>
           <a class="detail-link inline-link" href="${esc(gear.source || "#")}" target="_blank" rel="noreferrer noopener">Sumber gear</a>
         </article>`
         )
@@ -3867,6 +4010,18 @@ function inferCreatorSetFromName(effectName = "", gearName = "") {
   if (token.includes("hotwork")) return "hotwork";
   if (token.includes("lynx")) return "lynx";
   if (token.includes("swordmancer")) return "swordmancer";
+  if (token.includes("tidesurge")) return "tidesurge";
+  if (token.includes("misecurity")) return "misecurity";
+  if (token.includes("aburreyslegacy") || token.includes("aburrey")) return "aburreyslegacy";
+  if (token.includes("mordvoltinsulation")) return "mordvoltinsulation";
+  if (token.includes("mordvoltresistant")) return "mordvoltresistant";
+  if (token.includes("rovingmsgr")) return "rovingmsgr";
+  if (token.includes("armoredmsgr")) return "armoredmsgr";
+  if (token.includes("type50yinglung") || token.includes("yinglung")) return "type50yinglung";
+  if (token.includes("pulserlabs")) return "pulserlabs";
+  if (token.includes("catastrophe")) return "catastrophe";
+  if (token.includes("aicheavy")) return "aicheavy";
+  if (token.includes("aiclight")) return "aiclight";
   return "";
 }
 
@@ -4088,11 +4243,11 @@ function buildCreatorCharacterData(character, catalog = {}, globalGearCatalog = 
     const resolvedEffectDescRaw = String(
       canonical?.effectDescription || item?.effectDescription || rec?.effectDescription || "-"
     ).trim();
-    const genericSetDescription = /^(sinergi set|set effect|gear rarity)/i.test(resolvedEffectDescRaw);
-    const resolvedEffectDescription =
-      resolvedEffectDescRaw && resolvedEffectDescRaw !== "-" && !genericSetDescription
-        ? resolvedEffectDescRaw
-        : CREATOR_SET_EFFECTS[inferredSet] || "-";
+    const resolvedEffectDescription = localizeGearSetEffect(
+      resolvedEffectName,
+      resolvedEffectDescRaw,
+      mergedName
+    );
     const resolvedBaseDef = normalizeBaseDef(canonical?.baseDef || item?.baseDef || rec?.baseDef || "");
     return {
       name: mergedName,
@@ -4926,6 +5081,10 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     previewGearGlovesDef: document.getElementById("creator-preview-gear-gloves-def"),
     previewGearKit1Def: document.getElementById("creator-preview-gear-kit1-def"),
     previewGearKit2Def: document.getElementById("creator-preview-gear-kit2-def"),
+    previewGearArmorStats: document.getElementById("creator-preview-gear-armor-stats"),
+    previewGearGlovesStats: document.getElementById("creator-preview-gear-gloves-stats"),
+    previewGearKit1Stats: document.getElementById("creator-preview-gear-kit1-stats"),
+    previewGearKit2Stats: document.getElementById("creator-preview-gear-kit2-stats"),
     previewSkillBasic: document.getElementById("creator-preview-skill-basic"),
     previewSkillCombo: document.getElementById("creator-preview-skill-combo"),
     previewSkillActive: document.getElementById("creator-preview-skill-active"),
@@ -5121,6 +5280,12 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     kit1: "previewGearKit1Def",
     kit2: "previewGearKit2Def",
   };
+  const slotPreviewStatsRefKeys = {
+    armor: "previewGearArmorStats",
+    gloves: "previewGearGlovesStats",
+    kit1: "previewGearKit1Stats",
+    kit2: "previewGearKit2Stats",
+  };
 
   const parseStatNumber = (rawValue) => {
     const text = String(rawValue || "").trim().replace(/,/g, ".");
@@ -5141,12 +5306,16 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     const cleaned = fixed.replace(/\.0$/, "");
     return `${value >= 0 ? "+" : ""}${cleaned}${asPercent ? "%" : ""}`;
   };
-  const artificeAdjustedStatText = (rawValue, tier) => {
+  const artificeAdjustedStatText = (rawValue, tier, withTierSuffix = true) => {
     const parsed = parseStatNumber(rawValue);
     const safeTier = clampNumber(tier, 0, 3, 0);
-    if (!parsed) return `${String(rawValue || "-")} (Artifice +${safeTier})`;
+    if (!parsed) {
+      if (withTierSuffix) return `${String(rawValue || "-")} (Artifice +${safeTier})`;
+      return String(rawValue || "-");
+    }
     const boosted = parsed.value * (1 + safeTier * 0.1);
-    return `${formatSigned(boosted, parsed.percent)} (Artifice +${safeTier})`;
+    if (withTierSuffix) return `${formatSigned(boosted, parsed.percent)} (Artifice +${safeTier})`;
+    return formatSigned(boosted, parsed.percent);
   };
   const getIconSet = (kind) => {
     if (kind === "elite") return CREATOR_ELITE_ICON_URLS;
@@ -5501,8 +5670,7 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
         `;
       })
       .join("");
-    const baseDefHtml = `<p class="creator-gear-base-def">Base DEF: <strong>${esc(baseDef || "-")}</strong></p>`;
-    container.innerHTML = `${baseDefHtml}${rowsHtml}`;
+    container.innerHTML = rowsHtml;
     const previewArtificeRef = refs[slotPreviewArtificeRefKeys[slotKey]];
     if (previewArtificeRef) {
       previewArtificeRef.textContent = artificeSummaryText(slotKey, stats.length);
@@ -5510,6 +5678,16 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     const previewDefRef = refs[slotPreviewDefRefKeys[slotKey]];
     if (previewDefRef) {
       previewDefRef.textContent = `Base DEF: ${baseDef || "-"}`;
+    }
+    const previewStatsRef = refs[slotPreviewStatsRefKeys[slotKey]];
+    if (previewStatsRef) {
+      const lines = stats.map((stat, statIndex) => {
+        const tier = artifice[statIndex] || 0;
+        return `${stat.name}: ${artificeAdjustedStatText(stat.value, tier, false)}`;
+      });
+      previewStatsRef.innerHTML = (lines.length ? lines : ["Stat: -"])
+        .map((line) => `<span>${esc(line)}</span>`)
+        .join("");
     }
   };
   const syncWeaponSelect = () => {
