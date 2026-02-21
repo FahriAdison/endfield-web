@@ -5800,7 +5800,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Jacket\"}]"
+                    "value": "+16"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5818,7 +5818,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Fists\"}]"
+                    "value": "+9.7%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5836,7 +5836,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Flashlight\"}]"
+                    "value": "+21.0%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5854,7 +5854,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Flashlight\"}]"
+                    "value": "+21.0%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5879,7 +5879,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Jacket I\"}]"
+                    "value": "+14.7%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5897,7 +5897,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Miner Gloves T2\"}]"
+                    "value": "+13.0%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5915,7 +5915,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Gyro T1\"}]"
+                    "value": "+14.7%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5933,7 +5933,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Roving MSGR Gyro T1\"}]"
+                    "value": "+14.7%"
                   }
                 ],
                 "effectName": "Roving MSGR",
@@ -5958,7 +5958,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Frontiers Armor II\"}]"
+                    "value": "+20.7%"
                   }
                 ],
                 "effectName": "Frontiers",
@@ -5976,7 +5976,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Frontiers Blight RES Gloves\"}]"
+                    "value": "+34.5%"
                   }
                 ],
                 "effectName": "Frontiers",
@@ -5994,7 +5994,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Frontiers Extra O2 Tube\"}]"
+                    "value": "+20.7%"
                   }
                 ],
                 "effectName": "Frontiers",
@@ -6012,7 +6012,7 @@
                 "stats": [
                   {
                     "name": "Stat Utama",
-                    "value": "Redeemer Tag I\"}]"
+                    "value": "+43.2%"
                   }
                 ],
                 "effectName": "Frontiers",
@@ -16548,4 +16548,5 @@
     }
   ]
 }
+
 

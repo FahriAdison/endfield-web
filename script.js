@@ -3573,6 +3573,42 @@ function normalizeCreatorToken(value) {
     .replace(/[^a-z0-9]/g, "");
 }
 
+function sanitizeGearStatName(rawName, fallbackName = "Stat") {
+  const text = String(rawName || "")
+    .replace(/\s+/g, " ")
+    .replace(/^["'\[{(]+/, "")
+    .replace(/["'\]})]+$/, "")
+    .trim();
+  return text || fallbackName;
+}
+
+function sanitizeGearStatValue(rawValue, gearName = "", fallbackValue = "Boost") {
+  const raw = String(rawValue ?? "")
+    .replace(/\uFFFD/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!raw) return fallbackValue;
+
+  let cleaned = raw
+    .replace(/\\?"\}\]$/g, "")
+    .replace(/\}\]$/g, "")
+    .replace(/\\+"/g, '"')
+    .replace(/^["']+/, "")
+    .replace(/["']+$/, "")
+    .trim();
+
+  if (!cleaned) return fallbackValue;
+
+  const valueToken = normalizeCreatorToken(cleaned);
+  const gearToken = normalizeCreatorToken(gearName);
+  const lookedBroken = /\\?"\}\]$/.test(raw) || /\}\]$/.test(raw) || /[\[\]{}\\]/.test(cleaned);
+  if (gearToken && valueToken === gearToken) return fallbackValue;
+  if (/^stat( utama)?$/i.test(cleaned)) return fallbackValue;
+  if (lookedBroken && !/[0-9%+\-]/.test(cleaned)) return fallbackValue;
+
+  return cleaned;
+}
+
 function normalizeShowcaseCatalog(rawCatalog) {
   const base = rawCatalog && typeof rawCatalog === "object" ? rawCatalog : {};
   const rawCharacterImages =
@@ -3696,6 +3732,7 @@ function buildCreatorCharacterData(character, catalog = {}) {
   const mergeGearMeta = (item, slotType, usageLevel = "70") => {
     const token = normalizeCreatorToken(item?.name);
     const rec = recommendationByName.get(token);
+    const mergedName = String(item?.name || rec?.name || "-").trim() || "-";
     const slotIconFallback =
       slotType === "armor"
         ? "assets/skill-icons/talent.webp"
@@ -3706,12 +3743,12 @@ function buildCreatorCharacterData(character, catalog = {}) {
     const normalizedStats = stats
       .slice(0, 3)
       .map((stat, index) => ({
-        name: String(stat?.name || `Stat ${index + 1}`).trim() || `Stat ${index + 1}`,
-        value: String(stat?.value || "0").trim() || "0",
+        name: sanitizeGearStatName(stat?.name, `Stat ${index + 1}`),
+        value: sanitizeGearStatValue(stat?.value, mergedName, "Boost"),
       }))
       .filter((stat) => stat.name);
     return {
-      name: String(item?.name || rec?.name || "-").trim() || "-",
+      name: mergedName,
       icon: (() => {
         const candidate = String(item?.icon || rec?.icon || slotIconFallback).trim();
         if (!candidate) return slotIconFallback;
@@ -3762,7 +3799,7 @@ function buildCreatorCharacterData(character, catalog = {}) {
     buildSkills: String(build.skills || "Belum ada data"),
     buildTeam: String(build.team || "Belum ada data"),
     defaultUid: `AEND-${uidToken || "UNIT"}-${String(raritySafe).padStart(2, "0")}01`,
-    defaultRegion: "SEA",
+    defaultRegion: "Asia",
     defaultLevel: 70,
     defaultPotential: potentialDefault,
     defaultBreakthrough: breakthroughDefault,
@@ -4145,7 +4182,7 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
   const potential = clampNumber(state?.potential, 0, 5, 3);
   const breakthrough = clampNumber(state?.breakthrough, 0, 4, 2);
   const affinity = clampNumber(state?.affinity, 0, 4, 2);
-  const region = String(state?.region || "SEA").slice(0, 8);
+  const region = String(state?.region || "Asia").slice(0, 20);
   const weaponName = String(state?.weaponName || character?.buildWeapon || "-");
   const weaponLevel = clampNumber(state?.weaponLevel, 1, 90, level);
   const weaponSkillLevel = clampNumber(state?.weaponSkillLevel, 1, 9, 7);
@@ -4593,10 +4630,25 @@ async function initCardCreatorPage(characters) {
     cleanText(value, 24, fallback)
       .replace(/[^A-Za-z0-9_-]/g, "")
       .toUpperCase();
-  const normalizeRegion = (value, fallback = "SEA") => {
+  const normalizeRegion = (value, fallback = "Asia") => {
     const current = String(value || "").trim();
+    const upper = current.toUpperCase();
+    const aliasMap = {
+      SEA: "Asia",
+      ASIA: "Asia",
+      NA: "Americas/Europe",
+      EU: "Americas/Europe",
+      AMERICA: "Americas/Europe",
+      AMERICAS: "Americas/Europe",
+      EUROPE: "Americas/Europe",
+      GLOBAL: "Americas/Europe",
+      JP: "Americas/Europe",
+      CN: "China",
+      CHINA: "China",
+    };
+    const canonical = aliasMap[upper] || current;
     const options = [...refs.region.options].map((opt) => String(opt.value || "").trim());
-    return options.includes(current) ? current : fallback;
+    return options.includes(canonical) ? canonical : fallback;
   };
   const toImageSrc = (value, fallback = "assets/skill-icons/basic.webp") => {
     const candidate = String(value || "").trim();
@@ -4825,7 +4877,7 @@ async function initCardCreatorPage(characters) {
     return {
       alias: cleanText(`${target.name || "Operator"} Showcase`, 42, "Operator Showcase"),
       uid: sanitizeUid(target.defaultUid || fallbackUid, fallbackUid),
-      region: normalizeRegion(target.defaultRegion || "SEA", "SEA"),
+      region: normalizeRegion(target.defaultRegion || "Asia", "Asia"),
       tagline: cleanText(taglines[0] || "High Priority Deployment", 120, "High Priority Deployment"),
       level: clampNumber(target.defaultLevel, 1, 90, 70),
       potential: clampNumber(target.defaultPotential, 0, 5, 3),
@@ -4925,11 +4977,11 @@ async function initCardCreatorPage(characters) {
     const normalized = stats
       .slice(0, 3)
       .map((stat, index) => ({
-        name: String(stat?.name || `Stat ${index + 1}`).trim() || `Stat ${index + 1}`,
-        value: String(stat?.value || "0").trim() || "0",
+        name: sanitizeGearStatName(stat?.name, `Stat ${index + 1}`),
+        value: sanitizeGearStatValue(stat?.value, selectedName, "Boost"),
       }))
       .filter((item) => item.name);
-    return normalized.length ? normalized : [{ name: "Stat Utama", value: "0" }];
+    return normalized.length ? normalized : [{ name: "Stat Utama", value: "Boost" }];
   };
   const artificeSummaryText = (slotKey, statCount = 3) => {
     const artifice = sanitizeGearArtifice(slotKey, statCount);
@@ -5124,7 +5176,7 @@ async function initCardCreatorPage(characters) {
   const syncFormFromState = () => {
     refs.alias.value = state.alias;
     refs.uid.value = state.uid;
-    refs.region.value = normalizeRegion(state.region, "SEA");
+    refs.region.value = normalizeRegion(state.region, "Asia");
     refs.tagline.value = state.tagline;
     refs.level.value = String(state.level);
     refs.potential.value = String(state.potential);
@@ -5153,7 +5205,7 @@ async function initCardCreatorPage(characters) {
     styleId: state.styleId,
     alias: cleanText(state.alias, 42, "Operator Showcase"),
     uid: sanitizeUid(state.uid),
-    region: normalizeRegion(state.region, "SEA"),
+    region: normalizeRegion(state.region, "Asia"),
     tagline: cleanText(state.tagline, 120, "High Priority Deployment"),
     level: clampNumber(state.level, 1, 90, 70),
     potential: clampNumber(state.potential, 0, 5, 3),
@@ -5339,8 +5391,8 @@ async function initCardCreatorPage(characters) {
 
     state.weaponName = normalizeWeaponName(state.weaponName, character.defaultWeaponName || "-");
     state.uid = sanitizeUid(state.uid, creatorProfileId(character, state));
-    state.region = normalizeRegion(state.region, "SEA");
-    state.alias = cleanText(state.alias, 42, `${character.name || "Operator"} Showcase`);
+    state.region = normalizeRegion(state.region, "Asia");
+    state.alias = cleanText(state.alias, 42, "");
     state.tagline = cleanText(state.tagline, 120, "High Priority Deployment");
     state.gearArmor = cleanText(state.gearArmor, 72, character.defaultGearArmor || "-");
     state.gearGloves = cleanText(state.gearGloves, 72, character.defaultGearGloves || "-");
@@ -5373,7 +5425,7 @@ async function initCardCreatorPage(characters) {
     refs.preview.style.setProperty("--creator-accent", preset.accent || "#fdfd1f");
     refs.preview.style.setProperty("--creator-ink", preset.ink || "#f6f8fb");
 
-    refs.previewAlias.textContent = state.alias;
+    refs.previewAlias.textContent = state.alias || `${character.name || "Operator"} Showcase`;
     refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
     refs.previewTier.hidden = !state.showTier;
     refs.previewStars.textContent = creatorStars(character.rarity);
@@ -5505,8 +5557,10 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.alias.addEventListener("input", () => {
-    state.alias = cleanText(refs.alias.value, 42, `${findCharacter()?.name || "Operator"} Showcase`);
-    refs.alias.value = state.alias;
+    state.alias = cleanText(refs.alias.value, 42, "");
+    if (refs.alias.value !== state.alias) {
+      refs.alias.value = state.alias;
+    }
     applyPreview();
   });
   refs.uid.addEventListener("input", () => {
@@ -5515,7 +5569,7 @@ async function initCardCreatorPage(characters) {
     applyPreview();
   });
   refs.region.addEventListener("change", () => {
-    state.region = normalizeRegion(refs.region.value, "SEA");
+    state.region = normalizeRegion(refs.region.value, "Asia");
     applyPreview();
   });
   refs.tagline.addEventListener("input", () => {
