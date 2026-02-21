@@ -3848,8 +3848,9 @@ async function waitPreviewAssets(previewEl) {
 function isCanvasLikelyBlank(canvas) {
   const metrics = canvasContentMetrics(canvas);
   if (!metrics) return true;
-  if (metrics.opaqueRatio < 0.02) return true;
-  return metrics.score < 0.46;
+  if (metrics.opaqueRatio < 0.01) return true;
+  if (metrics.lumSpread < 0.02 && metrics.chromaAvg < 0.015) return true;
+  return metrics.score < 0.18;
 }
 
 function canvasContentMetrics(canvas) {
@@ -3909,23 +3910,68 @@ function pickBestCanvas(candidates) {
   return best;
 }
 
-async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
-  if (canvas && isCanvasLikelyBlank(canvas)) {
-    canvas = null;
-  }
-  if (!canvas) {
-    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
-    if (statusEl) {
-      statusEl.textContent = "Capture live preview gagal, memakai fallback export.";
+async function canvasToPngBlob(canvas) {
+  if (!canvas) return null;
+  return new Promise((resolve) => {
+    canvas.toBlob((blob) => resolve(blob || null), "image/png");
+  });
+}
+
+function downloadBlobFile(blob, fileName) {
+  if (!blob) return;
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  link.rel = "noopener";
+  link.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+async function captureCreatorPreviewBlob(previewEl, statusEl) {
+  if (!previewEl || typeof window === "undefined") return null;
+  await waitPreviewAssets(previewEl);
+  const rect = previewEl.getBoundingClientRect();
+  const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || rect.width || 1));
+  const targetHeight = Math.max(1, Math.round(previewEl.scrollHeight || rect.height || 1));
+
+  if (typeof window.domtoimage?.toBlob === "function") {
+    try {
+      const blob = await window.domtoimage.toBlob(previewEl, {
+        cacheBust: true,
+        bgcolor: "rgba(0,0,0,0)",
+        width: targetWidth,
+        height: targetHeight,
+        style: {
+          transform: "none",
+          margin: "0",
+          width: `${targetWidth}px`,
+          height: `${targetHeight}px`,
+        },
+      });
+      if (blob && blob.size > 4096) return blob;
+    } catch (error) {
+      console.error(error);
     }
   }
-  if (!canvas) throw new Error("Capture preview gagal");
-  const dataUrl = canvas.toDataURL("image/png");
-  const link = document.createElement("a");
-  link.href = dataUrl;
-  link.download = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
-  link.click();
+
+  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!canvas || isCanvasLikelyBlank(canvas)) return null;
+  const fallbackBlob = await canvasToPngBlob(canvas);
+  if (fallbackBlob && fallbackBlob.size > 4096) return fallbackBlob;
+  return null;
+}
+
+async function exportCreatorCardPng(character, preset, state, statusEl, previewEl) {
+  const blob = await captureCreatorPreviewBlob(previewEl, statusEl);
+  if (!blob) {
+    if (statusEl) {
+      statusEl.textContent = "Gagal export PNG dari live preview. Coba refresh lalu export lagi.";
+    }
+    throw new Error("Capture live preview gagal");
+  }
+  const fileName = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
+  downloadBlobFile(blob, fileName);
 }
 
 async function captureCreatorPreviewCanvas(previewEl, statusEl) {
@@ -4344,19 +4390,8 @@ async function renderCreatorCardCanvas(character, preset, state, statusEl) {
 }
 
 async function shareCreatorCardPng(character, preset, state, statusEl, previewEl) {
-  let canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
-  if (canvas && isCanvasLikelyBlank(canvas)) {
-    canvas = null;
-  }
-  if (!canvas) {
-    canvas = await renderCreatorCardCanvas(character, preset, state, statusEl);
-    if (statusEl) {
-      statusEl.textContent = "Capture live preview gagal, memakai fallback export.";
-    }
-  }
-  if (!canvas) throw new Error("Capture preview gagal");
-  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-  if (!blob) throw new Error("Gagal membentuk file PNG.");
+  const blob = await captureCreatorPreviewBlob(previewEl, statusEl);
+  if (!blob) throw new Error("Gagal membentuk file PNG dari live preview.");
 
   const fileName = `endfield-card-${String(character.id || character.name || "operator").toLowerCase()}.png`;
   const file = new File([blob], fileName, { type: "image/png" });
@@ -4372,7 +4407,7 @@ async function shareCreatorCardPng(character, preset, state, statusEl, previewEl
     return;
   }
 
-  await exportCreatorCardPng(character, preset, state, statusEl, previewEl);
+  downloadBlobFile(blob, fileName);
   if (statusEl) statusEl.textContent = "Share file tidak didukung browser ini. PNG di-download otomatis.";
 }
 
