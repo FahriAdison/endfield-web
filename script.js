@@ -36,6 +36,10 @@ const SITE_URL = "https://endfield-ind.my.id";
 const CREATOR_SHARE_TABLE = "creator_showcases";
 const SUPABASE_PUBLIC_URL = "https://axuitiqljniyqsbpxatf.supabase.co";
 const SUPABASE_PUBLIC_KEY = "sb_publishable_bF-mkQgNJ68W4yPQiX1TRg_HLj9W-T1";
+const VISITOR_DAILY_TABLE = "visitor_daily";
+const VISITOR_DAILY_STORAGE_KEY = "endfield_web_visitor_id_v1";
+const VISITOR_DAILY_TIMEZONE = "Asia/Jakarta";
+const VISITOR_DAILY_SYNC_MS = 30000;
 const CREATOR_ELITE_ICON_URLS = [
   "assets/icons/showcase/elite-0.png",
   "assets/icons/showcase/elite-1.png",
@@ -481,6 +485,204 @@ function getCreatorSupabaseClient() {
     auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
   });
   return creatorSupabaseClient;
+}
+
+let visitorCounterTimer = 0;
+let visitorCounterInFlight = false;
+let visitorCounterRunning = false;
+let visitorCounterRegisteredDate = "";
+let visitorCounterMemoryId = "";
+
+function getSupabaseRestConfig() {
+  const override = typeof window !== "undefined" ? window.__ENDFIELD_SUPABASE__ : null;
+  const url = String(override?.url || SUPABASE_PUBLIC_URL || "")
+    .trim()
+    .replace(/\/+$/, "");
+  const key = String(override?.key || SUPABASE_PUBLIC_KEY || "").trim();
+  if (!url || !key) return null;
+  return { url, key };
+}
+
+function getVisitorWidgetRefs() {
+  return {
+    card: document.getElementById("visitor-live-card"),
+    value: document.getElementById("visitor-live-value"),
+    meta: document.getElementById("visitor-live-meta"),
+  };
+}
+
+function setVisitorWidgetState(refs, value, meta, isError = false) {
+  if (refs?.value && value !== undefined) refs.value.textContent = String(value);
+  if (refs?.meta && meta !== undefined) refs.meta.textContent = String(meta);
+  if (refs?.meta) refs.meta.classList.toggle("error", Boolean(isError));
+}
+
+function createVisitorId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return `v-${crypto.randomUUID().replace(/-/g, "").slice(0, 28)}`;
+  }
+  return `v-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+}
+
+function getVisitorId() {
+  try {
+    const current = localStorage.getItem(VISITOR_DAILY_STORAGE_KEY);
+    if (current) return current;
+    const created = createVisitorId();
+    localStorage.setItem(VISITOR_DAILY_STORAGE_KEY, created);
+    return created;
+  } catch {
+    if (!visitorCounterMemoryId) visitorCounterMemoryId = createVisitorId();
+    return visitorCounterMemoryId;
+  }
+}
+
+function visitorDateKey(timeZone = VISITOR_DAILY_TIMEZONE) {
+  try {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date());
+    const dateParts = Object.fromEntries(parts.filter((item) => item.type !== "literal").map((item) => [item.type, item.value]));
+    if (dateParts.year && dateParts.month && dateParts.day) {
+      return `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+    }
+  } catch {
+    // fallback below
+  }
+  return new Date().toISOString().slice(0, 10);
+}
+
+function visitorSyncTimeLabel() {
+  try {
+    return new Date().toLocaleTimeString("id-ID", {
+      timeZone: VISITOR_DAILY_TIMEZONE,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  } catch {
+    return new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  }
+}
+
+function visitorRequestHeaders(config, extra = {}) {
+  return {
+    apikey: config.key,
+    Authorization: `Bearer ${config.key}`,
+    ...extra,
+  };
+}
+
+async function readVisitorApiError(response) {
+  try {
+    const text = await response.text();
+    if (!text) return `HTTP ${response.status}`;
+    return text.length > 240 ? `${text.slice(0, 237)}...` : text;
+  } catch {
+    return `HTTP ${response.status}`;
+  }
+}
+
+async function registerVisitorDaily(config, dateKey, visitorId) {
+  const url = `${config.url}/rest/v1/${VISITOR_DAILY_TABLE}?on_conflict=visit_date,visitor_id`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: visitorRequestHeaders(config, {
+      "Content-Type": "application/json",
+      Prefer: "resolution=ignore-duplicates,return=minimal",
+    }),
+    body: JSON.stringify([{ visit_date: dateKey, visitor_id: visitorId }]),
+  });
+  if (!response.ok && response.status !== 409) {
+    const summary = await readVisitorApiError(response);
+    throw new Error(`register visitor failed: ${summary}`);
+  }
+}
+
+function parseVisitorCountHeader(contentRange) {
+  const range = String(contentRange || "");
+  const match = range.match(/\/(\d+)$/);
+  if (!match) return null;
+  const total = Number(match[1]);
+  return Number.isFinite(total) ? total : null;
+}
+
+async function fetchVisitorDailyCount(config, dateKey) {
+  const url = `${config.url}/rest/v1/${VISITOR_DAILY_TABLE}?select=visitor_id&visit_date=eq.${encodeURIComponent(dateKey)}&limit=1`;
+  const response = await fetch(url, {
+    headers: visitorRequestHeaders(config, {
+      Prefer: "count=exact",
+    }),
+  });
+  if (!response.ok) {
+    const summary = await readVisitorApiError(response);
+    throw new Error(`fetch visitor count failed: ${summary}`);
+  }
+  const total = parseVisitorCountHeader(response.headers.get("content-range"));
+  if (Number.isFinite(total)) return total;
+  const rows = await response.json();
+  if (Array.isArray(rows)) return rows.length;
+  return 0;
+}
+
+function initDailyVisitorCounter() {
+  if (visitorCounterRunning) return;
+  visitorCounterRunning = true;
+
+  const config = getSupabaseRestConfig();
+  const refs = getVisitorWidgetRefs();
+  const hasWidget = Boolean(refs.card && refs.value && refs.meta);
+  if (hasWidget) {
+    setVisitorWidgetState(refs, "...", "Sinkronisasi data pengunjung...");
+  }
+  if (!config) {
+    if (hasWidget) setVisitorWidgetState(refs, "--", "Counter pengunjung belum aktif.", true);
+    return;
+  }
+
+  const visitorId = getVisitorId();
+  const refreshCounter = async () => {
+    if (visitorCounterInFlight) return;
+    visitorCounterInFlight = true;
+    try {
+      const todayKey = visitorDateKey();
+      if (visitorCounterRegisteredDate !== todayKey) {
+        await registerVisitorDaily(config, todayKey, visitorId);
+        visitorCounterRegisteredDate = todayKey;
+      }
+      if (hasWidget) {
+        const total = await fetchVisitorDailyCount(config, todayKey);
+        const countLabel = new Intl.NumberFormat("id-ID").format(total);
+        setVisitorWidgetState(
+          refs,
+          countLabel,
+          `Sinkron ${visitorSyncTimeLabel()} WIB • update tiap ${Math.round(VISITOR_DAILY_SYNC_MS / 1000)} detik`
+        );
+      }
+    } catch (error) {
+      if (hasWidget) {
+        setVisitorWidgetState(refs, "--", "Visitor belum tersinkron. Coba refresh lagi.", true);
+      }
+      console.error(error);
+    } finally {
+      visitorCounterInFlight = false;
+    }
+  };
+
+  refreshCounter();
+  if (hasWidget) {
+    visitorCounterTimer = window.setInterval(refreshCounter, VISITOR_DAILY_SYNC_MS);
+    window.addEventListener(
+      "pagehide",
+      () => {
+        if (visitorCounterTimer) window.clearInterval(visitorCounterTimer);
+      },
+      { once: true }
+    );
+  }
 }
 
 function createCreatorShareId() {
@@ -6033,6 +6235,7 @@ async function bootstrap() {
   if (page !== "gacha") initGlobalBgm();
   syncPrimaryNavigation();
   initNavDrawer();
+  initDailyVisitorCounter();
   const data = await fetchData();
 
   if (page === "home") return renderHome(data);
