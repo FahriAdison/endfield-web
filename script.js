@@ -55,6 +55,8 @@ const CREATOR_POTENTIAL_ICON_URLS = [
   "assets/icons/showcase/potential-4.png",
   "assets/icons/showcase/potential-5.png",
 ];
+const CREATOR_ASCENSION_ICON_URL = "assets/icons/showcase/ascension-mark.png";
+const CREATOR_STAR_ICON_URL = "assets/icons/showcase/star-mark.png";
 const CREATOR_AFFINITY_BADGES = ["A0", "A1", "A2", "A3", "A4"];
 const CREATOR_SET_EFFECTS = {
   aethertech:
@@ -557,6 +559,12 @@ function svgBadgeDataUrl(text, bg = "#0f2132", fg = "#d8ecff", stroke = "#6d90ad
 
 function creatorStars(rarity) {
   return "★".repeat(clampNumber(rarity, 1, 6, 5));
+}
+
+function creatorStarIconsHtml(rarity) {
+  const count = clampNumber(rarity, 1, 6, 5);
+  const starSrc = asset(CREATOR_STAR_ICON_URL);
+  return Array.from({ length: count }, () => `<img src="${esc(starSrc)}" alt="star" loading="lazy" />`).join("");
 }
 
 function creatorProfileId(character, state) {
@@ -4487,12 +4495,16 @@ function downloadBlobFile(blob, fileName) {
 async function captureCreatorPreviewBlob(previewEl, statusEl) {
   if (!previewEl || typeof window === "undefined") return null;
   await waitPreviewAssets(previewEl);
+  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (canvas && !isCanvasLikelyBlank(canvas)) {
+    const canvasBlob = await canvasToPngBlob(canvas);
+    if (canvasBlob && canvasBlob.size > 4096) return canvasBlob;
+  }
   const rect = previewEl.getBoundingClientRect();
   const targetWidth = Math.max(1, Math.round(previewEl.scrollWidth || rect.width || 1));
   const targetHeight = Math.max(1, Math.round(previewEl.scrollHeight || rect.height || 1));
-  const exportScale = 2;
-  const exportWidth = Math.max(1, Math.round(targetWidth * exportScale));
-  const exportHeight = Math.max(1, Math.round(targetHeight * exportScale));
+  const exportWidth = Math.max(1, Math.round(targetWidth));
+  const exportHeight = Math.max(1, Math.round(targetHeight));
 
   if (typeof window.domtoimage?.toBlob === "function") {
     try {
@@ -4502,8 +4514,6 @@ async function captureCreatorPreviewBlob(previewEl, statusEl) {
         width: exportWidth,
         height: exportHeight,
         style: {
-          transform: `scale(${exportScale})`,
-          transformOrigin: "top left",
           margin: "0",
           width: `${targetWidth}px`,
           height: `${targetHeight}px`,
@@ -4515,9 +4525,9 @@ async function captureCreatorPreviewBlob(previewEl, statusEl) {
     }
   }
 
-  const canvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
-  if (!canvas || isCanvasLikelyBlank(canvas)) return null;
-  const fallbackBlob = await canvasToPngBlob(canvas);
+  const fallbackCanvas = await captureCreatorPreviewCanvas(previewEl, statusEl);
+  if (!fallbackCanvas || isCanvasLikelyBlank(fallbackCanvas)) return null;
+  const fallbackBlob = await canvasToPngBlob(fallbackCanvas);
   if (fallbackBlob && fallbackBlob.size > 4096) return fallbackBlob;
   return null;
 }
@@ -5319,6 +5329,9 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
   };
   const getIconSet = (kind) => {
     if (kind === "elite") return CREATOR_ELITE_ICON_URLS;
+    if (kind === "ascension") {
+      return [null, CREATOR_ASCENSION_ICON_URL, CREATOR_ASCENSION_ICON_URL, CREATOR_ASCENSION_ICON_URL, CREATOR_ASCENSION_ICON_URL];
+    }
     if (kind === "potential") {
       return CREATOR_POTENTIAL_ICON_URLS.map((url, index) =>
         url || svgBadgeDataUrl(`P${index}`, "#111f2f", "#f3f8ff", "#6f8ba2")
@@ -5334,23 +5347,27 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
   const iconStripHtml = (kind, activeValue, max) => {
     const set = getIconSet(kind);
     const rows = [];
-    for (let index = 0; index <= max; index += 1) {
+    const start = kind === "ascension" ? 1 : 0;
+    for (let index = start; index <= max; index += 1) {
       const src = set[index] ? toImageSrc(set[index], "") : svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
       const activeClass = index <= activeValue ? " is-active" : "";
-      rows.push(`<span class="creator-icon-pill${activeClass}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></span>`);
+      rows.push(
+        `<span class="creator-icon-pill kind-${esc(kind)}${activeClass}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></span>`
+      );
     }
     return rows.join("");
   };
   const iconSelectorHtml = (kind, activeValue, max, target) => {
     const set = getIconSet(kind);
     const rows = [];
-    for (let index = 0; index <= max; index += 1) {
+    const start = kind === "ascension" ? 1 : 0;
+    for (let index = start; index <= max; index += 1) {
       const src = set[index] ? toImageSrc(set[index], "") : svgBadgeDataUrl(String(index), "#102130", "#d8ecff", "#6b8aa4");
       const activeClass = index === activeValue ? " is-active" : "";
       rows.push(
-        `<button type="button" class="creator-icon-choice${activeClass}" data-icon-kind="${esc(kind)}" data-icon-target="${esc(target)}" data-icon-value="${index}" aria-label="${esc(
+        `<button type="button" class="creator-icon-choice kind-${esc(kind)}${activeClass}" data-icon-kind="${esc(kind)}" data-icon-target="${esc(
           target
-        )} ${index}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></button>`
+        )}" data-icon-value="${index}" aria-label="${esc(target)} ${index}"><img src="${esc(src)}" alt="${esc(kind)} ${index}" loading="lazy" /></button>`
       );
     }
     return rows.join("");
@@ -5741,17 +5758,17 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     assign();
   };
   const renderIconSelectors = () => {
-    refs.breakthroughSelector.innerHTML = iconSelectorHtml("elite", state.breakthrough, 4, "breakthrough");
+    refs.breakthroughSelector.innerHTML = iconSelectorHtml("ascension", state.breakthrough, 4, "breakthrough");
     refs.potentialSelector.innerHTML = iconSelectorHtml("potential", state.potential, 5, "potential");
     refs.affinitySelector.innerHTML = iconSelectorHtml("affinity", state.affinity, 4, "affinity");
-    refs.weaponBreakthroughSelector.innerHTML = iconSelectorHtml("elite", state.weaponBreakthrough, 4, "weaponBreakthrough");
+    refs.weaponBreakthroughSelector.innerHTML = iconSelectorHtml("ascension", state.weaponBreakthrough, 4, "weaponBreakthrough");
     refs.weaponPotentialSelector.innerHTML = iconSelectorHtml("potential", state.weaponPotential, 5, "weaponPotential");
   };
   const renderIconStrips = () => {
-    refs.previewBreakthroughIcons.innerHTML = iconStripHtml("elite", state.breakthrough, 4);
+    refs.previewBreakthroughIcons.innerHTML = iconStripHtml("ascension", state.breakthrough, 4);
     refs.previewPotentialIcons.innerHTML = iconStripHtml("potential", state.potential, 5);
     refs.previewAffinityIcons.innerHTML = iconStripHtml("affinity", state.affinity, 4);
-    refs.previewWeaponBreakthroughIcons.innerHTML = iconStripHtml("elite", state.weaponBreakthrough, 4);
+    refs.previewWeaponBreakthroughIcons.innerHTML = iconStripHtml("ascension", state.weaponBreakthrough, 4);
     refs.previewWeaponPotentialIcons.innerHTML = iconStripHtml("potential", state.weaponPotential, 5);
   };
   const renderEssenceBars = () => {
@@ -6058,7 +6075,7 @@ async function initCardCreatorPage(characters, gearCatalog = []) {
     refs.previewAlias.textContent = state.alias || `${character.name || "Operator"} Showcase`;
     refs.previewTier.textContent = state.showTier ? `TIER ${character.tier || "-"}` : "";
     refs.previewTier.hidden = !state.showTier;
-    refs.previewStars.textContent = creatorStars(character.rarity);
+    refs.previewStars.innerHTML = creatorStarIconsHtml(character.rarity);
     setImageWithFallback(
       refs.previewImage,
       Array.isArray(character.imageCandidates) ? character.imageCandidates : [character.image, character.fallbackImage],

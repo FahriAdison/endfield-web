@@ -1831,6 +1831,32 @@ select:focus-visible {
   filter: brightness(1.16);
 }
 
+.creator-icon-choice.kind-ascension img,
+.creator-icon-pill.kind-ascension img {
+  opacity: 0.44;
+  filter: grayscale(1) brightness(0.88);
+}
+
+.creator-icon-choice.kind-ascension.is-active img,
+.creator-icon-pill.kind-ascension.is-active img {
+  opacity: 1;
+  filter: none;
+}
+
+.creator-icon-pill.kind-ascension {
+  min-height: 1.12rem;
+}
+
+.creator-icon-pill.kind-ascension img {
+  width: 0.92rem;
+  height: 0.98rem;
+}
+
+.creator-icon-choice.kind-ascension img {
+  width: 0.92rem;
+  height: 0.98rem;
+}
+
 .creator-gear-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2154,9 +2180,18 @@ select:focus-visible {
 }
 
 .creator-stars {
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: color-mix(in srgb, var(--creator-accent) 78%, #fff2af);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12rem;
+  margin-top: 0.14rem;
+  min-height: 0.72rem;
+}
+
+.creator-stars img {
+  width: 0.7rem;
+  height: 0.7rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.2rem rgba(248, 245, 42, 0.45));
 }
 
 .creator-preview-main {
@@ -2459,6 +2494,7 @@ select:focus-visible {
   gap: 0.4rem;
   grid-auto-rows: auto;
   align-items: stretch;
+  align-content: start;
   min-height: 0;
 }
 
@@ -2517,8 +2553,34 @@ select:focus-visible {
 
 .creator-showcase-card-weapon li,
 .creator-showcase-card-skills li {
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  gap: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.22rem;
+  align-items: center;
+  min-height: 0.96rem;
+}
+
+.creator-showcase-card-weapon li span,
+.creator-showcase-card-skills li span {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0;
+}
+
+.creator-showcase-card-weapon li strong,
+.creator-showcase-card-skills li strong {
+  flex: 0 0 auto;
+  margin-left: auto;
+  line-height: 1.2;
+  min-width: 1.08rem;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .creator-showcase-card-skills .creator-icon-strip,
@@ -2589,6 +2651,9 @@ select:focus-visible {
 }
 
 .creator-preview-gear-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   min-width: 0;
 }
 
@@ -2604,42 +2669,48 @@ select:focus-visible {
 
 .creator-preview-gear-item span {
   display: block;
+  margin: 0;
   font-size: 0.6rem;
+  line-height: 1.02;
   color: color-mix(in srgb, var(--creator-ink) 66%, #9cafbe);
 }
 
 .creator-preview-gear-item strong {
   display: block;
-  margin-top: 0.02rem;
+  margin: 0;
   font-size: 0.68rem;
   text-align: left;
-  line-height: 1.1;
+  line-height: 1.03;
+  overflow-wrap: anywhere;
 }
 
 .creator-preview-gear-item small {
   display: block;
-  margin-top: 0.04rem;
+  margin: 0;
   font-size: 0.6rem;
-  line-height: 1.08;
+  line-height: 1.02;
   color: color-mix(in srgb, var(--creator-ink) 70%, #99b1c2);
 }
 
 .creator-preview-gear-item .creator-preview-gear-def {
   color: color-mix(in srgb, #f6fa7a 72%, var(--creator-ink) 28%);
   font-size: 0.58rem;
+  margin-top: 0.01rem;
+  white-space: nowrap;
 }
 
 .creator-preview-gear-item .creator-preview-gear-artifice {
-  margin-top: 0.01rem;
+  margin-top: 0;
   white-space: nowrap;
   font-size: 0.56rem;
   letter-spacing: 0.01em;
+  line-height: 1.02;
 }
 
 .creator-preview-gear-item .creator-preview-gear-stats {
-  margin-top: 0.02rem;
+  margin-top: 0.01rem;
   font-size: 0.54rem;
-  line-height: 1.14;
+  line-height: 1.06;
   color: color-mix(in srgb, var(--creator-ink) 84%, #9dc4de);
   overflow-wrap: anywhere;
 }
@@ -2722,6 +2793,28 @@ select:focus-visible {
 .creator-showcase-preview .creator-brand-sign {
   margin-top: 0.1rem;
   text-align: right;
+}
+
+@media (pointer: coarse) and (min-width: 700px) {
+  .creator-showcase-preview {
+    aspect-ratio: 16 / 11;
+  }
+
+  .creator-showcase-card-weapon li,
+  .creator-showcase-card-skills li {
+    min-height: 0.9rem;
+    gap: 0.16rem;
+  }
+
+  .creator-preview-gear-item > div {
+    gap: 0;
+  }
+
+  .creator-preview-gear-item strong,
+  .creator-preview-gear-item small,
+  .creator-preview-gear-item span {
+    line-height: 1;
+  }
 }
 
 .footer {
@@ -3891,6 +3984,11 @@ select:focus-visible {
 
   .creator-preview-gear-item .creator-preview-gear-stats {
     font-size: 0.54rem;
+  }
+
+  .creator-stars img {
+    width: 0.62rem;
+    height: 0.62rem;
   }
 
   .creator-preview-essence .creator-essence-item p {
